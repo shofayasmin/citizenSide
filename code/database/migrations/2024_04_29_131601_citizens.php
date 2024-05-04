@@ -15,7 +15,11 @@ return new class extends Migration
             $table->id();
             $table->string('nik')->unique();
             $table->string('fullname');
+<<<<<<< HEAD
             $table->string('birth_place');
+=======
+            $table->string('birthplace');
+>>>>>>> bdf85523fa8b004315ff29b97ed4e7618e8c0020
             $table->date('birth_date');
             $table->enum('gender', ['Laki-laki','Perempuan']);
             $table->text('address');

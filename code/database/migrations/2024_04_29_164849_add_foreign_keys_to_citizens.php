@@ -9,6 +9,7 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
+<<<<<<< HEAD
     // public function up(): void
     // {
     //     Schema::table('citizens', function (Blueprint $table) {
@@ -33,6 +34,18 @@ return new class extends Migration
             indexName: 'citizens_rt_id'
         );
     });
+=======
+    public function up(): void
+    {
+        Schema::table('citizens', function (Blueprint $table) {
+            $table->foreignId('family_card_id')->constrained(
+                table: 'family_cards', indexName: 'citizens_family_card_id'
+            );
+            $table->foreignId('rt_id')->constrained(
+                table: 'rts', indexName: 'citizens_rt_id'
+            );
+        });
+>>>>>>> bdf85523fa8b004315ff29b97ed4e7618e8c0020
     }
 
     /**

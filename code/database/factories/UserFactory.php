@@ -2,11 +2,17 @@
 
 namespace Database\Factories;
 
+<<<<<<< HEAD
 use App\Models\Citizen;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
+=======
+use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
+>>>>>>> bdf85523fa8b004315ff29b97ed4e7618e8c0020
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
@@ -25,6 +31,7 @@ class UserFactory extends Factory
      */
     public function definition(): array
     {
+<<<<<<< HEAD
         
         return [
             'username' => fake()->userName(),
@@ -32,6 +39,15 @@ class UserFactory extends Factory
             'role' => fake()->randomElement(['admin', 'rt', 'rw', 'secretary', 'citizen']),
             'password' => static::$password ??= Hash::make('password'),
           ];
+=======
+        return [
+            'name' => fake()->name(),
+            'email' => fake()->unique()->safeEmail(),
+            'email_verified_at' => now(),
+            'password' => static::$password ??= Hash::make('password'),
+            'remember_token' => Str::random(10),
+        ];
+>>>>>>> bdf85523fa8b004315ff29b97ed4e7618e8c0020
     }
 
     /**
