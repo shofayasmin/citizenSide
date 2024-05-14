@@ -114,9 +114,15 @@
                                                 <div class="card-body">
 
 
-                                                    <h5 class="card-title">Data Kartu Keluarga</h5>
-                                                    <p>Berikut adalah Data Data Kartu Keluarga dari RW 003</code>.</p>
-                                                    <a href="{{ route('rt.create') }}" class="btn btn-primary key"> tambah </a>
+                                                    <h5 class="card-title">Data RT</h5>
+                                                    <p>Berikut adalah Data Data RT dari RW 003</code>.</p>
+
+                                                    
+                                                    <div class="text-right mb-3">
+                                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#RT_tambah">
+                                                            Tambah Data Rt
+                                                        </button>
+                                                    </div>
                                                     <div class="table-responsive">
 
                                                         <table class="table">
@@ -141,36 +147,16 @@
                                                                     - {{ \Carbon\Carbon::parse($d->berakhir_masa_jabatan)->format('Y') }}
                                                                     </td>
                                                                     <td>
-                                                                        <a href="{{route('rt.edit',['id' => $d->rt_id])}}" class="btn btn-primary"><i class="fas fa-pen"></i>Edit</a>
-                                                                        <a data-toggle="modal" data-target="#exampleModalHapus{{ $d->rt_id }}" class="btn btn-danger"><i class="fas fa-trash-alt"> Hapus</i></a>
+                                                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalEdit{{ $d->rt_id }}">
+                                                                            Edit
+                                                                        </button>
+                                                                        <a data-toggle="modal" data-target="#exampleModalHapus{{ $d->rt_id }}" class="btn btn-danger"><i class="fas fa-trash-alt">Hapus</i></a>
                                                                     </td>
                                                                     
                                                                 </tr>
 
                                                                 <!-- Modal -->
-                                                                <div class="modal fade" id="exampleModalHapus{{ $d->rt_id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                                                    <div class="modal-dialog modal-dialog-centered" role="document">
-                                                                        <div class="modal-content">
-                                                                            <div class="modal-header">
-                                                                                <h5 class="modal-title" id="exampleModalCenterTitle">Konfirmasi Hapus Data</h5>
-                                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                                    <i class="material-icons">close</i>
-                                                                                </button>
-                                                                            </div>
-                                                                            <div class="modal-body">
-
-                                                                                apakah anda yakin ingin menghapus data? <b>{{ $d->nama_ketua }}</b>                                                                         </div>
-                                                                            <div class="modal-footer">
-                                                                                <form action="{{ route('rt.delete',['id'=> $d->rt_id]) }}" method="POST">
-                                                                                    @csrf
-                                                                                    @method('DELETE')
-                                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                                                    <button type="Submit" class="btn btn-primary">Konfirmasi</button>
-                                                                                </form>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
+                                                                @include('Citizen.modal_rt')
 
                                                                 @endforeach
                                                             </tbody>

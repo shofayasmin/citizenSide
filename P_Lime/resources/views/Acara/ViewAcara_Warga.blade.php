@@ -90,91 +90,40 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="row">
                         <div class="col-xl">
-                            <div class="card">
-                                <div class="card-body">
-                                    
-                                    <div class="card text-center">
-                                        <div class="card-header">
-                                          <ul class="nav nav-pills card-header-pills">
-
-                                            <li class="nav-item">
-                                              <a class="nav-link active" href="#all" role="tab" data-toggle="tab">All</a>
-                                            </li>
-                                            <li class="nav-item">
-                                              <a class="nav-link" href="#Kegiatan" role="tab" data-toggle="tab">Kegiatan</a>
-                                            </li>
-                                            <li class="nav-item">
-                                              <a class="nav-link" href="#Informasi" role="tab" data-toggle="tab">Informasi</a>
-                                            </li>
-                                            <li class="nav-item">
-                                              <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Coming Soon</a>
-                                            </li>
-                                          </ul>
-
-                                        
-                                          
-
-                                          <div class="tab-content">
-
-                                              
-                                            <div role="tabpanel" class="tab-pane fade in active" id="all">
-                                                @foreach ($data as $d)
-                                                <div class="card mb-3 mt-3">
-
-                                                    <div class="card-body mt-2">
-                                                        <h5 class="card-title">{{ $d->judul }}</h5>
-                                                        <img src="{{ asset('storage/photo-acara/'.$d->image) }}" alt="" width="100">
-                                                        <p class="card-text">{{ $d->deskripsi }}</p>
-                                                        <p class="card-text"><small class="text-muted">{{ $d->tanggal_penyelenggaraan }}</small></p>
+                            <div class="container">
+                                @php $i = 0; @endphp
+                                @foreach($data as $key => $d)
+                                    @if($i % 3 == 0)
+                                        <div class="row row-cols-3">
+                                    @endif
+                                        <div class="col">
+                                            <div class="card">
+                                                <img src="{{ asset('storage/photo-acara/'.$d->image) }}" class="card-img-top" alt="Placeholder" style="width: 100%; height: 200px; object-fit: cover;">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">{{ $d->judul }}</h5>
+                                                    <p class="card-text">{{ $d->deskripsi }}</p>
+                                                    <a href="#" class="badge badge-primary" data-toggle="modal" data-target="#Read_More_{{ $key }}">Read More</a>
+                                                    <div class="text-right">
+                                                        <span class="badge badge-pill badge-info">{{ $d->tipe_acara }}</span>
                                                     </div>
                                                 </div>
-                                                @endforeach
                                             </div>
-                                            
-
-                                            <div role="tabpanel" class="tab-pane fade" id="Kegiatan">
-                                                @foreach ($data as $d)
-                                                <!-- Tampilkan hanya acara dengan tipe 'Kegiatan' -->
-                                                @if ($d->tipe_acara == 'Kegiatan')
-                                                <div class="card mb-3 mt-3">
-                                                    <div class="card-body mt-2">
-                                                        <h5 class="card-title">{{ $d->judul }}</h5>
-                                                        <img src="{{ asset('storage/photo-acara/'.$d->image) }}" alt="" width="100">
-                                                        <p class="card-text">{{ $d->deskripsi }}</p>
-                                                        <p class="card-text"><small class="text-muted">{{ $d->tanggal_penyelenggaraan }}</small></p>
-                                                    </div>
-                                                </div>
-                                                @endif
-                                                @endforeach
-                                            </div>
-
-                                            <div role="tabpanel" class="tab-pane fade" id="Informasi">
-                                                @foreach ($data as $d)
-                                                <!-- Tampilkan hanya acara dengan tipe 'Informasi' -->
-                                                @if ($d->tipe_acara == 'Informasi')
-                                                <div class="card mb-3 mt-3">
-                                                    <div class="card-body mt-2">
-                                                        <h5 class="card-title">{{ $d->judul }}</h5>
-                                                        <img src="{{ asset('storage/photo-acara/'.$d->image) }}" alt="" width="100">
-                                                        <p class="card-text">{{ $d->deskripsi }}</p>
-                                                        <p class="card-text"><small class="text-muted">{{ $d->tanggal_penyelenggaraan }}</small></p>
-                                                    </div>
-                                                </div>
-                                                @endif
-                                                @endforeach
-
-
-
-                                          </div>
-
                                         </div>
-                                        
-                                      </div>
-                                </div>
+                                    @if($i % 3 == 2 || $loop->last)
+                                        </div>
+                                    @endif
+                                    @php $i++; @endphp
+                                    @include('Acara.modal')
+                                @endforeach
                             </div>
+                            <a href="" class="btn btn-primary">Detail</a>
                         </div>
+                        
+
+
                     </div>
 
                     

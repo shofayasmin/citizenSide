@@ -335,32 +335,38 @@ class CitizenController extends Controller
     public function store_warga(Request $request)
     {
         $validator = Validator::make($request->all(),[
-            'nik' => 'required',
-            'no_kk' => 'required',
-            'nama' => 'required',
-            'tempat_tanggal_lahir' => 'required',
-            'jenis_kelamin' => 'required',
-            'alamat' => 'required',
-            'agama' => 'required',
-            'status' => 'required',
-            'pekerjaan' => 'required',
-            'kewarganegaraan' => 'required',
+            'nik'               => 'required',
+            'nama_lengkap'      => 'required',
+            'tempat_lahir'      => 'required',
+            'tanggal_lahir'     => 'required',
+            'jenis_kelamin'     => 'required',
+            'alamat'            => 'required',
+            'agama'             => 'required',
+            'nomor_telepon'     => 'required',
+            'status'            => 'required',
+            'pekerjaan'         => 'required',
+            'kewarganegaraan'   => 'required',
+            'domisili'          => 'required',
             
         ]);
+        
 
         if($validator->fails()) return redirect()->back()->withInput()->withErrors($validator);
 
         // $data['nama_field_di_database'] = $request->nama_di_inputan;
-        $data['nik'] = $request->nik; 
-        $data['no_kk'] = $request->no_kk; 
-        $data['nama'] =  $request->nama;
-        $data['tempat_tanggal_lahir'] =  $request->tempat_tanggal_lahir;
-        $data['jenis_kelamin'] =  $request->jenis_kelamin;
-        $data['alamat'] =  $request->alamat;
-        $data['agama'] =  $request->agama;
-        $data['status'] =  $request->status;
-        $data['pekerjaan'] =  $request->pekerjaan;
-        $data['kewarganegaraan'] =  $request->kewarganegaraan;
+        $data['nik']                =  $request->nik; 
+        $data['nama_lengkap']       =  $request->nama_lengkap;
+        $data['tempat_lahir']       =  $request->tempat_lahir;
+        $data['tanggal_lahir']      =  $request->tanggal_lahir;
+        $data['jenis_kelamin']      =  $request->jenis_kelamin;
+        $data['alamat']             =  $request->alamat;
+        $data['agama']              =  $request->agama;
+        $data['nomor_telepon']      =  $request->nomor_telepon;
+        $data['status']             =  $request->status;
+        $data['pekerjaan']          =  $request->pekerjaan;
+        $data['kewarganegaraan']    =  $request->kewarganegaraan;
+        $data['domisili']           =  $request->domisili;
+
 
         Warga::create($data);
 
@@ -375,33 +381,37 @@ class CitizenController extends Controller
     public function update_warga(Request $request,$id)
     {
         $validator = Validator::make($request->all(),[
-            'nik' => 'required',
-            'no_kk' => 'required',
-            'nama' => 'required',
-            'tempat_tanggal_lahir' => 'required',
-            'jenis_kelamin' => 'required',
-            'alamat' => 'required',
-            'agama' => 'required',
-            'status' => 'required',
-            'pekerjaan' => 'required',
-            'kewarganegaraan' => 'required',
+            'nik'               => 'required',
+            'nama_lengkap'      => 'required',
+            'tempat_lahir'      => 'required',
+            'tanggal_lahir'     => 'required',
+            'jenis_kelamin'     => 'required',
+            'alamat'            => 'required',
+            'agama'             => 'required',
+            'nomor_telepon'     => 'required',
+            'status'            => 'required',
+            'pekerjaan'         => 'required',
+            'kewarganegaraan'   => 'required',
+            'domisili'          => 'required',
         ]);
 
         if($validator->fails()) return redirect()->back()->withInput()->withErrors($validator);
 
         // $data['nama_field_di_database'] = $request->nama_di_inputan;
-        $data['nik'] = $request->nik; 
-        $data['no_kk'] = $request->no_kk; 
-        $data['nama'] =  $request->nama;
-        $data['tempat_tanggal_lahir'] =  $request->tempat_tanggal_lahir;
-        $data['jenis_kelamin'] =  $request->jenis_kelamin;
-        $data['alamat'] =  $request->alamat;
-        $data['agama'] =  $request->agama;
-        $data['status'] =  $request->status;
-        $data['pekerjaan'] =  $request->pekerjaan;
-        $data['kewarganegaraan'] =  $request->kewarganegaraan;
+        $data['nik']                =  $request->nik; 
+        $data['nama_lengkap']       =  $request->nama_lengkap;
+        $data['tempat_lahir']       =  $request->tempat_lahir;
+        $data['tanggal_lahir']      =  $request->tanggal_lahir;
+        $data['jenis_kelamin']      =  $request->jenis_kelamin;
+        $data['alamat']             =  $request->alamat;
+        $data['agama']              =  $request->agama;
+        $data['nomor_telepon']      =  $request->nomor_telepon;
+        $data['status']             =  $request->status;
+        $data['pekerjaan']          =  $request->pekerjaan;
+        $data['kewarganegaraan']    =  $request->kewarganegaraan;
+        $data['domisili']           =  $request->domisili;
 
-        Warga::where('id_warga',$id)->update($data);
+        Warga::where('nik',$id)->update($data);
         return redirect()->route('citizen.warga');
     }
 

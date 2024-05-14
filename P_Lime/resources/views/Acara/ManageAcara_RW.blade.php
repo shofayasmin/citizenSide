@@ -116,8 +116,10 @@
                                                 <div class="card-body">
                                                     <h5 class="card-title">Data ACARA</h5>
                                                     <p>Berikut adalah Data Data ACARA dari RW 003</code>.</p>
-                                                    <div class="d-flex justify-content-between align-items-center mb-3">
-                                                        <a href="{{ route('acara.create') }}" class="btn btn-primary key ml-auto">Tambah</a>
+                                                    <div class="text-right mb-3">
+                                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalTambah">
+                                                            Tambah Acara
+                                                        </button>
                                                     </div>
                                                     <div class="table-responsive">
                                                         <table class="table">
@@ -144,33 +146,15 @@
                                                                     
                                                                     
                                                                     <td>
-                                                                        <a href="{{route('acara.edit',['id' => $d->id_acara])}}" class="btn btn-primary"><i class="fas fa-pen"></i>Edit</a>
+                                                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalEdit{{ $d->id_acara }}">
+                                                                            Edit
+                                                                        </button>
                                                                         <a data-toggle="modal" data-target="#exampleModalHapus{{ $d->id_acara }}" class="btn btn-danger"><i class="fas fa-trash-alt">Hapus</i></a>
                                                                     </td>
                                                                 </tr>
 
                                                                 <!-- Modal -->
-                                                                <div class="modal fade" id="exampleModalHapus{{ $d->id_acara }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                                                    <div class="modal-dialog modal-dialog-centered" role="document">
-                                                                        <div class="modal-content">
-                                                                            <div class="modal-header">
-                                                                                <h5 class="modal-title" id="exampleModalCenterTitle">Konfirmasi Hapus Data</h5>
-                                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                                    <i class="material-icons">close</i>
-                                                                                </button>
-                                                                            </div>
-                                                                            <div class="modal-body">apakah anda yakin ingin menghapus data? <b>{{ $d->judul }}</b></div>
-                                                                            <div class="modal-footer">
-                                                                                <form action="{{ route('acara.delete',['id'=> $d->id_acara]) }}" method="POST">
-                                                                                    @csrf
-                                                                                    @method('DELETE')
-                                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                                                    <button type="Submit" class="btn btn-primary">Konfirmasi</button>
-                                                                                </form>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
+                                                                @include('Acara.modal')
 
                                                                 @endforeach
                                                                 

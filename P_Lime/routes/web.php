@@ -9,6 +9,7 @@ use App\Http\Controllers\CitizenController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\TemplateController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\LaporanController;
 
 
 /*
@@ -104,3 +105,5 @@ route::post('/citizen/store_rumah', [CitizenController::class, 'store_rumah'])->
 route::get('/citizen/edit_rumah/{id}', [CitizenController::class, 'edit_rumah'])->name('rumah.edit');
 route::put('/citizen/update_rumah/{id}', [CitizenController::class, 'update_rumah'])->name('rumah.update');
 route::delete('/citizen/delete_rumah/{id}', [CitizenController::class, 'delete_rumah'])->name('rumah.delete');
+
+route::get('/laporan/create', [LaporanController::class, 'index'])->name('laporan.create');
