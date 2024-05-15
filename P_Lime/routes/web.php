@@ -106,4 +106,6 @@ route::get('/citizen/edit_rumah/{id}', [CitizenController::class, 'edit_rumah'])
 route::put('/citizen/update_rumah/{id}', [CitizenController::class, 'update_rumah'])->name('rumah.update');
 route::delete('/citizen/delete_rumah/{id}', [CitizenController::class, 'delete_rumah'])->name('rumah.delete');
 
-route::get('/laporan/create', [LaporanController::class, 'index'])->name('laporan.create');
+// Laporan
+route::get('/laporan/index', [LaporanController::class, 'index'])->name('laporan.index');
+route::get('/laporan/create', [LaporanController::class, 'create'])->name('laporan.create');
