@@ -112,10 +112,12 @@
                                         <div class="col-xl">
                                             <div class="card">
                                                 <div class="card-body">
-                                                    <h5 class="card-title">Data Kartu Keluarga</h5>
-                                                    <p>Berikut adalah Data Data Kartu Keluarga dari RW 003</code>.</p>
-                                                    <div class="d-flex justify-content-between align-items-center mb-3">
-                                                        <a href="{{ route('warga.create') }}" class="btn btn-primary key ml-auto">Tambah</a>
+                                                    <h5 class="card-title">Data Warga</h5>
+                                                    <p>Berikut adalah Data Data Warga dari RW 003</code>.</p>
+                                                    <div class="text-right mb-3">
+                                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#warga_tambah">
+                                                            Tambah Acara
+                                                        </button>
                                                     </div>
                                                     <div class="table-responsive">
                                                         <table class="table">
@@ -129,6 +131,7 @@
                                                                     <th scope="col">Jenis Kelamin</th>
                                                                     <th scope="col">Alamat</th>
                                                                     <th scope="col">Agama</th>
+                                                                    <th scope="col">No. Telepon</th>
                                                                     <th scope="col">Status</th>
                                                                     <th scope="col">Pekerjaan</th>
                                                                     <th scope="col">Kewarganegaraan</th>
@@ -141,46 +144,28 @@
                                                                 @foreach ($data as $d)
                                                                 <tr>
                                                                         
-                                                                    <th scope="row">{{ $d->id_warga }}</th>
+                                                                    <th scope="row">{{ $d->id }}</th>
                                                                     <td>{{ $d->nik }}</td>
-                                                                    {{-- <td>{{ $d->no_kk }}</td> --}}
-                                                                    <td>{{ $d->nama }}</td>
-                                                                    <td>{{ $d->tempat_tanggal_lahir }}</td>
+                                                                    <td>{{ $d->nama_lengkap }}</td>
+                                                                    <td>{{ $d->tempat_lahir }}, {{ \Carbon\Carbon::parse($d->tanggal_lahir)->format('j F Y') }}</td>
                                                                     <td>{{ $d->jenis_kelamin }}</td>
                                                                     <td>{{ $d->alamat }}</td>
                                                                     <td>{{ $d->agama }}</td>
+                                                                    <td>{{ $d->nomor_telepon }}</td>
                                                                     <td>{{ $d->status }}</td>
                                                                     <td>{{ $d->pekerjaan }}</td>
                                                                     <td>{{ $d->kewarganegaraan }}</td>
                                                                     <td>{{ $d->domisili }}</td>
                                                                     <td>
-                                                                        <a href="{{route('warga.edit',['id' => $d->id])}}" class="btn btn-primary"><i class="fas fa-pen"></i>Edit</a>
-                                                                        <a data-toggle="modal" data-target="#exampleModalHapus{{ $d->id_warga }}" class="btn btn-danger"><i class="fas fa-trash-alt"> Hapus</i></a>
+                                                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalEdit{{ $d->nik }}">
+                                                                            Edit
+                                                                        </button>
+                                                                        <a data-toggle="modal" data-target="#exampleModalHapus{{ $d->nik }}" class="btn btn-danger"><i class="fas fa-trash-alt">Hapus</i></a>
                                                                     </td>
                                                                 </tr>
 
                                                                 <!-- Modal -->
-                                                                <div class="modal fade" id="exampleModalHapus{{ $d->id_warga }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                                                    <div class="modal-dialog modal-dialog-centered" role="document">
-                                                                        <div class="modal-content">
-                                                                            <div class="modal-header">
-                                                                                <h5 class="modal-title" id="exampleModalCenterTitle">Konfirmasi Hapus Data</h5>
-                                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                                    <i class="material-icons">close</i>
-                                                                                </button>
-                                                                            </div>
-                                                                            <div class="modal-body">apakah anda yakin ingin menghapus data? <b>{{ $d->nama }}</b></div>
-                                                                            <div class="modal-footer">
-                                                                                <form action="{{ route('warga.delete',['id'=> $d->id]) }}" method="POST">
-                                                                                    @csrf
-                                                                                    @method('DELETE')
-                                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                                                    <button type="Submit" class="btn btn-primary">Konfirmasi</button>
-                                                                                </form>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
+                                                                @include('Citizen.modal_warga')
 
                                                                 @endforeach
                                                                

@@ -114,8 +114,10 @@
                                                 <div class="card-body">
                                                     <h5 class="card-title">Data Rumah</h5>
                                                     <p>Berikut adalah Data Data Rumah dari RW 003</code>.</p>
-                                                    <div class="d-flex justify-content-between align-items-center mb-3">
-                                                        <a href="{{ route('rumah.create') }}" class="btn btn-primary key ml-auto">Tambah</a>
+                                                    <div class="text-right mb-3">
+                                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#rumah_tambah">
+                                                            Tambah Acara
+                                                        </button>
                                                     </div>
                                                     <div class="table-responsive">
                                                         <table class="table">
@@ -142,33 +144,15 @@
                                                                     <td>{{ $d->luas_tanah }} m²</td>
                                                                     <td>{{ $d->jumlah_anggota_kk }}</td>
                                                                     <td>
-                                                                        <a href="{{route('rumah.edit',['id' => $d->rumah_id])}}" class="btn btn-primary"><i class="fas fa-pen"></i>Edit</a>
+                                                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalEdit{{ $d->rumah_id }}">
+                                                                            Edit
+                                                                        </button>
                                                                         <a data-toggle="modal" data-target="#exampleModalHapus{{ $d->rumah_id }}" class="btn btn-danger"><i class="fas fa-trash-alt">Hapus</i></a>
                                                                     </td>
                                                                 </tr>
 
                                                                 <!-- Modal -->
-                                                                <div class="modal fade" id="exampleModalHapus{{ $d->rumah_id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                                                    <div class="modal-dialog modal-dialog-centered" role="document">
-                                                                        <div class="modal-content">
-                                                                            <div class="modal-header">
-                                                                                <h5 class="modal-title" id="exampleModalCenterTitle">Konfirmasi Hapus Data</h5>
-                                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                                    <i class="material-icons">close</i>
-                                                                                </button>
-                                                                            </div>
-                                                                            <div class="modal-body">apakah anda yakin ingin menghapus data? <b>{{ $d->nama_pemilik }}</b></div>
-                                                                            <div class="modal-footer">
-                                                                                <form action="{{ route('rumah.delete',['id'=> $d->rumah_id]) }}" method="POST">
-                                                                                    @csrf
-                                                                                    @method('DELETE')
-                                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                                                    <button type="Submit" class="btn btn-primary">Konfirmasi</button>
-                                                                                </form>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
+                                                                @include('Citizen.modal_rumah')
 
                                                                 @endforeach
                                                                 

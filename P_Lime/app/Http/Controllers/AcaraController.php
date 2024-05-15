@@ -6,6 +6,7 @@ use App\Models\Acara;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use Intervention\Image\Facades\Image;
 
 class AcaraController extends Controller
 {
@@ -30,20 +31,20 @@ class AcaraController extends Controller
 
     public function store(Request $request)
     {
-        
-
-        $validator = Validator::make($request->all(),[
-            'judul'                     => 'required',
-            'deskripsi'                 => 'required',
-            'tipe_acara'                => 'required',
-            'image'                     => 'required|mimes:png,jpg,jpeg|max:2048',
+        $validator = Validator::make($request->all(), [
+            'judul'         => 'required',
+            'deskripsi'     => 'required',
+            'tipe_acara'    => 'required',
+            'image'         => 'required|mimes:png,jpg,jpeg|max:2048',
         ]);
 
-        if($validator->fails()) return redirect()->back()->withInput()->withErrors($validator);
+        if ($validator->fails()) {
+            return redirect()->back()->withInput()->withErrors($validator);
+        }
 
         $photo = $request->file('image');
-        $filename = date('Y-m-d').$photo->getClientOriginalName();
-        $path = 'photo-acara/'.$filename;
+        $filename = date('Y-m-d') . $photo->getClientOriginalName();
+        $path = 'photo-acara/' . $filename;
 
         Storage::disk('public')->put($path,file_get_contents($photo));
 
@@ -55,7 +56,6 @@ class AcaraController extends Controller
         Acara::create($data);
 
         return redirect()->route('acara.manage');
-
     }
 
     public function edit_acara(Request $request,$id)
