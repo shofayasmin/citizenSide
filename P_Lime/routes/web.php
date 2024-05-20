@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\IuranController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UmkmController;
 use App\Http\Controllers\AcaraController;
@@ -110,9 +111,9 @@ route::put('/citizen/update_rumah/{id}', [CitizenController::class, 'update_ruma
 route::delete('/citizen/delete_rumah/{id}', [CitizenController::class, 'delete_rumah'])->name('rumah.delete');
 
 // Laporan
-route::get('/laporan/index', [LaporanController::class, 'index'])->name('laporan.index');
+route::get('/laporan/view', [LaporanController::class, 'view'])->name('laporan.view');
 route::get('/laporan/create', [LaporanController::class, 'create'])->name('laporan.create');
-route::get('/laporan/close_complaint', [LaporanController::class, 'close_complaint'])->name('laporan.close_complaint');
+route::get('/laporan/track', [LaporanController::class, 'track'])->name('laporan.track');
 
 
 // Bansos
@@ -120,4 +121,7 @@ route::get('/Bansos/informasi', [BansosController::class, 'informasi'])->name('b
 route::get('/Bansos/pengajuan', [BansosController::class, 'pengajuan'])->name('bansos.pengajuan');
 route::get('/Bansos/manage', [BansosController::class, 'manage'])->name('bansos.manage');
 route::get('/Bansos/lurah', [BansosController::class, 'lurah'])->name('bansos.lurah');
+
+// Iuran
+route::get('/Iuran/index', [IuranController::class, 'index'])->name('iuran.index');
 

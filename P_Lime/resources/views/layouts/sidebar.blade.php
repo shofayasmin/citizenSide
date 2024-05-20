@@ -33,7 +33,7 @@
                         <a href="{{ route('laporan.create') }}" class="{{ Request::routeIs('laporan.create') ? 'active' : '' }}">Membuat Laporan</a>
                     </li>
                     <li>
-                        <a href="{{ route('laporan.close_complaint') }}" class="{{ Request::routeIs('laporan.close_complaint') ? 'active' : '' }}">Tracking Laporan</a>
+                        <a href="{{ route('laporan.view') }}" >View Laporan</a>
                     </li>
                 </ul>
             </li>
@@ -68,10 +68,13 @@
                 </ul>
             </li>
             <li>
-                <a href="file-manager.html"><i class="material-icons">cloud_queue</i>Iuran</a>
+                <a href="{{ route('citizen.index') }}"><i class="material-icons {{ Request::routeIs('citizen.index') ? 'active' : '' }}">person</i>Citizen</a>
+            </li>
+            <li class="sidebar-title">
+                Sekretaris
             </li>
             <li>
-                <a href="{{ route('citizen.index') }}"><i class="material-icons {{ Request::routeIs('citizen.index') ? 'active' : '' }}">person</i>Citizen</a>
+                <a href="{{ route('iuran.index') }}"><i class="material-icons">cloud_queue</i>Iuran</a>
             </li>
 
             <li class="sidebar-title">

@@ -2,17 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\Iuran;
+use App\Http\Requests\StoreIuranRequest;
+use App\Http\Requests\UpdateIuranRequest;
 
-class LaporanController extends Controller
+class IuranController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function view()
+    public function index()
     {
-        return view('laporan.view');
-        
+        return view('Iuran.index');
     }
 
     /**
@@ -20,21 +21,13 @@ class LaporanController extends Controller
      */
     public function create()
     {
-
-        return view('laporan.create');
-
-
-    }
-
-    public function track()
-    {
-        return view('laporan.track');
+        //
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreIuranRequest $request)
     {
         //
     }
@@ -42,7 +35,7 @@ class LaporanController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Iuran $iuran)
     {
         //
     }
@@ -50,7 +43,7 @@ class LaporanController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Iuran $iuran)
     {
         //
     }
@@ -58,7 +51,7 @@ class LaporanController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateIuranRequest $request, Iuran $iuran)
     {
         //
     }
@@ -66,7 +59,7 @@ class LaporanController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Iuran $iuran)
     {
         //
     }
