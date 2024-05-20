@@ -10,6 +10,7 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\TemplateController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LaporanController;
+use App\Http\Controllers\BansosController;
 
 
 /*
@@ -42,7 +43,9 @@ Route::post('/login', [LoginController::class, 'authenticate'])->middleware('gue
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout')->middleware('auth');
 
 //dashboard
-Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth');
+Route::get('/dashboard/index', [DashboardController::class, 'index'])->middleware('auth');
+Route::get('/dashboard/index_warga', [DashboardController::class, 'warga'])->name('dashboard.warga');
+
 
 // User
 // route::get('/signin',[MasukController::class, 'SignIn'])->name('login'); // untuk Sign In
@@ -109,3 +112,12 @@ route::delete('/citizen/delete_rumah/{id}', [CitizenController::class, 'delete_r
 // Laporan
 route::get('/laporan/index', [LaporanController::class, 'index'])->name('laporan.index');
 route::get('/laporan/create', [LaporanController::class, 'create'])->name('laporan.create');
+route::get('/laporan/close_complaint', [LaporanController::class, 'close_complaint'])->name('laporan.close_complaint');
+
+
+// Bansos
+route::get('/Bansos/informasi', [BansosController::class, 'informasi'])->name('bansos.informasi');
+route::get('/Bansos/pengajuan', [BansosController::class, 'pengajuan'])->name('bansos.pengajuan');
+route::get('/Bansos/manage', [BansosController::class, 'manage'])->name('bansos.manage');
+route::get('/Bansos/lurah', [BansosController::class, 'lurah'])->name('bansos.lurah');
+

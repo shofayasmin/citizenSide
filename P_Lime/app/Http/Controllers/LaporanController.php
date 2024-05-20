@@ -26,6 +26,11 @@ class LaporanController extends Controller
 
     }
 
+    public function close_complaint()
+    {
+        return view('laporan.close_complaint');
+    }
+
     /**
      * Store a newly created resource in storage.
      */

@@ -1,5 +1,4 @@
 
-
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -12,13 +11,16 @@
         <!-- The above 6 meta tags *must* come first in the head; any other head content must come *after* these tags -->
         
         <!-- Title -->
-        <title>Acara View</title>
+        <title>Manage Citizen Data</title>
 
         <!-- Styles -->
         <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link href="{{ asset('lime/theme/assets/plugins/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
         <link href="{{ asset('lime/theme/assets/plugins/font-awesome/css/all.min.css')}}" rel="stylesheet">
+
+        <link href="{{ asset('lime/theme/assets/plugins/plupload/js/jquery.plupload.queue/css/jquery.plupload.queue.css')}}" rel="stylesheet">  
+
       
         <!-- Theme Styles -->
         <link href="{{ asset('lime/theme/assets/css/lime.min.css')}}" rel="stylesheet">
@@ -35,8 +37,6 @@
         
         @include('layouts.sidebar')
         
-        
-        
         @include('layouts.header')
 
         <div class="lime-container">
@@ -47,59 +47,36 @@
                             <div class="page-title">
                                 <nav aria-label="breadcrumb">
                                   <ol class="breadcrumb breadcrumb-separator-1">
-                                    <li class="breadcrumb-item"><a href="#">Acara</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">View</li>
+                                    <li class="breadcrumb-item"><a href="#">Laporan</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Buat Laporan</li>
                                   </ol>
                                 </nav>
-                                <h3>View Acara</h3>
+                                <h3>Laporan Detail Mengenai blabalablablablabla</h3>
                                 
                             </div>
                         </div>
                     </div>
-
                     <div class="row">
                         <div class="col-xl">
-                            <div class="container">
-                                @php $i = 0; @endphp
-                                @foreach($data as $key => $d)
-                                    @if($i % 3 == 0)
-                                        <div class="row row-cols-3">
-                                    @endif
-                                        <div class="col">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-xl">
                                             <div class="card">
-                                                <img src="{{ asset('storage/photo-acara/'.$d->image) }}" class="card-img-top" alt="Placeholder" style="width: 100%; height: 200px; object-fit: cover;">
-                                                <div class="card-body">
-                                                    <h5 class="card-title">{{ $d->judul }}</h5>
-                                                    <p class="card-text">{{ $d->deskripsi }}</p>
-                                                    <a href="#" class="badge badge-primary" data-toggle="modal" data-target="#Read_More_{{ $key }}">Read More</a>
-                                                    <div class="text-right">
-                                                        <span class="badge badge-pill badge-info">{{ $d->tipe_acara }}</span>
-                                                    </div>
+                                                <div class="card-body" >
+                                                    
                                                 </div>
                                             </div>
                                         </div>
-                                    @if($i % 3 == 2 || $loop->last)
-                                        </div>
-                                    @endif
-                                    @php $i++; @endphp
-                                    @include('Acara.modal')
-                                @endforeach
+                                    </div>
+                                </div>
                             </div>
-                            <a href="" class="btn btn-primary">Detail</a>
                         </div>
                     </div>
+                    <a href="{{ route('citizen.index') }}"> <- Kembali</a>
 
                     
-            <div class="lime-footer">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <span class="footer-text"></span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+            
         
         
         <!-- Javascripts -->
@@ -108,5 +85,8 @@
         <script src="{{ asset('lime/theme/assets/plugins/bootstrap/js/bootstrap.min.js')}}"></script>
         <script src="{{ asset('lime/theme/assets/plugins/jquery-slimscroll/jquery.slimscroll.min.js')}}"></script>
         <script src="{{ asset('lime/theme/assets/js/lime.min.js')}}"></script>
+        <script src="{{ asset('lime/theme/assets/plugins/plupload/js/plupload.full.min.js')}}"></script>
+        <script src="{{ asset('lime/theme/assets/plugins/plupload/js/jquery.plupload.queue/jquery.plupload.queue.min.js')}}"></script>
+        <script src="{{ asset('lime/theme/assets/js/pages/plupload.js')}}"></script>
     </body>
 </html>
