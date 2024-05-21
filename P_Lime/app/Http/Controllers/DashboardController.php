@@ -14,4 +14,8 @@ class DashboardController extends Controller
     {
         return view('dashboard.index_warga');
     }
+    public function rw()
+    {
+        return view('dashboard.rw');
+    }
 }

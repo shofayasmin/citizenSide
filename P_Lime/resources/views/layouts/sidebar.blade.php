@@ -26,7 +26,7 @@
                 </a>
             </li>
 
-            <li class="page {{ Request::is('laporan*') ? 'active' : '' }}">
+            <li class="page {{ Request::is('laporan*') ? 'active-page' : '' }}">
                 <a href="#"><i class="material-icons">person_outline</i>Laporan<i class="material-icons has-sub-menu">keyboard_arrow_left</i></a>
                 <ul class="sub-menu">
                     <li>
@@ -39,21 +39,22 @@
             </li>
             
 
-            <li class="page {{ Request::is('acara*') ? 'active' : '' }}">
+            <li class="page {{ Request::is('acara*') || Request::is('umkm*') ? 'active-page' : '' }}">
                 <a href="#"><i class="material-icons">inbox</i>Acara<i class="material-icons has-sub-menu">keyboard_arrow_left</i></a>
                 <ul class="sub-menu">
                     <li>
-                        <a href="{{ route('umkm.register') }}" class="{{ Request::routeIs('umkm.register') ? 'active' : '' }}">UMKM Register</a>
+                        <a href="{{ route('umkm.register') }}" >UMKM Register</a>
                     </li>
                     <li>
-                        <a href="{{ route('acara.manage') }}" class="{{ Request::routeIs('acara.manage') ? 'active' : '' }}">Manage</a>
+                        <a href="{{ route('acara.manage') }}" >Manage</a>
                     </li>
                     <li>
-                        <a href="{{ route('acara.view') }}" class="{{ Request::routeIs('acara.view') ? 'active' : '' }}">View</a>
+                        <a href="{{ route('acara.view') }}" >View</a>
                     </li>
                 </ul>
             </li>
-            <li class="page {{ Request::is('acara*') ? 'active' : '' }}">
+
+            <li class="page {{ Request::is('Bansos*') ? 'active-page' : '' }}">
                 <a href="#"><i class="material-icons">done_all</i>Bansos<i class="material-icons has-sub-menu">keyboard_arrow_left</i></a>
                 <ul class="sub-menu">
                     <li>
@@ -67,22 +68,33 @@
                     </li>
                 </ul>
             </li>
+
+
             <li>
-                <a href="{{ route('citizen.index') }}"><i class="material-icons {{ Request::routeIs('citizen.index') ? 'active' : '' }}">person</i>Citizen</a>
+                <a href="{{ route('citizen.index') }}" class="{{ Request::routeIs('citizen.index') ? 'active' : '' }}"><i class="material-icons">person</i>Citizen</a>
             </li>
             <li class="sidebar-title">
                 Sekretaris
             </li>
             <li>
-                <a href="{{ route('iuran.index') }}"><i class="material-icons">cloud_queue</i>Iuran</a>
+                <a href="{{ route('iuran.index') }}" class="{{ Request::routeIs('iuran.index') ? 'active' : '' }}"><i class="material-icons">cloud_queue</i>Iuran</a>
             </li>
+
 
             <li class="sidebar-title">
                 RW
             </li>
             <li>
-                <a href="{{ route('bansos.lurah') }}"><i class="material-icons">inbox</i>Mailbox</a>
+                <a href="{{ route('bansos.lurah') }}" class="{{ Request::routeIs('bansos.lurah') ? 'active' : '' }}">
+                    <i class="material-icons">inbox</i>Mailbox</a>
             </li>
+            <li>
+                <a href="{{ route('dashboard.rw') }}" class="{{ Request::routeIs('dashboard.rw') ? 'active' : '' }}">
+                    <i class="material-icons">dashboard</i>Dashboard_rw
+                </a>
+            </li>
+
+
             <li class="sidebar-title">
                 Warga
             </li>
