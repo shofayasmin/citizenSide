@@ -18,7 +18,7 @@
     <div class="lime-sidebar-inner slimscroll">
         <ul class="accordion-menu">
             <li class="sidebar-title">
-                Apps
+                POV General / Belum Terpisah
             </li>
             <li>
                 <a href="{{ asset('home') }}" class="{{ Request::path() === 'home' ? 'active' : '' }}">
@@ -33,7 +33,7 @@
                         <a href="{{ route('laporan.create') }}" class="{{ Request::routeIs('laporan.create') ? 'active' : '' }}">Membuat Laporan</a>
                     </li>
                     <li>
-                        <a href="{{ route('laporan.index') }}" class="{{ Request::routeIs('laporan.index') ? 'active' : '' }}">Tracking Laporan</a>
+                        <a href="{{ route('laporan.view') }}" >View Laporan</a>
                     </li>
                 </ul>
             </li>
@@ -43,6 +43,9 @@
                 <a href="#"><i class="material-icons">inbox</i>Acara<i class="material-icons has-sub-menu">keyboard_arrow_left</i></a>
                 <ul class="sub-menu">
                     <li>
+                        <a href="{{ route('umkm.register') }}" class="{{ Request::routeIs('umkm.register') ? 'active' : '' }}">UMKM Register</a>
+                    </li>
+                    <li>
                         <a href="{{ route('acara.manage') }}" class="{{ Request::routeIs('acara.manage') ? 'active' : '' }}">Manage</a>
                     </li>
                     <li>
@@ -50,15 +53,47 @@
                     </li>
                 </ul>
             </li>
-            <li>
-                <a href="todo.html"><i class="material-icons">done_all</i>Bansos</a>
-            </li>
-            <li>
-                <a href="file-manager.html"><i class="material-icons">cloud_queue</i>Iuran</a>
+            <li class="page {{ Request::is('acara*') ? 'active' : '' }}">
+                <a href="#"><i class="material-icons">done_all</i>Bansos<i class="material-icons has-sub-menu">keyboard_arrow_left</i></a>
+                <ul class="sub-menu">
+                    <li>
+                        <a href="{{ route('bansos.informasi') }}">Informasi Terbaru Bansos</a>
+                    </li>
+                    {{-- <li>
+                        <a href="{{ route('bansos.pengajuan') }}">Pengajuan Bansos</a>
+                    </li> --}}
+                    <li>
+                        <a href="{{ route('bansos.manage') }}">Manage Bansos</a>
+                    </li>
+                </ul>
             </li>
             <li>
                 <a href="{{ route('citizen.index') }}"><i class="material-icons {{ Request::routeIs('citizen.index') ? 'active' : '' }}">person</i>Citizen</a>
             </li>
+            <li class="sidebar-title">
+                Sekretaris
+            </li>
+            <li>
+                <a href="{{ route('iuran.index') }}"><i class="material-icons">cloud_queue</i>Iuran</a>
+            </li>
+
+            <li class="sidebar-title">
+                RW
+            </li>
+            <li>
+                <a href="{{ route('bansos.lurah') }}"><i class="material-icons">inbox</i>Mailbox</a>
+            </li>
+            <li class="sidebar-title">
+                Warga
+            </li>
+            <li>
+                <a href="{{ route('dashboard.warga') }}" class="{{ Request::routeIs('dashboard.warga') ? 'active' : '' }}">
+                    <i class="material-icons">dashboard</i>Dashboard_warga
+                </a>
+            </li>
+
+
+
         </ul>
     </div>
 </div>

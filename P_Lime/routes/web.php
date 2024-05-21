@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\IuranController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UmkmController;
 use App\Http\Controllers\AcaraController;
@@ -10,6 +11,7 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\TemplateController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LaporanController;
+use App\Http\Controllers\BansosController;
 
 
 /*
@@ -42,7 +44,9 @@ Route::post('/login', [LoginController::class, 'authenticate'])->middleware('gue
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout')->middleware('auth');
 
 //dashboard
-Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth');
+Route::get('/dashboard/index', [DashboardController::class, 'index'])->middleware('auth');
+Route::get('/dashboard/index_warga', [DashboardController::class, 'warga'])->name('dashboard.warga');
+
 
 // User
 // route::get('/signin',[MasukController::class, 'SignIn'])->name('login'); // untuk Sign In
@@ -107,5 +111,17 @@ route::put('/citizen/update_rumah/{id}', [CitizenController::class, 'update_ruma
 route::delete('/citizen/delete_rumah/{id}', [CitizenController::class, 'delete_rumah'])->name('rumah.delete');
 
 // Laporan
-route::get('/laporan/index', [LaporanController::class, 'index'])->name('laporan.index');
+route::get('/laporan/view', [LaporanController::class, 'view'])->name('laporan.view');
 route::get('/laporan/create', [LaporanController::class, 'create'])->name('laporan.create');
+route::get('/laporan/track', [LaporanController::class, 'track'])->name('laporan.track');
+
+
+// Bansos
+route::get('/Bansos/informasi', [BansosController::class, 'informasi'])->name('bansos.informasi');
+route::get('/Bansos/pengajuan', [BansosController::class, 'pengajuan'])->name('bansos.pengajuan');
+route::get('/Bansos/manage', [BansosController::class, 'manage'])->name('bansos.manage');
+route::get('/Bansos/lurah', [BansosController::class, 'lurah'])->name('bansos.lurah');
+
+// Iuran
+route::get('/Iuran/index', [IuranController::class, 'index'])->name('iuran.index');
+
