@@ -59,9 +59,9 @@
                     <li>
                         <a href="{{ route('bansos.informasi') }}">Informasi Terbaru Bansos</a>
                     </li>
-                    <li>
+                    {{-- <li>
                         <a href="{{ route('bansos.pengajuan') }}">Pengajuan Bansos</a>
-                    </li>
+                    </li> --}}
                     <li>
                         <a href="{{ route('bansos.manage') }}">Manage Bansos</a>
                     </li>

@@ -62,11 +62,11 @@
                             <div class="page-title">
                                 <nav aria-label="breadcrumb">
                                   <ol class="breadcrumb breadcrumb-separator-1">
-                                    <li class="breadcrumb-item"><a href="#">UI Elements</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">Forms</li>
+                                    <li class="breadcrumb-item"><a href="#">Bansos</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Manage Bansos</li>
                                   </ol>
                                 </nav>
-                                <h3>Forms</h3>
+                                <h3>Manage Bansos</h3>
                                 
                             </div>
                         </div>
@@ -83,7 +83,7 @@
                                                     <h4 class="mb-0">Data Bansos</h4>
                                                     <p>Berikut adalah Data Data Bansos dari RW 003</code>.</p>
                                                     <div class="text-right mb-3">
-                                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#kk_tambah">
+                                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#bansos_tambah">
                                                             Tambah Data Bansos
                                                         </button>
                                                     </div>
@@ -169,6 +169,49 @@
                                                                 </td> --}}
 
                                                                 <!-- Modal -->
+                                                                <div class="modal fade" id="bansos_tambah">
+                                                                    <div class="modal-dialog modal-xl">
+                                                                        <div class="modal-content">
+                                                                            <form action="" method="POST">
+                                                                                @csrf
+                                                                                <div class="form-group mt-3" style="margin-left: 10px; margin-right: 10px;">
+                                                                                    <label for="exampleInputEmail1">Jenis Bansos</label>
+                                                                                    <input type="form" name="no_kk" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Jenis Bansos">
+                                                                                    @error( 'no_kk' )
+                                                                                        <small>{{ $message }}</small>
+                                                                                    @enderror
+                                                                                </div>
+                                                                                <div class="form-group" style="margin-left: 10px; margin-right: 10px;">
+                                                                                    <label for="exampleInputEmail1">Periode Bansos</label>
+                                                                                    <input type="form" name="no_kk" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Periode Bansos">
+                                                                                    @error( 'no_kk' )
+                                                                                        <small>{{ $message }}</small>
+                                                                                    @enderror
+                                                                                <div class="form-group">
+                                                                                    <label for="exampleFormControlTextarea1">Siapa Saja Penerima Bansos</label>
+                                                                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                                                                </div>
+                                                                    
+                                                                                
+                                                                                <div class="form-group" style="margin-left: 10px; margin-right: 10px;">
+                                                                                    <label for="exampleInputEmail1">Tanggal Penyaluran</label>
+                                                                                    <input type="form" name="no_kk" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Dalam bentuk tahun">
+                                                                                    @error( 'no_kk' )
+                                                                                        <small>{{ $message }}</small>
+                                                                                    @enderror
+                                                                                </div>
+                                                                                             
+                                                                                        
+                                                                                
+                                                                                                    
+                                                                                <div class="modal-footer">
+                                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                                                                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                                                                </div>
+                                                                            </form>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
                                                                 
 
                                                                 
