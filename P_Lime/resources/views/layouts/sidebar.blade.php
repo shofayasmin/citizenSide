@@ -67,22 +67,28 @@
                     </li>
                 </ul>
             </li>
-            <li>
-                <a href="{{ route('citizen.index') }}"><i class="material-icons {{ Request::routeIs('citizen.index') ? 'active' : '' }}">person</i>Citizen</a>
-            </li>
+
+            @can('sekretaris')
             <li class="sidebar-title">
                 Sekretaris
             </li>
             <li>
                 <a href="{{ route('iuran.index') }}"><i class="material-icons">cloud_queue</i>Iuran</a>
             </li>
+            <li>
+                <a href="{{ route('citizen.index') }}"><i class="material-icons {{ Request::routeIs('citizen.index') ? 'active' : '' }}">person</i>Citizen</a>
+            </li>
+            @endcan
 
+            @can('rw')
             <li class="sidebar-title">
                 RW
             </li>
             <li>
                 <a href="{{ route('bansos.lurah') }}"><i class="material-icons">inbox</i>Mailbox</a>
             </li>
+            @endcan
+
             <li class="sidebar-title">
                 Warga
             </li>
