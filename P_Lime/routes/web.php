@@ -5,13 +5,13 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UmkmController;
 use App\Http\Controllers\AcaraController;
 use App\Http\Controllers\LoginController;
-use App\Http\Controllers\MasukController;
 use App\Http\Controllers\CitizenController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\TemplateController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\BansosController;
+use App\Http\Controllers\SpkController;
 
 
 /*
@@ -125,4 +125,10 @@ route::get('/Bansos/lurah', [BansosController::class, 'lurah'])->name('bansos.lu
 
 // Iuran
 route::get('/Iuran/index', [IuranController::class, 'index'])->name('iuran.index');
+
+
+// SPK
+// route::get('/SPK/electre', [SpkController::class, 'electre'])->name('spk.electre');
+// route::get('/SPK/saw', [SpkController::class, 'saw'])->name('spk.saw');
+route::get('/SPK/topsis', [SpkController::class, 'index'])->name('spk.topsis');
 

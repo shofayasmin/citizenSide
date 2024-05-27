@@ -104,6 +104,25 @@
                 </a>
             </li>
 
+            <li class="sidebar-title">
+                SPK
+            </li>
+            {{-- <li>
+                <a href="{{ route('spk.electre') }}" class="{{ Request::routeIs('spk.electre') ? 'active' : '' }}">
+                    <i class="material-icons">calculate</i>ELECTRE
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('spk.saw') }}" class="{{ Request::routeIs('spk.saw') ? 'active' : '' }}">
+                    <i class="material-icons">calculate</i>SAW
+                </a>
+            </li> --}}
+            <li>
+                <a href="{{ route('spk.topsis') }}" class="{{ Request::routeIs('spk.topsis') ? 'active' : '' }}">
+                    <i class="material-icons">calculate</i>topsis
+                </a>
+            </li>
+
 
 
         </ul>

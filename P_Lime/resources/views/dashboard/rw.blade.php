@@ -120,42 +120,42 @@
                                         <table class="table">
                                             <thead>
                                                 <tr>
-                                                    <th scope="col">ID</th>
-                                                    <th scope="col">Company</th>
-                                                    <th scope="col">Amount</th>
+                                                    <th scope="col">No</th>
+                                                    <th scope="col">Judul Laporan</th>
+                                                    <th scope="col">Pengirim <br>Laporan</th>
                                                     <th scope="col">Status</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <tr>
-                                                    <td>0776</td>
-                                                    <td>Sale Management</td>
-                                                    <td>$18, 560</td>
+                                                    <td>1</td>
+                                                    <td>Perbaikan Jalan</td>
+                                                    <td>Siti Ropeah</td>
                                                     <td><span class="badge badge-success">Finished</span></td>
                                                 </tr>
                                                 <tr>
-                                                    <td>0759</td>
-                                                    <td>Dropbox</td>
-                                                    <td>$40, 672</td>
+                                                    <td>2</td>
+                                                    <td>Perbaikan Masjid</td>
+                                                    <td>Jamaludin</td>
                                                     <td><span class="badge badge-warning">Waiting</span></td>
                                                 </tr>
                                                 <tr>
-                                                    <td>0741</td>
-                                                    <td>Social Media</td>
-                                                    <td>$13, 378</td>
+                                                    <td>3</td>
+                                                    <td>Dana Lomba</td>
+                                                    <td>Bastian</td>
                                                     <td><span class="badge badge-info">In Progress</span></td>
                                                 </tr>
                                                 <tr>
-                                                    <td>0740</td>
-                                                    <td>Envato Market</td>
-                                                    <td>$17, 456</td>
+                                                    <td>4</td>
+                                                    <td>Idul Adhha</td>
+                                                    <td>Aldi</td>
                                                     <td><span class="badge badge-info">In Progress</span></td>
                                                 </tr>
                                                 <tr>
-                                                    <td>0735</td>
-                                                    <td>Graphic Design</td>
-                                                    <td>$29, 999</td>
-                                                    <td><span class="badge badge-secondary">Canceled</span></td>
+                                                    <td>5</td>
+                                                    <td>Idul Fitri</td>
+                                                    <td>Iqbal</td>
+                                                <td><span class="badge badge-danger">Canceled</span></td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -220,26 +220,11 @@
                         <div class="col-md-4">
                             <div class="card">
                                 <div class="card-body">
-                                    <h5 class="card-title">Popular Products</h5>
-                                    <div class="popular-products">
-                                        <canvas id="productsChart">Your browser does not support the canvas element.</canvas>
-                                        <div class="popular-product-list">
-                                            <ul class="list-unstyled">
-                                                <li id="popular-product1">
-                                                    <span>Alpha - Material Design</span>
-                                                    <span class="badge badge-pill badge-success">59%</span>
-                                                </li>
-                                                <li id="popular-product2">
-                                                    <span>Space - Light Theme</span>
-                                                    <span class="badge badge-pill badge-warning">15%</span>
-                                                </li>
-                                                <li id="popular-product3">
-                                                    <span>Modern - Admin Dashboard</span>
-                                                    <span class="badge badge-pill badge-secondary">26%</span>
-                                                </li>
-                                            </ul>
-                                            <div class="alert alert-info" role="alert">
-                                                Based on last week's earnings.
+                                    <div class="col-lg">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <h5 class="card-title">Doughnut Chart</h5>
+                                                <canvas id="chartjs4">Your browser does not support the canvas element.</canvas>
                                             </div>
                                         </div>
                                     </div>
@@ -285,5 +270,8 @@
         <script src="{{ asset('lime/theme/assets/plugins/bootstrap/js/bootstrap.min.js')}}"></script>
         <script src="{{ asset('lime/theme/assets/plugins/jquery-slimscroll/jquery.slimscroll.min.js')}}"></script>
         <script src="{{ asset('lime/theme/assets/js/lime.min.js')}}"></script>
+        <script src="{{ asset('lime/theme/assets/plugins/apexcharts/dist/apexcharts.min.js') }}"></script>
+        <script src="{{ asset('lime/theme/assets/plugins/chartjs/chart.min.js') }}"></script>
+        <script src="{{ asset('lime/theme/assets/js/pages/charts.js')}}"></script>
     </body>
 </html>
