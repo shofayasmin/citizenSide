@@ -69,18 +69,30 @@
                 </ul>
             </li>
 
+<<<<<<< HEAD
 
             <li>
                 <a href="{{ route('citizen.index') }}" class="{{ Request::routeIs('citizen.index') ? 'active' : '' }}"><i class="material-icons">person</i>Citizen</a>
             </li>
+=======
+            @can('sekretaris')
+>>>>>>> 351a429431c6e3ccd0a911f2f49c77cab2fa6a3e
             <li class="sidebar-title">
                 Sekretaris
             </li>
             <li>
                 <a href="{{ route('iuran.index') }}" class="{{ Request::routeIs('iuran.index') ? 'active' : '' }}"><i class="material-icons">cloud_queue</i>Iuran</a>
             </li>
+            <li>
+                <a href="{{ route('citizen.index') }}"><i class="material-icons {{ Request::routeIs('citizen.index') ? 'active' : '' }}">person</i>Citizen</a>
+            </li>
+            @endcan
 
+<<<<<<< HEAD
 
+=======
+            @can('rw')
+>>>>>>> 351a429431c6e3ccd0a911f2f49c77cab2fa6a3e
             <li class="sidebar-title">
                 RW
             </li>
@@ -88,12 +100,16 @@
                 <a href="{{ route('bansos.lurah') }}" class="{{ Request::routeIs('bansos.lurah') ? 'active' : '' }}">
                     <i class="material-icons">inbox</i>Mailbox</a>
             </li>
+<<<<<<< HEAD
             <li>
                 <a href="{{ route('dashboard.rw') }}" class="{{ Request::routeIs('dashboard.rw') ? 'active' : '' }}">
                     <i class="material-icons">dashboard</i>Dashboard_rw
                 </a>
             </li>
 
+=======
+            @endcan
+>>>>>>> 351a429431c6e3ccd0a911f2f49c77cab2fa6a3e
 
             <li class="sidebar-title">
                 Warga
