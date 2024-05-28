@@ -17,7 +17,6 @@ class AcaraSeeder extends Seeder
             'judul' => 'kedatangan 01',
             'deskripsi' => 'halohalohalhalohaodhaohdadhalasdadadadas',
             'tipe_acara' => 'Informasi',
-            
         ]);
     }
 }

@@ -20,7 +20,7 @@ class LoginController extends Controller
         if(Auth::attempt( $credentials )){
             $request->session()->regenerate();
             if (auth()->user()->role === 'citizen'){
-                return redirect()->intended('/citizen_homepage');
+                return redirect()->intended('/dashboard/index_warga');
             }
             return redirect()->intended('/home');
         }
