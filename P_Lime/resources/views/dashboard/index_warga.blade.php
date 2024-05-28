@@ -23,6 +23,43 @@
     <link href="{{ asset('lime/theme/assets/css/lime.min.css') }}" rel="stylesheet">
     <link href="{{ asset('lime/theme/assets/css/custom.css') }}" rel="stylesheet">
 
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .content {
+            flex: 1;
+        }
+
+        .carousel {
+            width: 80%;
+            /* Adjust the width as needed */
+            margin: auto;
+            /* Center the carousel */
+        }
+
+        .carousel-inner {
+            height: 700px;
+            /* Adjust the height as needed */
+        }
+
+        .carousel-inner .carousel-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            /* Ensure the image covers the area */
+        }
+
+        .carousel-caption {
+            bottom: 70px;
+        }
+    </style>
 </head>
 
 <body>
@@ -60,6 +97,10 @@
                     <img class="d-block w-100"
                         src="https://www.shutterstock.com/image-photo/teambuilding-activity-stick-hands-colleagues-260nw-1035764212.jpg"
                         alt="First slide">
+                    <div class="carousel-caption d-none d-md-block text-black-50 bg-white">
+                        <h5>First slide label</h5>
+                        <p>Some representative placeholder content for the first slide.</p>
+                    </div>
                 </div>
                 <div class="carousel-item">
                     <img class="d-block w-100"
