@@ -50,60 +50,30 @@
                     <div class="row">
 
                         
+                        @foreach ($data as $key => $d)
+                            
+                        <div class="col-10">
+                            <div class="card">
+                                <div class="card-header d-flex justify-content-between align-items-center">
+                                    <h3 class="mt-3">{{ $d->judul }}</h3>
+                                    <img src="{{ asset('storage/photo-acara/comment1.png') }}" width="25" data-toggle="modal" data-target="#comment_{{ $key }}">
+                                    {{-- <img src="{{ asset('storage/photo-acara/track.png') }}" width="25" data-toggle="modal" data-target="#myModal"> --}}
 
-                        <div class="col-10">
-                            <div class="card">
-                                <div class="card-header d-flex justify-content-between align-items-center">
-                                    <h3 class="mt-3">Laporan Mengenai Kegiatan Maling yang masif di RT 03</h3>
-                                    <img src="{{ asset('storage/photo-acara/track.png') }}" width="25" data-toggle="modal" data-target="#myModal">
                                 </div>
                                 <div class="card-body">
                                     <h5 class="card-title"></h5>
                                     <p class="card-text"></p>
-                                    <small>3/13/2024</small>
-                                    <h5 class="card-title">Jungkat Parahudin</h5>
+                                    <small>{{ $d->created_at }}</small>
+                                    <h5 class="card-title">{{ $d->pengirim }}</h5>
+                                    <a href="#" class="badge badge-primary" data-toggle="modal" data-target="#Read_More_{{ $key }}">Read More</a>
                                     <div class="text-right">
-                                        <span class="badge badge-danger">Belum Selesai</span>
+                                        <a href="#" class="badge badge-danger status-toggle">Belum Selesai</a>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
-                        <div class="col-10">
-                            <div class="card">
-                                <div class="card-header d-flex justify-content-between align-items-center">
-                                    <h3 class="mt-3">Laporan Mengenai Jalan area masjid Rusak</h3>
-                                    <img src="{{ asset('storage/photo-acara/track.png') }}" width="25" data-toggle="modal" data-target="#myModal">
-                                </div>
-                                <div class="card-body">
-                                    <h5 class="card-title"></h5>
-                                    <p class="card-text"></p>
-                                    <small>3/13/2024</small>
-                                    <h5 class="card-title">Sumiyati</h5>
-                                    <div class="text-right">
-                                        <span class="badge badge-danger">Belum Selesai</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="col-10">
-                            <div class="card">
-                                <div class="card-header d-flex justify-content-between align-items-center">
-                                    <h3 class="mt-3">Laporan Mengenai RT yang tidak kompeten</h3>
-                                    <img src="{{ asset('storage/photo-acara/track.png') }}" width="25" data-toggle="modal" data-target="#myModal">
-                                </div>
-                                <div class="card-body">
-                                    <h5 class="card-title"></h5>
-                                    <p class="card-text"></p>
-                                    <small>3/13/2024</small>
-                                    <h5 class="card-title">Eli Sugigi</h5>
-                                    <div class="text-right">
-                                        <span class="badge badge-success">Selesai</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        @include('laporan.modal')
+                        @endforeach
 
                         <!-- Modal -->
                         <div class="modal fade" id="myModal">
@@ -157,6 +127,23 @@
                                 // Mengaktifkan modal ketika gambar diklik
                                 $('#myModal').on('shown.bs.modal', function () {
                                     $('#myModal').modal('show');
+                                });
+                            });
+                        </script>
+                        <!-- jQuery -->
+                        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                        <script>
+                            $(document).ready(function(){
+                                $('.status-toggle').on('click', function(event){
+                                    event.preventDefault(); // Mencegah tindakan default tautan
+                                    var $this = $(this);
+                                    if($this.hasClass('badge-danger')){
+                                        $this.removeClass('badge-danger').addClass('badge-success');
+                                        $this.text('Selesai');
+                                    } else {
+                                        $this.removeClass('badge-success').addClass('badge-danger');
+                                        $this.text('Belum Selesai');
+                                    }
                                 });
                             });
                         </script>

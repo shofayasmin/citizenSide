@@ -79,7 +79,7 @@
                                     <p> </p>
 
                                     
-                                    <form action="{{ route('acara.store') }}" method="POST">
+                                    <form action="{{ route('umkm.store') }}" method="POST">
                                         @csrf
 
                                         <div class="form-group">
@@ -91,20 +91,13 @@
                                             @enderror
                                         </div>
                                         <div class="form-group">
-                                            <label for="exampleFormControlTextarea1">alamat</label>
-                                            <textarea class="form-control" name="Alamat" id="exampleFormControlTextarea1" rows="3" placeholder="Masukkan Alamat"></textarea>
-                                            @error('Alamat')
+                                            <label for="exampleFormControlTextarea1">Nama UMKM</label>
+                                            <textarea class="form-control" name="umkm" id="exampleFormControlTextarea1" rows="3" placeholder="Masukkan umkm"></textarea>
+                                            @error('umkm')
                                                 <small>{{ $message }}</small>
                                             @enderror
                                         </div>
-                                        <div class="form-group">
-                                            <label for="exampleInputEmail1">Usia</label>
-                                            <input type="form" name="Usia" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Masukan Usia">
-                                            
-                                            @error('Usia')
-                                                <small>{{ $message }}</small>
-                                            @enderror
-                                        </div>
+                                        
                                         
 
                                         {{-- <div class="custom-file">

@@ -65,6 +65,11 @@ route::delete('/Acara/delete_acara/{id}', [AcaraController::class, 'delete_acara
 
 // UMKM
 route::get('/umkm/register', [UmkmController::class, 'register'])->name('umkm.register')->middleware('auth');
+route::get('/umkm/view', [UmkmController::class, 'view'])->name('umkm.view')->middleware('auth');
+route::post('/umkm/store_umkm',[UmkmController::class,'store_umkm'])->name('umkm.store')->middleware('not.warga');
+route::get('/umkm/edit_umkm/{id}', [UmkmController::class, 'edit_umkm'])->name('umkm.edit')->middleware('not.warga');
+route::put('/umkm/update_umkm/{id}', [UmkmController::class, 'update_umkm'])->name('umkm.update')->middleware('not.warga');
+route::delete('/umkm/delete_umkm/{id}', [UmkmController::class, 'delete_umkm'])->name('umkm.delete')->middleware('not.warga');
 
 // Read Citizen
 route::get('/citizen', [CitizenController::class, 'index'])->name('citizen.index')->middleware('sekretaris');
@@ -115,6 +120,9 @@ route::delete('/citizen/delete_rumah/{id}', [CitizenController::class, 'delete_r
 route::get('/laporan/view', [LaporanController::class, 'view'])->name('laporan.view')->middleware('not.warga');
 route::get('/laporan/create', [LaporanController::class, 'create'])->name('laporan.create')->middleware('not.warga');
 route::get('/laporan/track', [LaporanController::class, 'track'])->name('laporan.track')->middleware('not.warga');
+route::get('/laporan/edit/{id}', [LaporanController::class, 'edit'])->name('laporan.edit')->middleware('not.warga');
+route::post('/laporan/store', [LaporanController::class, 'store'])->name('laporan.store')->middleware('not.warga');
+
 
 
 // Bansos
@@ -128,7 +136,5 @@ route::get('/Iuran/index', [IuranController::class, 'index'])->name('iuran.index
 
 
 // SPK
-// route::get('/SPK/electre', [SpkController::class, 'electre'])->name('spk.electre');
-// route::get('/SPK/saw', [SpkController::class, 'saw'])->name('spk.saw');
 route::get('/SPK/topsis', [SpkController::class, 'index'])->name('spk.topsis');
 

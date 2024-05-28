@@ -18,13 +18,29 @@
     <div class="lime-sidebar-inner slimscroll">
         <ul class="accordion-menu">
             <li class="sidebar-title">
-                POV General / Belum Terpisah
+                Dashboard
             </li>
+            @can('rw')
+            {{-- <li class="sidebar-title">
+                RW
+            </li> --}}
+            {{-- <li>
+                <a href="{{ route('bansos.lurah') }}" class="{{ Request::routeIs('bansos.lurah') ? 'active' : '' }}">
+                    <i class="material-icons">inbox</i>Mailbox</a>
+            </li> --}}
+            <li>
+                <a href="{{ route('dashboard.rw') }}" class="{{ Request::routeIs('dashboard.rw') ? 'active' : '' }}">
+                    <i class="material-icons">dashboard</i>Dashboard
+                </a>
+            </li>
+            @endcan
+            @can('citizen')
             <li>
                 <a href="{{ asset('home') }}" class="{{ Request::path() === 'home' ? 'active' : '' }}">
                     <i class="material-icons">dashboard</i>Dashboard
                 </a>
             </li>
+            @endcan
 
             <li class="page {{ Request::is('laporan*') ? 'active-page' : '' }}">
                 <a href="#"><i class="material-icons">person_outline</i>Laporan<i class="material-icons has-sub-menu">keyboard_arrow_left</i></a>
@@ -69,14 +85,7 @@
                 </ul>
             </li>
 
-<<<<<<< HEAD
-
-            <li>
-                <a href="{{ route('citizen.index') }}" class="{{ Request::routeIs('citizen.index') ? 'active' : '' }}"><i class="material-icons">person</i>Citizen</a>
-            </li>
-=======
             @can('sekretaris')
->>>>>>> 351a429431c6e3ccd0a911f2f49c77cab2fa6a3e
             <li class="sidebar-title">
                 Sekretaris
             </li>
@@ -88,29 +97,9 @@
             </li>
             @endcan
 
-<<<<<<< HEAD
+            
 
-=======
-            @can('rw')
->>>>>>> 351a429431c6e3ccd0a911f2f49c77cab2fa6a3e
-            <li class="sidebar-title">
-                RW
-            </li>
-            <li>
-                <a href="{{ route('bansos.lurah') }}" class="{{ Request::routeIs('bansos.lurah') ? 'active' : '' }}">
-                    <i class="material-icons">inbox</i>Mailbox</a>
-            </li>
-<<<<<<< HEAD
-            <li>
-                <a href="{{ route('dashboard.rw') }}" class="{{ Request::routeIs('dashboard.rw') ? 'active' : '' }}">
-                    <i class="material-icons">dashboard</i>Dashboard_rw
-                </a>
-            </li>
-
-=======
-            @endcan
->>>>>>> 351a429431c6e3ccd0a911f2f49c77cab2fa6a3e
-
+            @can('citizen')
             <li class="sidebar-title">
                 Warga
             </li>
@@ -119,20 +108,11 @@
                     <i class="material-icons">dashboard</i>Dashboard_warga
                 </a>
             </li>
+            @endcan
 
             <li class="sidebar-title">
                 SPK
             </li>
-            {{-- <li>
-                <a href="{{ route('spk.electre') }}" class="{{ Request::routeIs('spk.electre') ? 'active' : '' }}">
-                    <i class="material-icons">calculate</i>ELECTRE
-                </a>
-            </li>
-            <li>
-                <a href="{{ route('spk.saw') }}" class="{{ Request::routeIs('spk.saw') ? 'active' : '' }}">
-                    <i class="material-icons">calculate</i>SAW
-                </a>
-            </li> --}}
             <li>
                 <a href="{{ route('spk.topsis') }}" class="{{ Request::routeIs('spk.topsis') ? 'active' : '' }}">
                     <i class="material-icons">calculate</i>topsis
