@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Acara extends Model
 {
+    use HasFactory;
     protected $primaryKey = 'id_acara';
     protected $fillable = [
         'judul', // Tambahkan 'judul' ke dalam daftar fillable
