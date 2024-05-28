@@ -4,6 +4,8 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
+use App\Models\Organisasi;
+use App\Models\SPK;
 use App\Models\User;
 use App\Models\Acara;
 use App\Models\Warga;
@@ -18,6 +20,7 @@ class DatabaseSeeder extends Seeder
     {
         Warga::factory(10)->create();
         User::factory(10)->create();
+        SPK::factory(10)->create();
         Acara::factory(10)->create();
     }
 }

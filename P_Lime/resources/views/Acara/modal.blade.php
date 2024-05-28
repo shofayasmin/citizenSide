@@ -119,7 +119,7 @@
 </div>
 
 
-<!-- Modal Untuk Read More -->
+<!-- Modal Untuk Ikuti Kegiatan -->
 @foreach($data as $key => $d)
     <div class="modal fade" id="Read_More_{{ $key }}" tabindex="-1" role="dialog" aria-labelledby="Read_MoreTitle_{{ $key }}" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
@@ -132,7 +132,7 @@
                 </div>
                 <div class="modal-body mb-4">
                     <p>{{ $d->deskripsi }}</p>
-                    <a href="#" class="card-link">Ikut Kegiatan</a>
+                    <a href="{{ route("umkm.register") }}" class="card-link">Ikut Kegiatan</a>
                     {{-- <a href="#" class="card-link">Another link</a> --}}
                 </div>
             </div>

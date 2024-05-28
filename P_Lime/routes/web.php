@@ -5,13 +5,13 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UmkmController;
 use App\Http\Controllers\AcaraController;
 use App\Http\Controllers\LoginController;
-use App\Http\Controllers\MasukController;
 use App\Http\Controllers\CitizenController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\TemplateController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\BansosController;
+use App\Http\Controllers\SpkController;
 
 
 /*
@@ -46,6 +46,7 @@ Route::get('/logout', [LoginController::class, 'logout'])->name('logout')->middl
 //dashboard
 Route::get('/dashboard/index', [DashboardController::class, 'index'])->middleware('auth');
 Route::get('/dashboard/index_warga', [DashboardController::class, 'warga']);
+Route::get('/dashboard/rw', [DashboardController::class, 'rw'])->name('dashboard.rw');
 
 
 // User
@@ -64,6 +65,11 @@ route::delete('/Acara/delete_acara/{id}', [AcaraController::class, 'delete_acara
 
 // UMKM
 route::get('/umkm/register', [UmkmController::class, 'register'])->name('umkm.register')->middleware('auth');
+route::get('/umkm/view', [UmkmController::class, 'view'])->name('umkm.view')->middleware('auth');
+route::post('/umkm/store_umkm',[UmkmController::class,'store_umkm'])->name('umkm.store')->middleware('not.warga');
+route::get('/umkm/edit_umkm/{id}', [UmkmController::class, 'edit_umkm'])->name('umkm.edit')->middleware('not.warga');
+route::put('/umkm/update_umkm/{id}', [UmkmController::class, 'update_umkm'])->name('umkm.update')->middleware('not.warga');
+route::delete('/umkm/delete_umkm/{id}', [UmkmController::class, 'delete_umkm'])->name('umkm.delete')->middleware('not.warga');
 
 // Read Citizen
 route::get('/citizen', [CitizenController::class, 'index'])->name('citizen.index')->middleware('sekretaris');
@@ -114,6 +120,9 @@ route::delete('/citizen/delete_rumah/{id}', [CitizenController::class, 'delete_r
 route::get('/laporan/view', [LaporanController::class, 'view'])->name('laporan.view')->middleware('not.warga');
 route::get('/laporan/create', [LaporanController::class, 'create'])->name('laporan.create')->middleware('not.warga');
 route::get('/laporan/track', [LaporanController::class, 'track'])->name('laporan.track')->middleware('not.warga');
+route::get('/laporan/edit/{id}', [LaporanController::class, 'edit'])->name('laporan.edit')->middleware('not.warga');
+route::post('/laporan/store', [LaporanController::class, 'store'])->name('laporan.store')->middleware('not.warga');
+
 
 
 // Bansos
@@ -124,4 +133,8 @@ route::get('/Bansos/lurah', [BansosController::class, 'lurah'])->name('bansos.lu
 
 // Iuran
 route::get('/Iuran/index', [IuranController::class, 'index'])->name('iuran.index')->middleware('sekretaris');
+
+
+// SPK
+route::get('/SPK/topsis', [SpkController::class, 'index'])->name('spk.topsis');
 
