@@ -45,7 +45,7 @@ Route::get('/logout', [LoginController::class, 'logout'])->name('logout')->middl
 
 //dashboard
 Route::get('/dashboard/index', [DashboardController::class, 'index'])->middleware('auth');
-Route::get('/dashboard/index_warga', [DashboardController::class, 'warga'])->name('dashboard.warga');
+Route::get('/dashboard/index_warga', [DashboardController::class, 'warga']);
 
 
 // User
