@@ -63,27 +63,7 @@
 </head>
 
 <body>
-    <div class="header w-100 p-3 d-flex justify-content-around">
-        <div class="title">
-            <h1>CHub</h1>
-        </div>
-        <div class="navbar d-flex">
-            <ul class="nav">
-                <li class="nav-item">
-                    <a class="nav-link active" href="#">Acara</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">UMKM</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Bansos</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/logout">Logout</a>
-                </li>
-            </ul>
-        </div>
-    </div>
+    @include('layoutWarga.header');
 
     <div class="content w-90 h-90 d-flex justify-content-center p-5">
         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">

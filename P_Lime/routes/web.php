@@ -1,17 +1,19 @@
 <?php
 
-use App\Http\Controllers\IuranController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SpkController;
 use App\Http\Controllers\UmkmController;
 use App\Http\Controllers\AcaraController;
+use App\Http\Controllers\IuranController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\MasukController;
+use App\Http\Controllers\BansosController;
 use App\Http\Controllers\CitizenController;
+use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\TemplateController;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\LaporanController;
-use App\Http\Controllers\BansosController;
-use App\Http\Controllers\SpkController;
+use App\Http\Controllers\DashboardWargaController;
 
 
 /*
@@ -24,7 +26,15 @@ use App\Http\Controllers\SpkController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+//landing page
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
+// User
+// route::get('/signin',[MasukController::class, 'SignIn'])->name('login'); // untuk Sign In
+// route::get('/signup',[MasukController::class, 'SignUp'])->name('register'); // untuk Sign Up
+// route::post('/user/store',[MasukController::class, 'store'])->name('user.store'); // untuk Store ke Database
 
 
 route::get('/home',[TemplateController::class,'index'])->name('home')->middleware('not.warga');
@@ -33,11 +43,6 @@ route::get('/home',[TemplateController::class,'index'])->name('home')->middlewar
 Route::get('/register', [RegisterController::class, 'index'])->middleware('guest');
 Route::post('/register', [RegisterController::class, 'store'])->middleware('guest');
 
-//landing page
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
 //Login/logout
 Route::get('/', [LoginController::class, 'index'])->name('login')->middleware('guest');
 Route::post('/login', [LoginController::class, 'authenticate'])->middleware('guest');
@@ -45,14 +50,12 @@ Route::get('/logout', [LoginController::class, 'logout'])->name('logout')->middl
 
 //dashboard
 Route::get('/dashboard/index', [DashboardController::class, 'index'])->middleware('auth');
-Route::get('/dashboard/index_warga', [DashboardController::class, 'warga']);
-Route::get('/dashboard/rw', [DashboardController::class, 'rw'])->name('dashboard.rw');
+Route::get('/dashboard/rw', [DashboardController::class, 'rw'])->name('dashboard.rw')->middleware('rw');
 
-
-// User
-// route::get('/signin',[MasukController::class, 'SignIn'])->name('login'); // untuk Sign In
-// route::get('/signup',[MasukController::class, 'SignUp'])->name('register'); // untuk Sign Up
-// route::post('/user/store',[MasukController::class, 'store'])->name('user.store'); // untuk Store ke Database
+//dashboard warga
+Route::get('/DashboardWarga/index', [DashboardWargaController::class, 'index'])->name('DashboardWarga.index')->middleware('auth');
+Route::get('/DashboardWarga/acara', [DashboardWargaController::class, 'acara'])->name('DashboardWarga.acara')->middleware('auth');
+Route::get('/DashboardWarga/umkm', [DashboardWargaController::class, 'umkm'])->name('DashboardWarga.umkm')->middleware('auth');
 
 // Acara
 route::get('/acara/manage',[AcaraController::class,'manage'])->name('acara.manage')->middleware('not.warga'); // acara bagian manage
