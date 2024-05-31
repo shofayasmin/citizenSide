@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Contribution;
 use App\Models\Iuran;
 use App\Http\Requests\StoreIuranRequest;
 use App\Http\Requests\UpdateIuranRequest;
+use App\Models\Expenditure;
+use App\Models\Income;
 
 class IuranController extends Controller
 {
@@ -15,6 +18,21 @@ class IuranController extends Controller
     {
         return view('Iuran.index');
     }
+
+    public function financial()
+    {
+        $data = Income::get();
+        // $data = Expenditure::get();
+        return view('Iuran.financial',compact('data'));
+    }
+
+    public function contribution()
+    {
+        $data = Contribution::get();
+        return view('Iuran.contribution',compact('data'));
+    }
+
+
 
     /**
      * Show the form for creating a new resource.

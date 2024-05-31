@@ -134,6 +134,34 @@ route::get('/Bansos/lurah', [BansosController::class, 'lurah'])->name('bansos.lu
 // Iuran
 route::get('/Iuran/index', [IuranController::class, 'index'])->name('iuran.index')->middleware('sekretaris');
 
+//iuran/contribution
+route::get('/iuran/contribution', [IuranController::class, 'contribution'])->name('iuran.contribution');
+route::get('/iuran/create_contribution', [IuranController::class, 'create_contribution'])->name('contribution.create');
+route::post('/iuran/store_contribution', [IuranController::class, 'store_contribution'])->name('contribution.store');
+route::get('/iuran/edit_contribution/{id}', [IuranController::class, 'edit_contribution'])->name('contribution.edit');
+route::put('/iuran/update_contribution/{id}', [IuranController::class, 'update_contribution'])->name('contribution.update');
+route::delete('/iuran/delete_contribution/{id}', [IuranController::class, 'delete_contribution'])->name('contribution.delete');
+// route::get('/contribution', [IuranController::class, 'contribution'])->name('iuran.contribution');
+route::get('/Iuran/contribution', [IuranController::class, 'contribution'])->name('iuran.tester')->middleware('sekretaris');;
+
+//iuran/financial
+//income = pemasukan
+route::get('/Iuran/financial', [IuranController::class, 'financial'])->name('iuran.financial')->middleware('sekretaris');;
+route::get('/Iuran/create_income', [IuranController::class, 'create_income'])->name('income.create')->middleware('sekretaris');;
+route::post('/Iuran/store_income', [IuranController::class, 'store_income'])->name('income.store')->middleware('sekretaris');;
+route::get('/Iuran/edit_income/{id}', [IuranController::class, 'edit_income'])->name('income.edit')->middleware('sekretaris');;
+route::put('/Iuran/update_income/{id}', [IuranController::class, 'update_income'])->name('income.update')->middleware('sekretaris');;
+route::delete('/Iuran/delete_income/{id}', [IuranController::class, 'delete_income'])->name('income.delete')->middleware('sekretaris');;
+//expenditure = pengeluaran
+// route::get('/iuran/expenditure', [IuranController::class, 'expenditure'])->name('iuran.expenditure');
+route::get('/Iuran/create_expenditure', [IuranController::class, 'create_expenditure'])->name('expenditure.create')->middleware('sekretaris');;
+route::post('/Iuran/store_expenditure', [IuranController::class, 'store_expenditure'])->name('expenditure.store')->middleware('sekretaris');;
+route::get('/Iuran/edit_expenditure/{id}', [IuranController::class, 'edit_expenditure'])->name('expenditure.edit')->middleware('sekretaris');;
+route::put('/Iuran/update_expenditure/{id}', [IuranController::class, 'update_expenditure'])->name('expenditure.update')->middleware('sekretaris');;
+route::delete('/Iuran/delete_expenditure/{id}', [IuranController::class, 'delete_expenditure'])->name('expenditure.delete')->middleware('sekretaris');;
+
+
+
 
 // SPK
 route::get('/SPK/topsis', [SpkController::class, 'index'])->name('spk.topsis');

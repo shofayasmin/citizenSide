@@ -10,7 +10,8 @@ class Contribution extends Model
     protected $primaryKey = 'contribution_id';
     protected $fillable = [
         'contribution_name', 
+        'description',
         'payment_status', 
-        'amount', 
+        'total_money',
     ];
 }
