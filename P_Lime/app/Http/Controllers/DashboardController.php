@@ -11,11 +11,6 @@ class DashboardController extends Controller
     public function index(){
         return view('dashboard.index');
     }
-
-    public function warga()
-    {
-        return view('dashboard.index_warga');
-    }
     public function rw()
     {
         $laporan = Laporan::orderByRaw("FIELD(status,'Belum Selesai', 'Selesai')")->get();

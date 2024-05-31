@@ -20,8 +20,15 @@ class RedirectIfAuthenticated
         $guards = empty($guards) ? [null] : $guards;
 
         foreach ($guards as $guard) {
+            // if (Auth::guard($guard)->check()) {
+            //     return redirect(RouteServiceProvider::HOME);
+            // }
             if (Auth::guard($guard)->check()) {
-                return redirect(RouteServiceProvider::HOME);
+                if (Auth::guard($guard)->user()->role !== 'citizen') {
+                    return redirect(RouteServiceProvider::NotCitizen);
+                } else {
+                    return redirect(RouteServiceProvider::Citizen);
+                }
             }
         }
 

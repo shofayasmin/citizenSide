@@ -18,6 +18,7 @@ use App\Models\Rumah;
 use App\Models\SPK;
 use App\Models\User;
 use App\Models\Acara;
+use App\Models\umkm;
 use App\Models\Warga;
 use Illuminate\Database\Seeder;
 
@@ -30,7 +31,7 @@ class DatabaseSeeder extends Seeder
     {
         Warga::factory(10)->create();
         User::factory(10)->create();
-        SPK::factory(10)->create();
+        umkm::factory(10)->create();
         Acara::factory(10)->create();
         Kk::factory(10)->create();
         Iuran::factory(10)->create();
