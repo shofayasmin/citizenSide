@@ -4,7 +4,7 @@
     <div class="modal fade" id="Read_More_{{ $key }}" tabindex="-1" role="dialog" aria-labelledby="Read_MoreTitle_{{ $key }}" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
             <div class="modal-content">
-                <img src="{{ asset('storage/photo-acara/'.$d->gambar) }}" class="card-img-top" alt="Placeholder" style="width: 100%; height: 200px; object-fit: cover;">
+                <img src="{{ asset('C:/Users/ASUS/AppData/Local/Temp/'.$d->gambar) }}" class="card-img-top" alt="Placeholder" style="width: 100%; height: 200px; object-fit: cover;">
                 
                 <div class="modal-header">
                     <h5 class="modal-title" id="Read_MoreTitle_{{ $key }}">{{ $d->judul }}</h5>

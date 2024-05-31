@@ -33,7 +33,8 @@
         <div class="container">
             <div class="login-container">
                 <div class="row">
-                    <div class="col-lg-4 col-md-5 col-sm-9 lfh">
+
+                    <div class="col-lg-5 col-md-5 col-sm-9 lfh">
                         <div class="card login-box">
                             <div class="card-body">
                                 <h5 class="card-title">Register</h5>
@@ -84,6 +85,7 @@
                             </div>
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>

@@ -2,29 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Bansos;
-use Illuminate\Http\Request;
 use App\Models\Alternatives;
+use Illuminate\Http\Request;
 use App\Models\Criteria;
 
-
-class BansosController extends Controller
+class PrometheeController extends Controller
 {
-    
-
-    public function informasi()
-    {
-        $data = Bansos::get();
-        return view('Bansos.informasi',compact('data'));
-    }
-    public function pengajuan()
-    {
-        return view('Bansos.pengajuan');
-    }
-    public function manage()
+    public function calculate()
     {
         $alternatives = Alternatives::all();
-        $bansos = Bansos::get();
 
         // Mengambil bobot kriteria dari tabel criteria
         $criteriaWeights = [
@@ -90,12 +76,7 @@ class BansosController extends Controller
         // Step 5: Rank the alternatives
         arsort($netFlow);
 
-        
-        return view('Bansos.manage', compact('netFlow', 'alternatives','bansos'));
 
-    }
-    public function lurah()
-    {
-        return view('Bansos.lurah');
+        return view('spk.promethee', compact('netFlow', 'alternatives'));
     }
 }
