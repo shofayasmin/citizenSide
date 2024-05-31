@@ -42,39 +42,48 @@
         @include('layouts.header')
 
         <!-- Content -->
-        <div class="row">
-            <div class="col-xl">
-                <div class="container">
-                    
-                    
-            
-                        <div class="row row-cols-3">
-                        
-                            <div class="col">
+        <div class="container mt-4">
+            <div class="row">
+                <div class="col-xl">
 
-                                @foreach ($data as $d)
-                                <div class="card">
-                                    <div class="d-flex justify-content-center align-items-center">
-                                        <img src="{{ $d->gambar }}" class="card-img-top" style="width: auto; max-height: 400px;">
-                                    </div>                                    
-                                    <div class="card-body">
-                                        <h5 class="card-title">{{ $d->judul }}</h5>
-                                        <p class="card-text">Jenis Bansos: {{ $d->jenis_bansos }}</p>
-                                        <p class="card-text">Periode Bansos: {{ $d->periode_bansos }} Hari</p>
-                                        <p class="card-text">Jumlah Bansos: {{ $d->jumlah_bansos }}</p>
-                                        <p class="card-text">Tanggal penyaluran: {{ $d->tanggal_penyaluran }}</p>
-                                    </div>
-                                </div>
-                                @endforeach
-
-                            </div>
-                        
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h5 class="card-title">Promethee</h5>
+                            <p>Ini adalah List Orang Orang yang berhak mendapatkan Bantuan Sosial</p>
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">No</th>
+                                        <th scope="col">Nama Kandidat</th>
+                                        <th scope="col">Net Flow</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @php
+                                        $counter = 1;
+                                    @endphp
+                                    @foreach ($netFlow as $altId => $flow)
+                                        <tr>
+                                            <td>{{ $counter++ }}</td>
+                                            <td>{{ $alternatives->find($altId)->name }}</td>
+                                            <td>{{ $flow }}</td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>       
                         </div>
-                        
-                        
+                    </div>
+    
+                    
+    
+                    
+
+                    
+
                 </div>
             </div>
         </div>
+        
         
         
         

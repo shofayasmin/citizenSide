@@ -46,7 +46,8 @@
                                 <div class="card-body">
                                     <div class="dashboard-info row">
                                         <div class="info-text col-md-6">
-                                            <h5 class="card-title">Welcome back Anna!</h5>
+                                            {{-- step ini bisa dipanggil dengan database --}}
+                                            <h5 class="card-title">Welcome back Anna!</h5> 
                                             <p>Get familiar with dashboard, here are some ways to get started.</p>
                                             <ul>
                                                 <li>Check some stats for your website bellow</li>
@@ -59,19 +60,21 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>      
+                        </div>
+
                         <div class="col-md-4">
                             <div class="card">
                                 <div class="card-body">
                                     <div class="">
                                         <div class="">
-                                            <h5 class="card-title">Daily Visitors</h5>
+                                            <h5 class="card-title">Total Penduduk Mingguan</h5>
                                             <canvas id="visitorsChart"></canvas>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>                      
+                        </div>  
+
                     </div>
                     <div class="row">
                         <div class="col-md-4">
@@ -115,7 +118,7 @@
                         <div class="col-md-8">
                             <div class="card">
                                 <div class="card-body">
-                                    <h5 class="card-title">Last Transactions</h5>
+                                    <h5 class="card-title">List Report</h5>
                                     <div class="table-responsive">
                                         <table class="table">
                                             <thead>
@@ -127,36 +130,22 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                                @foreach ($laporan as $l)
+                                                    
                                                 <tr>
-                                                    <td>1</td>
-                                                    <td>Perbaikan Jalan</td>
-                                                    <td>Siti Ropeah</td>
-                                                    <td><span class="badge badge-success">Finished</span></td>
+                                                    <td>{{ $l->laporan_id }}</td>
+                                                    <td>{{ $l->judul }}</td>
+                                                    <td>{{ $l->pengirim }}</td>
+                                                    <td>
+                                                        @if($l->status == 'Selesai')
+                                                            <span class="badge badge-success">{{ $l->status }}</span>
+                                                        @elseif($l->status == 'Belum Selesai')
+                                                            <a href="{{ route('laporan.view') }}" class="badge badge-danger">{{ $l->status }}</a>
+                                                        @endif
+                                                    </td>
                                                 </tr>
-                                                <tr>
-                                                    <td>2</td>
-                                                    <td>Perbaikan Masjid</td>
-                                                    <td>Jamaludin</td>
-                                                    <td><span class="badge badge-warning">Waiting</span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>3</td>
-                                                    <td>Dana Lomba</td>
-                                                    <td>Bastian</td>
-                                                    <td><span class="badge badge-info">In Progress</span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>4</td>
-                                                    <td>Idul Adhha</td>
-                                                    <td>Aldi</td>
-                                                    <td><span class="badge badge-info">In Progress</span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>5</td>
-                                                    <td>Idul Fitri</td>
-                                                    <td>Iqbal</td>
-                                                <td><span class="badge badge-danger">Canceled</span></td>
-                                                </tr>
+                                                @endforeach
+                                                
                                             </tbody>
                                         </table>
                                     </div>      
@@ -166,8 +155,9 @@
                         <div class="col-md-4">
                             <div class="card">
                                 <div class="card-body">
-                                    <h5 class="card-title">Social Media</h5>
+                                    <h5 class="card-title">List Laporan</h5>
                                     <div class="social-media-list">
+
                                         <div class="social-media-item">
                                             <div class="social-icon twitter">
                                                 <i class="fab fa-twitter"></i>
@@ -177,33 +167,8 @@
                                                 <span>4 November, 2019</span>
                                             </div>
                                         </div>
-                                        <div class="social-media-item">
-                                            <div class="social-icon google">
-                                                <i class="fab fa-google-plus-g"></i>
-                                            </div>
-                                            <div class="social-text">
-                                                <p>Sometimes by losing a battle you find a new way to win the war...</p>
-                                                <span>26 October, 2019</span>
-                                            </div>
-                                        </div>
-                                        <div class="social-media-item">
-                                            <div class="social-icon facebook">
-                                                <i class="fab fa-facebook-f"></i>
-                                            </div>
-                                            <div class="social-text">
-                                                <p>To improve is to change; to be perfect is to change often...</p>
-                                                <span>12 October, 2019</span>
-                                            </div>
-                                        </div>
-                                        <div class="social-media-item">
-                                            <div class="social-icon facebook">
-                                                <i class="fab fa-facebook-f"></i>
-                                            </div>
-                                            <div class="social-text">
-                                                <p>If you're going through hell, keep going...</p>
-                                                <span>29 September, 2019</span>
-                                            </div>
-                                        </div>
+
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -231,14 +196,55 @@
                                 </div>
                             </div>
                         </div>
+
                         <div class="col-md-8">
                             <div class="card">
                                 <div class="card-body">
                                     <h5 class="card-title">Earnings</h5>
-                                    <div id="apex1"></div>
+                                    <div id="apex100"></div>
                                 </div>
                             </div>
                         </div>
+                        <script>
+                            // Mendefinisikan array kosong untuk menyimpan data tanggal dan pemasukan
+                            var dates = [];
+                            var earnings = [];
+                        
+                            // Mengisi array dengan data dari model Iuran
+                            @foreach ($iuran as $i)
+                                dates.push("{{ $i->tanggal }}"); // Sesuaikan dengan nama atribut di model i
+                                earnings.push({{ $i->pemasukan }}); // Sesuaikan dengan nama atribut di model i
+                            @endforeach
+                        
+                            // Data untuk grafik
+                            var earningsData = {
+                                series: [{
+                                    name: 'Earnings',
+                                    data: earnings
+                                }],
+                                chart: {
+                                    height: 350,
+                                    type: 'line',
+                                    zoom: {
+                                        enabled: false
+                                    },
+                                },
+                                dataLabels: {
+                                    enabled: false
+                                },
+                                stroke: {
+                                    curve: 'smooth'
+                                },
+                                xaxis: {
+                                    categories: dates
+                                }
+                            };
+                        
+                            // Menampilkan grafik menggunakan ApexCharts
+                            var earningsChart = new ApexCharts(document.getElementById('apex100'), earningsData);
+                            earningsChart.render();
+                        </script>
+
                     </div>
                 </div>
             </div>

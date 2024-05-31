@@ -52,26 +52,26 @@
                         
                         @foreach ($data as $key => $d)
                             
-                        <div class="col-10">
-                            <div class="card">
-                                <div class="card-header d-flex justify-content-between align-items-center">
-                                    <h3 class="mt-3">{{ $d->judul }}</h3>
-                                    <img src="{{ asset('storage/photo-acara/comment1.png') }}" width="25" data-toggle="modal" data-target="#comment_{{ $key }}">
-                                    {{-- <img src="{{ asset('storage/photo-acara/track.png') }}" width="25" data-toggle="modal" data-target="#myModal"> --}}
+                            <div class="col-10">
+                                <div class="card">
+                                    <div class="card-header d-flex justify-content-between align-items-center">
+                                        <h3 class="mt-3">{{ $d->judul }}</h3>
+                                        <img src="{{ asset('storage/photo-acara/comment1.png') }}" width="25" data-toggle="modal" data-target="#comment_{{ $key }}">
+                                        {{-- <img src="{{ asset('storage/photo-acara/track.png') }}" width="25" data-toggle="modal" data-target="#myModal"> --}}
 
-                                </div>
-                                <div class="card-body">
-                                    <h5 class="card-title"></h5>
-                                    <p class="card-text"></p>
-                                    <small>{{ $d->created_at }}</small>
-                                    <h5 class="card-title">{{ $d->pengirim }}</h5>
-                                    <a href="#" class="badge badge-primary" data-toggle="modal" data-target="#Read_More_{{ $key }}">Read More</a>
-                                    <div class="text-right">
-                                        <a href="#" class="badge badge-danger status-toggle">Belum Selesai</a>
+                                    </div>
+                                    <div class="card-body">
+                                        <h5 class="card-title"></h5>
+                                        <p class="card-text"></p>
+                                        <small>{{ $d->created_at }}</small>
+                                        <h5 class="card-title">{{ $d->pengirim }}</h5>
+                                        <a href="#" class="badge badge-primary" data-toggle="modal" data-target="#Read_More_{{ $key }}">Read More</a>
+                                        <div class="text-right">
+                                            <a href="#" class="badge badge-danger status-toggle">Belum Selesai</a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
                         @include('laporan.modal')
                         @endforeach
 

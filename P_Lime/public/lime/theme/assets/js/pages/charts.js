@@ -1,6 +1,17 @@
 $(document).ready(function() {
     
     "use strict";
+
+    // Mendefinisikan array kosong untuk menyimpan data tanggal dan pemasukan
+    var dates = [];
+    var earnings = [];
+
+  // Mengisi array dengan data dari model Iuran
+  // @foreach ($iurans as $iuran)
+  //   dates.push("{{ $iuran->tanggal }}"); // Sesuaikan dengan nama atribut di model Iuran
+  //   earnings.push({{ $iuran->pemasukan }}); // Sesuaikan dengan nama atribut di model Iuran
+  // @endforeach 
+
     var options = {
             chart: {
                 height: 350,
@@ -10,8 +21,8 @@ $(document).ready(function() {
                 }
             },
             series: [{
-                name: "Desktops",
-                data: [10, 41, 35, 51, 49, 62, 69, 91, 148]
+                name: "Earnings",
+                data: earnings
             }],
             dataLabels: {
                 enabled: false
@@ -30,7 +41,7 @@ $(document).ready(function() {
                 },
             },
             xaxis: {
-                categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep'],
+                categories: dates
             }
         }
 

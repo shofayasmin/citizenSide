@@ -5,7 +5,7 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Model:Kk>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Kk>
  */
 class KkFactory extends Factory
 {
@@ -17,12 +17,12 @@ class KkFactory extends Factory
     public function definition(): array
     {
         return [
-            'no_kk' => fake()->userName(),
-            'alamat' => fake()->userName(),
-            'nik_kepala_keluarga' => fake()->userName(),
-            'jumlah_usia_produktif' => fake()->userName(),
-            'jumlah_anggota_kk' => fake()->userName(),
-            'jumlah_usia_lanjut' => fake()->userName(),
+            'no_kk' => fake()->unique()->nik(),
+            'alamat' => fake()->text(75),
+            'nik_kepala_keluarga' => fake()->unique()->nik(),
+            'jumlah_usia_produktif' => fake()->numberBetween(1,4),
+            'jumlah_anggota_kk' => fake()->numberBetween(1,4),
+            'jumlah_usia_lanjut' => fake()->numberBetween(1,4),
         ];
     }
 }
