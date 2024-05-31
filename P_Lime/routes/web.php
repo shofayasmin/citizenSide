@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\IuranController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SpkController;
 use App\Http\Controllers\UmkmController;
@@ -136,8 +137,15 @@ route::get('/Bansos/lurah', [BansosController::class, 'lurah'])->name('bansos.lu
 
 // Iuran
 route::get('/Iuran/index', [IuranController::class, 'index'])->name('iuran.index')->middleware('sekretaris');
+route::get('/Iuran/bayar', [IuranController::class, 'bayar'])->name('iuran.bayar')->middleware('sekretaris');
+route::post('/Iuran/store_iuran', [IuranController::class, 'store_iuran'])->name('iuran.store')->middleware('sekretaris');
+route::get('/Iuran/edit_iuran/{id}', [IuranController::class, 'edit_iuran'])->name('iuran.edit')->middleware('sekretaris');
+route::put('/Iuran/update_iuran/{id}', [IuranController::class, 'update_iuran'])->name('iuran.update')->middleware('sekretaris');
+route::delete('/Iuran/delete_iuran/{id}', [IuranController::class, 'delete_iuran'])->name('iuran.delete')->middleware('sekretaris');
 
 
 // SPK
-route::get('/SPK/topsis', [SpkController::class, 'index'])->name('spk.topsis');
+route::get('/SPK/promethee', [PrometheeController::class, 'calculate'])->name('spk.promethee');
+
+
 

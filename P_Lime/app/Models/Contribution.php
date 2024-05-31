@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Contribution extends Model
 {
+    use HasFactory;
     protected $primaryKey = 'contribution_id';
     protected $fillable = [
         'contribution_name', 

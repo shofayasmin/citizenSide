@@ -34,26 +34,30 @@
         
         @include('layouts.sidebar')
         
-        
         @include('layouts.header')
 
         <div class="lime-container">
             <div class="lime-body">
                 <div class="container">
+                    
                     <div class="row">
                         <div class="col-md-12">
                             <div class="page-title">
+                                
                                 <nav aria-label="breadcrumb">
                                   <ol class="breadcrumb breadcrumb-separator-1">
-                                    <li class="breadcrumb-item"><a href="#">Bansos</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">Manage Bansos</li>
+                                    <li class="breadcrumb-item"><a href="#">Keuangan</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">#</li>
+                                    
                                   </ol>
+                                  
                                 </nav>
-                                <h3>Manage Bansos</h3>
+                                <h3>Pembayar</h3>
                                 
                             </div>
                         </div>
                     </div>
+                    
                     <div class="row">
                         <div class="col-xl">
                             <div class="card">
@@ -62,83 +66,57 @@
                                         <div class="col-xl">
                                             <div class="card">
                                                 <div class="card-body">
-                                                    
-                                                    <h4 class="mb-0">Data Bansos</h4>
-                                                    <p>Berikut adalah Data Data Bansos dari RW 003</code>.</p>
+                                                    <h5 class="card-title">Data Pembayar</h5>
+                                                    <p>Berikut adalah Data Bayaran dari RW 003</code>.</p>
                                                     <div class="text-right mb-3">
-                                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#bansos_tambah">
-                                                            Tambah Data Bansos
+                                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#bayar_tambah">
+                                                            Tambah Data Bayaran
                                                         </button>
                                                     </div>
-
                                                     <div class="table-responsive">
                                                         <table class="table">
                                                             <thead>
+                                                                
                                                                 <tr>
                                                                     <th scope="col">No</th>
-                                                                    <th scope="col">Jenis Bansos</th>
-                                                                    <th scope="col">Periode Bansos</th>
-                                                                    <th scope="col">Tanggal Penyaluran</th>
-                                                                    <th scope="col">Penerima Bansos</th>
-                                                                    
-                                                                   
+                                                                    <th scope="col">Nama</th>
+                                                                    <th scope="col">Payment Status</th>
+                                                                    <th scope="col">Jumlah</th>
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
                                                                 @php
-                                                                    $counter = 1;
+                                                                    $counter = 1   
                                                                 @endphp
-                                                                @foreach ($bansos as $key => $b)
+                                                                @foreach ($bayar as $b)
+                                                                    
                                                                 <tr>
                                                                     <th scope="row">{{ $counter++ }}</th>
-                                                                    <td>{{ $b->jenis_bansos }}</td>
-                                                                    <td>{{ $b->periode_bansos }} Hari</td>
-                                                                    <td>{{ $b->tanggal_penyaluran }}</td>
+                                                                    <td>{{ $b->contribution_name}}</td>
+                                                                    <td>{{ $b->payment_status }}</td>
+                                                                    <td>Rp. {{ $b->amount }}</td>
                                                                     <td>
-                                                                        <a href="{{ route('spk.promethee') }}" class="btn btn-link">Lihat Detail</a> 
+                                                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalEdit{{ $b->contribution_id }}">
+                                                                            Edit
+                                                                        </button>
+                                                                        <button type="button" data-toggle="modal" data-target="#exampleModalHapus{{ $b->contribution_id }}" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
                                                                     </td>
                                                                     
                                                                 </tr>
-                                                                @include('Bansos.modal')
-                                                                @endforeach
-                                                                
-                                                                {{-- <td>
-                                                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalEdit">
-                                                                        Edit
-                                                                    </button>
-                                                                    <a data-toggle="modal" data-target="#exampleModalHapus" class="btn btn-danger"><i class="fas fa-trash-alt">Hapus</i></a>
-                                                                </td> --}}
-                                                                <!-- Modal Buat Show Kandidat-->
-                                                                @foreach($bansos as $key => $d)
-                                                                <div class="modal fade" id="modal_kandidat_{{ $key }}" tabindex="-1" role="dialog" aria-labelledby="modal_kandidatTitle_{{ $key }}" aria-hidden="true">
-                                                                    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-                                                                        <div class="modal-content">
-                                                                            <div class="modal-header">
-                                                                                <h5 class="modal-title" id="modal_kandidatTitle_{{ $key }}">{{ $d->jenis_bansos }}</h5>
-                                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                                    <span aria-hidden="true">&times;</span>
-                                                                                </button>
-                                                                            </div>
-                                                                            <div class="modal-body mb-4">
-                                                                                <p>Periode: {{ $d->periode_bansos }} Hari</p>
-                                                                                <p>Tanggal Penyaluran: {{ $d->tanggal_penyaluran }}</p>
-                                                                                <p>Deskripsi: {{ $d->deskripsi }}</p>
-                                                                                <img src="{{ asset('storage/photo-acara/' . $d->gambar) }}" alt="" width="100">
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                @endforeach
-
+                                                                @include('iuran.modal')
+                                                                @endforeach 
                                                                 
                                                                 
 
                                                                 
                                                                 
+                                                                
+                                                               
                                                             </tbody>
+                                                            
                                                         </table>
-                                                    </div>
-
+                                                        <a href="{{ route('citizen.index') }}"> <- Kembali</a>
+                                                    </div>      
                                                 </div>
                                             </div>
                                         </div>
@@ -147,7 +125,7 @@
                             </div>
                         </div>
                     </div>
-                    <a href="{{ route('bansos.informasi') }}"> <- Kembali</a>
+                    
 
                     
             

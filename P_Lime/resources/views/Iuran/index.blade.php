@@ -46,7 +46,7 @@
                                 
                                 <nav aria-label="breadcrumb">
                                   <ol class="breadcrumb breadcrumb-separator-1">
-                                    <li class="breadcrumb-item"><a href="#">Iuran</a></li>
+                                    <li class="breadcrumb-item"><a href="#">Keuangan</a></li>
                                     <li class="breadcrumb-item active" aria-current="page">#</li>
                                     
                                   </ol>
@@ -66,11 +66,11 @@
                                         <div class="col-xl">
                                             <div class="card">
                                                 <div class="card-body">
-                                                    <h5 class="card-title">Iuran</h5>
-                                                    <p>Berikut adalah Data Iuran dari RW 003</code>.</p>
+                                                    <h5 class="card-title">Data Keuangan</h5>
+                                                    <p>Berikut adalah Data Keuangan dari RW 003</code>.</p>
                                                     <div class="text-right mb-3">
                                                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#rumah_tambah">
-                                                            Tambah Iuran
+                                                            Tambah Data Keuangan
                                                         </button>
                                                     </div>
                                                     <div class="table-responsive">
@@ -89,87 +89,18 @@
                                                             </thead>
                                                             <tbody>
                                                                 
+                                                                @foreach ($iuran as $i)
                                                                     
                                                                 <tr>
-                                                                    <th scope="row">1</th>
-                                                                    <td>10/1/2024</td>
-                                                                    <td>Rp. 10.000.000</td>
-                                                                    <td>Rp. 2.000.000</td>
-                                                                    <td>Rp. 8.000.000</td>
-                                                                    <td>Iuran yang dibayarkan secara berkala untuk mendapatkan akses ke layanan kesehatan, seperti asuransi kesehatan atau program kesehatan pemerintah.</td>
+                                                                    <th scope="row">{{ $i->iuran_id }}</th>
+                                                                    <td>{{ $i->tanggal}}</td>
+                                                                    <td>Rp. {{ $i->pemasukan }}</td>
+                                                                    <td>Rp. {{ $i->pengeluaran }}</td>
+                                                                    <td>Rp. {{ $i->total }}</td>
+                                                                    <td>{{ $i->deskripsi }}</td>
                                                                 </tr>
-                                                                <tr>
-                                                                    <th scope="row">2</th>
-                                                                    <td>10/2/2024</td>
-                                                                    <td>Rp. 11.000.000</td>
-                                                                    <td>Rp. 4.000.000</td>
-                                                                    <td>Rp. 6.000.000</td>
-                                                                    <td>Pembayaran rutin yang dilakukan oleh anggota organisasi atau klub untuk mendukung kegiatan dan operasi organisasi tersebut.</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <th scope="row">3</th>
-                                                                    <td>10/3/2024</td>
-                                                                    <td>Rp. 6.000.000</td>
-                                                                    <td>Rp. 2.000.000</td>
-                                                                    <td>Rp. 4.000.000</td>
-                                                                    <td>Biaya yang harus dibayar oleh siswa atau orang tua mereka untuk mendapatkan akses ke pendidikan formal di institusi pendidikan.</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <th scope="row">4</th>
-                                                                    <td>10/4/2024</td>
-                                                                    <td>Rp. 2.000.000</td>
-                                                                    <td>Rp. 500.000</td>
-                                                                    <td>Rp. 1.500.000</td>
-                                                                    <td>Pembayaran bulanan atau tahunan yang harus dibayar oleh anggota klub, gym, atau fasilitas rekreasi lainnya untuk menggunakan fasilitas dan layanan yang ditawarkan.</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <th scope="row">5</th>
-                                                                    <td>10/5/2024</td>
-                                                                    <td>Rp. 20.000.000</td>
-                                                                    <td>Rp. 5.000.000</td>
-                                                                    <td>Rp. 15.000.000</td>
-                                                                    <td>Biaya yang harus dibayarkan untuk memarkir kendaraan bermotor di area parkir tertentu, seperti di pusat perbelanjaan, bandara, atau tempat umum lainnya.</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <th scope="row">6</th>
-                                                                    <td>10/6/2024</td>
-                                                                    <td>Rp. 5.000.000</td>
-                                                                    <td>Rp. 4.500.000</td>
-                                                                    <td>Rp. 500.000</td>
-                                                                    <td>Biaya yang harus dibayar oleh anggota asosiasi atau badan profesi untuk mendukung kegiatan dan layanan yang disediakan oleh asosiasi tersebut.</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <th scope="row">7</th>
-                                                                    <td>10/7/2024</td>
-                                                                    <td>Rp. 2.000.000</td>
-                                                                    <td>Rp. 8.000.000</td>
-                                                                    <td>Rp. -6.000.000</td>
-                                                                    <td>Pembayaran bulanan atau tahunan yang harus dibayarkan oleh pemilik rumah atau apartemen di kompleks perumahan untuk biaya pemeliharaan dan penyediaan layanan komunal.</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <th scope="row">8</th>
-                                                                    <td>10/8/2024</td>
-                                                                    <td>Rp. 5.000.000</td>
-                                                                    <td>Rp. 20.000.000</td>
-                                                                    <td>Rp. -15.000.000</td>
-                                                                    <td>Biaya yang dibebankan oleh perusahaan kartu kredit kepada pemegang kartu sebagai bagian dari penggunaan kartu kredit mereka, seperti biaya tahunan atau bunga.</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <th scope="row">9</th>
-                                                                    <td>10/9/2024</td>
-                                                                    <td>Rp. 10.000.000</td>
-                                                                    <td>Rp. 3.000.000</td>
-                                                                    <td>Rp. 7.000.000</td>
-                                                                    <td>Pembayaran yang harus dibayar oleh anggota klub olahraga untuk mendapatkan akses ke fasilitas olahraga dan program kebugaran yang ditawarkan oleh klub tersebut.</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <th scope="row">10</th>
-                                                                    <td>10/10/2024</td>
-                                                                    <td>Rp. 50.000.000</td>
-                                                                    <td>Rp. 15.000.000</td>
-                                                                    <td>Rp. 35.000.000</td>
-                                                                    <td>Pembayaran periodik yang dilakukan kepada perusahaan asuransi untuk mendapatkan perlindungan finansial terhadap risiko tertentu, seperti asuransi jiwa, asuransi kesehatan, atau asuransi properti.</td>
-                                                                </tr>
+                                                                @endforeach 
+                                                                
                                                                 
 
                                                                 

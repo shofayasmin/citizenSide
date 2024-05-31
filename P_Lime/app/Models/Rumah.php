@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Rumah extends Model
 {
+    use HasFactory;
     protected $primaryKey = 'rumah_id';
     protected $fillable = [
         'nama_pemilik', 
