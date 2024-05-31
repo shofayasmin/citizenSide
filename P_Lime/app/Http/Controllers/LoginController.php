@@ -21,6 +21,8 @@ class LoginController extends Controller
             $request->session()->regenerate();
             if (auth()->user()->role === 'citizen'){
                 return redirect()->intended('/DashboardWarga/index');
+            } else if (auth()->user()->role === 'rw'){
+                return redirect()->intended('/dashboard/rw');
             }
             return redirect()->intended('/dashboard/index');
         }

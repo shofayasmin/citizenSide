@@ -9,7 +9,7 @@
     <!-- Gaya CSS langsung -->
     <style>
         .active {
-            color: #037afb; /* atau menggunakan rgba(3,122,251,255) */
+            color: #037afb;
         }
     </style>
 </head>
