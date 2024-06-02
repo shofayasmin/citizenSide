@@ -9,7 +9,7 @@
     <!-- Gaya CSS langsung -->
     <style>
         .active {
-            color: #037afb; /* atau menggunakan rgba(3,122,251,255) */
+            color: #037afb;
         }
     </style>
 </head>
@@ -89,9 +89,19 @@
             <li class="sidebar-title">
                 Sekretaris
             </li>
-            <li>
-                <a href="{{ route('iuran.index') }}" class="{{ Request::routeIs('iuran.index') ? 'active' : '' }}"><i class="material-icons">cloud_queue</i>Iuran</a>
+
+            <li class="page {{ Request::is('iuran*') ? 'active-page' : '' }}">
+                <a href="#"><i class="material-icons">done_all</i>Keuangan<i class="material-icons has-sub-menu">keyboard_arrow_left</i></a>
+                <ul class="sub-menu">
+                    <li>
+                        <a href="{{ route('iuran.income') }}">Pemasukan</a>
+                    </li>
+                    <li>
+                        <a href="{{ route('iuran.expenditure') }}">Pengeluaran</a>
+                    </li>
+                </ul>
             </li>
+
             <li>
                 <a href="{{ route('citizen.index') }}"><i class="material-icons {{ Request::routeIs('citizen.index') ? 'active' : '' }}">person</i>Citizen</a>
             </li>
@@ -114,8 +124,8 @@
                 SPK
             </li>
             <li>
-                <a href="{{ route('spk.topsis') }}" class="{{ Request::routeIs('spk.topsis') ? 'active' : '' }}">
-                    <i class="material-icons">calculate</i>topsis
+                <a href="{{ route('spk.promethee') }}" class="{{ Request::routeIs('spk.promethee') ? 'active' : '' }}">
+                    <i class="material-icons">calculate</i>promethee
                 </a>
             </li>
 

@@ -17,7 +17,10 @@ class OrganisasiFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'nama_organisasi' => fake()->unique()->word(),
+            'ketua' => fake()->name,
+            'wakil' => fake()->name,
+            'jumlah_anggota' => fake()->numberBetween(1,4),
         ];
     }
 }

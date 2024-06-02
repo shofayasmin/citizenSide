@@ -15,7 +15,7 @@ class IsRT
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (auth()->user()->role !== 'rt') {
+        if (auth()->user()->role !== 'rt' || auth()->user()->role ==='rw') {
             abort(403);
         }
         return $next($request);

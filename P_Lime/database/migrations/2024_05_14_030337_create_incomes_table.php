@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('incomes', function (Blueprint $table) {
             $table->id('income_id');
             $table->string('income_name');
-            $table->string('income_type');
-            $table->integer('amount');
+            $table->enum('income_type', ['Iuran Warga', 'Sumbangan', 'Usaha RW', 'Bantuan Pemerintah']);
+            $table->integer('inflow');
             $table->string('description');
             $table->timestamps();
         });

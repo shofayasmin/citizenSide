@@ -17,9 +17,9 @@ class IncomeFactory extends Factory
     public function definition(): array
     {
         return [
-            'income_name' => fake()->text(),
+            'income_name' => fake()->word(),
             'income_type' => fake()->randomElement(['Iuran Warga', 'Sumbangan', 'Usaha RW', 'Bantuan Pemerintah']),
-            'amount' => fake()->numberBetween(0, 1000000000),
+            'inflow' => fake()->numberBetween(0, 1000000000),
             'description' => fake()->text(),
         ];
     }

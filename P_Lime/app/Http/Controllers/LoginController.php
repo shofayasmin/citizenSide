@@ -20,9 +20,11 @@ class LoginController extends Controller
         if(Auth::attempt( $credentials )){
             $request->session()->regenerate();
             if (auth()->user()->role === 'citizen'){
-                return redirect()->intended('/dashboard/index_warga');
+                return redirect()->intended('/DashboardWarga/index');
+            } else if (auth()->user()->role === 'rw'){
+                return redirect()->intended('/dashboard/rw');
             }
-            return redirect()->intended('/home');
+            return redirect()->intended('/dashboard/index');
         }
         else{
             return back()->with('LoginError', 'Login Failed');

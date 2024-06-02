@@ -3,82 +3,103 @@
 namespace App\Http\Controllers;
 
 use App\Models\Contribution;
+use App\Models\Income;
 use App\Models\Iuran;
 use App\Http\Requests\StoreIuranRequest;
 use App\Http\Requests\UpdateIuranRequest;
 use App\Models\Expenditure;
-use App\Models\Income;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class IuranController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    
     public function index()
     {
-        return view('Iuran.index');
+        $iuran = Iuran::get();
+        return view('Iuran.index',compact('iuran'));
     }
 
-    public function financial()
+    public function income()
     {
         $data = Income::get();
-        // $data = Expenditure::get();
-        return view('Iuran.financial',compact('data'));
+        return view('Iuran.income',compact('data'));
     }
 
-    public function contribution()
+    public function expenditure()
     {
-        $data = Contribution::get();
-        return view('Iuran.contribution',compact('data'));
+        $data = Expenditure::get();
+        return view('Iuran.expenditure',compact('data'));
     }
 
 
+    
+    // public function bayar()
+    // {
+    //     $bayar = Contribution::get();
+    //     return view('Iuran.bayar',compact('bayar'));
+    // }
+    
+    // public function store_iuran(Request $request)
+    // {
+    //     $validator = Validator::make($request->all(),[
+    //         'contribution_name' => 'required',
+    //         'payment_status' => 'required',
+    //         'amount' => 'required',
+    //     ]);
+        
+    //     if($validator->fails()) return redirect()->back()->withInput()->withErrors($validator);
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
+    //     // $data['nama_field_di_database'] = $request->nama_di_inputan;
+    //     $bayar['contribution_name'] = $request->contribution_name; 
+    //     $bayar['payment_status'] = $request->payment_status; 
+    //     $bayar['amount'] =  $request->amount;
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StoreIuranRequest $request)
-    {
-        //
-    }
+    //     Contribution::create($bayar);
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Iuran $iuran)
-    {
-        //
-    }
+    //     return redirect()->route('iuran.bayar');
+    // }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Iuran $iuran)
-    {
-        //
-    }
+    // public function edit_iuran(Request $request,$id)
+    // {
+    //     $data = Contribution::find($id);
+        
+    //     return view('iuran.edit',compact('data'));
+    // }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateIuranRequest $request, Iuran $iuran)
-    {
-        //
-    }
+    // public function update_iuran(Request $request,$id)
+    // {
+        
+    //     $validator = Validator::make($request->all(),[
+    //         'contribution_name' => 'required',
+    //         'payment_status' => 'required',
+    //         'amount' => 'required',
+    //     ]);
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Iuran $iuran)
-    {
-        //
-    }
+    //     if($validator->fails()) return redirect()->back()->withInput()->withErrors($validator);
+
+    //     // $data['nama_field_di_database'] = $request->nama_di_inputan;
+    //     $bayar['contribution_name'] = $request->contribution_name; 
+    //     $bayar['payment_status'] = $request->payment_status; 
+    //     $bayar['amount'] =  $request->amount;
+
+    //     Contribution::where('contribution_id',$id)->update($bayar);
+
+    //     return redirect()->route('iuran.bayar');
+    // }
+
+    
+    // public function delete_iuran(Request $request,$id)
+    // {
+    //     $data = Contribution::find($id);
+
+    //     if($data){
+    //         $data->delete();
+    //     }
+
+    //     return redirect()->route('iuran.bayar');
+    // }
 }

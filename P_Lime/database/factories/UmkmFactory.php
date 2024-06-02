@@ -17,7 +17,8 @@ class UmkmFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'nama' => fake()->word(),
+            'umkm' => fake()->text(),
         ];
     }
 }

@@ -10,7 +10,7 @@
         <!-- The above 6 meta tags *must* come first in the head; any other head content must come *after* these tags -->
         
         <!-- Title -->
-        <title>Manage Contribute Contributor Data</title>
+        <title>Manage Data Pemasukan</title>
 
         <!-- Styles -->
         <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900&display=swap" rel="stylesheet">
@@ -31,59 +31,10 @@
     </head>
     <body>
         
-        <div class="lime-sidebar">
-            <div class="lime-sidebar-inner slimscroll">
-                <ul class="accordion-menu">
-                    <li class="sidebar-title">
-                        Apps
-                    </li>
-                    <li>
-                        <a href="{{('/home')}}" ><i class="material-icons">dashboard</i>Dashboard</a>
-                    </li>
-                    <li>
-                        <a href="profile.html"><i class="material-icons">person_outline</i>Laporan</a>
-                    </li>
-                    <li class="page">
-                        <a href="#"><i class="material-icons">inbox</i>Acara<i class="material-icons has-sub-menu">keyboard_arrow_left</i></a>
-                        <ul class="sub-menu">
-                            <li>
-                                <a href="/acara/manage" class="active" onclick="return false;">Manage</a>
-                            </li>
-                            <li>
-                                <a href="/acara/view">View</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="todo.html"><i class="material-icons">done_all</i>Bansos</a>
-                    </li>
-                    <li>
-                        <a href="file-manager.html"><i class="material-icons">cloud_queue</i>Iuran</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        
-        
-        <div class="theme-settings-sidebar">
-            <div class="theme-settings-inner">
-                <h3 class="theme-sidebar-title">Themes</h3>
-                <p class="themes-info">Select a demo</p>
-                
-                <a class="theme-item active" href="#">
-                    <img src="{{ asset('lime/theme/assets/images/themes/1.png')}}" alt="">
-                    <h4 class="theme-title">Classic</h4>
-                </a>
-                <a class="theme-item" href="#">
-                    <div class="coming-theme">Coming Soon</div>
-                    <img src="{{ asset('lime/theme/assets/images/themes/2.png')}}" alt="">
-                    <h4 class="theme-title">Dark Theme</h4>
-                </a>
-            </div>
-        </div>
+        @include('layouts.sidebar')
         
         @include('layouts.header')
-
+        
         <div class="lime-container">
             <div class="lime-body">
                 <div class="container">
@@ -92,11 +43,13 @@
                             <div class="page-title">
                                 <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb breadcrumb-separator-1">
-                                    <li class="breadcrumb-item"><a href="#">UI Elements</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">Forms</li>
+                                    <li class="breadcrumb-item"><a href="#">Iuran</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Data Keuangan</li>
+                                    
                                 </ol>
                                 </nav>
                                 <h3>Forms</h3>
+                                
                             </div>
                         </div>
                     </div>
@@ -108,45 +61,50 @@
                                         <div class="col-xl">
                                             <div class="card">
                                                 <div class="card-body">
-                                                    <h5 class="card-title">Data Iuran</h5>
-                                                    <p>Berikut adalah Data Iuran dari RW 003</code>.</p>
-                                                    {{-- <a href="{{ route('rt.create') }}" class="btn btn-primary key"> tambah </a>
+                                                    <h5 class="card-title">Data Pemasukan</h5>
+                                                    <p>Berikut adalah Data Pemasukan dari RW 003</code>.</p>
+                                                    <div class="text-right mb-3">
+                                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#income_tambah">
+                                                            Tambah Data 
+                                                        </button>
+                                                    </div>
                                                     <div class="table-responsive">
-                                                        <table class="table"> --}}
+                                                        <table class="table">
                                                             <thead>
                                                                 <tr>
                                                                     <th scope="col">No</th>
-                                                                    <th scope="col">Nama Iuran</th>
+                                                                    <th scope="col">Nama Pemasukan</th>
+                                                                    <th scope="col">Tipe Pemasukan</th>
                                                                     <th scope="col">Deskripsi</th>
-                                                                    <th scope="col">Status Pembayaran</th>
-                                                                    <th scope="col">Total Uang</th>
+                                                                    <th scope="col">Inflow</th>
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
                                                                 @foreach ($data as $d)
                                                                 <tr>
-                                                                        
-                                                                    <th scope="row">{{ $d->contribution_id }}</th>
-                                                                    <td>{{ $d->contribution_name }}</td>
+                                                                    <th scope="row">{{ $d->income_id }}</th>
+                                                                    <td>{{ $d->income_name }}</td>
+                                                                    <td>{{ $d->income_type }}</td>
                                                                     <td>{{ $d->description }}</td>
-                                                                    <td>{{ $d->payment_status }}</td>
-                                                                    <td>{{ $d->total_money }}</td>
-                                                                    </td>
+                                                                    <td>{{ $d->inflow }}</td>
                                                                     <td>
-                                                                        <a href="{{route('edit_contribution',['id' => $d->contribution_id])}}" class="btn btn-primary"><i class="fas fa-pen"></i>Edit</a>
-                                                                        <a data-toggle="modal" data-target="#exampleModalHapus{{ $d->contribution_id }}" class="btn btn-danger"><i class="fas fa-trash-alt"> Hapus</i></a>
+                                                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalEdit{{ $d->income_name }}">
+                                                                            Edit
+                                                                        </button>
+                                                                        <a data-toggle="modal" data-target="#exampleModalHapus{{ $d->income_name }}" class="btn btn-danger"><i class="fas fa-trash-alt">Hapus</i></a>
                                                                     </td>
                                                                 </tr>
 
-                                                                @include('Iuran.modal_finance')
+                                                                <!-- Modal -->
+                                                                @include('Iuran.modal_income')
 
                                                                 @endforeach
+
                                                             </tbody>
                                                         </table>
-                                                    </div>  
+                                                        <a href="{{ route('iuran.income') }}"> <- Kembali</a>
+                                                    </div>      
                                                 </div>
-
-
                                             </div>
                                         </div>
                                     </div>
@@ -154,12 +112,7 @@
                             </div>
                         </div>
                     </div>
-                    <a href="{{ route('contribution.index') }}"> <- Kembali</a>
-
                     
-            
-        
-        
         <!-- Javascripts -->
         <script src="{{ asset('lime/theme/assets/plugins/jquery/jquery-3.1.0.min.js')}}"></script>
         <script src="{{ asset('lime/theme/assets/plugins/bootstrap/popper.min.js')}}"></script>

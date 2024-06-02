@@ -11,7 +11,7 @@
         <!-- The above 6 meta tags *must* come first in the head; any other head content must come *after* these tags -->
         
         <!-- Title -->
-        <title>Manage Data Keuangan</title>
+        <title>Manage Citizen Data</title>
 
         <!-- Styles -->
         <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900&display=swap" rel="stylesheet">
@@ -39,21 +39,25 @@
         <div class="lime-container">
             <div class="lime-body">
                 <div class="container">
+                    
                     <div class="row">
                         <div class="col-md-12">
                             <div class="page-title">
+                                
                                 <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb breadcrumb-separator-1">
-                                    <li class="breadcrumb-item"><a href="#">Iuran</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">Data Keuangan</li>
+                                    <li class="breadcrumb-item"><a href="#">Keuangan</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">#</li>
                                     
                                 </ol>
-                                </nav>
-                                <h3>Forms</h3>
                                 
+                                </nav>
+                                <h3>Pembayar</h3>
+
                             </div>
                         </div>
                     </div>
+                    
                     <div class="row">
                         <div class="col-xl">
                             <div class="card">
@@ -62,49 +66,56 @@
                                         <div class="col-xl">
                                             <div class="card">
                                                 <div class="card-body">
-                                                    <h5 class="card-title">Data Keuangan</h5>
-                                                    <p>Berikut adalah Data Keuangan dari RW 003</code>.</p>
+                                                    <h5 class="card-title">Data Pembayar</h5>
+                                                    <p>Berikut adalah Data Bayaran dari RW 003</code>.</p>
                                                     <div class="text-right mb-3">
-                                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#income_tambah">
-                                                            Tambah Data 
+                                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#bayar_tambah">
+                                                            Tambah Data Bayaran
                                                         </button>
                                                     </div>
                                                     <div class="table-responsive">
                                                         <table class="table">
                                                             <thead>
+                                                                
                                                                 <tr>
                                                                     <th scope="col">No</th>
-                                                                    <th scope="col">Nama Pemasukan</th>
-                                                                    <th scope="col">Tipe Pemasukan</th>
+                                                                    <th scope="col">Nama</th>
+                                                                    <th scope="col">Status Pembayaran</th>
                                                                     <th scope="col">Jumlah</th>
-                                                                    <th scope="col">Deskripsi</th>
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
-                                                                @foreach ($data as $d)
+                                                                @php
+                                                                    $counter = 1   
+                                                                @endphp
+                                                                @foreach ($bayar as $b)
+                                                                    
                                                                 <tr>
-                                                                        
-                                                                    <th scope="row">{{ $d->income_id }}</th>
-                                                                    <td>{{ $d->income_name }}</td>
-                                                                    <td>{{ $d->income_type }}</td>
-                                                                    <td>{{ $d->amount }}</td>
-                                                                    <td>{{ $d->description }}</td>
+                                                                    <th scope="row">{{ $counter++ }}</th>
+                                                                    <td>{{ $b->contribution_name}}</td>
+                                                                    <td>{{ $b->payment_status }}</td>
+                                                                    <td>Rp. {{ $b->amount }}</td>
                                                                     <td>
-                                                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalEdit{{ $d->income_name }}">
+                                                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalEdit{{ $b->contribution_id }}">
                                                                             Edit
                                                                         </button>
-                                                                        <a data-toggle="modal" data-target="#exampleModalHapus{{ $d->income_name }}" class="btn btn-danger"><i class="fas fa-trash-alt">Hapus</i></a>
+                                                                        <button type="button" data-toggle="modal" data-target="#exampleModalHapus{{ $b->contribution_id }}" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
                                                                     </td>
+                                                                    
                                                                 </tr>
+                                                                @include('iuran.modal')
+                                                                @endforeach 
+                                                                
+                                                                
 
-                                                                <!-- Modal -->
-                                                                @include('Iuran.modal_financial')
-
-                                                                @endforeach
+                                                                
+                                                                
+                                                                
 
                                                             </tbody>
+                                                            
                                                         </table>
-                                                        <a href="{{ route('iuran.financial') }}"> <- Kembali</a>
+                                                        <a href="{{ route('citizen.index') }}"> <- Kembali</a>
                                                     </div>      
                                                 </div>
                                             </div>
@@ -115,6 +126,11 @@
                         </div>
                     </div>
                     
+
+                    
+            
+        
+        
         <!-- Javascripts -->
         <script src="{{ asset('lime/theme/assets/plugins/jquery/jquery-3.1.0.min.js')}}"></script>
         <script src="{{ asset('lime/theme/assets/plugins/bootstrap/popper.min.js')}}"></script>

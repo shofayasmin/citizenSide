@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Kk extends Model
 {
+    use HasFactory;
     protected $primaryKey = 'id_kk';
     protected $fillable = [
         'no_kk', 

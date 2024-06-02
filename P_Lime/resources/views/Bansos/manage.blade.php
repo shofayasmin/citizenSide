@@ -35,23 +35,6 @@
         @include('layouts.sidebar')
         
         
-        <div class="theme-settings-sidebar">
-            <div class="theme-settings-inner">
-                <h3 class="theme-sidebar-title">Themes</h3>
-                <p class="themes-info">Select a demo</p>
-                
-                <a class="theme-item active" href="#">
-                    <img src="{{ asset('lime/theme/assets/images/themes/1.png')}}" alt="">
-                    <h4 class="theme-title">Classic</h4>
-                </a>
-                <a class="theme-item" href="#">
-                    <div class="coming-theme">Coming Soon</div>
-                    <img src="{{ asset('lime/theme/assets/images/themes/2.png')}}" alt="">
-                    <h4 class="theme-title">Dark Theme</h4>
-                </a>
-            </div>
-        </div>
-        
         @include('layouts.header')
 
         <div class="lime-container">
@@ -97,121 +80,57 @@
                                                                     <th scope="col">Periode Bansos</th>
                                                                     <th scope="col">Tanggal Penyaluran</th>
                                                                     <th scope="col">Penerima Bansos</th>
-                                                                    <th scope="col">Gambar</th>
+                                                                    
                                                                    
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
+                                                                @php
+                                                                    $counter = 1;
+                                                                @endphp
+                                                                @foreach ($bansos as $key => $b)
+                                                                <tr>
+                                                                    <th scope="row">{{ $counter++ }}</th>
+                                                                    <td>{{ $b->jenis_bansos }}</td>
+                                                                    <td>{{ $b->periode_bansos }} Hari</td>
+                                                                    <td>{{ $b->tanggal_penyaluran }}</td>
+                                                                    <td>
+                                                                        <a href="{{ route('spk.promethee') }}" class="btn btn-link">Lihat Detail</a> 
+                                                                    </td>
+                                                                    
+                                                                </tr>
+                                                                @include('Bansos.modal')
+                                                                @endforeach
                                                                 
-                                                                <tr>
-                                                                    <th scope="row">1</th>
-                                                                    <td>Bantuan Pemerintah</td>
-                                                                    <td>1-2 Hari</td>
-                                                                    <td>20 Juni 2024</td>
-                                                                    <td>
-                                                                        <ul>
-                                                                            <li>Arif</li>
-                                                                            <li>Johan</li>
-                                                                            <li>Saifudin</li>
-                                                                            <li>Bambang</li>
-                                                                            <li>Tejo</li>
-                                                                            <li>Yanto</li>
-                                                                            <li>Yayat</li>
-                                                                        </ul>
-                                                                    </td>
-                                                                    <td><img src="{{ asset('storage/photo-acara/Presiden Jokowi Luncurkan Penyaluran Cadangan Beras Pemerintah untuk Bantuan Pangan.jpeg') }}" alt="" width="100"></td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <th scope="row">2</th>
-                                                                    <td>Bantuan Sposor Pocari Sweat</td>
-                                                                    <td>1-2 Hari</td>
-                                                                    <td>21 Juli 2024</td>
-                                                                    <td>
-                                                                        <ul>
-                                                                            <li>Arif</li>
-                                                                            <li>Johan</li>
-                                                                            <li>Saifudin</li>
-                                                                            <li>Bambang</li>
-                                                                            <li>Tejo</li>
-                                                                            <li>Yanto</li>
-                                                                            <li>Yayat</li>
-                                                                        </ul>
-                                                                    </td>
-                                                                    <td>
-                                                                        <img src="{{ asset('storage/photo-acara/TVC POCARI SWEAT - Bintang SMA.jpeg') }}" alt="" width="100">
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <th scope="row">3</th>
-                                                                    <td>Bantuan Program Covid</td>
-                                                                    <td>1-5 Hari</td>
-                                                                    <td>22 Agustus 2024</td>
-                                                                    <td>
-                                                                        <ul>
-                                                                            <li>Arif</li>
-                                                                            <li>Johan</li>
-                                                                            <li>Saifudin</li>
-                                                                            <li>Bambang</li>
-                                                                            <li>Tejo</li>
-                                                                            <li>Yanto</li>
-                                                                            <li>Yayat</li>
-                                                                        </ul>
-                                                                    </td>
-                                                                    <td>
-                                                                        <img src="{{ asset('storage/photo-acara/Lagi, Polres Tangsel Salurkan BTPKLW Ke Pelaku Usaha Mikro.jpeg') }}" alt="" width="100">
-                                                                    </td>
-                                                                </tr>
                                                                 {{-- <td>
                                                                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalEdit">
                                                                         Edit
                                                                     </button>
                                                                     <a data-toggle="modal" data-target="#exampleModalHapus" class="btn btn-danger"><i class="fas fa-trash-alt">Hapus</i></a>
                                                                 </td> --}}
-
-                                                                <!-- Modal -->
-                                                                <div class="modal fade" id="bansos_tambah">
-                                                                    <div class="modal-dialog modal-xl">
+                                                                <!-- Modal Buat Show Kandidat-->
+                                                                @foreach($bansos as $key => $d)
+                                                                <div class="modal fade" id="modal_kandidat_{{ $key }}" tabindex="-1" role="dialog" aria-labelledby="modal_kandidatTitle_{{ $key }}" aria-hidden="true">
+                                                                    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
                                                                         <div class="modal-content">
-                                                                            <form action="" method="POST">
-                                                                                @csrf
-                                                                                <div class="form-group mt-3" style="margin-left: 10px; margin-right: 10px;">
-                                                                                    <label for="exampleInputEmail1">Jenis Bansos</label>
-                                                                                    <input type="form" name="no_kk" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Jenis Bansos">
-                                                                                    @error( 'no_kk' )
-                                                                                        <small>{{ $message }}</small>
-                                                                                    @enderror
-                                                                                </div>
-                                                                                <div class="form-group" style="margin-left: 10px; margin-right: 10px;">
-                                                                                    <label for="exampleInputEmail1">Periode Bansos</label>
-                                                                                    <input type="form" name="no_kk" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Periode Bansos">
-                                                                                    @error( 'no_kk' )
-                                                                                        <small>{{ $message }}</small>
-                                                                                    @enderror
-                                                                                <div class="form-group">
-                                                                                    <label for="exampleFormControlTextarea1">Siapa Saja Penerima Bansos</label>
-                                                                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                                                                                </div>
-                                                                    
-                                                                                
-                                                                                <div class="form-group" style="margin-left: 10px; margin-right: 10px;">
-                                                                                    <label for="exampleInputEmail1">Tanggal Penyaluran</label>
-                                                                                    <input type="form" name="no_kk" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Dalam bentuk tahun">
-                                                                                    @error( 'no_kk' )
-                                                                                        <small>{{ $message }}</small>
-                                                                                    @enderror
-                                                                                </div>
-                                                                                             
-                                                                                        
-                                                                                
-                                                                                                    
-                                                                                <div class="modal-footer">
-                                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-                                                                                    <button type="submit" class="btn btn-primary">Submit</button>
-                                                                                </div>
-                                                                            </form>
+                                                                            <div class="modal-header">
+                                                                                <h5 class="modal-title" id="modal_kandidatTitle_{{ $key }}">{{ $d->jenis_bansos }}</h5>
+                                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                    <span aria-hidden="true">&times;</span>
+                                                                                </button>
+                                                                            </div>
+                                                                            <div class="modal-body mb-4">
+                                                                                <p>Periode: {{ $d->periode_bansos }} Hari</p>
+                                                                                <p>Tanggal Penyaluran: {{ $d->tanggal_penyaluran }}</p>
+                                                                                <p>Deskripsi: {{ $d->deskripsi }}</p>
+                                                                                <img src="{{ asset('storage/photo-acara/' . $d->gambar) }}" alt="" width="100">
+                                                                            </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
+                                                                @endforeach
+
+                                                                
                                                                 
 
                                                                 

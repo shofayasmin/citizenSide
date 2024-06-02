@@ -51,42 +51,22 @@
                         <div class="row row-cols-3">
                         
                             <div class="col">
+
+                                @foreach ($data as $d)
                                 <div class="card">
                                     <div class="d-flex justify-content-center align-items-center">
-                                        <img src="{{ asset('storage/photo-acara/Presiden Jokowi Luncurkan Penyaluran Cadangan Beras Pemerintah untuk Bantuan Pangan.jpeg') }}" class="card-img-top" style="width: auto; max-height: 400px;">
+                                        <img src="{{ $d->gambar }}" class="card-img-top" style="width: auto; max-height: 400px;">
                                     </div>                                    
                                     <div class="card-body">
-                                        <h5 class="card-title">Informasi Bansos Yang diadakan oleh pemerintah</h5>
-                                        <p class="card-text">Jenis Bansos: Bantuan Pemerintah</p>
-                                        <p class="card-text">Periode Bansos: 1-2 Hari</p>
-                                        <p class="card-text">Jumlah Bansos: 20</p>
-                                        <p class="card-text">Tanggal penyaluran: 20 Juni 2024</p>
+                                        <h5 class="card-title">{{ $d->judul }}</h5>
+                                        <p class="card-text">Jenis Bansos: {{ $d->jenis_bansos }}</p>
+                                        <p class="card-text">Periode Bansos: {{ $d->periode_bansos }} Hari</p>
+                                        <p class="card-text">Jumlah Bansos: {{ $d->jumlah_bansos }}</p>
+                                        <p class="card-text">Tanggal penyaluran: {{ $d->tanggal_penyaluran }}</p>
                                     </div>
                                 </div>
-                                <div class="card">
-                                    <div class="d-flex justify-content-center align-items-center">
-                                        <img src="{{ asset('storage/photo-acara/TVC POCARI SWEAT - Bintang SMA.jpeg') }}" class="card-img-top" style="width: auto; max-height: 400px;">
-                                    </div> 
-                                    <div class="card-body">
-                                        <h5 class="card-title">Informasi Bansos Yang Digelar oleh Pocari Sweat yang memberikan Promosi Besar Besaran</h5>
-                                        <p class="card-text">Jenis Bansos: Bantuan Lembaga Swasta</p>
-                                        <p class="card-text">Periode Bansos: 1-2 Hari</p>
-                                        <p class="card-text">Jumlah Bansos: 50</p>
-                                        <p class="card-text">Tanggal penyaluran: 21 Juli 2024</p>
-                                    </div>
-                                </div>
-                                <div class="card">
-                                    <div class="d-flex justify-content-center align-items-center">
-                                        <img src="{{ asset('storage/photo-acara/Lagi, Polres Tangsel Salurkan BTPKLW Ke Pelaku Usaha Mikro.jpeg') }}" class="card-img-top" style="width: auto; max-height: 400px;">
-                                    </div> 
-                                    <div class="card-body">
-                                        <h5 class="card-title">Informasi Bansos Yang diadakan oleh pemerintah Dalam Bantuan Covid-19</h5>
-                                        <p class="card-text">Jenis Bansos: Bantuan Pemerintah</p>
-                                        <p class="card-text">Periode Bansos: 1-5 Hari</p>
-                                        <p class="card-text">Jumlah Bansos: 100</p>
-                                        <p class="card-text">Tanggal penyaluran: 22 Agustus 2024</p>
-                                    </div>
-                                </div>
+                                @endforeach
+
                             </div>
                         
                         </div>

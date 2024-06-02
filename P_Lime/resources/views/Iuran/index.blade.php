@@ -42,10 +42,7 @@
                         <div class="col-md-12">
                             <div class="page-title">
                                 <nav aria-label="breadcrumb">
-                                <ol class="breadcrumb breadcrumb-separator-1">
-                                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">Iuran</li>
-                                </ol>
+
                                 </nav>
                                 <h3>Iuran</h3>
                             </div>
@@ -55,17 +52,6 @@
                         <div class="col-xl">
                             <div class="card">
                                 <div class="card-body">
-                                    <h5 class="card-title">Data Iuran </h5>
-                                    <p> </p>
-                                    <form>
-                                        <p>Silahkan pilih sesuai dengan kebutuhan dan tujuan anda</p>
-                                            <div class="dropdown">
-                                                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    Pilih Data
-                                                </button>
-                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                    <a class="dropdown-item" href="{{ route('iuran.tester') }}">Iuran & Kas</a>
-                                                    <a class="dropdown-item" href="{{ route('iuran.financial') }}">Data Keuangan</a>
                                                 </div>
                                             </div>
 
