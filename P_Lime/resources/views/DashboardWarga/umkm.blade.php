@@ -13,7 +13,7 @@
 
     <div class="container d-flex flex-wrap justify-content-between h-70 overflow-auto">
 
-        @foreach ($umkms as $umkm)
+        {{-- @foreach ($umkms as $umkm)
             <div class="card" style="width: 25rem;">
                 <div class="image-container position-relative">
                     <span class="badge badge-warning position-absolute" style="top:0; right:0;">UMKM</span>
@@ -25,8 +25,7 @@
                     <a href="#" class="btn btn-primary">Go somewhere</a>
                 </div>
             </div>
-        @endforeach
-
+        @endforeach --}}
     </div>
 </body>
 

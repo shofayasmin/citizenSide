@@ -27,6 +27,33 @@
             </div>
         @endforeach
 
+
+        {{-- <div class="row">
+            <div class="col-xl">
+                <div class="container">
+                    @foreach ($acaras as $d)
+                        <div class="col">
+                            <div class="card">
+                                <img src="{{ asset('storage/photo-acara/' . $d->image) }}" class="card-img-top"
+                                    alt="Placeholder" style="height: 200px; object-fit: cover;">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ $d->judul }}</h5>
+                                    <p class="card-text">{{ $d->deskripsi }}</p>
+                                    <a href="#" class="badge badge-primary" data-toggle="modal"
+                                        data-target="#Read_More_{{ $d }}">Read More</a>
+                                    <div class="text-right">
+                                        <span class="badge badge-pill badge-info">{{ $d->tipe_acara }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+        </div> --}}
+    </div>
+
+
     </div>
 </body>
 
