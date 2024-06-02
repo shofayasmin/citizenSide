@@ -34,13 +34,6 @@
                 </a>
             </li>
             @endcan
-            @can('citizen')
-            <li>
-                <a href="{{ asset('home') }}" class="{{ Request::path() === 'home' ? 'active' : '' }}">
-                    <i class="material-icons">dashboard</i>Dashboard
-                </a>
-            </li>
-            @endcan
 
             <li class="page {{ Request::is('laporan*') ? 'active-page' : '' }}">
                 <a href="#"><i class="material-icons">person_outline</i>Laporan<i class="material-icons has-sub-menu">keyboard_arrow_left</i></a>
@@ -85,11 +78,7 @@
                 </ul>
             </li>
 
-            @can('sekretaris')
-            <li class="sidebar-title">
-                Sekretaris
-            </li>
-
+            @canany(['sekretaris', 'rw'])
             <li class="page {{ Request::is('iuran*') ? 'active-page' : '' }}">
                 <a href="#"><i class="material-icons">done_all</i>Keuangan<i class="material-icons has-sub-menu">keyboard_arrow_left</i></a>
                 <ul class="sub-menu">
@@ -105,7 +94,7 @@
             <li>
                 <a href="{{ route('citizen.index') }}"><i class="material-icons {{ Request::routeIs('citizen.index') ? 'active' : '' }}">person</i>Citizen</a>
             </li>
-            @endcan
+            @endcanany
 
             
 
