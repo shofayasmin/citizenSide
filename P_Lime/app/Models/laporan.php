@@ -16,4 +16,9 @@ class laporan extends Model
         'gambar', 
         'pengirim',
     ];
+
+    public function comments()
+{
+    return $this->hasMany(Comment::class);
+}
 }

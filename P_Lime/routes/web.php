@@ -13,7 +13,8 @@ use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\TemplateController;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\PrometheeController;
+use App\Http\Controllers\IuranController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\DashboardWargaController;
 
 
@@ -163,3 +164,6 @@ Route::get('/cek-nik', [CitizenController::class, 'showCekNIKForm']);
 
 // Rute untuk menangani permintaan POST untuk memeriksa NIK
 Route::post('/cek-nik', [CitizenController::class, 'cekNIK']);
+
+// Comment
+Route::post('/comments', [CommentController::class, 'store'])->name('comments.store');

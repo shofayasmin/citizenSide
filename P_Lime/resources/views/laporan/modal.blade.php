@@ -18,7 +18,7 @@
 @endforeach
 
 {{-- modal for read comment --}}
-@foreach($data as $key => $d)
+{{-- @foreach($data as $key => $d)
     <div class="modal fade" id="comment_{{ $key }}" tabindex="-1" role="dialog" aria-labelledby="commentTitle_{{ $key }}" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
             <div class="modal-content">
@@ -66,8 +66,85 @@
             </div>
         </div>
     </div>
+@endforeach --}}
+
+@foreach($data as $key => $d)
+    <div class="modal fade" id="comment_{{ $key }}" tabindex="-1" role="dialog" aria-labelledby="commentTitle_{{ $key }}" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-body mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="mail-container">
+                                <div class="mail-header">
+                                    <div class="mail-title">
+                                        {{ $d->judul }}
+                                    </div>
+                                </div>
+                                <div class="comments-container">
+                                    @foreach($d->comments as $comment)
+                                    <div class="mail-info">
+                                        <div class="mail-author">
+                                            <img src="{{ asset('storage/photo-acara/orang.png') }}" alt="">
+                                            <div class="mail-author-info">
+                                                <span class="mail-author-name">{{ $comment->author }}</span>
+                                                <p>{{ $comment->comment }}</p>
+                                            </div>
+                                        </div>
+                                        <div class="mail-other-info">
+                                            <span>{{ $comment->created_at->format('H:i') }}</span>
+                                        </div>
+                                    </div>
+                                    @endforeach
+                                </div>
+                                <div class="comment-form mt-3">
+                                    <form id="commentForm_{{ $key }}" method="POST" action="{{route('comments.store')}}">
+                                        @csrf
+                                        <input type="hidden" name="laporan_id" value="{{ $d->laporan_id }}">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" name="author" placeholder="Your Name" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <textarea class="form-control" name="comment" rows="3" placeholder="Your Comment" required></textarea>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary">Submit Comment</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 @endforeach
 
+<script>
+    $(document).ready(function() {
+        @foreach($data as $key => $d)
+            $('#commentForm_{{ $key }}').on('submit', function(event) {
+                event.preventDefault();
+                var formData = $(this).serialize();
+                
+                $.ajax({
+                    url: '{{ route('comments.store') }}',
+                    type: 'POST',
+                    data: formData,
+                    success: function(response) {
+                        if (response.success) {
+                            location.reload(); // Refresh the page to display the new comment
+                        } else {
+                            alert('Failed to submit comment');
+                        }
+                    },
+                    error: function() {
+                        alert('Error submitting comment');
+                    }
+                });
+            });
+        @endforeach
+    });
+</script>
 <script>
     $(document).ready(function(){
         $('.Read_More').on('click', function(){

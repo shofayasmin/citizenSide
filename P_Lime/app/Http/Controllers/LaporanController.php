@@ -6,6 +6,7 @@ use App\Models\laporan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Log;
 
 
 class LaporanController extends Controller
@@ -108,15 +109,61 @@ class LaporanController extends Controller
         return redirect()->route('laporan.view');
     }
 
-    public function updateStatus(Request $request)
-    {
-        $laporan = Laporan::find($request->id);
-        if ($laporan) {
-            $laporan->status = $request->status;
-            $laporan->save();
-            return response()->json(['success' => true]);
-        }
-        return response()->json(['success' => false]);
+    // public function updateStatus(Request $request)
+    // {
+    //     $laporan = Laporan::find($request->id);
+    //     if ($laporan) {
+    //         $laporan->status = $request->status;
+    //         $laporan->save();
+    //         return response()->json(['success' => true]);
+    //     }
+    //     return response()->json(['success' => false]);
+    // }
+
+//     public function updateStatus(Request $request)
+// {
+//     $laporan = Laporan::find($request->id);
+    
+//     if (!$laporan) {
+//         return response()->json(['success' => false, 'message' => 'Laporan not found']);
+//     }
+
+//     try {
+//         $laporan->status = $request->status;
+//         $laporan->save();
+//         return response()->json(['success' => true]);
+//     } catch (\Exception $e) {
+//         return response()->json(['success' => false, 'message' => $e->getMessage()]);
+//     }
+// }
+
+public function updateStatus(Request $request)
+{
+    Log::info('Update status request received', ['request' => $request->all()]);
+
+    $laporan = Laporan::find($request->id);
+    
+    if (!$laporan) {
+        Log::error('Laporan not found', ['id' => $request->id]);
+        return response()->json(['success' => false, 'message' => 'Laporan not found']);
     }
+
+    try {
+        $laporan->status = $request->status;
+        $laporan->save();
+        Log::info('Status updated successfully', ['laporan' => $laporan]);
+        return response()->json(['success' => true]);
+    } catch (\Exception $e) {
+        Log::error('Error updating status', ['error' => $e->getMessage()]);
+        return response()->json(['success' => false, 'message' => $e->getMessage()]);
+    }
+}
+
+public function index()
+{
+    $data = Laporan::with('comments')->get();
+    return view('your-view', compact('data'));
+}
+
 
 }

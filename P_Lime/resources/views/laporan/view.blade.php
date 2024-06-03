@@ -149,11 +149,11 @@
                                         },
                                         success: function(response) {
                                             if (response.success) {
-                                                if ($this.hasClass('badge-danger')) {
-                                                    $this.removeClass('badge-danger').addClass('badge-success');
+                                                if ($this.hasClass('btn-danger')) {
+                                                    $this.removeClass('btn-danger').addClass('btn-success');
                                                     $this.text('Selesai');
                                                 } else {
-                                                    $this.removeClass('badge-success').addClass('badge-danger');
+                                                    $this.removeClass('btn-success').addClass('btn-danger');
                                                     $this.text('Belum Selesai');
                                                 }
                                             } else {
