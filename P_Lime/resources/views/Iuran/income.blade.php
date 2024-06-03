@@ -43,12 +43,12 @@
                             <div class="page-title">
                                 <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb breadcrumb-separator-1">
-                                    <li class="breadcrumb-item"><a href="#">Iuran</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">Data Keuangan</li>
-                                    
+                                    <li class="breadcrumb-item active"><a href="#">Dashboard</a></li>
+                                    <li class="breadcrumb-item">Keuangan</li>
+                                    <li class="breadcrumb-item">Pemasukan</li>
                                 </ol>
                                 </nav>
-                                <h3>Forms</h3>
+                                <h3>Pemasukan</h3>
                                 
                             </div>
                         </div>
@@ -61,10 +61,10 @@
                                         <div class="col-xl">
                                             <div class="card">
                                                 <div class="card-body">
-                                                    <h5 class="card-title">Data Pemasukan</h5>
+                                                    <h5 class="card-title">Pemasukan</h5>
                                                     <p>Berikut adalah Data Pemasukan dari RW 003</code>.</p>
                                                     <div class="text-right mb-3">
-                                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#income_tambah">
+                                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalTambahIncome">
                                                             Tambah Data 
                                                         </button>
                                                     </div>
@@ -80,23 +80,27 @@
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
-                                                                @foreach ($data as $d)
+                                                                @php
+                                                                    $counter = 1   
+                                                                @endphp
+                                                                @foreach ($income as $d)
                                                                 <tr>
-                                                                    <th scope="row">{{ $d->income_id }}</th>
+                                                                    <th scope="row">{{ $counter++ }}</th>
                                                                     <td>{{ $d->income_name }}</td>
                                                                     <td>{{ $d->income_type }}</td>
                                                                     <td>{{ $d->description }}</td>
-                                                                    <td>{{ $d->inflow }}</td>
+                                                                    <td>Rp. {{ $d->inflow }}</td>
                                                                     <td>
-                                                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalEdit{{ $d->income_name }}">
-                                                                            Edit
+                                                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalEditIncome{{ $d->income_id }}">
+                                                                            <i class="fas fa-pen"></i>Edit
                                                                         </button>
-                                                                        <a data-toggle="modal" data-target="#exampleModalHapus{{ $d->income_name }}" class="btn btn-danger"><i class="fas fa-trash-alt">Hapus</i></a>
-                                                                    </td>
+                                                                        <button type="button" data-toggle="modal" data-target="#exampleModalHapusIncome{{ $d->income_id }}" class="btn btn-danger">
+                                                                            <i class="fas fa-trash-alt"></i> Hapus
+                                                                        </button></td>
                                                                 </tr>
 
                                                                 <!-- Modal -->
-                                                                @include('Iuran.modal_income')
+                                                                @include('Iuran.modal_income', ['income' => $d])
 
                                                                 @endforeach
 

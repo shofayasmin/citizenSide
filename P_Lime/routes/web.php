@@ -14,7 +14,6 @@ use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\TemplateController;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\PrometheeController;
 use App\Http\Controllers\DashboardWargaController;
 
 
@@ -136,7 +135,25 @@ route::get('/Bansos/pengajuan', [BansosController::class, 'pengajuan'])->name('b
 route::get('/Bansos/manage', [BansosController::class, 'manage'])->name('bansos.manage')->middleware('not.warga');
 route::get('/Bansos/lurah', [BansosController::class, 'lurah'])->name('bansos.lurah')->middleware('not.warga');
 
-//iuran
+// Iuran
+// route::get('/Iuran/index', [IuranController::class, 'index'])->name('iuran.index')->middleware('sekretaris');
+// route::get('/Iuran/bayar', [IuranController::class, 'bayar'])->name('iuran.bayar')->middleware('sekretaris');
+// route::post('/Iuran/store_iuran', [IuranController::class, 'store_iuran'])->name('iuran.store')->middleware('sekretaris');
+// route::get('/Iuran/edit_iuran/{id}', [IuranController::class, 'edit_iuran'])->name('iuran.edit')->middleware('sekretaris');
+// route::put('/Iuran/update_iuran/{id}', [IuranController::class, 'update_iuran'])->name('iuran.update')->middleware('sekretaris');
+// route::delete('/Iuran/delete_iuran/{id}', [IuranController::class, 'delete_iuran'])->name('iuran.delete')->middleware('sekretaris');
+
+//iuran/contribution
+// route::get('/iuran/contribution', [IuranController::class, 'contribution'])->name('iuran.contribution')->middleware('sekretaris');
+// route::get('/iuran/create_contribution', [IuranController::class, 'create_contribution'])->name('contribution.create')->middleware('sekretaris');
+// route::post('/iuran/store_contribution', [IuranController::class, 'store_contribution'])->name('contribution.store')->middleware('sekretaris');
+// route::get('/iuran/edit_contribution/{id}', [IuranController::class, 'edit_contribution'])->name('contribution.edit')->middleware('sekretaris');
+// route::put('/iuran/update_contribution/{id}', [IuranController::class, 'update_contribution'])->name('contribution.update')->middleware('sekretaris');
+// route::delete('/iuran/delete_contribution/{id}', [IuranController::class, 'delete_contribution'])->name('contribution.delete')->middleware('sekretaris');
+// // route::get('/contribution', [IuranController::class, 'contribution'])->name('iuran.contribution');
+// route::get('/Iuran/contribution', [IuranController::class, 'contribution'])->name('iuran.tester')->middleware('sekretaris');
+
+//iuran/financial
 //income = pemasukan
 route::get('/Iuran/income', [IuranController::class, 'income'])->name('iuran.income')->middleware('sekretaris');;
 route::get('/Iuran/create_income', [IuranController::class, 'create_income'])->name('income.create')->middleware('sekretaris');
@@ -152,7 +169,6 @@ route::post('/Iuran/store_expenditure', [IuranController::class, 'store_expendit
 route::get('/Iuran/edit_expenditure/{id}', [IuranController::class, 'edit_expenditure'])->name('expenditure.edit')->middleware('sekretaris');
 route::put('/Iuran/update_expenditure/{id}', [IuranController::class, 'update_expenditure'])->name('expenditure.update')->middleware('sekretaris');
 route::delete('/Iuran/delete_expenditure/{id}', [IuranController::class, 'delete_expenditure'])->name('expenditure.delete')->middleware('sekretaris');
-
 
 
 

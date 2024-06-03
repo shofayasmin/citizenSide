@@ -30,7 +30,7 @@
         <![endif]-->
     </head>
     <body>
-        @include('layouts.sidebar');
+        @include('layouts.sidebar')
         
         @include('layouts.header')
 
@@ -42,11 +42,12 @@
                             <div class="page-title">
                                 <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb breadcrumb-separator-1">
-                                    <li class="breadcrumb-item"><a href="#">Keuangan</a></li>
+                                    <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+                                    <li class="breadcrumb-item">Keuangan</li>
                                     <li class="breadcrumb-item active" aria-current="page">Pengeluaran</li>
                                 </ol>
                                 </nav>
-                                <h3>Forms</h3>
+                                <h3>Pengeluaran</h3>
                             </div>
                         </div>
                     </div>
@@ -58,16 +59,20 @@
                                         <div class="col-xl">
                                             <div class="card">
                                                 <div class="card-body">
-                                                    <h5 class="card-title">Data Pengeluaran</h5>
+                                                    <h5 class="card-title">Pengeluaran</h5>
                                                     <p>Berikut adalah Data Pengeluaran dari RW 003</code>.</p>
-                                                    {{-- <a href="{{ route('rt.create') }}" class="btn btn-primary key"> tambah </a>
-                                                    <div class="table-responsive">--}}
-                                                        <table class="table"> 
+                                                    <div class="text-right mb-3">
+                                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalTambahExpenditure">
+                                                            Tambah Data 
+                                                        </button>
+                                                    </div>
+                                                    <div class="table-responsive">
+                                                    <table class="table"> 
                                                             <thead>
                                                                 <tr>
                                                                     <th scope="col">No</th>
                                                                     <th scope="col">Nama Pengeluaran</th>
-                                                                    <th scope="col">Jumlah</th>s
+                                                                    <th scope="col">Jumlah</th>
                                                                     <th scope="col">Deskripsi</th>
                                                                 </tr>
                                                             </thead>
@@ -75,7 +80,7 @@
                                                                 @php
                                                                     $counter = 1   
                                                                 @endphp
-                                                                @foreach ($data as $d)
+                                                                @foreach ($expenditure as $d)
                                                                 <tr>
                                                                     <th scope="row">{{ $counter++ }}</th>
                                                                     <td>{{ $d->expenditure_name }}</td>
@@ -83,12 +88,16 @@
                                                                     <td>{{ $d->description }}</td>
                                                                     </td>
                                                                     <td>
-                                                                        <button type="button" {{route('expenditure.edit',['id' => $d->expenditure_id])}}" class="btn btn-primary"><i class="fas fa-pen"></i>Edit</button>
-                                                                        <button type="button" data-toggle="modal" data-target="#exampleModalHapus{{ $d->expenditure_id }}" class="btn btn-danger"><i class="fas fa-trash-alt"> Hapus</i></button>
+                                                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalEdit{{ $d->expenditure_id }}">
+                                                                            <i class="fas fa-pen"></i> Edit
+                                                                        </button>
+                                                                        <button type="button" data-toggle="modal" data-target="#exampleModalHapus{{ $d->expenditure_id }}" class="btn btn-danger">
+                                                                            <i class="fas fa-trash-alt"></i> Hapus
+                                                                        </button>
                                                                     </td>
                                                                 </tr>
 
-                                                                @include('Iuran.modal_expenditure')
+                                                                @include('Iuran.modal_expenditure', ['expenditure' => $d])
 
                                                                 @endforeach
                                                             </tbody>

@@ -4,19 +4,18 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalCenterTitle">Konfirmasi Hapus Data</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <i class="material-icons">Close</i>
+                <<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
                 Apakah Anda yakin ingin menghapus data <b>{{ $income->income_name }}</b>?
             </div>
             <div class="modal-footer">
-                <form action="{{ route('income.delete',['id'=> $income->income_id]) }}" method="POST">
+                <form action="{{ route('income.delete', ['id' => $income->income_id]) }}" method="POST">
                     @csrf
                     @method('DELETE')
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="Submit" class="btn btn-primary">Konfirmasi</button>
+                    <button type="submit" class="btn btn-danger">Hapus</button>
                 </form>
             </div>
         </div>
@@ -30,7 +29,7 @@
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalCenterTitle">Tambah Pemasukan</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <i class="material-icons">Close</i>
+                    <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
@@ -38,11 +37,14 @@
                 <form action="{{ route('income.store') }}" method="POST">
                     @csrf
                     <div class="form-group" style="margin-left: 10px; margin-right: 10px;">
-                        <label for="exampleInputEmail1">Nama Pemasukan:</label>
-                        <input type="form" class="form-control" id="exampleInputEmail1" name="income_name" aria-describedby="emailHelp" placeholder="Masukkan Nama Pemasukan" >
+                        <label for="income_name">Nama Pemasukan</label>
+                        <input type="form" class="form-control" name="income_name" id="income_name" aria-describedby="emailHelp" placeholder="Masukkan Nama Pemasukan">
+                        @error( 'income_name' )
+                            <small>{{ $message }}</small>
+                        @enderror
                     </div>
                     <div class="form-group" style="margin-left: 10px; margin-right: 10px;">
-                        <label for="exampleInputEmail1">Tipe Pemasukan:</label>
+                        <label for="income_type">Tipe Pemasukan</label>
                         <select class="form-control" id="income_type" name="income_type">
                             <option value="Iuran Warga">Iuran Warga</option>
                             <option value="Sumbangan">Sumbangan</option>
@@ -51,18 +53,25 @@
                         </select>
                     </div>
                     <div class="form-group" style="margin-left: 10px; margin-right: 10px;">
-                        <label for="total_money">Total Money:</label>
-                        <input type="number" class="form-control" name="total_money" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Masukkan Nama Pemasukan">
+                        <label for="description">Deskripsi</label>
+                        <input class="form-control" id="description" name="description" rows="3" aria-describedby="emailHelp" placeholder="Masukkan Deskripsi">
+                        @error( 'description' )
+                            <small>{{ $message }}</small>
+                        @enderror
                     </div>
                     <div class="form-group" style="margin-left: 10px; margin-right: 10px;">
-                        <label for="description">Deskripsi:</label>
-                        <input class="form-control" id="exampleInputEmail1" name="description" rows="3" ></input>
+                        <label for="inflow">Inflow</label>
+                        <input type="number" class="form-control" name="inflow" id="inflow" aria-describedby="emailHelp" placeholder="Masukkan Nominal Pemasukan">
+                        @error( 'inflow' )
+                            <small>{{ $message }}</small>
+                        @enderror
                     </div>
-                    <button type="submit" class="btn btn-primary">Tambah</button>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Tambah</button>
+                    </div>
                 </form>
             </div>
         </div>
-        
     </div>
 </div>
 
@@ -73,20 +82,20 @@
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalCenterTitle">Edit Data Pemasukan</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <i class="material-icons">Close</i>
+                    <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
                 <!-- Form untuk edit data income -->
-                <form action="{{ route('income.update',['id'=> $income->income_id]) }}" method="POST">
+                <form action="{{ route('income.update', ['id' => $income->income_id]) }}" method="POST">
                     @csrf
                     @method('PUT')
                     <div class="form-group">
-                        <label for="income_name">Nama Pemasukan:</label>
+                        <label for="income_name">Nama Pemasukan</label>
                         <input type="text" class="form-control" id="income_name" name="income_name" value="{{ $income->income_name }}">
                     </div>
                     <div class="form-group">
-                        <label for="income_type">Tipe Pemasukan:</label>
+                        <label for="income_type">Tipe Pemasukan</label>
                         <select class="form-control" id="income_type" name="income_type">
                             <option value="Iuran Warga" {{ $income->income_type == "Iuran Warga" ? 'selected' : '' }}>Iuran Warga</option>
                             <option value="Sumbangan" {{ $income->income_type == "Sumbangan" ? 'selected' : '' }}>Sumbangan</option>
@@ -95,15 +104,16 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="description">Deskripsi:</label>
+                        <label for="description">Deskripsi</label>
                         <textarea class="form-control" id="description" name="description" rows="3">{{ $income->description }}</textarea>
                     </div>
                     <div class="form-group">
-                        <label for="total_money">Inflow:</label>
-                        <input type="number" class="form-control" id="total_money" name="total_money" value="{{ $income->total_money }}">
+                        <label for="inflow">Inflow</label>
+                        <input type="number" class="form-control" id="inflow" name="inflow" value="{{ $income->inflow }}">
                     </div>
-                    <button type="submit" class="btn btn-primary">Simpan Perubahan
-                    </button>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+                    </div>
                 </form>
             </div>
         </div>
