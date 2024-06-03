@@ -19,7 +19,7 @@ class LaporanFactory extends Factory
         return [
             'judul' => fake()->unique()->words(3, true),
             'pengirim' => fake()->unique()->name,
-            'gambar' => fake()->unique()->image(null, 120, 80, 'animals', true, true, 'cats', true, 'jpg'),
+            'gambar' => fake()->image(null, 120, 80, 'animals', true, true, 'cats', true, 'jpg'),
             'deskripsi' => fake()->unique()->text(100),
             'status' => fake()->randomElement(['Selesai','Belum Selesai']),
         ];

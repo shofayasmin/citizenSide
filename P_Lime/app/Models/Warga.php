@@ -13,6 +13,7 @@ class Warga extends Model
     protected $primaryKey = 'nik';
     protected $fillable = [
         'nik', 
+        'no_kk',
         'nama_lengkap', 
         'tempat_lahir', 
         'tanggal_lahir', 
@@ -25,5 +26,9 @@ class Warga extends Model
         'kewarganegaraan', 
         'domisili', 
     ];
+    public function kk()
+    {
+        return $this->belongsTo(Kk::class, 'no_kk', 'no_kk');
+    }
 }
 

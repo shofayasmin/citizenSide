@@ -67,11 +67,12 @@
                                     @endif
                                         <div class="col">
                                             <div class="card">
-                                                <img src="{{ asset('storage/photo-acara/'.$d->image) }}" class="card-img-top" alt="Placeholder" style="width: 100%; height: 200px; object-fit: cover;">
-                                                <div class="card-body">
+                                                <img src="{{ asset('storage/photo-acara/2024-05-13Pekan Budaya Tionghoa Yogyakarta di Kampung Ketandan Perkuat Ekonomi Masyarakat.jpeg') }}" class="card-img-top" alt="Placeholder" style="width: 100%; height: 200px; object-fit: cover;">
+                                                <div class="card-body"> 
                                                     <h5 class="card-title">{{ $d->judul }}</h5>
                                                     <p class="card-text">{{ $d->deskripsi }}</p>
                                                     <a href="#" class="badge badge-primary" data-toggle="modal" data-target="#Read_More_{{ $key }}">Read More</a>
+                                                    
                                                     <div class="text-right">
                                                         <span class="badge badge-pill badge-info">{{ $d->tipe_acara }}</span>
                                                     </div>
@@ -82,7 +83,7 @@
                                         </div>
                                     @endif
                                     @php $i++; @endphp
-                                    @include('Acara.modal')
+                                    @include('Acara.modal',['acara' => $d])
                                 @endforeach
                             </div>
                         </div>

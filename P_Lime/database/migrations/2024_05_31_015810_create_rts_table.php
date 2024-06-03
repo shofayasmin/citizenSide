@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('rts', function (Blueprint $table) {
             $table->id('rt_id');
-            $table->string('nama_ketua',30);
+            $table->string('nama_ketua',50);
             $table->string('no_rt',5);
             $table->date('mulai_masa_jabatan');
             $table->date('berakhir_masa_jabatan')->nullable();

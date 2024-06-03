@@ -42,4 +42,9 @@ class User extends Authenticatable
     protected $casts = [
         'password' => 'hashed',
     ];
+
+    public function joinedAcaras()
+    {
+        return $this->belongsToMany(Acara::class, 'acara_participants', 'user_id', 'acara_id');
+    }
 }

@@ -17,12 +17,12 @@ class AlternativesFactory extends Factory
     public function definition(): array
     {
         return [
-            'name'=>fake()->name(),
-            'luas_rumah'=>fake()->numberBetween(1,100),
-            'gaji'=>fake()->numberBetween(10,30) * 100000,
-            'status'=>fake()->numberBetween(0,1),
-            'jumlah_usia_lanjut'=>fake()->numberBetween(0,4),
-            'jarak_domisili'=>fake()->numberBetween(1,30),
+            'name'                      =>fake()->name(),
+            'jumlah_usia_produktif'     =>fake()->numberBetween(1,10),
+            'jumlah_anggota_keluarga'   =>fake()->numberBetween(1.10),
+            'kondisi_rumah'             =>fake()->numberBetween(1,10),
+            'jumlah_kk'                 =>fake()->numberBetween(1,2),
+            'pendapatan_total'          =>fake()->numberBetween(1,30) * 100000,
         ];
     }
 }

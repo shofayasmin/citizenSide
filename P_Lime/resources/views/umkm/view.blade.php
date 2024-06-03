@@ -51,66 +51,43 @@
                                     <li class="breadcrumb-item active" aria-current="page">View</li>
                                   </ol>
                                 </nav>
-                                <h3>View Umkm Participant</h3>
+                                <h3>View Umkm List</h3>
                                 
                             </div>
                         </div>
                     </div>
+
                     <div class="row">
                         <div class="col-xl">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-xl">
+                            <div class="container">
+                                <div class="row">
+                                    @php $i = 0; @endphp
+                                    @foreach($data as $d)
+                                        @if($i % 2 == 0 && $i != 0)
+                                            </div><div class="row mt-3">
+                                        @endif
+                                        <div class="col-md-6 mb-4">
                                             <div class="card">
+                                                <img src="{{ asset('storage/photo-acara/2024-05-13Tempat pelatihan umkm daerah padamara 083114610391.jpeg') }}" class="card-img-top" alt="Placeholder" style="width: 100%; height: 200px; object-fit: cover;">
                                                 <div class="card-body">
-                                                    
-                                                    <h4 class="mb-0">Data Kartu Keluarga</h4>
-                                                    <p>Berikut adalah Data Data Kartu Keluarga dari RW 003</code>.</p>
-                                                    
-                                                    <div class="table-responsive">
-                                                        <table class="table">
-                                                            <thead>
-                                                                <tr>
-                                                                    <th scope="col">No</th>
-                                                                    <th scope="col">Nama Peserta</th>
-                                                                    <th scope="col">Nama UMKM</th>
-                                                                   
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                                @foreach ($data as $d)
-                                                                <tr>
-                                                                    <th scope="row">{{ $d->umkm_id }}</th>
-                                                                    <td>{{ $d->Nama }}</td>
-                                                                    <td>{{ $d->umkm }}</td>
-                                                                    <td>
-                                                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalEdit{{ $d->umkm_id }}">
-                                                                            Edit
-                                                                        </button>
-                                                                        <a data-toggle="modal" data-target="#exampleModalHapus{{ $d->umkm_id }}" class="btn btn-danger"><i class="fas fa-trash-alt">Hapus</i></a>
-                                                                    </td>
-                                                                </tr>
-
-                                                                <!-- Modal -->
-                                                                @include('umkm.modal')
-
-                                                                @endforeach
-                                                                
-                                                            </tbody>
-                                                        </table>
-                                                        {{-- <a href="{{ route('citizen.index') }}"> <- Kembali</a> --}}
+                                                    <h5 class="card-title">{{ $d->umkm }}</h5>
+                                                    <p class="card-text">Penjelasan Detail Tentang UMKM Tersebut</p> <!-- $d->deskripsi -->
+                                                    <button class="btn btn-success ikut-kegiatan" data-id="{{ $d->umkm_id }}" data-toggle="modal" data-target="#confirmationModal">Ikut Kegiatan</button>
+                                                    <div class="text-right">
+                                                        <span class="badge badge-pill badge-info">{{ $d->tipe_umkm }}</span>
                                                     </div>
-
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                        @php $i++; @endphp
+                                    @include('umkm.modal')
+                                    @endforeach
                                 </div>
-                            </div>
+                            </div>                            
                         </div>
                     </div>
 
+                </div>    
                     
 
                     
