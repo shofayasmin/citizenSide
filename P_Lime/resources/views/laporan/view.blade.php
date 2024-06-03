@@ -49,20 +49,25 @@
                     
                     <div class="row">
 
-                        
-                        @foreach ($data as $key => $d)
+                       @foreach($data as $d)
                             <div class="col-10">
                                 <div class="card">
                                     <div class="card-header d-flex justify-content-between align-items-center">
                                         <h3 class="mt-3">{{ $d->judul }}</h3>
-                                        <img src="{{ asset('storage/photo-acara/comment1.png') }}" width="25" data-toggle="modal" data-target="#comment_{{ $key }}">
+
+                                        @if (auth()->user()->role =='rw')
+                                        <img src="{{ asset('storage/photo-acara/comment1.png') }}" width="25" data-toggle="modal" data-target="#datacomment_{{ $d->id_laporan_id }}">
+                                        @elseif(auth()->user()->role =='citizen')
+                                        <img src="{{ asset('storage/photo-acara/comment1.png') }}" width="25" data-toggle="modal" data-target="#comment_{{ $d->id_laporan_id }}">
+                                        @endif
+
                                     </div>
                                     <div class="card-body">
                                         <h5 class="card-title"></h5>
                                         <p class="card-text"></p>
                                         <small>{{ $d->created_at }}</small>
                                         <h5 class="card-title">{{ $d->pengirim }}</h5>
-                                        <a href="#" class="badge badge-primary" data-toggle="modal" data-target="#Read_More_{{ $key }}">Read More</a>
+                                        <a href="#" class="badge badge-primary" data-toggle="modal" data-target="#Read_More_{{$d->id_laporan_id }}">Read More</a>
                                         <div class="text-right">
                                             <button class="btn {{ $d->status == 'Belum Selesai' ? 'btn-danger' : 'btn-success' }} status-toggle" data-id="{{ $d->laporan_id }}">
                                                 {{ $d->status }}

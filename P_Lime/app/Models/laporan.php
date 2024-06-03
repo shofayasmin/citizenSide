@@ -12,8 +12,7 @@ class laporan extends Model
     protected $fillable = [
         'judul', 
         'deskripsi',  
-        'gambar', 
-        'gambar', 
+        'gambar',  
         'pengirim',
     ];
 

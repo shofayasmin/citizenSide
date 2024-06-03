@@ -1,12 +1,12 @@
 {{-- modal read more --}}
-@foreach($data as $key => $d)
-    <div class="modal fade" id="Read_More_{{ $key }}" tabindex="-1" role="dialog" aria-labelledby="Read_MoreTitle_{{ $key }}" aria-hidden="true">
+@foreach($data as $d)
+    <div class="modal fade" id="Read_More_{{ $d->id_laporan_id }}" tabindex="-1" role="dialog" aria-labelledby="Read_MoreTitle_{{ $d->id_laporan_id }}" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
             <div class="modal-content">
                 <img src="{{ asset('storage/photo-acara/masjid-rusak.jpg') }}" class="card-img-top" alt="Placeholder" style="width: 100%; height: 200px; object-fit: cover;">
                 
                 <div class="modal-header">
-                    <h5 class="modal-title" id="Read_MoreTitle_{{ $key }}">{{ $d->judul }}</h5>
+                    <h5 class="modal-title" id="Read_MoreTitle_{{ $d->id_laporan_id }}">{{ $d->judul }}</h5>
                 </div>
                 <div class="modal-body mb-4">
                     <p>{{ $d->deskripsi }}</p>
@@ -68,8 +68,8 @@
     </div>
 @endforeach --}}
 
-@foreach($data as $key => $d)
-    <div class="modal fade" id="comment_{{ $key }}" tabindex="-1" role="dialog" aria-labelledby="commentTitle_{{ $key }}" aria-hidden="true">
+@foreach($data as $d)
+    <div class="modal fade" id="comment_{{ $d->id_laporan_id }}" tabindex="-1" role="dialog" aria-labelledby="commentTitle_{{ $d->id_laporan_id }}" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-body mb-4">
@@ -82,23 +82,22 @@
                                     </div>
                                 </div>
                                 <div class="comments-container">
-                                    @foreach($d->comments as $comment)
+                                   
                                     <div class="mail-info">
                                         <div class="mail-author">
                                             <img src="{{ asset('storage/photo-acara/orang.png') }}" alt="">
                                             <div class="mail-author-info">
-                                                <span class="mail-author-name">{{ $comment->author }}</span>
-                                                <p>{{ $comment->comment }}</p>
+                                                <span class="mail-author-name">{{ $d->author }}</span>
+                                                <p>{{ $d->comment }}</p>
                                             </div>
                                         </div>
                                         <div class="mail-other-info">
-                                            <span>{{ $comment->created_at->format('H:i') }}</span>
+                                            <span>{{ $d->created_at->format('H:i') }}</span>
                                         </div>
                                     </div>
-                                    @endforeach
                                 </div>
                                 <div class="comment-form mt-3">
-                                    <form id="commentForm_{{ $key }}" method="POST" action="{{route('comments.store')}}">
+                                    <form id="commentForm_{{ $d->id_laporan_id}}" method="POST" action="{{route('comments.store')}}">
                                         @csrf
                                         <input type="hidden" name="laporan_id" value="{{ $d->laporan_id }}">
                                         <div class="form-group">
@@ -117,12 +116,53 @@
             </div>
         </div>
     </div>
+
+
+
+    <div class="modal fade" id="datacomment_{{ $d->id_laporan_id }}" tabindex="-1" role="dialog" aria-labelledby="commentTitle_{{ $d->id_laporan_id }}" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-body mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="mail-container">
+                                <div class="mail-header">x`x`
+                                    <div class="mail-title">
+                                        {{ $d->judul }}
+                                    </div>
+                                </div>
+
+                                <div class="mail-info">
+                                    <div class="mail-author">
+                                        <img src="{{ asset('storage/photo-acara/orang.png') }}" alt="">
+                                        <div class="mail-author-info">
+                                            <span class="mail-author-name">{{ $d->author }}</span>
+                                            <p>{{ $d->comment }}</p>
+                                        </div>
+                                    </div>
+                                    <div class="mail-other-info">
+                                        <span>{{ $d->created_at }}</span>
+                                    </div>
+                                </div>
+                                <div class="mail-text">
+                                </div>
+                                
+                               
+                                <div class="mail-text mb-3">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 @endforeach
 
 <script>
     $(document).ready(function() {
-        @foreach($data as $key => $d)
-            $('#commentForm_{{ $key }}').on('submit', function(event) {
+        @foreach($data as $d)
+            $('#commentForm_{{ $d->id_laporan_id }}').on('submit', function(event) {
                 event.preventDefault();
                 var formData = $(this).serialize();
                 
