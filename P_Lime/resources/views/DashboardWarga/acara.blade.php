@@ -11,7 +11,7 @@
 <body>
     @include('layoutWarga.header')
 
-    <div class="container d-flex flex-wrap justify-content-between h-70 overflow-auto">
+    {{-- <div class="container d-flex flex-wrap justify-content-between h-70 overflow-auto">
 
         @foreach ($acaras as $acara)
             <div class="card" style="width: 25rem;">
@@ -28,7 +28,7 @@
         @endforeach
 
 
-        {{-- <div class="row">
+        <div class="row">
             <div class="col-xl">
                 <div class="container">
                     @foreach ($acaras as $d)
@@ -50,11 +50,48 @@
                     @endforeach
                 </div>
             </div>
-        </div> --}}
+        </div>
     </div>
+    </div> --}}
 
-
+    <div class="row">
+        <div class="col-xl">
+            <div class="container">
+                @php $i = 0; @endphp
+                @foreach ($acaras as $key => $d)
+                    @if ($i % 3 == 0)
+                        <div class="row row-cols-3">
+                    @endif
+                    <div class="col">
+                        <div class="card">
+                            <img src="https://picsum.photos/300/100" class="card-img-top"
+                                alt="Placeholder" style="width: 100%; height: 200px; object-fit: cover;">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ $d->judul }}</h5>
+                                <p class="card-text">{{ $d->deskripsi }}</p>
+                                <a href="#" class="badge badge-primary" data-toggle="modal"
+                                    data-target="#Read_More_{{ $key }}">Read More</a>
+                                <div class="text-right">
+                                    <span class="badge badge-pill badge-info">{{ $d->tipe_acara }}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    @if ($i % 3 == 2 || $loop->last)
+            </div>
+            @endif
+            @php $i++; @endphp
+            @include('layoutWarga.modal')
+            @endforeach
+        </div>
+    </div>
     </div>
 </body>
+<!-- Javascripts -->
+<script src="{{ asset('lime/theme/assets/plugins/jquery/jquery-3.1.0.min.js') }}"></script>
+<script src="{{ asset('lime/theme/assets/plugins/bootstrap/popper.min.js') }}"></script>
+<script src="{{ asset('lime/theme/assets/plugins/bootstrap/js/bootstrap.min.js') }}"></script>
+<script src="{{ asset('lime/theme/assets/plugins/jquery-slimscroll/jquery.slimscroll.min.js') }}"></script>
+<script src="{{ asset('lime/theme/assets/js/lime.min.js') }}"></script>
 
 </html>

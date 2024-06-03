@@ -58,17 +58,23 @@ class LaporanController extends Controller
             return redirect()->back()->withInput()->withErrors($validator);
         }
         
+        
+        if(request()->has('gambar')){
+            $image = request()->file('gambar');
+            $image->storeAs('buktiLaporan', $image->getClientOriginalName(), 'public');
+            dd($image);
+        }
+        
+        // $photo = $request->file('gambar');
+        // $filename = date('Y-m-d') . $photo->getClientOriginalName();
+        // $path = 'photo-acara/' . $filename;
 
-        $photo = $request->file('gambar');
-        $filename = date('Y-m-d') . $photo->getClientOriginalName();
-        $path = 'photo-acara/' . $filename;
-
-        Storage::disk('public')->put($path,file_get_contents($photo));
+        // Storage::disk('public')->put($path,file_get_contents($photo));
 
         $data['judul'] = $request->judul;
         $data['pengirim'] = $request->pengirim;
         $data['deskripsi'] = $request->deskripsi;;
-        $data['gambar'] = $filename;
+        $data['gambar'] = $image;
 
         laporan::create($data);
 

@@ -28,7 +28,12 @@
                     href="{{ route('DashboardWarga.umkm') }}">UMKM</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Bansos</a>
+                <a class="{{ Request::routeIs('DashboardWarga.bansos') ? 'active' : '' }} nav-link"
+                    href="{{ route('DashboardWarga.bansos') }}">Bansos</a>
+            </li>
+            <li class="nav-item">
+                <a class="{{ Request::routeIs('DashboardWarga.pelaporan') ? 'active' : '' }} nav-link"
+                    href="{{ route('DashboardWarga.pelaporan') }}">Pelaporan</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/logout">Logout</a>
