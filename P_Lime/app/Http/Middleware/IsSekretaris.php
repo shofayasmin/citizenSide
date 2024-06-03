@@ -15,9 +15,11 @@ class IsSekretaris
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (auth()->user()->role !== 'secretary') {
+        if (auth()->user()->role === 'secretary' || auth()->user()->role ==='rw') {
+            return $next($request);
+        } else {
             abort(403);
         }
-        return $next($request);
+        
     }
 }

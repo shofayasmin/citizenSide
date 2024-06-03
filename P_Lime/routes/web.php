@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\IuranController;
 use App\Http\Controllers\PrometheeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SpkController;
@@ -14,6 +13,7 @@ use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\TemplateController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PrometheeController;
 use App\Http\Controllers\DashboardWargaController;
 
 
