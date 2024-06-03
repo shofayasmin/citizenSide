@@ -83,10 +83,10 @@
                 <a href="#"><i class="material-icons">done_all</i>Keuangan<i class="material-icons has-sub-menu">keyboard_arrow_left</i></a>
                 <ul class="sub-menu">
                     <li>
-                        <a href="{{ route('iuran.index') }}">Keuangan RW 003</a>
+                        <a href="{{ route('iuran.income') }}">Pemasukan</a>
                     </li>
                     <li>
-                        <a href="{{ route('iuran.bayar') }}">Data Contributor</a>
+                        <a href="{{ route('iuran.expenditure') }}">Pengeluaran</a>
                     </li>
                 </ul>
             </li>
