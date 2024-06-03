@@ -76,7 +76,7 @@
                                     </div>
                                 </div>
                             </div>
-                            @include('laporan.modal')
+                            @include('laporan.modal', ['d' => $d])
                         @endforeach
 
                         <!-- Modal -->

@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class laporan extends Model
 {
     use HasFactory;
-    protected $primaryKey = 'umkm_id';
+    protected $primaryKey = 'laporan_id';
     protected $fillable = [
         'judul', 
         'deskripsi',  
@@ -18,6 +18,6 @@ class laporan extends Model
 
     public function comments()
 {
-    return $this->hasMany(Comment::class);
+    return $this->hasMany(Comment::class, 'laporan_id');
 }
 }
