@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -11,7 +10,7 @@
         <!-- The above 6 meta tags *must* come first in the head; any other head content must come *after* these tags -->
         
         <!-- Title -->
-        <title>Manage Citizen Data</title>
+        <title>Manage Data Pengeluaran</title>
 
         <!-- Styles -->
         <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900&display=swap" rel="stylesheet">
@@ -31,7 +30,6 @@
         <![endif]-->
     </head>
     <body>
-        
         @include('layouts.sidebar')
         
         @include('layouts.header')
@@ -39,25 +37,20 @@
         <div class="lime-container">
             <div class="lime-body">
                 <div class="container">
-                    
                     <div class="row">
                         <div class="col-md-12">
                             <div class="page-title">
-                                
                                 <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb breadcrumb-separator-1">
-                                    <li class="breadcrumb-item"><a href="#">Keuangan</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">#</li>
-                                    
+                                    <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+                                    <li class="breadcrumb-item">Keuangan</li>
+                                    <li class="breadcrumb-item active" aria-current="page">Pengeluaran</li>
                                 </ol>
-                                
                                 </nav>
-                                <h3>Pembayar</h3>
-
+                                <h3>Pengeluaran</h3>
                             </div>
                         </div>
                     </div>
-                    
                     <div class="row">
                         <div class="col-xl">
                             <div class="card">
@@ -66,57 +59,51 @@
                                         <div class="col-xl">
                                             <div class="card">
                                                 <div class="card-body">
-                                                    <h5 class="card-title">Data Pembayar</h5>
-                                                    <p>Berikut adalah Data Bayaran dari RW 003</code>.</p>
+                                                    <h5 class="card-title">Pengeluaran</h5>
+                                                    <p>Berikut adalah Data Pengeluaran dari RW 003</code>.</p>
                                                     <div class="text-right mb-3">
-                                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#bayar_tambah">
-                                                            Tambah Data Bayaran
+                                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalTambahExpenditure">
+                                                            Tambah Data 
                                                         </button>
                                                     </div>
                                                     <div class="table-responsive">
-                                                        <table class="table">
+                                                    <table class="table"> 
                                                             <thead>
-                                                                
                                                                 <tr>
                                                                     <th scope="col">No</th>
-                                                                    <th scope="col">Nama</th>
-                                                                    <th scope="col">Status Pembayaran</th>
+                                                                    <th scope="col">Nama Pengeluaran</th>
                                                                     <th scope="col">Jumlah</th>
+                                                                    <th scope="col">Deskripsi</th>
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
                                                                 @php
                                                                     $counter = 1   
                                                                 @endphp
-                                                                @foreach ($bayar as $b)
-                                                                    
+                                                                @foreach ($expenditure as $d)
                                                                 <tr>
                                                                     <th scope="row">{{ $counter++ }}</th>
-                                                                    <td>{{ $b->contribution_name}}</td>
-                                                                    <td>{{ $b->payment_status }}</td>
-                                                                    <td>Rp. {{ $b->amount }}</td>
-                                                                    <td>
-                                                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalEdit{{ $b->contribution_id }}">
-                                                                            Edit
-                                                                        </button>
-                                                                        <button type="button" data-toggle="modal" data-target="#exampleModalHapus{{ $b->contribution_id }}" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
+                                                                    <td>{{ $d->expenditure_name }}</td>
+                                                                    <td>Rp. {{ $d->amount }}</td>
+                                                                    <td>{{ $d->description }}</td>
                                                                     </td>
-                                                                    
+                                                                    <td>
+                                                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalEdit{{ $d->expenditure_id }}">
+                                                                            <i class="fas fa-pen"></i> Edit
+                                                                        </button>
+                                                                        <button type="button" data-toggle="modal" data-target="#exampleModalHapus{{ $d->expenditure_id }}" class="btn btn-danger">
+                                                                            <i class="fas fa-trash-alt"></i> Hapus
+                                                                        </button>
+                                                                    </td>
                                                                 </tr>
-                                                                @include('iuran.modal')
-                                                                @endforeach 
-                                                                
-                                                                
 
-                                                                
-                                                                
-                                                                
+                                                                @include('Iuran.modal_expenditure', ['expenditure' => $d])
 
+                                                                @endforeach
                                                             </tbody>
-                                                            
                                                         </table>
-                                                        <a href="{{ route('citizen.index') }}"> <- Kembali</a>
-                                                    </div>      
+                                                        <a href="{{ route('iuran.expenditure') }}"> <- Kembali</a>
+                                                    </div>  
                                                 </div>
                                             </div>
                                         </div>
@@ -125,8 +112,6 @@
                             </div>
                         </div>
                     </div>
-                    
-
                     
             
         

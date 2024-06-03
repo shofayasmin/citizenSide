@@ -18,6 +18,8 @@ use App\Models\Rumah;
 use App\Models\SPK;
 use App\Models\User;
 use App\Models\Acara;
+use App\Models\Expenditure;
+use App\Models\Income;
 use App\Models\umkm;
 use App\Models\Warga;
 use Illuminate\Database\Seeder;
@@ -41,10 +43,11 @@ class DatabaseSeeder extends Seeder
         Rumah::factory(10)->create();
         // laporan::factory(10)->create();
         Organisasi::factory(10)->create();
-        Contribution::factory(10)->create();
+        Income::factory()->count(10)->create();
+        Expenditure::factory()->count(10)->create();
 
         $this->call(CriteriaSeeder::class);
-       
+
 
 
 
