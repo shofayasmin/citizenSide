@@ -14,5 +14,6 @@ class Income extends Model
         'income_type', 
         'description',
         'inflow', 
+        'date',
     ]; 
 }

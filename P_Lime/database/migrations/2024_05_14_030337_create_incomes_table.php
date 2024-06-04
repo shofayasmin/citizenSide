@@ -12,6 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('incomes', function (Blueprint $table) {
+            $table->date('date');
             $table->id('income_id');
             $table->string('income_name');
             $table->enum('income_type', ['Iuran Warga', 'Sumbangan', 'Usaha RW', 'Bantuan Pemerintah']);
