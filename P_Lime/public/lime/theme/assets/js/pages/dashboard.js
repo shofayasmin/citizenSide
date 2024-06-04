@@ -1,19 +1,20 @@
 $(document).ready(function() {
     
     "use strict";
+    
     var ctx = document.getElementById('visitorsChart');
     var myChart = new Chart(ctx, {
         type: 'bar',
         data: {
-            labels: ['Visitors', 'Visitors', 'Visitors', 'Visitors', 'Visitors', 'Visitors', 'Visitors', 'Visitors', 'Visitors', 'Visitors', 'Visitors'],
+            labels: ['Islam','Konghucu','Kristen','Buddha','Katolik'],
             datasets: [{
                 
-                label: 'Total',
-                data: [3, 6, 4, 5, 6, 5, 3, 5, 6, 5, 4],
+                label: 'Laki',
+                data: [3, 6, 4, 5, 6],
                 backgroundColor: '#5780F7'
             }, {
-                label: 'Unique',
-                data: [2, 4, 2, 4, 2, 4, 2, 4, 2, 4, 2],
+                label: 'Perempuan',
+                data: [2, 4, 2, 4, 2],
                 backgroundColor: '#F4F4F5'
             }]
         },

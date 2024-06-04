@@ -24,4 +24,8 @@ class DashboardWargaController extends Controller
         $umkms = umkm::all();
         return view('DashboardWarga.umkm', compact('umkms'));
     }
+    public function bansos()
+    {
+        
+    }
 }

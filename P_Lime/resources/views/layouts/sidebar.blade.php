@@ -20,21 +20,15 @@
             <li class="sidebar-title">
                 Dashboard
             </li>
-            @can('rw')
+            @canany(['rw', 'sekretaris', 'rt'])
             <li>
                 <a href="{{ route('dashboard.rw') }}" class="{{ Request::routeIs('dashboard.rw') ? 'active' : '' }}">
                     <i class="material-icons">dashboard</i>Dashboard
                 </a>
             </li>
-            @endcan
+            @endcanany
+            
 
-            @can('sekretaris')
-            <li>
-                <a href="{{ route('dashboard.rw') }}" class="{{ Request::routeIs('dashboard.rw') ? 'active' : '' }}">
-                    <i class="material-icons">dashboard</i>Dashboard
-                </a>
-            </li>
-            @endcan
 
             <li class="page {{ Request::is('laporan*') ? 'active-page' : '' }}">
                 <a href="#"><i class="material-icons">person_outline</i>Laporan<i class="material-icons has-sub-menu">keyboard_arrow_left</i></a>
@@ -52,11 +46,11 @@
             <li class="page {{ Request::is('acara*') || Request::is('umkm*') ? 'active-page' : '' }}">
                 <a href="#"><i class="material-icons">inbox</i>Acara<i class="material-icons has-sub-menu">keyboard_arrow_left</i></a>
                 <ul class="sub-menu">
-                    @can('rw')
+                    {{-- @can('rw')
                     <li>
                         <a href="{{ route('umkm.register') }}" >UMKM Register</a>
                     </li>     
-                    @endcan
+                    @endcan --}}
                     <li>
                         <a href="{{ route('umkm.view') }}" >UMKM list</a>
                     </li>     
@@ -86,7 +80,7 @@
 
             @canany(['sekretaris', 'rw'])
             <li class="page {{ Request::is('iuran*') ? 'active-page' : '' }}">
-                <a href="#"><i class="material-icons">done_all</i>Keuangan<i class="material-icons has-sub-menu">keyboard_arrow_left</i></a>
+                <a href="#"><i class="material-icons">money</i>Keuangan<i class="material-icons has-sub-menu">keyboard_arrow_left</i></a>
                 <ul class="sub-menu">
                     <li>
                         <a href="{{ route('iuran.index') }}">Keuangan RW 003</a>
