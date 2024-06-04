@@ -9,11 +9,11 @@
 <link href="{{ asset('lime/theme/assets/css/lime.min.css') }}" rel="stylesheet">
 <link href="{{ asset('lime/theme/assets/css/custom.css') }}" rel="stylesheet">
 
-<div class="header w-100 p-3 d-flex justify-content-around">
+<div class="header w-100 p-3 d-flex justify-content-around sticky-top" style="background-color: white">
     <div class="title">
         <h1>CHub</h1>
     </div>
-    <div class="navbar d-flex">
+    <div class="navbar d-flex ">
         <ul class="nav">
             <li class="nav-item">
                 <a class="{{ Request::routeIs('DashboardWarga.index') ? 'active' : '' }} nav-link"
@@ -28,7 +28,12 @@
                     href="{{ route('DashboardWarga.umkm') }}">UMKM</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Bansos</a>
+                <a class="{{ Request::routeIs('DashboardWarga.bansos') ? 'active' : '' }} nav-link"
+                    href="{{ route('DashboardWarga.bansos') }}">Bansos</a>
+            </li>
+            <li class="nav-item">
+                <a class="{{ Request::routeIs('DashboardWarga.pelaporan') ? 'active' : '' }} nav-link"
+                    href="{{ route('DashboardWarga.pelaporan') }}">Pelaporan</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/logout">Logout</a>

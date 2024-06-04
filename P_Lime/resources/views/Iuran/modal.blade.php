@@ -58,7 +58,7 @@
                     <small>{{ $message }}</small>
                 @enderror
             </div>      
-                          
+
             
                                 
             <div class="modal-footer">

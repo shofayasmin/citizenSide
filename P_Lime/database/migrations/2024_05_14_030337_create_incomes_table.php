@@ -11,11 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('contributions', function (Blueprint $table) {
-            $table->id('contribution_id');
-            $table->string('contribution_name',100);
-            $table->enum('payment_status',['Belum dibayar','Lunas']);
-            $table->integer('amount');
+        Schema::create('incomes', function (Blueprint $table) {
+            $table->id('income_id');
+            $table->string('income_name');
+            $table->enum('income_type', ['Iuran Warga', 'Sumbangan', 'Usaha RW', 'Bantuan Pemerintah']);
+            $table->integer('inflow');
+            $table->string('description');
             $table->timestamps();
         });
     }
@@ -25,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('contributions');
+        Schema::dropIfExists('incomes');
     }
 };

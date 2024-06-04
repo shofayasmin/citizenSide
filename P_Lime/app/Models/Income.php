@@ -5,15 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class laporan extends Model
+class Income extends Model
 {
     use HasFactory;
-    protected $primaryKey = 'umkm_id';
+    protected $primaryKey = 'income_id';
     protected $fillable = [
-        'judul', 
-        'deskripsi',  
-        'gambar', 
-        'pengirim',
-        'status',
-    ];
+        'income_name', 
+        'income_type', 
+        'description',
+        'inflow', 
+    ]; 
 }
