@@ -13,5 +13,6 @@ class Expenditure extends Model
         'expenditure_name', 
         'amount', 
         'description', 
+        'date',
     ];
 }

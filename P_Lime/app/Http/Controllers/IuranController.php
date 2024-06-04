@@ -32,14 +32,6 @@ class IuranController extends Controller
         return view('Iuran.expenditure',compact('expenditure'));
     }
 
-
-    
-    // public function bayar()
-    // {
-    //     $bayar = Contribution::get();
-    //     return view('Iuran.bayar',compact('bayar'));
-    // }
-    
     //Income (Pemasukan)
     public function store_income(Request $request)
     {
@@ -48,6 +40,7 @@ class IuranController extends Controller
             'income_type' => 'required',
             'description' => 'required',
             'inflow' => 'required',
+            'date' => 'required',
         ]);
         
         if($validator->fails()) return redirect()->back()->withInput()->withErrors($validator);
@@ -57,7 +50,8 @@ class IuranController extends Controller
         $income['income_type'] = $request->income_type; 
         $income['description'] = $request->description;
         $income['inflow'] =  $request->inflow;
-
+        $income['date'] = $request->date;
+        
         Income::create($income);
 
         return redirect()->route('iuran.income');
@@ -81,6 +75,7 @@ class IuranController extends Controller
             'income_type' => 'required',
             'description' => 'required',
             'inflow' => 'required',
+            'date' => 'required',
         ]);
 
         if($validator->fails()) return redirect()->back()->withInput()->withErrors($validator);
@@ -88,8 +83,9 @@ class IuranController extends Controller
         // $data['nama_field_di_database'] = $request->nama_di_inputan;
         $income['income_name'] = $request->income_name; 
         $income['income_type'] = $request->income_type; 
-        $income['description'] =  $request->description;
+        $income['description'] = $request->description;
         $income['inflow'] =  $request->inflow;
+        $income['date'] = $request->date;
 
         Income::where('income_id',$id)->update($income);
 
@@ -114,6 +110,7 @@ class IuranController extends Controller
     public function store_expenditure(Request $request)
     {
         $validator = Validator::make($request->all(),[
+            'date' => 'required',
             'expenditure_name' => 'required',
             'amount' => 'required',
             'description' => 'required',
@@ -122,6 +119,7 @@ class IuranController extends Controller
         if($validator->fails()) return redirect()->back()->withInput()->withErrors($validator);
 
         // $data['nama_field_di_database'] = $request->nama_di_inputan;
+        $expenditure['date'] = $request->date; 
         $expenditure['expenditure_name'] = $request->expenditure_name; 
         $expenditure['amount'] = $request->amount; 
         $expenditure['description'] = $request->description;
@@ -135,7 +133,7 @@ class IuranController extends Controller
     {
         $data = Expenditure::find($id);
         
-        return view('income.edit',compact('data'));
+        return view('expenditure.edit',compact('data'));
     }
 
     /**
@@ -145,6 +143,7 @@ class IuranController extends Controller
     {
         
         $validator = Validator::make($request->all(),[
+            'date' => 'required',
             'expenditure_name' => 'required',
             'amount' => 'required',
             'description' => 'required',
@@ -153,9 +152,11 @@ class IuranController extends Controller
         if($validator->fails()) return redirect()->back()->withInput()->withErrors($validator);
 
         // $data['nama_field_di_database'] = $request->nama_di_inputan;
+        $expenditure['date'] = $request->date; 
         $expenditure['expenditure_name'] = $request->expenditure_name; 
         $expenditure['amount'] = $request->amount; 
         $expenditure['description'] =  $request->description;
+        
 
         Expenditure::where('expenditure_id',$id)->update($expenditure);
 

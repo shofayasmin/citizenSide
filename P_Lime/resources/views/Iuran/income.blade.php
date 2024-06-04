@@ -73,6 +73,7 @@
                                                             <thead>
                                                                 <tr>
                                                                     <th scope="col">No</th>
+                                                                    <th scope="col">Tanggal</th>
                                                                     <th scope="col">Nama Pemasukan</th>
                                                                     <th scope="col">Tipe Pemasukan</th>
                                                                     <th scope="col">Deskripsi</th>
@@ -86,6 +87,7 @@
                                                                 @foreach ($income as $d)
                                                                 <tr>
                                                                     <th scope="row">{{ $counter++ }}</th>
+                                                                    <td>{{ $d->date }}</td>
                                                                     <td>{{ $d->income_name }}</td>
                                                                     <td>{{ $d->income_type }}</td>
                                                                     <td>{{ $d->description }}</td>

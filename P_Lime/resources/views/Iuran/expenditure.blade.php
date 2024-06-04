@@ -71,6 +71,7 @@
                                                             <thead>
                                                                 <tr>
                                                                     <th scope="col">No</th>
+                                                                    <th scope="col">Tanggal</th>
                                                                     <th scope="col">Nama Pengeluaran</th>
                                                                     <th scope="col">Jumlah</th>
                                                                     <th scope="col">Deskripsi</th>
@@ -83,6 +84,7 @@
                                                                 @foreach ($expenditure as $d)
                                                                 <tr>
                                                                     <th scope="row">{{ $counter++ }}</th>
+                                                                    <td>{{ $d->date }}</td>
                                                                     <td>{{ $d->expenditure_name }}</td>
                                                                     <td>Rp. {{ $d->amount }}</td>
                                                                     <td>{{ $d->description }}</td>
