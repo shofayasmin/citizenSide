@@ -73,7 +73,7 @@
                                                 <div class="card-body">
                                                     <h5 class="card-title">{{ $d->umkm }}</h5>
                                                     <p class="card-text">Penjelasan Detail Tentang UMKM Tersebut</p> <!-- $d->deskripsi -->
-                                                    <button class="btn btn-success ikut-kegiatan" data-id="{{ $d->umkm_id }}" data-toggle="modal" data-target="#confirmationModal">Ikut Kegiatan</button>
+                                                    <span class="btn btn-success ikut-kegiatan" data-id="{{ $d->umkm_id }}" data-toggle="modal" data-target="#confirmationModal{{ $d->umkm_id }}">Ikut Kegiatan</span>
                                                     <div class="text-right">
                                                         <span class="badge badge-pill badge-info">{{ $d->tipe_umkm }}</span>
                                                     </div>

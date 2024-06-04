@@ -58,30 +58,40 @@
     </div>
 </div>
 
-<!-- Modal -->
-<div class="modal fade" id="confirmationModal" tabindex="-1" role="dialog" aria-labelledby="confirmationModalLabel" aria-hidden="true">
+<!-- Modal untuk ikut -->
+<div class="modal fade" id="confirmationModal{{ $d->umkm_id }}" tabindex="-1" role="dialog" aria-labelledby="confirmationModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="confirmationModalLabel">Konfirmasi Partisipasi</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+
+        <form method="POST" action="{{ route('participate') }}">
+            @csrf
+            @method('POST')
+
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="confirmationModalLabel">Konfirmasi Partisipasi</h5>
+                    <input type="hidden" name="umkm_id" value="{{ $d->umkm_id }}">
+                    <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Apakah anda bersedia untuk ikut?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                    <button type="submit" class="btn btn-primary">Yes</button>
+                </div>
             </div>
-            <div class="modal-body">
-                Apakah anda bersedia untuk ikut?
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-                <button type="button" class="btn btn-primary confirm-participation">Yes</button>
-            </div>
-        </div>
+        </form>
+        
+       
     </div>
 </div>
 
 <!-- jQuery -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
+{{-- <script>
     $(document).ready(function(){
         var selectedUmkmId;
 
@@ -89,7 +99,7 @@
             selectedUmkmId = $(this).data('id');
         });
 
-        $('.confirm-participation').on('click', function() {
+        $('#confirm-participation').on('click', function() {
             $.ajax({
                 url: '{{ route('participate') }}',
                 type: 'POST',
@@ -113,7 +123,7 @@
             });
         });
     });
-</script>
+</script> --}}
 
 
 

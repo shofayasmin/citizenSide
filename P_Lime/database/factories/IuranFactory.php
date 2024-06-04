@@ -17,7 +17,7 @@ class IuranFactory extends Factory
     public function definition(): array
     {
         return [
-            'tanggal' => fake()->date('Y-m-d'),
+            'tanggal' => fake()->dateTimeThisYear('+1 months'),
             'pemasukan' => fake()->numberBetween(1, 100) * 1000000,  // Nilai pemasukan acak antara 1000 dan 10000
             'pengeluaran' => fake()->numberBetween(1, 100) * 1000000,  // Nilai pengeluaran acak antara 500 dan 5000
             'total' => function (array $attributes) {

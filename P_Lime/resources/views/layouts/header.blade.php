@@ -7,7 +7,15 @@
                 <span class="material-design-hamburger__layer"></span>
             </a>
         </section>
-        <a class="navbar-brand" href="{{ route('home') }}">C-Hub</a>
+        <a class="navbar-brand" href="
+            @if(Auth::user()->role == 'rw')
+                {{ route('dashboard.rw') }}
+            @elseif(Auth::user()->role == 'citizen')
+                {{ route('DashboardWarga.index') }}
+            @else
+                {{ route('home') }}
+            @endif
+        ">C-Hub</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <i class="material-icons">keyboard_arrow_down</i>
         </button>
