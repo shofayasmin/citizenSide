@@ -11,7 +11,7 @@
 
 <div class="header w-100 p-3 d-flex justify-content-around sticky-top" style="background-color: white">
     <div class="title">
-        <h1>CHub</h1>
+        <h1 style="color:cornflowerblue;">C-Hub</h1>
     </div>
     <div class="navbar d-flex ">
         <ul class="nav">
