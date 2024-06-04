@@ -60,9 +60,7 @@ class LaporanController extends Controller
         
         
         if(request()->has('gambar')){
-            $image = request()->file('gambar');
-            $image->storeAs('buktiLaporan', $image->getClientOriginalName(), 'public');
-            dd($image);
+            $image = request()->file('gambar')->store('buktiLaporan', 'public');
         }
         
         // $photo = $request->file('gambar');
@@ -73,11 +71,17 @@ class LaporanController extends Controller
 
         $data['judul'] = $request->judul;
         $data['pengirim'] = $request->pengirim;
-        $data['deskripsi'] = $request->deskripsi;;
+        $data['deskripsi'] = $request->deskripsi;
+        $data['status'] = 'Belum Selesai';
         $data['gambar'] = $image;
 
         laporan::create($data);
 
+        session()->flash('success', 'Laporan telah berhasil ditambahkan!');
+
+        if (auth()->user()->role === 'citizen'){
+            return redirect()->route('DashboardWarga.pelaporan');
+        }
         return redirect()->route('laporan.view');
     }
 
@@ -101,13 +105,16 @@ class LaporanController extends Controller
         ]);
 
         if($validator->fails()) return redirect()->back()->withInput()->withErrors($validator);
-        
+
+        if(request()->has('gambar')){
+            $image = request()->file('gambar')->store('buktiLaporan', 'public');
+        }
 
         // $data['nama_field_di_database'] = $request->nama_di_inputan;
         $data['judul'] = $request->judul;
         $data['pengirim'] = $request->pengirim;
         $data['deskripsi'] = $request->deskripsi;
-        $data['gambar'] = $request->gambar;
+        $data['gambar'] = $image;
         
 
         laporan::where('laporan_id',$id)->update($data);

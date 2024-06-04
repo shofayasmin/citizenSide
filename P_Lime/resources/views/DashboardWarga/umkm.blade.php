@@ -11,10 +11,7 @@
 <body>
     @include('layoutWarga.header')
 
-    <a href="#" class="">Daftarkan UMKM anda disini</a>
-    <div class="container d-flex flex-wrap justify-content-between h-70 overflow-auto">
-
-
+    <div class="container d-flex flex-wrap justify-content-between h-70 overflow-auto mt-5">
         @foreach ($umkms as $umkm)
             <div class="card" style="width: 25rem;">
                 <div class="image-container position-relative">

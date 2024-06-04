@@ -11,7 +11,7 @@
 <body>
     @include('layoutWarga.header')
 
-    <div class="container d-flex flex-wrap justify-content-between h-70 overflow-auto">
+    <div class="container d-flex flex-wrap justify-content-between h-70 overflow-auto mt-5">
         @foreach ($bansos as $d)
             <div class="card">
                 <div class="d-flex justify-content-center align-items-center">

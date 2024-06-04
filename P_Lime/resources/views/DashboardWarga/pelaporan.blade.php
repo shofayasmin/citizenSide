@@ -11,7 +11,7 @@
 <body>
     @include('layoutWarga.header')
 
-    <div class="container m-10">
+    <div class="container mt-5">
         <div class="row">
             <div class="col-xl">
                 <div class="card">
@@ -24,7 +24,13 @@
                                         <form action="{{ route('laporan.store') }}" method="POST"
                                             enctype="multipart/form-data">
                                             @csrf
-                                            <input type="hidden" name="pengirim" value="{{ auth()->user()->username }}">
+                                            @if (session()->has('success'))
+                                                <div class="alert alert-success">
+                                                    {{ session()->get('success') }}
+                                                </div>
+                                            @endif
+                                            <input type="hidden" name="pengirim"
+                                                value="{{ auth()->user()->username }}">
                                             <div class="form-group">
                                                 <label for="exampleFormControlInput1">Judul Laporan</label>
                                                 <input type="text" name="judul" class="form-control"
