@@ -11,13 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('umkms', function (Blueprint $table) {
-            $table->id('umkm_id');
-            $table->string('Nama');
-            $table->string('umkm');
-            $table->string('gambar')->nullable();
-            $table->string('tipe_umkm');
-            $table->string('deskripsi');
+        Schema::create('participations', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('user_id')->constrained('users');
+            $table->unsignedBigInteger('umkm_id');
+            $table->foreign('umkm_id')->references('umkm_id')->on('umkms')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -27,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('umkms');
+        Schema::dropIfExists('umkm__participations');
     }
 };

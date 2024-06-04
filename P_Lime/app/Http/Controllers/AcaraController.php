@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Acara;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Intervention\Image\Facades\Image;
@@ -99,6 +100,22 @@ class AcaraController extends Controller
         }
 
         return redirect()->route('acara.manage');
+    }
+
+    public function storeIkutiAcara(Request $request, $acaraId)
+    {
+        $user = Auth::user();
+        $acara = Acara::findOrFail($acaraId);
+
+        // Simpan data peserta ke tabel pivot
+        $acara->participants()->attach($user->id);
+
+        return redirect()->back()->with('success', 'Anda telah mengikuti kegiatan.');
+    }
+    public function showParticipants($acaraId)
+    {
+        $acara = Acara::with('participants')->findOrFail($acaraId);
+        return view('acara.ViewAcara_Warga', compact('acara'));
     }
 
 

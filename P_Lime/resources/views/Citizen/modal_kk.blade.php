@@ -155,3 +155,41 @@
     </div>
     </div>
 </div>
+
+<!-- resources/views/Citizen/modal_kk.blade.php -->
+
+<div class="modal fade" id="householdModal_{{ $id_kk }}" tabindex="-1" role="dialog" aria-labelledby="householdModalLabel_{{ $id_kk }}" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="householdModalLabel_{{ $id_kk }}">Household Members</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <ul id="householdModalBody_{{ $id_kk }}"></ul>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function showHouseholdMembers(no_kk, id_kk) {
+        const modalBody = document.getElementById(`householdModalBody_${id_kk}`);
+        modalBody.innerHTML = ''; // Clear previous list
+
+        fetch(`/citizen/members/${no_kk}`)
+            .then(response => response.json())
+            .then(data => {
+                data.forEach(member => {
+                    const listItem = document.createElement('li');
+                    listItem.textContent = member.nama_lengkap; // Assuming member has a 'nama_lengkap' property
+                    modalBody.appendChild(listItem);
+                });
+            });
+        }
+</script>

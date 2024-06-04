@@ -33,15 +33,15 @@ class DatabaseSeeder extends Seeder
     {
         Warga::factory(10)->create();
         User::factory(10)->create();
-        umkm::factory(10)->create();
+        umkm::factory(4)->create();
         Acara::factory(10)->create();
         Kk::factory(10)->create();
         Iuran::factory(10)->create();
-        Alternatives::factory(10)->create();
+        Alternatives::factory(50)->create();
         Bansos::factory(10)->create();
         Rt::factory(10)->create();
         Rumah::factory(10)->create();
-        // laporan::factory(10)->create();
+        laporan::factory(3)->create();
         Organisasi::factory(10)->create();
         Income::factory()->count(10)->create();
         Expenditure::factory()->count(10)->create();

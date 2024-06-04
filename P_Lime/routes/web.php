@@ -5,7 +5,6 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SpkController;
 use App\Http\Controllers\UmkmController;
 use App\Http\Controllers\AcaraController;
-use App\Http\Controllers\IuranController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MasukController;
 use App\Http\Controllers\BansosController;
@@ -68,6 +67,8 @@ route::post('/store',[AcaraController::class,'store'])->name('acara.store')->mid
 route::get('/Acara/edit_acara/{id}', [AcaraController::class, 'edit_acara'])->name('acara.edit')->middleware('not.warga');
 route::put('/Acara/update_acara/{id}', [AcaraController::class, 'update_acara'])->name('acara.update')->middleware('not.warga');
 route::delete('/Acara/delete_acara/{id}', [AcaraController::class, 'delete_acara'])->name('acara.delete')->middleware('not.warga');
+Route::post('/acara/{id}/ikuti', [AcaraController::class, 'storeIkutiAcara'])->name('acara.ikuti');
+Route::get('/acara/{id}/participants', [AcaraController::class, 'showParticipants'])->name('acara.participants');
 
 // UMKM
 route::get('/umkm/register', [UmkmController::class, 'register'])->name('umkm.register')->middleware('auth');
@@ -76,6 +77,9 @@ route::post('/umkm/store_umkm',[UmkmController::class,'store_umkm'])->name('umkm
 route::get('/umkm/edit_umkm/{id}', [UmkmController::class, 'edit_umkm'])->name('umkm.edit')->middleware('not.warga');
 route::put('/umkm/update_umkm/{id}', [UmkmController::class, 'update_umkm'])->name('umkm.update')->middleware('not.warga');
 route::delete('/umkm/delete_umkm/{id}', [UmkmController::class, 'delete_umkm'])->name('umkm.delete')->middleware('not.warga');
+route::get('/umkm/list', [UmkmController::class, 'show_list'])->name('umkm.list')->middleware('not.warga');
+Route::post('/participate', [UmkmController::class, 'store_kandidat'])->name('participate');
+
 
 // Read Citizen
 route::get('/citizen', [CitizenController::class, 'index'])->name('citizen.index')->middleware('sekretaris');
@@ -96,6 +100,7 @@ route::POST('/citizen/store_warga', [CitizenController::class, 'store_warga'])->
 route::get('/citizen/edit_warga/{id}', [CitizenController::class, 'edit_warga'])->name('warga.edit')->middleware('sekretaris');
 route::put('/citizen/update_warga/{id}', [CitizenController::class, 'update_warga'])->name('warga.update')->middleware('sekretaris');
 route::delete('/citizen/delete_warga/{id}', [CitizenController::class, 'delete_warga'])->name('warga.delete')->middleware('sekretaris');
+Route::get('/household/members/{no_kk}', [CitizenController::class, 'getHouseholdMembers'])->name('household.member');
 
 
 // KK
@@ -128,6 +133,7 @@ route::get('/laporan/create', [LaporanController::class, 'create'])->name('lapor
 route::get('/laporan/track', [LaporanController::class, 'track'])->name('laporan.track')->middleware('not.warga');
 route::get('/laporan/edit/{id}', [LaporanController::class, 'edit'])->name('laporan.edit')->middleware('not.warga');
 route::post('/laporan/store', [LaporanController::class, 'store'])->name('laporan.store')->middleware('auth');
+Route::post('/laporan/update-status', [LaporanController::class, 'updateStatus'])->name('laporan.updateStatus');
 
 
 
@@ -179,3 +185,9 @@ route::get('/SPK/promethee', [PrometheeController::class, 'calculate'])->name('s
 
 
 
+
+// Rute untuk menampilkan form cek NIK
+Route::get('/cek-nik', [CitizenController::class, 'showCekNIKForm']);
+
+// Rute untuk menangani permintaan POST untuk memeriksa NIK
+Route::post('/cek-nik', [CitizenController::class, 'cekNIK']);

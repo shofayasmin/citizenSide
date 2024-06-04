@@ -58,6 +58,63 @@
     </div>
 </div>
 
+<!-- Modal -->
+<div class="modal fade" id="confirmationModal" tabindex="-1" role="dialog" aria-labelledby="confirmationModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="confirmationModalLabel">Konfirmasi Partisipasi</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Apakah anda bersedia untuk ikut?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                <button type="button" class="btn btn-primary confirm-participation">Yes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function(){
+        var selectedUmkmId;
+
+        $('.ikut-kegiatan').on('click', function() {
+            selectedUmkmId = $(this).data('id');
+        });
+
+        $('.confirm-participation').on('click', function() {
+            $.ajax({
+                url: '{{ route('participate') }}',
+                type: 'POST',
+                data: {
+                    _token: '{{ csrf_token() }}',
+                    umkm_id: selectedUmkmId,
+                    user_id: '{{ auth()->user()->id }}'
+                },
+                success: function(response) {
+                    if (response.success) {
+                        alert('Anda telah berhasil berpartisipasi.');
+                    } else {
+                        alert('Gagal berpartisipasi.');
+                    }
+                    $('#confirmationModal').modal('hide');
+                },
+                error: function(xhr, status, error) {
+                    console.error(xhr.responseText);
+                    alert('Error submitting participation.');
+                }
+            });
+        });
+    });
+</script>
+
 
 
 
