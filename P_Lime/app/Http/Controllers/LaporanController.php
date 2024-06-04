@@ -58,20 +58,30 @@ class LaporanController extends Controller
             return redirect()->back()->withInput()->withErrors($validator);
         }
         
+        
+        if(request()->has('gambar')){
+            $image = request()->file('gambar')->store('buktiLaporan', 'public');
+        }
+        
+        // $photo = $request->file('gambar');
+        // $filename = date('Y-m-d') . $photo->getClientOriginalName();
+        // $path = 'photo-acara/' . $filename;
 
-        $photo = $request->file('gambar');
-        $filename = date('Y-m-d') . $photo->getClientOriginalName();
-        $path = 'photo-acara/' . $filename;
-
-        Storage::disk('public')->put($path,file_get_contents($photo));
+        // Storage::disk('public')->put($path,file_get_contents($photo));
 
         $data['judul'] = $request->judul;
         $data['pengirim'] = $request->pengirim;
-        $data['deskripsi'] = $request->deskripsi;;
-        $data['gambar'] = $filename;
+        $data['deskripsi'] = $request->deskripsi;
+        $data['status'] = 'Belum Selesai';
+        $data['gambar'] = $image;
 
         laporan::create($data);
 
+        session()->flash('success', 'Laporan telah berhasil ditambahkan!');
+
+        if (auth()->user()->role === 'citizen'){
+            return redirect()->route('DashboardWarga.pelaporan');
+        }
         return redirect()->route('laporan.view');
     }
 
@@ -95,16 +105,31 @@ class LaporanController extends Controller
         ]);
 
         if($validator->fails()) return redirect()->back()->withInput()->withErrors($validator);
-        
+
+        if(request()->has('gambar')){
+            $image = request()->file('gambar')->store('buktiLaporan', 'public');
+        }
 
         // $data['nama_field_di_database'] = $request->nama_di_inputan;
         $data['judul'] = $request->judul;
         $data['pengirim'] = $request->pengirim;
         $data['deskripsi'] = $request->deskripsi;
-        $data['gambar'] = $request->gambar;
+        $data['gambar'] = $image;
         
 
         laporan::where('laporan_id',$id)->update($data);
         return redirect()->route('laporan.view');
     }
+
+    public function updateStatus(Request $request)
+    {
+        $laporan = Laporan::find($request->id);
+        if ($laporan) {
+            $laporan->status = $request->status;
+            $laporan->save();
+            return response()->json(['success' => true]);
+        }
+        return response()->json(['success' => false]);
+    }
+
 }

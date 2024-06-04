@@ -130,7 +130,7 @@
                                                                     <th scope="col">Judul</th>
                                                                     <th scope="col">Deskripsi</th>
                                                                     <th scope="col">Tipe Acara</th>
-                                                                    <th scope="col">image</th>
+                                                                    
                                                                     
                                                                 </tr>
                                                             </thead>
@@ -142,14 +142,14 @@
                                                                     <td>{{ $d->judul }}</td>
                                                                     <td>{{ $d->deskripsi }}</td>
                                                                     <td>{{ $d->tipe_acara }}</td>
-                                                                    <td><img src="{{ asset('storage/photo-acara/'.$d->image) }}" alt="" width="100"></td>
                                                                     
                                                                     
                                                                     <td>
-                                                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalEdit{{ $d->id_acara }}">
-                                                                            Edit
+                                                                        
+                                                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalEdit{{ $d->id_acara }}"><i class="fas fa-pencil-alt"></i>
+                                                                            
                                                                         </button>
-                                                                        <a data-toggle="modal" data-target="#exampleModalHapus{{ $d->id_acara }}" class="btn btn-danger"><i class="fas fa-trash-alt">Hapus</i></a>
+                                                                        <button type="button" data-toggle="modal" data-target="#exampleModalHapus{{ $d->id_acara }}" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
                                                                     </td>
                                                                 </tr>
 

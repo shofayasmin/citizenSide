@@ -16,4 +16,8 @@ class Acara extends Model
         'image',
         // Kolom lain yang ingin Anda masukkan ke dalam fillable
     ];
+    public function participants()
+    {
+        return $this->belongsToMany(User::class, 'acara_participants', 'acara_id', 'user_id');
+    }
 }

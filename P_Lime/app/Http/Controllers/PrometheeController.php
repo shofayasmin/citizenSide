@@ -14,11 +14,11 @@ class PrometheeController extends Controller
 
         // Mengambil bobot kriteria dari tabel criteria
         $criteriaWeights = [
-            'luas_rumah' => Criteria::where('name', 'Luas Rumah')->first()->weight,
-            'gaji' => Criteria::where('name', 'Gaji')->first()->weight,
-            'status' => Criteria::where('name', 'Status')->first()->weight,
-            'jumlah_usia_lanjut' => Criteria::where('name', 'Jumlah Usia Lanjut')->first()->weight,
-            'jarak_domisili' => Criteria::where('name', 'Jarak Domisili')->first()->weight,
+            'jumlah_usia_produktif'     => Criteria::where('name', 'Jumlah Usia Produktif')->first()->weight,
+            'jumlah_anggota_keluarga'   => Criteria::where('name', 'Jumlah Anggota Keluarga')->first()->weight,
+            'kondisi_rumah'             => Criteria::where('name', 'Kondisi Rumah')->first()->weight,
+            'jumlah_kk'                 => Criteria::where('name', 'Jumlah KK')->first()->weight,
+            'pendapatan_total'          => Criteria::where('name', 'Pendapatan')->first()->weight,
         ];
 
         // Step 1: Calculate the preference for each pair of alternatives for each criterion

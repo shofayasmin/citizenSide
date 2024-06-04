@@ -66,7 +66,7 @@
                                                     <p>Berikut adalah Data Data Warga dari RW 003</code>.</p>
                                                     <div class="text-right mb-3">
                                                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#warga_tambah">
-                                                            Tambah Acara
+                                                            Tambah Data Warga
                                                         </button>
                                                     </div>
                                                     <div class="table-responsive">
@@ -75,7 +75,7 @@
                                                                 <tr>
                                                                     <th scope="col">No</th>
                                                                     <th scope="col">NIK</th>
-                                                                    {{-- <th scope="col">NO KK</th> --}}
+                                                                    <th scope="col">NO KK</th>
                                                                     <th scope="col">Nama Lengkap</th>
                                                                     <th scope="col">Tempat Tanggal Lahir</th>
                                                                     <th scope="col">Jenis Kelamin</th>
@@ -96,6 +96,7 @@
                                                                         
                                                                     <th scope="row">{{ $d->id }}</th>
                                                                     <td>{{ $d->nik }}</td>
+                                                                    <td>{{ $d->no_kk }}</td>
                                                                     <td>{{ $d->nama_lengkap }}</td>
                                                                     <td>{{ $d->tempat_lahir }}, {{ \Carbon\Carbon::parse($d->tanggal_lahir)->format('j F Y') }}</td>
                                                                     <td>{{ $d->jenis_kelamin }}</td>
@@ -120,6 +121,16 @@
                                                                 @endforeach
                                                                
                                                             </tbody>
+                                                            <!-- Form untuk input NIK -->
+                                                            <form method="post" action="/cek-nik">
+                                                                @csrf
+                                                                <div class="form-group">
+                                                                    <label for="nik">NIK:</label>
+                                                                    <input type="text" class="form-control" id="nik" name="nik" placeholder="Masukkan NIK">
+                                                                </div>
+                                                                <!-- Tombol untuk memeriksa NIK -->
+                                                                <button type="submit" class="btn btn-primary">Cek NIK</button>
+                                                            </form>
                                                         </table>
                                                         <a href="{{ route('citizen.index') }}"> <- Kembali</a>
                                                     </div>      

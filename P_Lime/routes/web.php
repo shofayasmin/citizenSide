@@ -1,11 +1,11 @@
 <?php
 
+use App\Http\Controllers\IuranController;
 use App\Http\Controllers\PrometheeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SpkController;
 use App\Http\Controllers\UmkmController;
 use App\Http\Controllers\AcaraController;
-use App\Http\Controllers\IuranController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MasukController;
 use App\Http\Controllers\BansosController;
@@ -39,6 +39,7 @@ use App\Http\Controllers\DashboardWargaController;
 
 
 route::get('/home',[TemplateController::class,'index'])->name('home')->middleware('not.warga');
+route::get('/welcome',[TemplateController::class,'landing_page'])->name('landing')->middleware('auth');
 
 //Register
 Route::get('/register', [RegisterController::class, 'index'])->middleware('guest');
@@ -51,12 +52,14 @@ Route::get('/logout', [LoginController::class, 'logout'])->name('logout')->middl
 
 //dashboard
 Route::get('/dashboard/index', [DashboardController::class, 'index'])->middleware('auth');
-Route::get('/dashboard/rw', [DashboardController::class, 'rw'])->name('dashboard.rw')->middleware('rw');
+Route::get('/dashboard/rw', [DashboardController::class, 'rw'])->name('dashboard.rw')->middleware('not.warga');
 
 //dashboard warga
 Route::get('/DashboardWarga/index', [DashboardWargaController::class, 'index'])->name('DashboardWarga.index')->middleware('auth');
 Route::get('/DashboardWarga/acara', [DashboardWargaController::class, 'acara'])->name('DashboardWarga.acara')->middleware('auth');
 Route::get('/DashboardWarga/umkm', [DashboardWargaController::class, 'umkm'])->name('DashboardWarga.umkm')->middleware('auth');
+Route::get('/DashboardWarga/bansos', [DashboardWargaController::class, 'infoBansos'])->name('DashboardWarga.bansos')->middleware('auth');
+Route::get('/DashboardWarga/pelaporan', [DashboardWargaController::class, 'pelaporan'])->name('DashboardWarga.pelaporan')->middleware('auth');
 
 // Acara
 route::get('/acara/manage',[AcaraController::class,'manage'])->name('acara.manage')->middleware('not.warga'); // acara bagian manage
@@ -66,6 +69,8 @@ route::post('/store',[AcaraController::class,'store'])->name('acara.store')->mid
 route::get('/Acara/edit_acara/{id}', [AcaraController::class, 'edit_acara'])->name('acara.edit')->middleware('not.warga');
 route::put('/Acara/update_acara/{id}', [AcaraController::class, 'update_acara'])->name('acara.update')->middleware('not.warga');
 route::delete('/Acara/delete_acara/{id}', [AcaraController::class, 'delete_acara'])->name('acara.delete')->middleware('not.warga');
+Route::post('/acara/{id}/ikuti', [AcaraController::class, 'storeIkutiAcara'])->name('acara.ikuti');
+Route::get('/acara/{id}/participants', [AcaraController::class, 'showParticipants'])->name('acara.participants');
 
 // UMKM
 route::get('/umkm/register', [UmkmController::class, 'register'])->name('umkm.register')->middleware('auth');
@@ -74,6 +79,10 @@ route::post('/umkm/store_umkm',[UmkmController::class,'store_umkm'])->name('umkm
 route::get('/umkm/edit_umkm/{id}', [UmkmController::class, 'edit_umkm'])->name('umkm.edit')->middleware('not.warga');
 route::put('/umkm/update_umkm/{id}', [UmkmController::class, 'update_umkm'])->name('umkm.update')->middleware('not.warga');
 route::delete('/umkm/delete_umkm/{id}', [UmkmController::class, 'delete_umkm'])->name('umkm.delete')->middleware('not.warga');
+route::get('/umkm/list', [UmkmController::class, 'show_list'])->name('umkm.list')->middleware('not.warga');
+Route::post('/participate', [UmkmController::class, 'store_kandidat'])->name('participate');
+
+
 
 // Read Citizen
 route::get('/citizen', [CitizenController::class, 'index'])->name('citizen.index')->middleware('sekretaris');
@@ -94,6 +103,7 @@ route::POST('/citizen/store_warga', [CitizenController::class, 'store_warga'])->
 route::get('/citizen/edit_warga/{id}', [CitizenController::class, 'edit_warga'])->name('warga.edit')->middleware('sekretaris');
 route::put('/citizen/update_warga/{id}', [CitizenController::class, 'update_warga'])->name('warga.update')->middleware('sekretaris');
 route::delete('/citizen/delete_warga/{id}', [CitizenController::class, 'delete_warga'])->name('warga.delete')->middleware('sekretaris');
+Route::get('/household/members/{no_kk}', [CitizenController::class, 'getHouseholdMembers'])->name('household.member');
 
 
 // KK
@@ -121,11 +131,12 @@ route::put('/citizen/update_rumah/{id}', [CitizenController::class, 'update_ruma
 route::delete('/citizen/delete_rumah/{id}', [CitizenController::class, 'delete_rumah'])->name('rumah.delete')->middleware('sekretaris');
 
 // Laporan
-route::get('/laporan/view', [LaporanController::class, 'view'])->name('laporan.view')->middleware('not.warga');
+route::get('/laporan/view', [LaporanController::class, 'view'])->name('laporan.view')->middleware('auth');
 route::get('/laporan/create', [LaporanController::class, 'create'])->name('laporan.create')->middleware('not.warga');
 route::get('/laporan/track', [LaporanController::class, 'track'])->name('laporan.track')->middleware('not.warga');
 route::get('/laporan/edit/{id}', [LaporanController::class, 'edit'])->name('laporan.edit')->middleware('not.warga');
-route::post('/laporan/store', [LaporanController::class, 'store'])->name('laporan.store')->middleware('not.warga');
+route::post('/laporan/store', [LaporanController::class, 'store'])->name('laporan.store')->middleware('auth');
+Route::post('/laporan/update-status', [LaporanController::class, 'updateStatus'])->name('laporan.updateStatus');
 
 
 
@@ -174,6 +185,3 @@ route::delete('/Iuran/delete_expenditure/{id}', [IuranController::class, 'delete
 
 // SPK
 route::get('/SPK/promethee', [PrometheeController::class, 'calculate'])->name('spk.promethee');
-
-
-

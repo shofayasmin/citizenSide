@@ -55,8 +55,8 @@
                                 @foreach ($data as $d)
                                 <div class="card">
                                     <div class="d-flex justify-content-center align-items-center">
-                                        <img src="{{ $d->gambar }}" class="card-img-top" style="width: auto; max-height: 400px;">
-                                    </div>                                    
+                                        <img src="\storage\photo-acara\Presiden Jokowi Luncurkan Penyaluran Cadangan Beras Pemerintah untuk Bantuan Pangan.jpeg" class="card-img-top" style="width: auto; max-height: 400px;">
+                                    </div>                                  
                                     <div class="card-body">
                                         <h5 class="card-title">{{ $d->judul }}</h5>
                                         <p class="card-text">Jenis Bansos: {{ $d->jenis_bansos }}</p>

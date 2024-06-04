@@ -41,7 +41,14 @@
                 @error( 'nik' )
                     <small>{{ $message }}</small>
                 @enderror
-            </div>              
+            </div>   
+            <div class="form-group" style="margin-left: 10px; margin-right: 10px;">
+                <label for="exampleInputEmail1">No KK</label>
+                <input type="form" name="no_kk" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="12345678912345">
+                @error( 'no_kk' )
+                    <small>{{ $message }}</small>
+                @enderror
+            </div>           
             <div class="form-group" style="margin-left: 10px; margin-right: 10px;">
                 <label for="exampleInputEmail1">Nama Lengkap</label>
                 <input type="text" name="nama_lengkap" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Cukup masukkan Angka saja">
@@ -167,7 +174,14 @@
                 @error( 'nik' )
                     <small>{{ $message }}</small>
                 @enderror
-            </div>              
+            </div>   
+            <div class="form-group" style="margin-left: 10px; margin-right: 10px;">
+                <label for="exampleInputEmail1">No KK</label>
+                <input type="form" name="no_kk" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="12345678912345">
+                @error( 'no_kk' )
+                    <small>{{ $message }}</small>
+                @enderror
+            </div>            
             <div class="form-group" style="margin-left: 10px; margin-right: 10px;">
                 <label for="exampleInputEmail1">Nama Lengkap</label>
                 <input type="text" name="nama_lengkap" value="{{ $d->nama_lengkap }}" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Cukup masukkan Angka saja">

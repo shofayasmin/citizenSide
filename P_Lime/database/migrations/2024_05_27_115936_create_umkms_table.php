@@ -15,6 +15,9 @@ return new class extends Migration
             $table->id('umkm_id');
             $table->string('Nama');
             $table->string('umkm');
+            $table->string('gambar')->nullable();
+            $table->string('tipe_umkm');
+            $table->string('deskripsi');
             $table->timestamps();
         });
     }

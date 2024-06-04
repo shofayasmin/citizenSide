@@ -7,15 +7,13 @@ namespace Database\Seeders;
 
 use App\Models\Alternatives;
 use App\Models\Bansos;
-use App\Models\Contribution;
+
 use App\Models\Iuran;
 use App\Models\Kk;
 use App\Models\laporan;
 use App\Models\Organisasi;
-use App\Models\Preference;
 use App\Models\Rt;
 use App\Models\Rumah;
-use App\Models\SPK;
 use App\Models\User;
 use App\Models\Acara;
 use App\Models\Expenditure;
@@ -33,18 +31,16 @@ class DatabaseSeeder extends Seeder
     {
         Warga::factory(10)->create();
         User::factory(10)->create();
-        umkm::factory(10)->create();
-        Acara::factory(10)->create();
-        Kk::factory(10)->create();
-        Iuran::factory(10)->create();
-        Alternatives::factory(10)->create();
+        umkm::factory(4)->create();
+        Acara::factory(6)->create();
+        Kk::factory(6)->create();
+        Iuran::factory(30)->create();
+        Alternatives::factory(50)->create();
         Bansos::factory(10)->create();
-        Rt::factory(10)->create();
-        Rumah::factory(10)->create();
-        // laporan::factory(10)->create();
-        Organisasi::factory(10)->create();
-        Income::factory()->count(10)->create();
-        Expenditure::factory()->count(10)->create();
+        Rt::factory(5)->create();
+        Rumah::factory(5)->create();
+        laporan::factory(4)->create();
+        Organisasi::factory(5)->create();
 
         $this->call(CriteriaSeeder::class);
 

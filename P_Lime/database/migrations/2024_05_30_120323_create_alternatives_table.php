@@ -14,11 +14,11 @@ return new class extends Migration
         Schema::create('alternatives', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->float('luas_rumah'); // Luas rumah dalam satuan yang relevan
-            $table->double('gaji', 15, 2); // Gaji dalam jumlah besar
-            $table->integer('status'); // 0: Tidak bekerja, 1: Bekerja
-            $table->integer('jumlah_usia_lanjut'); // Jumlah anggota keluarga usia lanjut
-            $table->float('jarak_domisili'); // Jarak domisili dalam kilometer atau satuan lain
+            $table->float('jumlah_usia_produktif');     // Jumlah orang yang produktif dalam kk, atau belum lansia
+            $table->double('jumlah_anggota_keluarga');  // total jumlah anggota keluarga yg tinggal 1 rumah
+            $table->integer('kondisi_rumah');           // semakin besar angkanya berarti semakin bagus rating rumah tersebut
+            $table->integer('jumlah_kk');               // Jumlah kk dalam 1 rumah
+            $table->float('pendapatan_total',15,2);     // jumlah total pendapatan 1 rumah
             $table->timestamps();
         });
         

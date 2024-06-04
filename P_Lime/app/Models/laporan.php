@@ -8,12 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class laporan extends Model
 {
     use HasFactory;
-    protected $primaryKey = 'umkm_id';
+    protected $primaryKey = 'laporan_id';
     protected $fillable = [
-        'judul', 
-        'deskripsi',  
+        'pengirim', 
+        'judul',  
+        'deskripsi', 
         'gambar', 
-        'gambar', 
-        'pengirim',
+        'status',
     ];
+    
 }

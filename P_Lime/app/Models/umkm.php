@@ -13,5 +13,8 @@ class umkm extends Model
     protected $fillable = [
         'Nama', 
         'umkm',  
+        'gambar',
+        'tipe_umkm',
+        'deskripsi'
     ];
 }

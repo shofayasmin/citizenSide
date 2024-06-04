@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Acara;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Intervention\Image\Facades\Image;
@@ -42,16 +43,20 @@ class AcaraController extends Controller
             return redirect()->back()->withInput()->withErrors($validator);
         }
 
-        $photo = $request->file('image');
-        $filename = date('Y-m-d') . $photo->getClientOriginalName();
-        $path = 'photo-acara/' . $filename;
+        // $photo = $request->file('image');
+        // $filename = date('Y-m-d') . $photo->getClientOriginalName();
+        // $path = 'photo-acara/' . $filename;
 
-        Storage::disk('public')->put($path,file_get_contents($photo));
+        // Storage::disk('public')->put($path,file_get_contents($photo));
+        if(request()->has('image')){
+            $image = request()->file('image')->store('gambarAcara', 'public');
+        }
 
         $data['judul'] = $request->judul;
         $data['deskripsi'] = $request->deskripsi;
         $data['tipe_acara'] = $request->tipe_acara;
-        $data['image'] = $filename;
+        $data['image'] = $image;
+
 
         Acara::create($data);
 
@@ -95,6 +100,22 @@ class AcaraController extends Controller
         }
 
         return redirect()->route('acara.manage');
+    }
+
+    public function storeIkutiAcara(Request $request, $acaraId)
+    {
+        $user = Auth::user();
+        $acara = Acara::findOrFail($acaraId);
+
+        // Simpan data peserta ke tabel pivot
+        $acara->participants()->attach($user->id);
+
+        return redirect()->back()->with('success', 'Anda telah mengikuti kegiatan.');
+    }
+    public function showParticipants($acaraId)
+    {
+        $acara = Acara::with('participants')->findOrFail($acaraId);
+        return view('acara.ViewAcara_Warga', compact('acara'));
     }
 
 
