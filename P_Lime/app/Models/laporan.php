@@ -13,7 +13,7 @@ class laporan extends Model
         'judul', 
         'deskripsi',  
         'gambar', 
-        'gambar', 
         'pengirim',
+        'status',
     ];
 }

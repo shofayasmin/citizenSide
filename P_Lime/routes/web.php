@@ -57,6 +57,8 @@ Route::get('/dashboard/rw', [DashboardController::class, 'rw'])->name('dashboard
 Route::get('/DashboardWarga/index', [DashboardWargaController::class, 'index'])->name('DashboardWarga.index')->middleware('auth');
 Route::get('/DashboardWarga/acara', [DashboardWargaController::class, 'acara'])->name('DashboardWarga.acara')->middleware('auth');
 Route::get('/DashboardWarga/umkm', [DashboardWargaController::class, 'umkm'])->name('DashboardWarga.umkm')->middleware('auth');
+Route::get('/DashboardWarga/bansos', [DashboardWargaController::class, 'infoBansos'])->name('DashboardWarga.bansos')->middleware('auth');
+Route::get('/DashboardWarga/pelaporan', [DashboardWargaController::class, 'pelaporan'])->name('DashboardWarga.pelaporan')->middleware('auth');
 
 // Acara
 route::get('/acara/manage',[AcaraController::class,'manage'])->name('acara.manage')->middleware('not.warga'); // acara bagian manage
@@ -122,10 +124,10 @@ route::delete('/citizen/delete_rumah/{id}', [CitizenController::class, 'delete_r
 
 // Laporan
 route::get('/laporan/view', [LaporanController::class, 'view'])->name('laporan.view')->middleware('not.warga');
-route::get('/laporan/create', [LaporanController::class, 'create'])->name('laporan.create')->middleware('not.warga');
+route::get('/laporan/create', [LaporanController::class, 'create'])->name('laporan.create')->middleware('auth');
 route::get('/laporan/track', [LaporanController::class, 'track'])->name('laporan.track')->middleware('not.warga');
 route::get('/laporan/edit/{id}', [LaporanController::class, 'edit'])->name('laporan.edit')->middleware('not.warga');
-route::post('/laporan/store', [LaporanController::class, 'store'])->name('laporan.store')->middleware('not.warga');
+route::post('/laporan/store', [LaporanController::class, 'store'])->name('laporan.store')->middleware('auth');
 
 
 
