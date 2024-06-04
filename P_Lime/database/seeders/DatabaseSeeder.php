@@ -7,17 +7,17 @@ namespace Database\Seeders;
 
 use App\Models\Alternatives;
 use App\Models\Bansos;
-use App\Models\Contribution;
+
 use App\Models\Iuran;
 use App\Models\Kk;
 use App\Models\laporan;
 use App\Models\Organisasi;
-use App\Models\Preference;
 use App\Models\Rt;
 use App\Models\Rumah;
-use App\Models\SPK;
 use App\Models\User;
 use App\Models\Acara;
+use App\Models\Expenditure;
+use App\Models\Income;
 use App\Models\umkm;
 use App\Models\Warga;
 use Illuminate\Database\Seeder;
@@ -41,10 +41,9 @@ class DatabaseSeeder extends Seeder
         Rumah::factory(5)->create();
         laporan::factory(4)->create();
         Organisasi::factory(5)->create();
-        Contribution::factory(10)->create();
 
         $this->call(CriteriaSeeder::class);
-       
+
 
 
 

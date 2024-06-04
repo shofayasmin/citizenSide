@@ -16,4 +16,5 @@ class laporan extends Model
         'gambar', 
         'status',
     ];
+    
 }

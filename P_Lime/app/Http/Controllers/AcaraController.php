@@ -43,16 +43,20 @@ class AcaraController extends Controller
             return redirect()->back()->withInput()->withErrors($validator);
         }
 
-        $photo = $request->file('image');
-        $filename = date('Y-m-d') . $photo->getClientOriginalName();
-        $path = 'photo-acara/' . $filename;
+        // $photo = $request->file('image');
+        // $filename = date('Y-m-d') . $photo->getClientOriginalName();
+        // $path = 'photo-acara/' . $filename;
 
-        Storage::disk('public')->put($path,file_get_contents($photo));
+        // Storage::disk('public')->put($path,file_get_contents($photo));
+        if(request()->has('image')){
+            $image = request()->file('image')->store('gambarAcara', 'public');
+        }
 
         $data['judul'] = $request->judul;
         $data['deskripsi'] = $request->deskripsi;
         $data['tipe_acara'] = $request->tipe_acara;
-        $data['image'] = $filename;
+        $data['image'] = $image;
+
 
         Acara::create($data);
 

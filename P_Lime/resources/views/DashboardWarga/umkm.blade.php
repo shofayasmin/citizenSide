@@ -11,22 +11,12 @@
 <body>
     @include('layoutWarga.header')
 
-    <div class="lime-container">
-        <div class="lime-body">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="page-title">
-                            <nav aria-label="breadcrumb">
-                              <ol class="breadcrumb breadcrumb-separator-1">
-                                <li class="breadcrumb-item"><a href="#">Acara</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">View</li>
-                              </ol>
-                            </nav>
-                            <h3>View Umkm List</h3>
-                            
-                        </div>
-                    </div>
+    <div class="container d-flex flex-wrap justify-content-between h-70 overflow-auto mt-5">
+        @foreach ($umkms as $umkm)
+            <div class="card" style="width: 25rem;">
+                <div class="image-container position-relative">
+                    <span class="badge badge-warning position-absolute" style="top:0; right:0;">UMKM</span>
+                    <img class="card-img-top" src="https://picsum.photos/300/100" alt="Card image cap">
                 </div>
 
                 <div class="row">
@@ -71,7 +61,11 @@
                     </div>
                 </div>
             </div>
+<<<<<<< HEAD
         </div>
+=======
+        @endforeach
+>>>>>>> 93fb73d1fd064aac7e0aed0eeb0d1368ba3fc5f5
     </div>
 </body>
 
