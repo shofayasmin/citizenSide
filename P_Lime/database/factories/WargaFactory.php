@@ -18,6 +18,7 @@ class WargaFactory extends Factory
     {
         return [
             'nik' => fake()->unique()->nik(),
+            'no_kk' => fake()->nik(),
             'nama_lengkap' => fake()->name(),
             'tempat_lahir' => fake()->city(),
             'tanggal_lahir' => fake()->dateTimeBetween('-80 years', '-15 years'),

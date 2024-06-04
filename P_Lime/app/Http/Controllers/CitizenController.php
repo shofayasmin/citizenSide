@@ -170,6 +170,12 @@ class CitizenController extends Controller
         return redirect()->route('citizen.kk');
     }
 
+    public function getHouseholdMembers($no_kk)
+    {
+        $householdMembers = Warga::where('no_kk', $no_kk)->get();
+        return response()->json($householdMembers);
+    }
+
     // ORGANISASI
     public function organisasi()
     {
@@ -336,6 +342,7 @@ class CitizenController extends Controller
     {
         $validator = Validator::make($request->all(),[
             'nik'               => 'required',
+            'no_kk'             => 'required',
             'nama_lengkap'      => 'required',
             'tempat_lahir'      => 'required',
             'tanggal_lahir'     => 'required',
@@ -355,6 +362,7 @@ class CitizenController extends Controller
 
         // $data['nama_field_di_database'] = $request->nama_di_inputan;
         $data['nik']                =  $request->nik; 
+        $data['no_kk']              =  $request->no_kk; 
         $data['nama_lengkap']       =  $request->nama_lengkap;
         $data['tempat_lahir']       =  $request->tempat_lahir;
         $data['tanggal_lahir']      =  $request->tanggal_lahir;
@@ -382,6 +390,7 @@ class CitizenController extends Controller
     {
         $validator = Validator::make($request->all(),[
             'nik'               => 'required',
+            'no_kk'             => 'required',
             'nama_lengkap'      => 'required',
             'tempat_lahir'      => 'required',
             'tanggal_lahir'     => 'required',
@@ -399,6 +408,7 @@ class CitizenController extends Controller
 
         // $data['nama_field_di_database'] = $request->nama_di_inputan;
         $data['nik']                =  $request->nik; 
+        $data['no_kk']              =  $request->no_kk; 
         $data['nama_lengkap']       =  $request->nama_lengkap;
         $data['tempat_lahir']       =  $request->tempat_lahir;
         $data['tanggal_lahir']      =  $request->tanggal_lahir;
@@ -425,5 +435,7 @@ class CitizenController extends Controller
 
         return redirect()->route('citizen.warga');
     }
+
+    
 
 }

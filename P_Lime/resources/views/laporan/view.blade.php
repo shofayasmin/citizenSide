@@ -51,14 +51,11 @@
 
                         
                         @foreach ($data as $key => $d)
-                            
                             <div class="col-10">
                                 <div class="card">
                                     <div class="card-header d-flex justify-content-between align-items-center">
                                         <h3 class="mt-3">{{ $d->judul }}</h3>
                                         <img src="{{ asset('storage/photo-acara/comment1.png') }}" width="25" data-toggle="modal" data-target="#comment_{{ $key }}">
-                                        {{-- <img src="{{ asset('storage/photo-acara/track.png') }}" width="25" data-toggle="modal" data-target="#myModal"> --}}
-
                                     </div>
                                     <div class="card-body">
                                         <h5 class="card-title"></h5>
@@ -67,12 +64,14 @@
                                         <h5 class="card-title">{{ $d->pengirim }}</h5>
                                         <a href="#" class="badge badge-primary" data-toggle="modal" data-target="#Read_More_{{ $key }}">Read More</a>
                                         <div class="text-right">
-                                            <a href="#" class="badge badge-danger status-toggle">Belum Selesai</a>
+                                            <button class="btn {{ $d->status == 'Belum Selesai' ? 'btn-danger' : 'btn-success' }} status-toggle" data-id="{{ $d->laporan_id }}">
+                                                {{ $d->status }}
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        @include('laporan.modal')
+                            @include('laporan.modal')
                         @endforeach
 
                         <!-- Modal -->
@@ -137,13 +136,34 @@
                                 $('.status-toggle').on('click', function(event){
                                     event.preventDefault(); // Mencegah tindakan default tautan
                                     var $this = $(this);
-                                    if($this.hasClass('badge-danger')){
-                                        $this.removeClass('badge-danger').addClass('badge-success');
-                                        $this.text('Selesai');
-                                    } else {
-                                        $this.removeClass('badge-success').addClass('badge-danger');
-                                        $this.text('Belum Selesai');
-                                    }
+                                    var laporanId = $this.data('id');
+                                    var newStatus = $this.hasClass('badge-danger') ? 'Selesai' : 'Belum Selesai';
+                                    
+                                    $.ajax({
+                                        url: '{{ route('laporan.updateStatus') }}',
+                                        type: 'POST',
+                                        data: {
+                                            _token: '{{ csrf_token() }}',
+                                            id: laporanId,
+                                            status: newStatus
+                                        },
+                                        success: function(response) {
+                                            if (response.success) {
+                                                if ($this.hasClass('badge-danger')) {
+                                                    $this.removeClass('badge-danger').addClass('badge-success');
+                                                    $this.text('Selesai');
+                                                } else {
+                                                    $this.removeClass('badge-success').addClass('badge-danger');
+                                                    $this.text('Belum Selesai');
+                                                }
+                                            } else {
+                                                alert('Failed to update status');
+                                            }
+                                        },
+                                        error: function() {
+                                            alert('Error updating status');
+                                        }
+                                    });
                                 });
                             });
                         </script>

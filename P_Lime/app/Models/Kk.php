@@ -17,4 +17,8 @@ class Kk extends Model
         'jumlah_anggota_kk', 
         'jumlah_usia_lanjut', 
     ];
+    public function wargas()
+    {
+        return $this->hasMany(Warga::class, 'no_kk', 'no_kk');
+    }
 }

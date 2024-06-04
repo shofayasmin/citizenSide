@@ -21,20 +21,12 @@
             <li class="sidebar-title">
                 Dashboard
             </li>
-            @can('rw')
-                {{-- <li class="sidebar-title">
-                RW
-            </li> --}}
-                {{-- <li>
-                <a href="{{ route('bansos.lurah') }}" class="{{ Request::routeIs('bansos.lurah') ? 'active' : '' }}">
-                    <i class="material-icons">inbox</i>Mailbox</a>
-            </li> --}}
-                <li>
-                    <a href="{{ route('dashboard.rw') }}" class="{{ Request::routeIs('dashboard.rw') ? 'active' : '' }}">
-                        <i class="material-icons">dashboard</i>Dashboard
-                    </a>
-                </li>
-            @endcan
+            
+            <li>
+                <a href="{{ route('dashboard.rw') }}" class="{{ Request::routeIs('dashboard.rw') ? 'active' : '' }}">
+                    <i class="material-icons">dashboard</i>Dashboard
+                </a>
+            </li> 
 
             <li class="page {{ Request::is('laporan*') ? 'active-page' : '' }}">
                 <a href="#"><i class="material-icons">report</i>Laporan<i
@@ -57,11 +49,13 @@
                 <ul class="sub-menu">
                     @canany(['sekretaris','rw'])
                     <li>
-                        <a href="{{ route('acara.manage') }}">Manage</a>
+                        <a href="{{ route('acara.manage') }}">Manage Acara</a>
                     </li>
                     @endcanany
                     <li>
-                        <a href="{{ route('acara.view') }}">View</a>
+
+                        <a href="{{ route('acara.view') }}" >View Acara</a>
+
                     </li>
                 </ul>
             </li>
@@ -72,11 +66,11 @@
                 <ul class="sub-menu">
                     @canany(['sekretaris','rw'])
                     <li>
-                        <a href="{{ route('umkm.register') }}">Register</a>
+                        <a href="{{ route('umkm.register') }}">UMKM Register</a>
                     </li>
                     @endcanany
                     <li>
-                        <a href="{{ route('umkm.view') }}">View</a>
+                        <a href="{{ route('umkm.view') }}">UMKM List</a>
                     </li>
                 </ul>
             </li>

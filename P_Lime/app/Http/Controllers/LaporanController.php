@@ -120,4 +120,16 @@ class LaporanController extends Controller
         laporan::where('laporan_id',$id)->update($data);
         return redirect()->route('laporan.view');
     }
+
+    public function updateStatus(Request $request)
+    {
+        $laporan = Laporan::find($request->id);
+        if ($laporan) {
+            $laporan->status = $request->status;
+            $laporan->save();
+            return response()->json(['success' => true]);
+        }
+        return response()->json(['success' => false]);
+    }
+
 }

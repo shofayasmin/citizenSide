@@ -89,26 +89,27 @@
                                                                 @foreach ($data as $d)
                                                                 <tr>
                                                                     <th scope="row">{{ $d->id_kk }}</th>
-                                                                    <td>{{ $d->no_kk }}</td>
+                                                                    <td><button type="button" class="btn btn-link" data-toggle="modal" data-target="#householdModal_{{ $d->id_kk }}">{{ $d->no_kk }}</button></td>
                                                                     <td>{{ $d->alamat }}</td>
                                                                     <td>{{ $d->nik_kepala_keluarga }}</td>
                                                                     <td>{{ $d->jumlah_usia_produktif }}</td>
                                                                     <td>{{ $d->jumlah_anggota_kk }}</td>
                                                                     <td>{{ $d->jumlah_usia_lanjut }}</td>
                                                                     <td>
-                                                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalEdit{{ $d->id_kk }}">
-                                                                            Edit
+                                                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalEdit{{ $d->id_kk }}"><i class="fas fa-pencil-alt"></i>
+                                                                            
                                                                         </button>
-                                                                        <a data-toggle="modal" data-target="#exampleModalHapus{{ $d->id_kk }}" class="btn btn-danger"><i class="fas fa-trash-alt">Hapus</i></a>
+                                                                        <button type="button" data-toggle="modal" data-target="#exampleModalHapus{{ $d->id_kk }}" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
                                                                     </td>
                                                                 </tr>
 
                                                                 <!-- Modal -->
-                                                                @include('Citizen.modal_kk')
+                                                                @include('Citizen.modal_kk',['id_kk' => $d->id_kk])
 
                                                                 @endforeach
                                                                 
                                                             </tbody>
+
                                                         </table>
                                                         <a href="{{ route('citizen.index') }}"> <- Kembali</a>
                                                     </div>
@@ -133,5 +134,9 @@
         <script src="{{ asset('lime/theme/assets/plugins/bootstrap/js/bootstrap.min.js')}}"></script>
         <script src="{{ asset('lime/theme/assets/plugins/jquery-slimscroll/jquery.slimscroll.min.js')}}"></script>
         <script src="{{ asset('lime/theme/assets/js/lime.min.js')}}"></script>
+        <!-- Include jQuery and Bootstrap JS files -->
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
     </body>
 </html>

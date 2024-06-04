@@ -15,27 +15,27 @@ class CriteriaSeeder extends Seeder
     {
         $data = [
             [
-                'name' => 'Luas Rumah',
+                'name' => 'Jumlah Usia Produktif',
                 'weight' => 0.25,
                 
             ],
             [
-                'name' => 'Gaji',
+                'name' => 'Jumlah Anggota Keluarga',
                 'weight' => 0.25,
                 
             ],
             [
-                'name' => 'Status',
+                'name' => 'Kondisi Rumah',
                 'weight' => 0.20,
                 
             ],
             [
-                'name' => 'Jumlah Usia Lanjut',
+                'name' => 'Jumlah KK',
                 'weight' => 0.20,
                 
             ],
             [
-                'name' => 'Jarak Domisili',
+                'name' => 'Pendapatan',
                 'weight' => 0.10,
                 
             ],
