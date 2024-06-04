@@ -1,10 +1,11 @@
 <?php
 
+use App\Http\Controllers\IuranController;
+use App\Http\Controllers\PrometheeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SpkController;
 use App\Http\Controllers\UmkmController;
 use App\Http\Controllers\AcaraController;
-use App\Http\Controllers\IuranController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MasukController;
 use App\Http\Controllers\BansosController;
@@ -13,7 +14,6 @@ use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\TemplateController;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\PrometheeController;
 use App\Http\Controllers\DashboardWargaController;
 
 
@@ -39,6 +39,7 @@ use App\Http\Controllers\DashboardWargaController;
 
 
 route::get('/home',[TemplateController::class,'index'])->name('home')->middleware('not.warga');
+route::get('/welcome',[TemplateController::class,'landing_page'])->name('landing')->middleware('auth');
 
 //Register
 Route::get('/register', [RegisterController::class, 'index'])->middleware('guest');
@@ -52,7 +53,7 @@ Route::get('/logout', [LoginController::class, 'logout'])->name('logout')->middl
 
 //dashboard
 Route::get('/dashboard/index', [DashboardController::class, 'index'])->middleware('auth');
-Route::get('/dashboard/rw', [DashboardController::class, 'rw'])->name('dashboard.rw')->middleware('rw');
+Route::get('/dashboard/rw', [DashboardController::class, 'rw'])->name('dashboard.rw')->middleware('not.warga');
 
 //dashboard warga
 Route::get('/DashboardWarga/index', [DashboardWargaController::class, 'index'])->name('DashboardWarga.index')->middleware('auth');
@@ -81,6 +82,7 @@ route::put('/umkm/update_umkm/{id}', [UmkmController::class, 'update_umkm'])->na
 route::delete('/umkm/delete_umkm/{id}', [UmkmController::class, 'delete_umkm'])->name('umkm.delete')->middleware('not.warga');
 route::get('/umkm/list', [UmkmController::class, 'show_list'])->name('umkm.list')->middleware('not.warga');
 Route::post('/participate', [UmkmController::class, 'store_kandidat'])->name('participate');
+
 
 
 // Read Citizen
@@ -130,8 +132,8 @@ route::put('/citizen/update_rumah/{id}', [CitizenController::class, 'update_ruma
 route::delete('/citizen/delete_rumah/{id}', [CitizenController::class, 'delete_rumah'])->name('rumah.delete')->middleware('sekretaris');
 
 // Laporan
-route::get('/laporan/view', [LaporanController::class, 'view'])->name('laporan.view')->middleware('not.warga');
-route::get('/laporan/create', [LaporanController::class, 'create'])->name('laporan.create')->middleware('auth');
+route::get('/laporan/view', [LaporanController::class, 'view'])->name('laporan.view')->middleware('auth');
+route::get('/laporan/create', [LaporanController::class, 'create'])->name('laporan.create')->middleware('not.warga');
 route::get('/laporan/track', [LaporanController::class, 'track'])->name('laporan.track')->middleware('not.warga');
 route::get('/laporan/edit/{id}', [LaporanController::class, 'edit'])->name('laporan.edit')->middleware('not.warga');
 route::post('/laporan/store', [LaporanController::class, 'store'])->name('laporan.store')->middleware('auth');
@@ -184,12 +186,3 @@ route::delete('/Iuran/delete_expenditure/{id}', [IuranController::class, 'delete
 
 // SPK
 route::get('/SPK/promethee', [PrometheeController::class, 'calculate'])->name('spk.promethee');
-
-
-
-
-// Rute untuk menampilkan form cek NIK
-Route::get('/cek-nik', [CitizenController::class, 'showCekNIKForm']);
-
-// Rute untuk menangani permintaan POST untuk memeriksa NIK
-Route::post('/cek-nik', [CitizenController::class, 'cekNIK']);

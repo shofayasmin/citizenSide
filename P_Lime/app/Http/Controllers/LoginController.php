@@ -27,7 +27,9 @@ class LoginController extends Controller
                 return redirect()->intended('/DashboardWarga/index');
             } else if (auth()->user()->role === 'rw'){
                 return redirect()->intended('/dashboard/rw');
-            }
+            } else if (auth()->user()->role === 'secretary'){
+                return redirect()->intended('/dashboard/rw');
+            } 
             return redirect()->intended('/dashboard/index');
         }
         else{

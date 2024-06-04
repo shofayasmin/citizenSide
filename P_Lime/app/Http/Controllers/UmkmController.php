@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Umkm_Participation;
+use App\Models\UmkmParticipation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use App\Models\umkm;
+use Illuminate\Support\Facades\DB;
+
 
 class UmkmController extends Controller
 {
@@ -15,7 +17,7 @@ class UmkmController extends Controller
         return view('umkm.register');
     }
     public function view(){
-        $data = umkm::get();
+        $data = umkm::all();
         return view('umkm.view',compact('data'));
     }
 
@@ -91,16 +93,21 @@ class UmkmController extends Controller
 
     public function store_kandidat(Request $request)
     {
-        $request->validate([
+        // Validate the request data
+        $validatedData = $request->validate([
             'user_id' => 'required|exists:users,id',
             'umkm_id' => 'required|exists:umkms,umkm_id'
         ]);
 
-        $participation = new Umkm_Participation();
-        $participation->user_id = $request->user_id;
-        $participation->umkm_id = $request->umkm_id;
-        $participation->save();
+        // Create the new participation record
+        UmkmParticipation::create($validatedData);
 
-        return response()->json(['success' => true]);
+        return redirect()->route('umkm.view');
+
+
+
+
+        // Return a success response
+        // return response()->json(['success' => true]);
     }
 }
