@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('rumahs', function (Blueprint $table) {
             $table->id('rumah_id');
-            $table->string('nama_pemilik',50);
+            $table->string('nik_pemilik');
+            $table->foreign('nik_pemilik')->references('nik')->on('wargas');
             $table->text('alamat');
             $table->integer('luas_bangunan');
             $table->integer('luas_tanah');

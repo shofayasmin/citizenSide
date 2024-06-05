@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Warga;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +18,7 @@ class RtFactory extends Factory
     public function definition(): array
     {
         return [
-            'nama_ketua'=>fake()->name(),
+            'nik_ketua'=> Warga::inRandomOrder()->first()?->nik,
             'no_rt'=>fake()->numberBetween(1,13),
             'mulai_masa_jabatan'=>fake()->dateTimeThisYear('2 months'),
             'berakhir_masa_jabatan'=>function (array $attributes) {

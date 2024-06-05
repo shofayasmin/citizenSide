@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Warga;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +18,7 @@ class RumahFactory extends Factory
     public function definition(): array
     {
         return [
-            'nama_pemilik'=>fake()->name,
+            'nik_pemilik'=> Warga::inRandomOrder()->first()?->nik,
             'alamat'=>fake()->text(7),
             'luas_bangunan'=>fake()->numberBetween(1,50),
             'luas_tanah'=>fake()->numberBetween(1,50),
