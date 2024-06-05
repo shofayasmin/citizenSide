@@ -64,7 +64,7 @@
                     @endif
                     <div class="col">
                         <div class="card">
-                            <img src="https://picsum.photos/300/100" class="card-img-top" alt="Placeholder"
+                            <img src="{{ asset('storage/'. $d->image) }}" class="card-img-top" alt="Placeholder"
                                 style="width: 100%; height: 200px; object-fit: cover;">
                             <div class="card-body">
                                 <h5 class="card-title">{{ $d->judul }}</h5>

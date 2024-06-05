@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Warga;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -19,7 +20,7 @@ class KkFactory extends Factory
         return [
             'no_kk' => fake()->unique()->nik(),
             'alamat' => fake()->text(75),
-            'nik_kepala_keluarga' => fake()->unique()->nik(),
+            'nik_kepala_keluarga' => Warga::inRandomOrder()->first()?->nik,
             'jumlah_usia_produktif' => fake()->numberBetween(1,4),
             'jumlah_anggota_kk' => fake()->numberBetween(1,4),
             'jumlah_usia_lanjut' => fake()->numberBetween(1,4),
