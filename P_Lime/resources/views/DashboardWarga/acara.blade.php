@@ -64,8 +64,8 @@
                     @endif
                     <div class="col">
                         <div class="card">
-                            <img src="{{ asset('storage/'. $d->image) }}" class="card-img-top" alt="Placeholder"
-                                style="width: 100%; height: 200px; object-fit: cover;">
+                            <img src="{{ asset('storage/'.$d->image) }}" class="card-img-top"
+                                alt="Placeholder" style="width: 100%; height: 200px; object-fit: cover;">
                             <div class="card-body">
                                 <h5 class="card-title">{{ $d->judul }}</h5>
                                 <p class="card-text">{{ $d->deskripsi }}</p>
@@ -78,6 +78,7 @@
                         </div>
                     </div>
                     @if ($i % 3 == 2 || $loop->last)
+
             </div>
             @endif
             @php $i++; @endphp
