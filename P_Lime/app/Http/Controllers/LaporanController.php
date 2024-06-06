@@ -23,6 +23,9 @@ class LaporanController extends Controller
         $comments = Comment::all();
         // $data = laporan::orderByRaw("FIELD(status,'Belum Selesai', 'Selesai')")->get();
         return view('laporan.view',compact('data', 'comments'));
+        // $data = Laporan::with('warga')
+        // ->orderByRaw("FIELD(status,'Belum Selesai', 'Selesai')")->get();
+        // return view('laporan.view',compact('data'));
         
     }
 
