@@ -15,7 +15,8 @@ class LaporanController extends Controller
      */
     public function view()
     {
-        $data = Laporan::orderByRaw("FIELD(status,'Belum Selesai', 'Selesai')")->get();
+        $data = Laporan::with('warga')
+        ->orderByRaw("FIELD(status,'Belum Selesai', 'Selesai')")->get();
         return view('laporan.view',compact('data'));
         
     }

@@ -19,25 +19,16 @@
     <div class="lime-sidebar-inner slimscroll">
         <ul class="accordion-menu">
             <li class="sidebar-title">
-                Dashboard
+                MENU
             </li>
-<<<<<<< HEAD
-            @canany(['rw', 'sekretaris', 'rt'])
-=======
-            
->>>>>>> 93fb73d1fd064aac7e0aed0eeb0d1368ba3fc5f5
             <li>
                 <a href="{{ route('dashboard.rw') }}" class="{{ Request::routeIs('dashboard.rw') ? 'active' : '' }}">
                     <i class="material-icons">dashboard</i>Dashboard
                 </a>
-<<<<<<< HEAD
             </li>
-            @endcanany
-            
 
-=======
-            </li> 
->>>>>>> 93fb73d1fd064aac7e0aed0eeb0d1368ba3fc5f5
+
+
 
             <li class="page {{ Request::is('laporan*') ? 'active-page' : '' }}">
                 <a href="#"><i class="material-icons">report</i>Laporan<i
@@ -53,19 +44,19 @@
                 </ul>
             </li>
 
-            
+
             <li class="page {{ Request::is('acara*') ? 'active-page' : '' }}">
                 <a href="#"><i class="material-icons">celebration</i>Acara<i
                         class="material-icons has-sub-menu">keyboard_arrow_left</i></a>
                 <ul class="sub-menu">
-                    @canany(['sekretaris','rw'])
-                    <li>
-                        <a href="{{ route('acara.manage') }}">Manage Acara</a>
-                    </li>
+                    @canany(['sekretaris', 'rw'])
+                        <li>
+                            <a href="{{ route('acara.manage') }}">Manage Acara</a>
+                        </li>
                     @endcanany
                     <li>
 
-                        <a href="{{ route('acara.view') }}" >View Acara</a>
+                        <a href="{{ route('acara.view') }}">View Acara</a>
 
                     </li>
                 </ul>
@@ -75,34 +66,13 @@
                 <a href="#"><i class="material-icons">store</i>UMKM<i
                         class="material-icons has-sub-menu">keyboard_arrow_left</i></a>
                 <ul class="sub-menu">
-                    @canany(['sekretaris','rw'])
-                    <li>
-                        <a href="{{ route('umkm.register') }}">UMKM Register</a>
-                    </li>
+                    @canany(['sekretaris', 'rw'])
+                        <li>
+                            <a href="{{ route('umkm.register') }}">UMKM Register</a>
+                        </li>
                     @endcanany
                     <li>
                         <a href="{{ route('umkm.view') }}">UMKM List</a>
-                    </li>
-                </ul>
-            </li>
-            
-
-            <li class="page {{ Request::is('acara*') || Request::is('umkm*') ? 'active-page' : '' }}">
-                <a href="#"><i class="material-icons">inbox</i>Acara<i class="material-icons has-sub-menu">keyboard_arrow_left</i></a>
-                <ul class="sub-menu">
-                    {{-- @can('rw')
-                    <li>
-                        <a href="{{ route('umkm.register') }}" >UMKM Register</a>
-                    </li>     
-                    @endcan --}}
-                    <li>
-                        <a href="{{ route('umkm.view') }}" >UMKM list</a>
-                    </li>     
-                    <li>
-                        <a href="{{ route('acara.manage') }}" >Manage Acara</a>
-                    </li>
-                    <li>
-                        <a href="{{ route('acara.view') }}" >View Acara</a>
                     </li>
                 </ul>
             </li>
@@ -118,48 +88,54 @@
                         <a href="{{ route('bansos.pengajuan') }}">Pengajuan Bansos</a>
                     </li> --}}
                     @can('rw')
-                    <li>
-                        <a href="{{ route('bansos.manage') }}">Manage Bansos</a>
-                    </li>
+                        <li>
+                            <a href="{{ route('bansos.manage') }}">Manage Bansos</a>
+                        </li>
                     @endcan
                 </ul>
             </li>
 
-            
-                <li class="page {{ Request::is('iuran*') ? 'active-page' : '' }}">
-                    <a href="#"><i class="material-icons">attach_money</i>Keuangan<i
-                            class="material-icons has-sub-menu">keyboard_arrow_left</i></a>
-                    <ul class="sub-menu">
-                        <li>
-                            <a href="{{ route('iuran.income') }}">Pemasukan</a>
-                        </li>
-                        @canany(['sekretaris', 'rw'])
+
+            <li class="page {{ Request::is('iuran*') ? 'active-page' : '' }}">
+                <a href="#"><i class="material-icons">attach_money</i>Keuangan<i
+                        class="material-icons has-sub-menu">keyboard_arrow_left</i></a>
+                <ul class="sub-menu">
+                    <li>
+                        <a href="{{ route('iuran.income') }}">Pemasukan</a>
+                    </li>
+                    @canany(['sekretaris', 'rw'])
                         <li>
                             <a href="{{ route('iuran.expenditure') }}">Pengeluaran</a>
                         </li>
-                        @endcanany
-                    </ul>
-                </li>
+                    @endcanany
+                </ul>
+            </li>
 
-                <li>
-                    <a href="{{ route('citizen.index') }}"><i
-                            class="material-icons {{ Request::routeIs('citizen.index') ? 'active' : '' }}">person</i>Citizen</a>
-                </li>
+            @canany(['sekretaris', 'rw'])
+            <li class="page {{ Request::is('citizen*') ? 'active-page' : '' }}">
+                <a href="#"><i class="material-icons">person</i>Kependudukan<i
+                        class="material-icons has-sub-menu">keyboard_arrow_left</i></a>
+                <ul class="sub-menu">
+                    <li>
+                        <a href="{{ route('citizen.kk') }}">Keluarga</a>
+                    </li>
+                    <li>
+                        <a href="{{ route('citizen.warga') }}">Warga</a>
+                    </li>
+                    <li>
+                        <a href="{{ route('citizen.rumah') }}">Rumah</a>
+                    </li>
+                    <li>
+                        <a href="{{ route('citizen.rt') }}">RT</a>
+                    </li>
+                    <li>
+                        <a href="{{ route('citizen.organisasi') }}">Organisasi</a>
+                    </li>
+                </ul>
+            </li>
+            @endcanany
             
 
-
-
-            @can('citizen')
-                <li class="sidebar-title">
-                    Warga
-                </li>
-                <li>
-                    <a href="{{ route('dashboard.warga') }}"
-                        class="{{ Request::routeIs('dashboard.warga') ? 'active' : '' }}">
-                        <i class="material-icons">dashboard</i>Dashboard_warga
-                    </a>
-                </li>
-            @endcan
 
             <li class="sidebar-title">
                 SPK

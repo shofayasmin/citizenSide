@@ -61,7 +61,7 @@
                                         <h5 class="card-title"></h5>
                                         <p class="card-text"></p>
                                         <small>{{ $d->created_at }}</small>
-                                        <h5 class="card-title">{{ $d->pengirim }}</h5>
+                                        <h5 class="card-title">{{ $d->warga->nama_lengkap }}</h5>
                                         <a href="#" class="badge badge-primary" data-toggle="modal" data-target="#Read_More_{{ $key }}">Read More</a>
                                         <div class="text-right">
                                             <a href="#" class="badge {{ $d->status == 'Belum Selesai' ? 'badge-danger' : 'badge-success' }} status-toggle" data-id="{{ $d->laporan_id }}">{{ $d->status }}</a>

@@ -1,3 +1,5 @@
+
+<!-- Modal untuk Hapus -->
 <div class="modal fade" id="exampleModalHapus{{ $d->id_acara }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
@@ -130,13 +132,24 @@
                 </div>
                 <div class="modal-body mb-4">
                     <p>{{ $d->deskripsi }}</p>
-                    <a href="{{ route("umkm.register") }}" class="card-link">Ikut Kegiatan</a>
-                    {{-- <a href="#" class="card-link">Another link</a> --}}
+                    @if($d->tipe_acara != 'Informasi')
+                        <form action="{{ route('acara.ikuti', $d->id_acara) }}" method="POST">
+                            @csrf
+                            <button type="submit" class="btn btn-link">Ikut Kegiatan</button>
+                            <button type="button" class="btn btn-link show-participants-btn" data-toggle="modal" data-target="#participantsModal_{{ $d->id_acara }}">Show Participants</button>
+                        </form>
+                    @endif
+                    
                 </div>
             </div>
         </div>
     </div>
+    
+    {{-- <!-- Include participants modal -->
+    @include('partials.participants_modal', ['acara' => $d]) --}}
 @endforeach
+
+
 
 <script>
     $(document).ready(function(){
@@ -146,5 +159,40 @@
         });
     });
 </script>
+
+<!-- Modal for each event -->
+@foreach($acaras as $d)
+    <!-- Your existing modal for showing event details -->
+    <div class="modal fade" id="Read_More_{{ $d->id_acara }}" tabindex="-1" role="dialog" aria-labelledby="Read_MoreTitle_{{ $d->id_acara }}" aria-hidden="true">
+        <!-- Modal content for showing event details -->
+    </div>
+    
+    <!-- Modal for showing participants -->
+    <div class="modal fade" id="participantsModal_{{ $d->id_acara }}" tabindex="-1" role="dialog" aria-labelledby="participantsModalLabel_{{ $d->id_acara }}" aria-hidden="true">
+        <!-- Modal content for showing participants -->
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="participantsModalLabel_{{ $d->id_acara }}">Participants for {{ $d->judul }}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <!-- Display participants here -->
+                    @if($d->participants->isEmpty())
+                        <p>No participants yet.</p>
+                    @else
+                        <ul class="list-group">
+                            @foreach($d->participants as $participant)
+                                <li class="list-group-item">{{ $participant->username }}</li>
+                            @endforeach
+                        </ul>
+                    @endif
+                </div>
+            </div>
+        </div>
+    </div>
+@endforeach
 
 
