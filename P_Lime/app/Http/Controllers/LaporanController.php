@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\laporan;
 use Illuminate\Http\Request;
+use App\Models\Comment;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
 
@@ -15,8 +16,13 @@ class LaporanController extends Controller
      */
     public function view()
     {
-        $data = Laporan::orderByRaw("FIELD(status,'Belum Selesai', 'Selesai')")->get();
-        return view('laporan.view',compact('data'));
+        $data = Laporan::with('comments.user')
+        ->orderByRaw("FIELD(status, 'Belum Selesai', 'Selesai')")
+        ->get();
+        // $data = laporan::with('comments.user')->get();
+        $comments = Comment::all();
+        // $data = laporan::orderByRaw("FIELD(status,'Belum Selesai', 'Selesai')")->get();
+        return view('laporan.view',compact('data', 'comments'));
         
     }
 

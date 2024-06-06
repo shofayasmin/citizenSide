@@ -55,7 +55,13 @@
                                 <div class="card">
                                     <div class="card-header d-flex justify-content-between align-items-center">
                                         <h3 class="mt-3">{{ $d->judul }}</h3>
-                                        <img src="{{ asset('storage/photo-acara/comment1.png') }}" width="25" data-toggle="modal" data-target="#comment_{{ $key }}">
+
+                                        @if (auth()->user()->role == 'citizen')
+                                            <img src="{{ asset('storage/photo-acara/comment1.png') }}" width="25" data-toggle="modal" data-target="#datacomment_{{ $d->laporan_id }}">
+                                        @elseif(auth()->user()->role == 'rw')
+                                            <img src="{{ asset('storage/photo-acara/comment1.png') }}" width="25" data-toggle="modal" data-target="#comment_{{ $d->laporan_id }}">
+                                        @endif
+
                                     </div>
                                     <div class="card-body">
                                         <h5 class="card-title"></h5>
@@ -120,13 +126,30 @@
 
                         <!-- Skrip JavaScript -->
                         <script>
+                            
+                            $(document).ready(function() {
+                                @if (auth()->user()->role == 'citizen')
+                                    $('[data-toggle="modal"]').click(function() {
+                                        var datacomment_ = $(this).data('target'); // Mendapatkan target modal dari atribut data-target
+                                        $(targetModal).modal('show');
+                                    });
+                                @elseif(auth()->user()->role == 'rw')
+                                    $('[data-toggle="modal"]').click(function() {
+                                        var comment_ = $(this).data('target'); // Mendapatkan target modal dari atribut data-target
+                                        $(targetModal).modal('show');
+                                    });
+                                @endif
+                            });
+                        </script>
+                        
+                        {{-- <script>
                             $(document).ready(function(){
                                 // Mengaktifkan modal ketika gambar diklik
                                 $('#myModal').on('shown.bs.modal', function () {
                                     $('#myModal').modal('show');
                                 });
                             });
-                        </script>
+                        </script> --}}
                         <!-- jQuery -->
                         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
                         <script>
@@ -187,5 +210,6 @@
         <script src="{{ asset('lime/theme/assets/plugins/plupload/js/plupload.full.min.js')}}"></script>
         <script src="{{ asset('lime/theme/assets/plugins/plupload/js/jquery.plupload.queue/jquery.plupload.queue.min.js')}}"></script>
         <script src="{{ asset('lime/theme/assets/js/pages/plupload.js')}}"></script>
+        <script src="{{ asset('https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js')}}"></script>
     </body>
 </html>

@@ -15,6 +15,8 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\TemplateController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DashboardWargaController;
+use App\Http\Controllers\CommentController;
+
 
 
 /*
@@ -137,6 +139,8 @@ route::get('/laporan/track', [LaporanController::class, 'track'])->name('laporan
 route::get('/laporan/edit/{id}', [LaporanController::class, 'edit'])->name('laporan.edit')->middleware('not.warga');
 route::post('/laporan/store', [LaporanController::class, 'store'])->name('laporan.store')->middleware('auth');
 Route::post('/laporan/update-status', [LaporanController::class, 'updateStatus'])->name('laporan.updateStatus');
+Route::post('/laporan/{id}/comment', [LaporanController::class, 'addComment'])->name('laporan.addComment');
+route::post('/laporan/storecomment', [LaporanController::class, 'storecomment'])->name('laporan.storecomment')->middleware('not.warga');
 
 
 
@@ -185,3 +189,7 @@ route::delete('/Iuran/delete_expenditure/{id}', [IuranController::class, 'delete
 
 // SPK
 route::get('/SPK/promethee', [PrometheeController::class, 'calculate'])->name('spk.promethee');
+
+// Komentar
+Route::post('/comments', [CommentController::class, 'store'])->name('comments.store');
+Route::post('/comments/store', [CommentController::class, 'store'])->name('comments.store');

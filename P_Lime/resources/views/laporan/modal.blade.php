@@ -21,9 +21,9 @@
 @endforeach
 
 
-{{-- modal for read comment --}}
+{{-- modal for create comment --}}
 @foreach($data as $key => $d)
-    <div class="modal fade" id="comment_{{ $key }}" tabindex="-1" role="dialog" aria-labelledby="commentTitle_{{ $key }}" aria-hidden="true">
+    <div class="modal fade" id="comment_{{ $d->laporan_id }}" tabindex="-1" role="dialog" aria-labelledby="commentTitle_{{ $d->laporan_id }}" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-body mb-4">
@@ -34,7 +34,45 @@
                                     <div class="mail-title">
                                         {{ $d->judul }}
                                     </div>
-
+                                </div>
+                                <div class="comments-container">
+                                @foreach ($comments as $c)
+                                    
+                                <div class="mail-info">
+                                    <div class="mail-author">
+                                        <img src="{{ asset('storage/photo-acara/orang.png') }}" alt="">
+                                        <div class="mail-author-info">
+                                            <span class="mail-author-name">{{ $c->author }}</span>
+                                            <p>{{ $c->comment }}</p>
+                                        </div>
+                                    </div>
+                                    <div class="mail-other-info">
+                                        <span>{{ $d->created_at->format('H:i') }}</span>
+                                    </div>
+                                </div>
+                                </div>
+                                @endforeach
+                                <div class="comment-form mt-3">
+                                    <form id="commentForm_{{ $d->laporan_id}}" method="POST" action="{{route('comments.store')}}">
+                                        @csrf
+                                        <input type="hidden" name="laporan_id" value="{{ $d->laporan_id }}">
+                                        <div class="form-group">
+                                            <input type="hidden" name="author" value="{{ $d->user_id }}">
+                                        </div>
+                                        <div class="form-group">
+                                            <textarea class="form-control" name="comment" rows="3" placeholder="Your Comment" required></textarea>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary" data-target="commentForm_">Submit Comment</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+@endforeach
 {{--<script>
     $(document).ready(function() {
         $('.Read_More').on('click', function() {
@@ -45,45 +83,50 @@
 </script>
 
 {{-- modal for read comment --}}
-<div class="modal fade" id="comment_{{ $key }}" tabindex="-1" role="dialog"
-    aria-labelledby="commentTitle_{{ $key }}" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-body mb-4">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="mail-container">
-                            <div class="mail-header">
-                                <div class="mail-title">
-                                    {{ $d->judul }}
-                                </div>--}}
+@foreach($data as $d)
+    <div class="modal fade" id="datacomment_{{ $d->laporan_id }}" tabindex="-1" role="dialog" aria-labelledby="commentTitle_{{ $d->laporan_id }}" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-body mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="mail-container">
+                                <div class="mail-header">x`x`
+                                    <div class="mail-title">
+                                        {{ $d->judul }}
+                                    </div>
+                                </div>
+
                                 <div class="mail-info">
                                     <div class="mail-author">
                                         <img src="{{ asset('storage/photo-acara/orang.png') }}" alt="">
                                         <div class="mail-author-info">
-                                            <span class="mail-author-name">Ahmad susanto</span>
-                                            <p>Aduh lama banget ini dibenerinnya tolong dong cepet</p>
+                                            <span class="mail-author-name">{{ $d->author }}</span>
+                                            <p>{{ $d->comment }}</p>
                                         </div>
                                     </div>
                                     <div class="mail-other-info">
-                                        <span>18:01</span>
+                                        <span>{{ $d->created_at }}</span>
                                     </div>
                                 </div>
+                                <!-- Menampilkan Komentar Terkait -->
                                 <div class="mail-text">
-                                </div>
-                                <div class="mail-info">
-                                    <div class="mail-author">
-                                        <img src="{{ asset('storage/photo-acara/orang.png') }}" alt="">
-                                        <div class="mail-author-info">
-                                            <span class="mail-author-name">Siti Ropeah</span>
-                                            <p>Aduh Bau banget nihhhhhh</p>
+                                    @foreach($d->comments as $comment)
+                                        <div class="comment">
+                                            <div class="mail-info">
+                                                <div class="mail-author">
+                                                    <img src="{{ asset('storage/photo-acara/orang.png') }}" alt="">
+                                                    <div class="mail-author-info">
+                                                        <span class="mail-author-name">{{ $comment->user->username }}</span>
+                                                        <p>{{ $comment->content }}</p>
+                                                    </div>
+                                                </div>
+                                                <div class="mail-other-info">
+                                                    <span>{{ $comment->created_at }}</span>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="mail-other-info">
-                                        <span>18:05</span>
-                                    </div>
-                                </div>
-                                <div class="mail-text mb-3">
+                                    @endforeach
                                 </div>
                             </div>
                         </div>
@@ -92,7 +135,6 @@
             </div>
         </div>
     </div>
-
 @endforeach
 
 <script>
@@ -101,5 +143,32 @@
             var modalId = $(this).data('target');
             $(modalId).modal('show');
         });
+    });
+</script>
+{{-- jQuery to handle form submission --}}
+<script>
+    $(document).ready(function() {
+        @foreach($data as $d)
+            $('#commentForm_{{ $d->laporan_id }}').on('submit', function(event) {
+                event.preventDefault();
+                var formData = $(this).serialize();
+                
+                $.ajax({
+                    url: '{{ route('laporan.storecomment') }}',
+                    type: 'POST',
+                    data: formData,
+                    success: function(response) {
+                        if (response.success) {
+                            location.reload(); // Refresh the page to display the new comment
+                        } else {
+                            alert('Failed to submit comment');
+                        }
+                    },
+                    error: function() {
+                        alert('Error submitting comment');
+                    }
+                });
+            });
+        @endforeach
     });
 </script>
