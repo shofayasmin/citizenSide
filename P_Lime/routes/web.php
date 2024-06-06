@@ -134,7 +134,8 @@ route::get('/laporan/track', [LaporanController::class, 'track'])->name('laporan
 route::get('/laporan/edit/{id}', [LaporanController::class, 'edit'])->name('laporan.edit')->middleware('not.warga');
 route::post('/laporan/store', [LaporanController::class, 'store'])->name('laporan.store')->middleware('not.warga');
 Route::post('/laporan/update-status', [LaporanController::class, 'updateStatus'])->name('laporan.updateStatus');
-
+Route::post('/laporan/{id}/comment', [LaporanController::class, 'addComment'])->name('laporan.addComment');
+route::post('/laporan/storecomment', [LaporanController::class, 'storecomment'])->name('laporan.storecomment')->middleware('not.warga');
 
 
 
@@ -164,6 +165,3 @@ Route::get('/cek-nik', [CitizenController::class, 'showCekNIKForm']);
 
 // Rute untuk menangani permintaan POST untuk memeriksa NIK
 Route::post('/cek-nik', [CitizenController::class, 'cekNIK']);
-
-// Comment
-Route::post('/comments', [CommentController::class, 'store'])->name('comments.store');

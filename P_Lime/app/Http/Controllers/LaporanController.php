@@ -16,19 +16,12 @@ class LaporanController extends Controller
      * Display a listing of the resource.
      */
     public function view()
-    {
+    {      
         
-        $data = Laporan::with('comments')->get();
-        $data = Laporan::orderByRaw("FIELD(status,'Belum Selesai', 'Selesai')")
-        ->with('comments')
-        ->get();
-        // $komentar = Comment::join('laporans','comments.laporan_id ', '=', 'laporans.laporan_id');      
+        $data = laporan::with('comments.user')->get();
+        $comments = Comment::all();
 
-
-        $data = laporan::join('comments', 'laporan_id', '=', 'comments.laporan_id')->get();
-
-
-        return view('laporan.view',compact('data'));
+        return view('laporan.view',compact('data','comments'));
         
     }
 
@@ -57,9 +50,34 @@ class LaporanController extends Controller
     {
         //
     }
+
+    public function storecomment(Request $request)
+    {
+
+        // dd($request->all());
+        $validator = Validator::make($request->all(),[
+            'laporan_id' => 'required',
+            'author' => 'required',
+            'comment' => 'required',
+        ]);
+
+        // if($validator->fails()) return redirect()->back()->withInput()->withErrors($validator);
+
+        $data['laporan_id'] = $request->laporan_id; 
+        $data['author'] = $request->author; 
+        $data['comment'] =  $request->comment;
+        
+
+        Comment::create($data);
+
+        // return redirect()->route('citizen.kk');
+        return redirect()->back()->with('success', 'Comment added successfully!');
+    }
+
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
+            
             'judul'         => 'required',
             'pengirim'         => 'required',
             'deskripsi'     => 'required',
@@ -175,6 +193,21 @@ public function index()
     $data = Laporan::with('comments')->get();
     return view('your-view', compact('data'));
 }
+
+public function addComment(Request $request, $laporan_id)
+    {
+        $request->validate([
+            'content' => 'required',
+        ]);
+
+        Comment::create([
+            'laporan_id' => $laporan_id,
+            'user_id' => auth()->id(),
+            'content' => $request->content,
+        ]);
+
+        return redirect()->back();
+    }
 
 
 }

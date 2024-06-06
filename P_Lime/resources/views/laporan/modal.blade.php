@@ -82,22 +82,24 @@
                                     </div>
                                 </div>
                                 <div class="comments-container">
-                                   
-                                    <div class="mail-info">
-                                        <div class="mail-author">
-                                            <img src="{{ asset('storage/photo-acara/orang.png') }}" alt="">
-                                            <div class="mail-author-info">
-                                                <span class="mail-author-name">{{ $d->author }}</span>
-                                                <p>{{ $d->comment }}</p>
-                                            </div>
-                                        </div>
-                                        <div class="mail-other-info">
-                                            <span>{{ $d->created_at->format('H:i') }}</span>
-                                        </div>
-                                    </div>
+                                   @foreach ($comments as $c)
+                                       
+                                   <div class="mail-info">
+                                       <div class="mail-author">
+                                           <img src="{{ asset('storage/photo-acara/orang.png') }}" alt="">
+                                           <div class="mail-author-info">
+                                               <span class="mail-author-name">{{ $c->author }}</span>
+                                               <p>{{ $c->comment }}</p>
+                                           </div>
+                                       </div>
+                                       <div class="mail-other-info">
+                                           <span>{{ $d->created_at->format('H:i') }}</span>
+                                       </div>
+                                   </div>
                                 </div>
+                                @endforeach
                                 <div class="comment-form mt-3">
-                                    <form id="commentForm_{{ $d->id_laporan_id}}" method="POST" action="{{route('comments.store')}}">
+                                    <form id="commentForm_{{ $d->id_laporan_id}}" method="POST" action="{{route('laporan.storecomment')}}">
                                         @csrf
                                         <input type="hidden" name="laporan_id" value="{{ $d->laporan_id }}">
                                         <div class="form-group">
@@ -167,7 +169,7 @@
                 var formData = $(this).serialize();
                 
                 $.ajax({
-                    url: '{{ route('comments.store') }}',
+                    url: '{{ route('laporan.storecomment') }}',
                     type: 'POST',
                     data: formData,
                     success: function(response) {
