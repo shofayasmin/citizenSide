@@ -21,23 +21,14 @@
             <li class="sidebar-title">
                 Dashboard
             </li>
-<<<<<<< HEAD
-            @canany(['rw', 'sekretaris', 'rt'])
-=======
-            
->>>>>>> 93fb73d1fd064aac7e0aed0eeb0d1368ba3fc5f5
             <li>
                 <a href="{{ route('dashboard.rw') }}" class="{{ Request::routeIs('dashboard.rw') ? 'active' : '' }}">
                     <i class="material-icons">dashboard</i>Dashboard
                 </a>
-<<<<<<< HEAD
             </li>
-            @endcanany
+            
             
 
-=======
-            </li> 
->>>>>>> 93fb73d1fd064aac7e0aed0eeb0d1368ba3fc5f5
 
             <li class="page {{ Request::is('laporan*') ? 'active-page' : '' }}">
                 <a href="#"><i class="material-icons">report</i>Laporan<i

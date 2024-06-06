@@ -78,7 +78,7 @@
                     <div class="hero-inner">
 						<div class="hero-copy">
 	                        <h1 class="hero-title mt-0">Landing template for Sistem Informasi RW</h1>
-	                        <p class="hero-paragraph">Landing Page Bekerja di Semua Device, Jadi {{ $user->username }} tidak usah khawatir, Dan dapatkan hasil yang indah selamanya</p>
+	                        <p class="hero-paragraph">Landing Page Bekerja di Semua Device, Jadi pengguna tidak usah khawatir, Dan dapatkan hasil yang indah selamanya</p>
 							<div class="hero-form field field-grouped">
 								{{-- <div class="control control-expanded">
 									<input class="input" type="email" name="email" placeholder="Your best email&hellip;">
