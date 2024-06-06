@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Warga;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -18,8 +19,8 @@ class OrganisasiFactory extends Factory
     {
         return [
             'nama_organisasi' => fake()->unique()->word(),
-            'ketua' => fake()->name,
-            'wakil' => fake()->name,
+            'ketua' => Warga::inRandomOrder()->first()?->nik,
+            'wakil' => Warga::inRandomOrder()->first()?->nik,
             'jumlah_anggota' => fake()->numberBetween(1,4),
         ];
     }

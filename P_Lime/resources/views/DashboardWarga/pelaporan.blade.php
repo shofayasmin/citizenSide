@@ -30,7 +30,7 @@
                                                 </div>
                                             @endif
                                             <input type="hidden" name="pengirim"
-                                                value="{{ auth()->user()->username }}">
+                                                value="{{ auth()->user()->user_nik }}">
                                             <div class="form-group">
                                                 <label for="exampleFormControlInput1">Judul Laporan</label>
                                                 <input type="text" name="judul" class="form-control"

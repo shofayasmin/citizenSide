@@ -37,6 +37,13 @@
                 <form action="{{ route('income.store') }}" method="POST">
                     @csrf
                     <div class="form-group" style="margin-left: 10px; margin-right: 10px;">
+                        <label for="date">Tanggal</label>
+                        <input type="date" class="form-control" name="date" id="date" aria-describedby="emailHelp">
+                        @error( 'date' )
+                            <small>{{ $message }}</small>
+                        @enderror
+                    </div>
+                    <div class="form-group" style="margin-left: 10px; margin-right: 10px;">
                         <label for="income_name">Nama Pemasukan</label>
                         <input type="form" class="form-control" name="income_name" id="income_name" aria-describedby="emailHelp" placeholder="Masukkan Nama Pemasukan">
                         @error( 'income_name' )
@@ -91,8 +98,18 @@
                     @csrf
                     @method('PUT')
                     <div class="form-group">
+                        <label for="date">Tanggal</label>
+                        <input type="date" class="form-control" id="date" name="date"  value="{{ $income->date }}">
+                        @error( 'date' )
+                            <small>{{ $message }}</small>
+                        @enderror
+                    </div>
+                    <div class="form-group">
                         <label for="income_name">Nama Pemasukan</label>
                         <input type="text" class="form-control" id="income_name" name="income_name" value="{{ $income->income_name }}">
+                        @error( 'income_name' )
+                            <small>{{ $message }}</small>
+                        @enderror
                     </div>
                     <div class="form-group">
                         <label for="income_type">Tipe Pemasukan</label>
@@ -106,10 +123,16 @@
                     <div class="form-group">
                         <label for="description">Deskripsi</label>
                         <textarea class="form-control" id="description" name="description" rows="3">{{ $income->description }}</textarea>
+                        @error( 'description' )
+                            <small>{{ $message }}</small>
+                        @enderror
                     </div>
                     <div class="form-group">
                         <label for="inflow">Inflow</label>
                         <input type="number" class="form-control" id="inflow" name="inflow" value="{{ $income->inflow }}">
+                        @error( 'inflow' )
+                            <small>{{ $message }}</small>
+                        @enderror
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary">Simpan Perubahan</button>

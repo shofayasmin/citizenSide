@@ -37,6 +37,13 @@
                 <form action="{{ route('expenditure.store') }}" method="POST">
                     @csrf
                     <div class="form-group" style="margin-left: 10px; margin-right: 10px;">
+                        <label for="date">Tanggal</label>
+                        <input type="date" class="form-control" name="date" id="date" aria-describedby="emailHelp">
+                        @error( 'date' )
+                            <small>{{ $message }}</small>
+                        @enderror
+                    </div>
+                    <div class="form-group" style="margin-left: 10px; margin-right: 10px;">
                         <label for="expenditure_name">Nama Pengeluaran</label>
                         <input type="text" class="form-control" id="expenditure_name" name="expenditure_name" aria-describedby="emailHelp" placeholder="Masukkan Nama Pengeluaran">
                         @error( 'expenditure_name' )
@@ -80,6 +87,13 @@
                 <form action="{{ route('expenditure.update',['id'=> $expenditure->expenditure_id]) }}" method="POST">
                     @csrf
                     @method('PUT')
+                    <div class="form-group">
+                        <label for="date">Tanggal</label>
+                        <input type="date" class="form-control" id="date" name="date"  value="{{ $expenditure->date }}">
+                        @error( 'date' )
+                            <small>{{ $message }}</small>
+                        @enderror
+                    </div>
                     <div class="form-group">
                         <label for="expenditure_name">Nama Pengeluaran</label>
                         <input type="text" class="form-control" id="expenditure_name" name="expenditure_name" value="{{ $expenditure->expenditure_name }}">

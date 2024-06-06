@@ -67,7 +67,7 @@
                                         <h5 class="card-title"></h5>
                                         <p class="card-text"></p>
                                         <small>{{ $d->created_at }}</small>
-                                        <h5 class="card-title">{{ $d->pengirim }}</h5>
+                                        <h5 class="card-title">{{ $d->warga->nama_lengkap }}</h5>
                                         <a href="#" class="badge badge-primary" data-toggle="modal" data-target="#Read_More_{{ $key }}">Read More</a>
                                         <div class="text-right">
                                             <a href="#" class="badge {{ $d->status == 'Belum Selesai' ? 'badge-danger' : 'badge-success' }} status-toggle" data-id="{{ $d->laporan_id }}">{{ $d->status }}</a>
@@ -78,62 +78,17 @@
                             @include('laporan.modal')
                         @endforeach
 
-                        <!-- Modal -->
-                        <div class="modal fade" id="myModal">
-                            <div class="modal-dialog modal-xl">
-                                <div class="modal-content">
-                                    <div class="timeline">
-                                        <div class="container-track left-container">
-                                            <img src="{{ asset('storage/photo-acara/counter1.png') }}" alt="">
-                                            <div class="text-box-track">
-                                                <h2>Alphabet Inc.</h2>
-                                                <small>2018-2020</small>
-                                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Est animi, eligendi debitis iusto eos repellat maiores at aliquam ut inventore, corrupti corporis sint beatae cupiditate facilis labore officiis architecto vitae.</p>
-                                                <span class="left-container-arrow"></span>
-                                            </div>
-                                        </div>
-                                        <div class="container-track right-container">
-                                            <img src="{{ asset('storage/photo-acara/counter2.png') }}" alt="">
-                                            <div class="text-box-track">
-                                                <h2>Amazon Inc.</h2>
-                                                <small>2019-2020</small>
-                                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Est animi, eligendi debitis iusto eos repellat maiores at aliquam ut inventore, corrupti corporis sint beatae cupiditate facilis labore officiis architecto vitae.</p>
-                                                <span class="right-container-arrow"></span>
-                                            </div>
-                                        </div>
-                                        <div class="container-track left-container">
-                                            <img src="{{ asset('storage/photo-acara/counter3.png') }}" alt="">
-                                            <div class="text-box-track">
-                                                <h2>Tesla Inc.</h2>
-                                                <small>2020-2021</small>
-                                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Est animi, eligendi debitis iusto eos repellat maiores at aliquam ut inventore, corrupti corporis sint beatae cupiditate facilis labore officiis architecto vitae.</p>
-                                                <span class="left-container-arrow"></span>
-                                            </div>
-                                        </div>
-                                        <div class="container-track right-container">
-                                            <img src="{{ asset('storage/photo-acara/counter4.png') }}" alt="">
-                                            <div class="text-box-track">
-                                                <h2>Toyota Inc.</h2>
-                                                <small>2019-2020</small>
-                                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Est animi, eligendi debitis iusto eos repellat maiores at aliquam ut inventore, corrupti corporis sint beatae cupiditate facilis labore officiis architecto vitae.</p>
-                                                <span class="right-container-arrow"></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
+                        
                         <!-- Skrip JavaScript -->
                         <script>
                             
                             $(document).ready(function() {
-                                @if (auth()->user()->role == 'citizen')
+                                @if (auth()->user()->role == 'rw')
                                     $('[data-toggle="modal"]').click(function() {
                                         var datacomment_ = $(this).data('target'); // Mendapatkan target modal dari atribut data-target
                                         $(targetModal).modal('show');
                                     });
-                                @elseif(auth()->user()->role == 'rw')
+                                @elseif(auth()->user()->role == 'citizen')
                                     $('[data-toggle="modal"]').click(function() {
                                         var comment_ = $(this).data('target'); // Mendapatkan target modal dari atribut data-target
                                         $(targetModal).modal('show');
