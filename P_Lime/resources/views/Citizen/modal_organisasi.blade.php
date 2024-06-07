@@ -39,28 +39,36 @@
             @csrf
             <div class="form-group" style="margin-left: 10px; margin-right: 10px;">
                 <label for="exampleInputEmail1">Nama Organisasi</label>
-                <input type="form" name="nama_organisasi" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Masukkan Nama Pemilik">
+                <input type="form" name="nama_organisasi" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Masukkan Nama Organisasi">
                 @error( 'nama_organisasi' )
                     <small>{{ $message }}</small>
                 @enderror
             </div>
             <div class="form-group" style="margin-left: 10px; margin-right: 10px;">
                 <label for="exampleInputEmail1">Nama Ketua Organisasi</label>
-                <input type="form" name="ketua" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="jl.smerewing jos 123">
+                <select name="ketua" id="exampleInputEmail1" class="form-control">
+                    @foreach($warga as $w)
+                    <option value="{{ $w->nik }}">{{ $w->nama_lengkap }}</option>
+                    @endforeach
+                </select>
                 @error( 'ketua' )
                     <small>{{ $message }}</small>
                 @enderror
             </div>               
             <div class="form-group" style="margin-left: 10px; margin-right: 10px;">
                 <label for="exampleInputEmail1">Nama Wakil Organisasi</label>
-                <input type="form" name="wakil" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Cukup masukkan Angka saja">
+                <select name="wakil" id="exampleInputEmail1" class="form-control">
+                    @foreach($warga as $w)
+                    <option value="{{ $w->nik }}">{{ $w->nama_lengkap }}</option>
+                    @endforeach
+                </select>
                 @error( 'wakil' )
                     <small>{{ $message }}</small>
                 @enderror
             </div>               
             <div class="form-group" style="margin-left: 10px; margin-right: 10px;">
                 <label for="exampleInputEmail1">Jumlah Anggota</label>
-                <input type="form" name="jumlah_anggota" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Cukup masukkan Angka saja">
+                <input type="number" name="jumlah_anggota" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Cukup masukkan Angka saja">
                 @error( 'jumlah_anggota' )
                     <small>{{ $message }}</small>
                 @enderror

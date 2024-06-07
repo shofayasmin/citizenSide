@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Comment;
 use App\Models\laporan;
+use App\Models\Warga;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
@@ -37,10 +38,8 @@ class LaporanController extends Controller
      */
     public function create()
     {
-
-        return view('laporan.create');
-
-
+        $warga = Warga::all();
+        return view('laporan.create', compact('warga'));
     }
 
     public function track()
