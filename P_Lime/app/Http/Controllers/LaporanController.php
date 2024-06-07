@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\laporan;
 use App\Models\Comment;
+use App\Models\laporan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Log;
 
 
 class LaporanController extends Controller
@@ -16,13 +15,21 @@ class LaporanController extends Controller
      * Display a listing of the resource.
      */
     public function view()
-    {      
-        
-        $data = laporan::with('comments.user')->get();
-        $comments = Comment::all();
+    {
+        $data = Laporan::with('warga','comments')
+        ->orderByRaw("FIELD(status,'Belum Selesai', 'Selesai')")->get();
 
-        return view('laporan.view',compact('data','comments'));
+        $data_tambahan = Laporan::with('comments.user')
+        ->orderByRaw("FIELD(status, 'Belum Selesai', 'Selesai')")
+        ->get();
+
+        $comment = Comment::all();
+
+
+        return view('laporan.view',compact('data','data_tambahan','comment'));
         
+        
+
     }
 
     /**
@@ -50,34 +57,9 @@ class LaporanController extends Controller
     {
         //
     }
-
-    public function storecomment(Request $request)
-    {
-
-        // dd($request->all());
-        $validator = Validator::make($request->all(),[
-            'laporan_id' => 'required',
-            'author' => 'required',
-            'comment' => 'required',
-        ]);
-
-        // if($validator->fails()) return redirect()->back()->withInput()->withErrors($validator);
-
-        $data['laporan_id'] = $request->laporan_id; 
-        $data['author'] = $request->author; 
-        $data['comment'] =  $request->comment;
-        
-
-        Comment::create($data);
-
-        // return redirect()->route('citizen.kk');
-        return redirect()->back()->with('success', 'Comment added successfully!');
-    }
-
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            
             'judul'         => 'required',
             'pengirim'         => 'required',
             'deskripsi'     => 'required',
@@ -88,20 +70,30 @@ class LaporanController extends Controller
             return redirect()->back()->withInput()->withErrors($validator);
         }
         
+        
+        if(request()->has('gambar')){
+            $image = request()->file('gambar')->store('buktiLaporan', 'public');
+        }
+        
+        // $photo = $request->file('gambar');
+        // $filename = date('Y-m-d') . $photo->getClientOriginalName();
+        // $path = 'photo-acara/' . $filename;
 
-        $photo = $request->file('gambar');
-        $filename = date('Y-m-d') . $photo->getClientOriginalName();
-        $path = 'photo-acara/' . $filename;
-
-        Storage::disk('public')->put($path,file_get_contents($photo));
+        // Storage::disk('public')->put($path,file_get_contents($photo));
 
         $data['judul'] = $request->judul;
         $data['pengirim'] = $request->pengirim;
-        $data['deskripsi'] = $request->deskripsi;;
-        $data['gambar'] = $filename;
+        $data['deskripsi'] = $request->deskripsi;
+        $data['status'] = 'Belum Selesai';
+        $data['gambar'] = $image;
 
         laporan::create($data);
 
+        session()->flash('success', 'Laporan telah berhasil ditambahkan!');
+
+        if (auth()->user()->role === 'citizen'){
+            return redirect()->route('DashboardWarga.pelaporan');
+        }
         return redirect()->route('laporan.view');
     }
 
@@ -125,89 +117,46 @@ class LaporanController extends Controller
         ]);
 
         if($validator->fails()) return redirect()->back()->withInput()->withErrors($validator);
-        
+
+        if(request()->has('gambar')){
+            $image = request()->file('gambar')->store('buktiLaporan', 'public');
+        }
 
         // $data['nama_field_di_database'] = $request->nama_di_inputan;
         $data['judul'] = $request->judul;
         $data['pengirim'] = $request->pengirim;
         $data['deskripsi'] = $request->deskripsi;
-        $data['gambar'] = $request->gambar;
+        $data['gambar'] = $image;
         
 
         laporan::where('laporan_id',$id)->update($data);
         return redirect()->route('laporan.view');
     }
 
-    // public function updateStatus(Request $request)
-    // {
-    //     $laporan = Laporan::find($request->id);
-    //     if ($laporan) {
-    //         $laporan->status = $request->status;
-    //         $laporan->save();
-    //         return response()->json(['success' => true]);
-    //     }
-    //     return response()->json(['success' => false]);
-    // }
-
-//     public function updateStatus(Request $request)
-// {
-//     $laporan = Laporan::find($request->id);
-    
-//     if (!$laporan) {
-//         return response()->json(['success' => false, 'message' => 'Laporan not found']);
-//     }
-
-//     try {
-//         $laporan->status = $request->status;
-//         $laporan->save();
-//         return response()->json(['success' => true]);
-//     } catch (\Exception $e) {
-//         return response()->json(['success' => false, 'message' => $e->getMessage()]);
-//     }
-// }
-
-public function updateStatus(Request $request)
-{
-    Log::info('Update status request received', ['request' => $request->all()]);
-
-    $laporan = Laporan::find($request->id);
-    
-    if (!$laporan) {
-        Log::error('Laporan not found', ['id' => $request->id]);
-        return response()->json(['success' => false, 'message' => 'Laporan not found']);
+    public function updateStatus(Request $request)
+    {
+        $laporan = Laporan::find($request->id);
+        if ($laporan) {
+            $laporan->status = $request->status;
+            $laporan->save();
+            return response()->json(['success' => true]);
+        }
+        return response()->json(['success' => false]);
     }
-
-    try {
-        $laporan->status = $request->status;
-        $laporan->save();
-        Log::info('Status updated successfully', ['laporan' => $laporan]);
-        return response()->json(['success' => true]);
-    } catch (\Exception $e) {
-        Log::error('Error updating status', ['error' => $e->getMessage()]);
-        return response()->json(['success' => false, 'message' => $e->getMessage()]);
-    }
-}
-
-public function index()
-{
-    $data = Laporan::with('comments')->get();
-    return view('your-view', compact('data'));
-}
-
-public function addComment(Request $request, $laporan_id)
+    public function store_comment(Request $request)
     {
         $request->validate([
-            'content' => 'required',
+            'laporan_id' => 'required|exists:laporans,laporan_id',
+            'content' => 'required|string|max:255',
         ]);
 
         Comment::create([
-            'laporan_id' => $laporan_id,
-            'user_id' => auth()->id(),
+            'laporan_id' => $request->laporan_id,
+            'user_id' => auth()->user()->id,
             'content' => $request->content,
         ]);
 
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Comment added successfully.');
     }
-
 
 }

@@ -15,7 +15,8 @@ return new class extends Migration
             $table->id('id_kk');
             $table->string('no_kk',30)->unique();
             $table->text('alamat');
-            $table->string('nik_kepala_keluarga',30)->unique();
+            $table->string('nik_kepala_keluarga');
+            $table->foreign('nik_kepala_keluarga')->references('nik')->on('wargas');
             $table->integer('jumlah_usia_produktif');
             $table->integer('jumlah_anggota_kk');
             $table->integer('jumlah_usia_lanjut');

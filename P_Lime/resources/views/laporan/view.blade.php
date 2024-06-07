@@ -48,71 +48,138 @@
                 <div class="container">
                     
                     <div class="row">
-                        @foreach($data as $key => $d)
+
+                        
+                        @foreach ($data as $key => $d)
                             <div class="col-10">
                                 <div class="card">
+                                    @php
+                                        $allowedRoles = ['secretary', 'rw', 'rt']; // Daftar peran yang diizinkan
+                                    @endphp
                                     <div class="card-header d-flex justify-content-between align-items-center">
                                         <h3 class="mt-3">{{ $d->judul }}</h3>
-                    
-                                        @if (auth()->user()->role == 'rw')
-                                            <img src="{{ asset('storage/photo-acara/comment1.png') }}" width="25" data-toggle="modal" data-target="#datacomment_{{ $d->id }}">
-                                        @elseif(auth()->user()->role == 'citizen')
-                                            <img src="{{ asset('storage/photo-acara/comment1.png') }}" width="25" data-toggle="modal" data-target="#comment_{{ $d->id }}">
+                                        @if(auth()->check() && auth()->user()->role == 'rw')
+                                            <img src="{{ asset('storage/photo-acara/comment1.png') }}" width="25" data-toggle="modal" data-target="#comment_{{ $d->laporan_id }}">
+                                        @endif
+                                        @if(auth()->check() && in_array(auth()->user()->role, $allowedRoles))
+                                            <img src="{{ asset('storage/photo-acara/comment1.png') }}" width="25" data-toggle="modal" data-target="#datacomment_{{ $d->laporan_id }}">
                                         @endif
                                     </div>
                                     <div class="card-body">
+                                        <h5 class="card-title"></h5>
+                                        <p class="card-text"></p>
                                         <small>{{ $d->created_at }}</small>
-                                        <h5 class="card-title">{{ $d->pengirim }}</h5>
-                                        <a href="#" class="badge badge-primary" data-toggle="modal" data-target="#Read_More_{{ $d->id }}">Read More</a>
+                                        @if ($d->warga)
+                                            <h5 class="card-title">{{ $d->warga->nama_lengkap }}</h5>
+                                        @else
+                                            <h5 class="card-title text-danger">Unknown Warga</h5>
+                                        @endif
+                                        <a href="#" class="badge badge-primary" data-toggle="modal" data-target="#Read_More_{{ $d->laporan_id }}">Read More</a>
                                         <div class="text-right">
-                                            <button class="btn {{ $d->status == 'Belum Selesai' ? 'btn-danger' : 'btn-success' }} status-toggle" data-id="{{ $d->id }}">
-                                                {{ $d->status }}
-                                            </button>
-                                        </div>
-                    
-                                        <!-- Display Comments -->
-                                        <div class="comments mt-3">
-                                            @foreach($d->comments as $comment)
-                                                <div class="comment">
-                                                    <strong>{{ $comment->user->username }}</strong>
-                                                    <p>{{ $comment->content }}</p>
-                                                </div>
-                                            @endforeach
+                                            <a href="#" class="badge {{ $d->status == 'Belum Selesai' ? 'badge-danger' : 'badge-success' }} status-toggle" data-id="{{ $d->laporan_id }}">{{ $d->status }}</a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                    
-                            <!-- Comment Modal for Citizen -->
-                            @if(auth()->user()->role == 'citizen')
-                                <div class="modal fade" id="comment_{{ $d->id }}" tabindex="-1" role="dialog" aria-labelledby="commentModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="commentModalLabel">Add Comment</h5>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
+                            @include('laporan.modal')
+                        @endforeach
+                        
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="myModal">
+                            <div class="modal-dialog modal-xl">
+                                <div class="modal-content">
+                                    <div class="timeline">
+                                        <div class="container-track left-container">
+                                            <img src="{{ asset('storage/photo-acara/counter1.png') }}" alt="">
+                                            <div class="text-box-track">
+                                                <h2>Alphabet Inc.</h2>
+                                                <small>2018-2020</small>
+                                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Est animi, eligendi debitis iusto eos repellat maiores at aliquam ut inventore, corrupti corporis sint beatae cupiditate facilis labore officiis architecto vitae.</p>
+                                                <span class="left-container-arrow"></span>
                                             </div>
-                                            <div class="modal-body">
-                                                <form action="{{ route('laporan.addComment', $d->id) }}" method="POST">
-                                                    @csrf
-                                                    <div class="form-group">
-                                                        <label for="content">Comment</label>
-                                                        <textarea name="content" class="form-control" id="content" rows="3" required></textarea>
-                                                    </div>
-                                                    <button type="submit" class="btn btn-primary">Submit</button>
-                                                </form>
+                                        </div>
+                                        <div class="container-track right-container">
+                                            <img src="{{ asset('storage/photo-acara/counter2.png') }}" alt="">
+                                            <div class="text-box-track">
+                                                <h2>Amazon Inc.</h2>
+                                                <small>2019-2020</small>
+                                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Est animi, eligendi debitis iusto eos repellat maiores at aliquam ut inventore, corrupti corporis sint beatae cupiditate facilis labore officiis architecto vitae.</p>
+                                                <span class="right-container-arrow"></span>
+                                            </div>
+                                        </div>
+                                        <div class="container-track left-container">
+                                            <img src="{{ asset('storage/photo-acara/counter3.png') }}" alt="">
+                                            <div class="text-box-track">
+                                                <h2>Tesla Inc.</h2>
+                                                <small>2020-2021</small>
+                                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Est animi, eligendi debitis iusto eos repellat maiores at aliquam ut inventore, corrupti corporis sint beatae cupiditate facilis labore officiis architecto vitae.</p>
+                                                <span class="left-container-arrow"></span>
+                                            </div>
+                                        </div>
+                                        <div class="container-track right-container">
+                                            <img src="{{ asset('storage/photo-acara/counter4.png') }}" alt="">
+                                            <div class="text-box-track">
+                                                <h2>Toyota Inc.</h2>
+                                                <small>2019-2020</small>
+                                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Est animi, eligendi debitis iusto eos repellat maiores at aliquam ut inventore, corrupti corporis sint beatae cupiditate facilis labore officiis architecto vitae.</p>
+                                                <span class="right-container-arrow"></span>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            @endif
-                    
-                            @include('laporan.modal', ['d' => $d])
-                        @endforeach
+                            </div>
+                        </div>
+
+                        <!-- Skrip JavaScript -->
+                        <script>
+                            $(document).ready(function(){
+                                // Mengaktifkan modal ketika gambar diklik
+                                $('#myModal').on('shown.bs.modal', function () {
+                                    $('#myModal').modal('show');
+                                });
+                            });
+                        </script>
+                        <!-- jQuery -->
+                        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                        <script>
+                            $(document).ready(function(){
+                                $('.status-toggle').on('click', function(event){
+                                    event.preventDefault(); // Mencegah tindakan default tautan
+                                    var $this = $(this);
+                                    var laporanId = $this.data('id');
+                                    var newStatus = $this.hasClass('badge-danger') ? 'Selesai' : 'Belum Selesai';
+                                    
+                                    $.ajax({
+                                        url: '{{ route('laporan.updateStatus') }}',
+                                        type: 'POST',
+                                        data: {
+                                            _token: '{{ csrf_token() }}',
+                                            id: laporanId,
+                                            status: newStatus
+                                        },
+                                        success: function(response) {
+                                            if (response.success) {
+                                                if ($this.hasClass('badge-danger')) {
+                                                    $this.removeClass('badge-danger').addClass('badge-success');
+                                                    $this.text('Selesai');
+                                                } else {
+                                                    $this.removeClass('badge-success').addClass('badge-danger');
+                                                    $this.text('Belum Selesai');
+                                                }
+                                            } else {
+                                                alert('Failed to update status');
+                                            }
+                                        },
+                                        error: function() {
+                                            alert('Error updating status');
+                                        }
+                                    });
+                                });
+                            });
+                        </script>
+
                     </div>
-                    
                 </div>
             </div>
         </div>
@@ -133,52 +200,5 @@
         <script src="{{ asset('lime/theme/assets/plugins/plupload/js/plupload.full.min.js')}}"></script>
         <script src="{{ asset('lime/theme/assets/plugins/plupload/js/jquery.plupload.queue/jquery.plupload.queue.min.js')}}"></script>
         <script src="{{ asset('lime/theme/assets/js/pages/plupload.js')}}"></script>
-        <!-- Skrip JavaScript -->
-        <script>
-            $(document).ready(function(){
-                // Mengaktifkan modal ketika gambar diklik
-                $('#myModal').on('shown.bs.modal', function () {
-                    $('#myModal').modal('show');
-                });
-            });
-        </script>
-        <!-- jQuery -->
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script>
-            $(document).ready(function(){
-                $('.status-toggle').on('click', function(event){
-                    event.preventDefault(); // Mencegah tindakan default tautan
-                    var $this = $(this);
-                    var laporanId = $this.data('id');
-                    var newStatus = $this.hasClass('badge-danger') ? 'Selesai' : 'Belum Selesai';
-                    
-                    $.ajax({
-                        url: '{{ route('laporan.updateStatus') }}',
-                        type: 'POST',
-                        data: {
-                            _token: '{{ csrf_token() }}',
-                            id: laporanId,
-                            status: newStatus
-                        },
-                        success: function(response) {
-                            if (response.success) {
-                                if ($this.hasClass('btn-danger')) {
-                                    $this.removeClass('btn-danger').addClass('btn-success');
-                                    $this.text('Selesai');
-                                } else {
-                                    $this.removeClass('btn-success').addClass('btn-danger');
-                                    $this.text('Belum Selesai');
-                                }
-                            } else {
-                                alert('Failed to update status');
-                            }
-                        },
-                        error: function() {
-                            alert('Error updating status');
-                        }
-                    });
-                });
-            });
-        </script>
     </body>
 </html>

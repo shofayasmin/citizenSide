@@ -5,10 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Umkm_Participation extends Model
+class Expenditure extends Model
 {
     use HasFactory;
+    protected $primaryKey = 'expenditure_id';
     protected $fillable = [
-        'user_id', 'umkm_id'
+        'expenditure_name', 
+        'amount', 
+        'description', 
+        'date',
     ];
 }

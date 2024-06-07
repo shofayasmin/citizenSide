@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -11,14 +10,14 @@
         <!-- The above 6 meta tags *must* come first in the head; any other head content must come *after* these tags -->
         
         <!-- Title -->
-        <title>Manage Citizen Data</title>
+        <title>Manage Iuran Data</title>
 
         <!-- Styles -->
         <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link href="{{ asset('lime/theme/assets/plugins/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
         <link href="{{ asset('lime/theme/assets/plugins/font-awesome/css/all.min.css')}}" rel="stylesheet">
-      
+
         <!-- Theme Styles -->
         <link href="{{ asset('lime/theme/assets/css/lime.min.css')}}" rel="stylesheet">
         <link href="{{ asset('lime/theme/assets/css/custom.css')}}" rel="stylesheet">
@@ -31,7 +30,7 @@
         <![endif]-->
     </head>
     <body>
-        
+
         @include('layouts.sidebar')
         
         @include('layouts.header')
@@ -39,91 +38,46 @@
         <div class="lime-container">
             <div class="lime-body">
                 <div class="container">
-                    
                     <div class="row">
                         <div class="col-md-12">
                             <div class="page-title">
-                                
                                 <nav aria-label="breadcrumb">
-                                  <ol class="breadcrumb breadcrumb-separator-1">
-                                    <li class="breadcrumb-item"><a href="#">Keuangan</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">#</li>
-                                    
-                                  </ol>
-                                  
+
                                 </nav>
                                 <h3>Iuran</h3>
-                                
                             </div>
                         </div>
                     </div>
-                    
                     <div class="row">
                         <div class="col-xl">
                             <div class="card">
                                 <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-xl">
-                                            <div class="card">
-                                                <div class="card-body">
-                                                    <h5 class="card-title">Data Keuangan</h5>
-                                                    <p>Berikut adalah Data Keuangan dari RW 003</code>.</p>
-                                                    <div class="text-right mb-3">
-                                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#rumah_tambah">
-                                                            Tambah Data Keuangan
-                                                        </button>
-                                                    </div>
-                                                    <div class="table-responsive">
-                                                        <table class="table">
-                                                            <thead>
-                                                                
-                                                                <tr>
-                                                                    <th scope="col">No</th>
-                                                                    <th scope="col">Tanggal</th>
-                                                                    <th scope="col">Pemasukan</th>
-                                                                    <th scope="col">Pengeluaran</th>
-                                                                    <th scope="col">Total</th>
-                                                                    <th scope="col">Deskripsi</th>
-                                                                    
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                                
-                                                                @foreach ($iuran as $i)
-                                                                    
-                                                                <tr>
-                                                                    <th scope="row">{{ $i->iuran_id }}</th>
-                                                                    <td>{{ $i->tanggal}}</td>
-                                                                    <td>Rp. {{ $i->pemasukan }}</td>
-                                                                    <td>Rp. {{ $i->pengeluaran }}</td>
-                                                                    <td>Rp. {{ $i->total }}</td>
-                                                                    <td>{{ $i->deskripsi }}</td>
-                                                                </tr>
-                                                                @endforeach 
-                                                                
-                                                                
-
-                                                                
-                                                                
-                                                                
-                                                               
-                                                            </tbody>
-                                                            
-                                                        </table>
-                                                        <a href="{{ route('citizen.index') }}"> <- Kembali</a>
-                                                    </div>      
                                                 </div>
                                             </div>
-                                        </div>
-                                    </div>
+
+                                        {{-- <div class="custom-file">
+                                            <label for=""></label>
+                                            <input type="file" class="custom-file-input" id="customFile">
+                                            <label class="custom-file-label" for="customFile">Upload Image</label>
+                                        </div> --}}
+                                                            
+                                        {{-- <button type="submit" class="btn btn-primary mt-3">Submit</button> --}}
+                                    </form>
                                 </div>
                             </div>
                         </div>
                     </div>
                     
-
-                    
-            
+            <div class="lime-footer">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <span class="footer-text"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         
         
         <!-- Javascripts -->

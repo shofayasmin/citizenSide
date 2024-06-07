@@ -5,13 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Contribution extends Model
+class UmkmParticipation extends Model
 {
     use HasFactory;
-    protected $primaryKey = 'contribution_id';
+    protected $table = 'umkm_participations';
+
     protected $fillable = [
-        'contribution_name', 
-        'payment_status', 
-        'amount', 
+        'user_id', 'umkm_id'
     ];
 }

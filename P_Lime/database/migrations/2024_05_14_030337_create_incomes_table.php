@@ -11,10 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('cashes', function (Blueprint $table) {
-            $table->id('cash_id');
-            $table->date('range_time');
-            $table->integer('total_money');
+        Schema::create('incomes', function (Blueprint $table) {
+            $table->date('date');
+            $table->id('income_id');
+            $table->string('income_name');
+            $table->enum('income_type', ['Iuran Warga', 'Sumbangan', 'Usaha RW', 'Bantuan Pemerintah']);
+            $table->integer('inflow');
             $table->string('description');
             $table->timestamps();
         });
@@ -25,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('cashes');
+        Schema::dropIfExists('incomes');
     }
 };

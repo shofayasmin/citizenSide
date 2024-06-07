@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Contribution;
+use App\Models\Income;
 use App\Models\Iuran;
 use App\Http\Requests\StoreIuranRequest;
 use App\Http\Requests\UpdateIuranRequest;
+use App\Models\Expenditure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -18,73 +20,158 @@ class IuranController extends Controller
         return view('Iuran.index',compact('iuran'));
     }
 
-    
-    public function bayar()
+    public function income()
     {
-        $bayar = Contribution::get();
-        return view('Iuran.bayar',compact('bayar'));
+        $income = Income::get();
+        return view('Iuran.income',compact('income'));
     }
     
-    public function store_iuran(Request $request)
+    public function expenditure()
+    {
+        $expenditure = Expenditure::get();
+        return view('Iuran.expenditure',compact('expenditure'));
+    }
+
+    //Income (Pemasukan)
+    public function store_income(Request $request)
     {
         $validator = Validator::make($request->all(),[
-            'contribution_name' => 'required',
-            'payment_status' => 'required',
-            'amount' => 'required',
+            'income_name' => 'required',
+            'income_type' => 'required',
+            'description' => 'required',
+            'inflow' => 'required',
+            'date' => 'required',
         ]);
         
         if($validator->fails()) return redirect()->back()->withInput()->withErrors($validator);
 
         // $data['nama_field_di_database'] = $request->nama_di_inputan;
-        $bayar['contribution_name'] = $request->contribution_name; 
-        $bayar['payment_status'] = $request->payment_status; 
-        $bayar['amount'] =  $request->amount;
+        $income['income_name'] = $request->income_name; 
+        $income['income_type'] = $request->income_type; 
+        $income['description'] = $request->description;
+        $income['inflow'] =  $request->inflow;
+        $income['date'] = $request->date;
+        
+        Income::create($income);
 
-        Contribution::create($bayar);
-
-        return redirect()->route('iuran.bayar');
+        return redirect()->route('iuran.income');
     }
 
-    public function edit_iuran(Request $request,$id)
+    public function edit_income(Request $request,$id)
     {
-        $data = Contribution::find($id);
+        $data = Income::find($id);
         
-        return view('iuran.edit',compact('data'));
+        return view('income.edit',compact('data'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update_iuran(Request $request,$id)
+    public function update_income(Request $request,$id)
     {
         
         $validator = Validator::make($request->all(),[
-            'contribution_name' => 'required',
-            'payment_status' => 'required',
-            'amount' => 'required',
+            'income_name' => 'required',
+            'income_type' => 'required',
+            'description' => 'required',
+            'inflow' => 'required',
+            'date' => 'required',
         ]);
 
         if($validator->fails()) return redirect()->back()->withInput()->withErrors($validator);
 
         // $data['nama_field_di_database'] = $request->nama_di_inputan;
-        $bayar['contribution_name'] = $request->contribution_name; 
-        $bayar['payment_status'] = $request->payment_status; 
-        $bayar['amount'] =  $request->amount;
+        $income['income_name'] = $request->income_name; 
+        $income['income_type'] = $request->income_type; 
+        $income['description'] = $request->description;
+        $income['inflow'] =  $request->inflow;
+        $income['date'] = $request->date;
 
-        Contribution::where('contribution_id',$id)->update($bayar);
+        Income::where('income_id',$id)->update($income);
 
-        return redirect()->route('iuran.bayar');
+        return redirect()->route('iuran.income');
     }
 
     
-    public function delete_iuran(Request $request,$id)
+    public function delete_income(Request $request,$id)
     {
-        $data = Contribution::find($id);
+        $data = Income::find($id);
 
         if($data){
             $data->delete();
         }
 
-        return redirect()->route('iuran.bayar');
+        return redirect()->route('iuran.income');
+    }
+
+
+    //Expenditure (Pengeluaran)
+    
+    public function store_expenditure(Request $request)
+    {
+        $validator = Validator::make($request->all(),[
+            'date' => 'required',
+            'expenditure_name' => 'required',
+            'amount' => 'required',
+            'description' => 'required',
+        ]);
+        
+        if($validator->fails()) return redirect()->back()->withInput()->withErrors($validator);
+
+        // $data['nama_field_di_database'] = $request->nama_di_inputan;
+        $expenditure['date'] = $request->date; 
+        $expenditure['expenditure_name'] = $request->expenditure_name; 
+        $expenditure['amount'] = $request->amount; 
+        $expenditure['description'] = $request->description;
+
+        Expenditure::create($expenditure);
+
+        return redirect()->route('iuran.expenditure');
+    }
+
+    public function edit_expenditure(Request $request,$id)
+    {
+        $data = Expenditure::find($id);
+        
+        return view('expenditure.edit',compact('data'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update_expenditure(Request $request,$id)
+    {
+        
+        $validator = Validator::make($request->all(),[
+            'date' => 'required',
+            'expenditure_name' => 'required',
+            'amount' => 'required',
+            'description' => 'required',
+        ]);
+
+        if($validator->fails()) return redirect()->back()->withInput()->withErrors($validator);
+
+        // $data['nama_field_di_database'] = $request->nama_di_inputan;
+        $expenditure['date'] = $request->date; 
+        $expenditure['expenditure_name'] = $request->expenditure_name; 
+        $expenditure['amount'] = $request->amount; 
+        $expenditure['description'] =  $request->description;
+        
+
+        Expenditure::where('expenditure_id',$id)->update($expenditure);
+
+        return redirect()->route('iuran.expenditure');
+    }
+
+    
+    public function delete_expenditure(Request $request,$id)
+    {
+        $data = Expenditure::find($id);
+
+        if($data){
+            $data->delete();
+        }
+
+        return redirect()->route('iuran.expenditure');
     }
 }

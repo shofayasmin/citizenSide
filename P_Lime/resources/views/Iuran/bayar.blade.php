@@ -18,7 +18,7 @@
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link href="{{ asset('lime/theme/assets/plugins/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
         <link href="{{ asset('lime/theme/assets/plugins/font-awesome/css/all.min.css')}}" rel="stylesheet">
-      
+
         <!-- Theme Styles -->
         <link href="{{ asset('lime/theme/assets/css/lime.min.css')}}" rel="stylesheet">
         <link href="{{ asset('lime/theme/assets/css/custom.css')}}" rel="stylesheet">
@@ -45,15 +45,15 @@
                             <div class="page-title">
                                 
                                 <nav aria-label="breadcrumb">
-                                  <ol class="breadcrumb breadcrumb-separator-1">
+                                <ol class="breadcrumb breadcrumb-separator-1">
                                     <li class="breadcrumb-item"><a href="#">Keuangan</a></li>
                                     <li class="breadcrumb-item active" aria-current="page">#</li>
                                     
-                                  </ol>
-                                  
+                                </ol>
+                                
                                 </nav>
                                 <h3>Pembayar</h3>
-                                
+
                             </div>
                         </div>
                     </div>
@@ -80,7 +80,7 @@
                                                                 <tr>
                                                                     <th scope="col">No</th>
                                                                     <th scope="col">Nama</th>
-                                                                    <th scope="col">Payment Status</th>
+                                                                    <th scope="col">Status Pembayaran</th>
                                                                     <th scope="col">Jumlah</th>
                                                                 </tr>
                                                             </thead>
@@ -111,7 +111,7 @@
                                                                 
                                                                 
                                                                 
-                                                               
+
                                                             </tbody>
                                                             
                                                         </table>

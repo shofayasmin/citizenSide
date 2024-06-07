@@ -14,8 +14,10 @@ return new class extends Migration
         Schema::create('organisasis', function (Blueprint $table) {
             $table->id('id_organisasi');
             $table->string('nama_organisasi',30);
-            $table->string('ketua',50);
-            $table->string('wakil',50);
+            $table->string('ketua');
+            $table->foreign('ketua')->references('nik')->on('wargas');
+            $table->string('wakil');
+            $table->foreign('wakil')->references('nik')->on('wargas');
             $table->integer('jumlah_anggota');
             $table->timestamps();
         });
