@@ -53,16 +53,28 @@
                         @foreach ($data as $key => $d)
                             <div class="col-10">
                                 <div class="card">
+                                    @php
+                                        $allowedRoles = ['secretary', 'rw', 'rt']; // Daftar peran yang diizinkan
+                                    @endphp
                                     <div class="card-header d-flex justify-content-between align-items-center">
                                         <h3 class="mt-3">{{ $d->judul }}</h3>
-                                        <img src="{{ asset('storage/photo-acara/comment1.png') }}" width="25" data-toggle="modal" data-target="#comment_{{ $key }}">
+                                        @if(auth()->check() && auth()->user()->role == 'rw')
+                                            <img src="{{ asset('storage/photo-acara/comment1.png') }}" width="25" data-toggle="modal" data-target="#comment_{{ $d->laporan_id }}">
+                                        @endif
+                                        @if(auth()->check() && in_array(auth()->user()->role, $allowedRoles))
+                                            <img src="{{ asset('storage/photo-acara/comment1.png') }}" width="25" data-toggle="modal" data-target="#datacomment_{{ $d->laporan_id }}">
+                                        @endif
                                     </div>
                                     <div class="card-body">
                                         <h5 class="card-title"></h5>
                                         <p class="card-text"></p>
                                         <small>{{ $d->created_at }}</small>
-                                        <h5 class="card-title">{{ $d->warga->nama_lengkap }}</h5>
-                                        <a href="#" class="badge badge-primary" data-toggle="modal" data-target="#Read_More_{{ $key }}">Read More</a>
+                                        @if ($d->warga)
+                                            <h5 class="card-title">{{ $d->warga->nama_lengkap }}</h5>
+                                        @else
+                                            <h5 class="card-title text-danger">Unknown Warga</h5>
+                                        @endif
+                                        <a href="#" class="badge badge-primary" data-toggle="modal" data-target="#Read_More_{{ $d->laporan_id }}">Read More</a>
                                         <div class="text-right">
                                             <a href="#" class="badge {{ $d->status == 'Belum Selesai' ? 'badge-danger' : 'badge-success' }} status-toggle" data-id="{{ $d->laporan_id }}">{{ $d->status }}</a>
                                         </div>
@@ -71,6 +83,7 @@
                             </div>
                             @include('laporan.modal')
                         @endforeach
+                        
 
                         <!-- Modal -->
                         <div class="modal fade" id="myModal">
