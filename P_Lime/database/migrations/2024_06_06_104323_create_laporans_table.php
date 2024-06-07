@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('laporans', function (Blueprint $table) {
             $table->id('laporan_id');
             $table->string('pengirim');
-            $table->foreign('pengirim')->references('user_nik')->on('users');
+            $table->foreign('pengirim')->references('nik')->on('wargas');
             $table->string('judul');
             $table->string('deskripsi');
             $table->string('gambar');

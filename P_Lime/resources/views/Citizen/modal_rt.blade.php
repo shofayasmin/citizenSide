@@ -37,7 +37,11 @@
             @csrf
             <div class="form-group" style="margin-left: 10px; margin-right: 10px;">
                 <label for="exampleInputEmail1">Nama RT</label>
-                <input type="form" name="nama_ketua" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Masukan Nama RT">
+                <select name="nik_ketua" id="exampleInputEmail1" class="form-control">
+                    @foreach ($warga as $w)
+                        <option value="{{ $w->nik }}">{{ $w->nama_lengkap }}</option>
+                    @endforeach
+                </select>
                 @error( 'nama_ketua' )
                     <small>{{ $message }}</small>
                 @enderror

@@ -9,8 +9,13 @@ class Rumah extends Model
 {
     use HasFactory;
     protected $primaryKey = 'rumah_id';
+
+    public function warga()
+    {
+        return $this->belongsTo(Warga::class, 'nik_pemilik', 'nik');
+    }
     protected $fillable = [
-        'nama_pemilik', 
+        'nik_pemilik', 
         'alamat', 
         'luas_bangunan', 
         'luas_tanah', 

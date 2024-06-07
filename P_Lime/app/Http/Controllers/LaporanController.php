@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comment;
 use App\Models\laporan;
+use App\Models\Warga;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
@@ -15,10 +17,20 @@ class LaporanController extends Controller
      */
     public function view()
     {
-        $data = Laporan::with('warga')
+        $data = Laporan::with('warga','comments')
         ->orderByRaw("FIELD(status,'Belum Selesai', 'Selesai')")->get();
-        return view('laporan.view',compact('data'));
+
+        $data_tambahan = Laporan::with('comments.user')
+        ->orderByRaw("FIELD(status, 'Belum Selesai', 'Selesai')")
+        ->get();
+
+        $comment = Comment::all();
+
+
+        return view('laporan.view',compact('data','data_tambahan','comment'));
         
+        
+
     }
 
     /**
@@ -26,10 +38,8 @@ class LaporanController extends Controller
      */
     public function create()
     {
-
-        return view('laporan.create');
-
-
+        $warga = Warga::all();
+        return view('laporan.create', compact('warga'));
     }
 
     public function track()
@@ -131,6 +141,21 @@ class LaporanController extends Controller
             return response()->json(['success' => true]);
         }
         return response()->json(['success' => false]);
+    }
+    public function store_comment(Request $request)
+    {
+        $request->validate([
+            'laporan_id' => 'required|exists:laporans,laporan_id',
+            'content' => 'required|string|max:255',
+        ]);
+
+        Comment::create([
+            'laporan_id' => $request->laporan_id,
+            'user_id' => auth()->user()->id,
+            'content' => $request->content,
+        ]);
+
+        return redirect()->back()->with('success', 'Comment added successfully.');
     }
 
 }

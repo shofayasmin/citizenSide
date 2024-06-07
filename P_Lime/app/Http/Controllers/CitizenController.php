@@ -25,9 +25,9 @@ class CitizenController extends Controller
     //RT
     public function rt()
     {
-        $data = Rt::get();
-
-        return view('Citizen.rt',compact('data'));
+        $data = Rt::with('warga')->get();
+        $warga = Warga::all();
+        return view('Citizen.rt',compact('data', 'warga'));
     }
     public function create_rt()
     {
@@ -36,7 +36,7 @@ class CitizenController extends Controller
     public function store_rt(Request $request)
     {
         $validator = Validator::make($request->all(),[
-            'nama_ketua' => 'required',
+            'nik_ketua' => 'required',
             'no_rt' => 'required',
             'mulai_masa_jabatan' => 'required',
             'berakhir_masa_jabatan' => 'required',
@@ -45,7 +45,7 @@ class CitizenController extends Controller
         if($validator->fails()) return redirect()->back()->withInput()->withErrors($validator);
 
         // $data['nama_field_di_database'] = $request->nama_di_inputan;
-        $data['nama_ketua'] = $request->nama_ketua; 
+        $data['nik_ketua'] = $request->nik_ketua; 
         $data['no_rt'] = $request->no_rt; 
         $data['mulai_masa_jabatan'] =  $request->mulai_masa_jabatan;
         $data['berakhir_masa_jabatan'] =  $request->berakhir_masa_jabatan;
@@ -63,7 +63,7 @@ class CitizenController extends Controller
     public function update_rt(Request $request,$id)
     {
         $validator = Validator::make($request->all(),[
-            'nama_ketua' => 'required',
+            'nik_ketua' => 'required',
             'no_rt' => 'required',
             'mulai_masa_jabatan' => 'required',
             'berakhir_masa_jabatan' => 'required',
@@ -72,7 +72,7 @@ class CitizenController extends Controller
         if($validator->fails()) return redirect()->back()->withInput()->withErrors($validator);
 
         // $data['nama_field_di_database'] = $request->nama_di_inputan;
-        $data['nama_ketua'] = $request->nama_ketua; 
+        $data['nik_ketua'] = $request->nik_ketua; 
         $data['no_rt'] = $request->no_rt; 
         $data['mulai_masa_jabatan'] =  $request->mulai_masa_jabatan;
         $data['berakhir_masa_jabatan'] =  $request->berakhir_masa_jabatan;
@@ -98,14 +98,23 @@ class CitizenController extends Controller
     public function kk()
     {
         $data = Kk::get();
-
-        return view('Citizen.kk',compact('data'));
+        $warga = Warga::all();
+        return view('Citizen.kk',compact('data', 'warga'));
     }
     public function create_kk(){
         return view('Citizen.create_kk');
     }
     public function store_kk(Request $request)
     {
+        if (Kk::where('no_kk', $request->no_kk)->exists()) {
+            $errorMessage = 'Nomor KK sudah ada.'; // Customize this message
+    
+            return redirect()->back()
+                ->withInput() // Preserve form data
+                ->withErrors([
+                    'no_kk' => $errorMessage, // Set the error message for 'no_kk' field
+                ]);
+        }
         $validator = Validator::make($request->all(),[
             'no_kk' => 'required',
             'alamat' => 'required',
@@ -180,7 +189,8 @@ class CitizenController extends Controller
     public function organisasi()
     {
         $data = Organisasi::get();
-        return view('Citizen.organisasi',compact('data'));
+        $warga = Warga::all();
+        return view('Citizen.organisasi',compact('data', 'warga'));
          
     }
     public function create_organisasi()
@@ -253,9 +263,9 @@ class CitizenController extends Controller
     // RUMAH
     public function rumah()
     {
-        $data = Rumah::get();
-
-        return view('Citizen.rumah',compact('data'));
+        $data = Rumah::with('warga')->get();
+        $warga = Warga::all();
+        return view('Citizen.rumah',compact('data', 'warga'));
     }
     public function create_rumah()
     {
@@ -264,7 +274,7 @@ class CitizenController extends Controller
     public function store_rumah(Request $request)
     {
         $validator = Validator::make($request->all(),[
-            'nama_pemilik' => 'required',
+            'nik_pemilik' => 'required',
             'alamat' => 'required',
             'luas_bangunan' => 'required',
             'luas_tanah' => 'required',
@@ -275,7 +285,7 @@ class CitizenController extends Controller
         if($validator->fails()) return redirect()->back()->withInput()->withErrors($validator);
 
         // $data['nama_field_di_database'] = $request->nama_di_inputan;
-        $data['nama_pemilik'] = $request->nama_pemilik; 
+        $data['nik_pemilik'] = $request->nik_pemilik; 
         $data['alamat'] = $request->alamat; 
         $data['luas_bangunan'] =  $request->luas_bangunan;
         $data['luas_tanah'] =  $request->luas_tanah;

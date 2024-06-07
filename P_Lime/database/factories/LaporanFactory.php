@@ -3,10 +3,11 @@
 namespace Database\Factories;
 
 use App\Models\User;
+use App\Models\Warga;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\laporan>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Laporan>
  */
 class LaporanFactory extends Factory
 {
@@ -19,7 +20,7 @@ class LaporanFactory extends Factory
     {
         return [
             'judul' => fake()->unique()->words(3, true),
-            'pengirim' => User::inRandomOrder()->first()?->user_nik,
+            'pengirim' => Warga::inRandomOrder()->first()?->nik,
             'gambar' => fake()->image(null, 120, 80, 'animals', true, true, 'cats', true, 'jpg'),
             'deskripsi' => fake()->unique()->text(100),
             'status' => fake()->randomElement(['Selesai','Belum Selesai']),
