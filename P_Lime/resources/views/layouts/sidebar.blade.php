@@ -21,22 +21,12 @@
             <li class="sidebar-title">
                 MENU
             </li>
-<<<<<<< HEAD
             
-=======
->>>>>>> c488f119df5b54dd746bd70ccfb583f58bb38baa
             <li>
                 <a href="{{ route('dashboard.rw') }}" class="{{ Request::routeIs('dashboard.rw') ? 'active' : '' }}">
                     <i class="material-icons">dashboard</i>Dashboard
                 </a>
-<<<<<<< HEAD
             </li> 
-=======
-            </li>
-
-
-
->>>>>>> c488f119df5b54dd746bd70ccfb583f58bb38baa
 
             <li class="page {{ Request::is('laporan*') ? 'active-page' : '' }}">
                 <a href="#"><i class="material-icons">report</i>Laporan<i

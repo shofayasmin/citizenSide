@@ -22,6 +22,9 @@ class laporan extends Model
         return $this->belongsTo(Warga::class, 'pengirim', 'nik');
     }
     
-    
+    public function comments()
+    {
+        return $this->hasMany(Comment::class,'laporan_id','laporan_id');
+    }
 
 }

@@ -138,6 +138,7 @@ route::get('/laporan/track', [LaporanController::class, 'track'])->name('laporan
 route::get('/laporan/edit/{id}', [LaporanController::class, 'edit'])->name('laporan.edit')->middleware('not.warga');
 route::post('/laporan/store', [LaporanController::class, 'store'])->name('laporan.store')->middleware('auth');
 Route::post('/laporan/update-status', [LaporanController::class, 'updateStatus'])->name('laporan.updateStatus');
+Route::post('/laporan/comments', [LaporanController::class, 'store_comment'])->name('comments.store');
 
 
 
