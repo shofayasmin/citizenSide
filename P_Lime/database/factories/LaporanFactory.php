@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -18,7 +19,7 @@ class LaporanFactory extends Factory
     {
         return [
             'judul' => fake()->unique()->words(3, true),
-            'pengirim' => fake()->unique()->name,
+            'pengirim' => User::inRandomOrder()->first()?->user_nik,
             'gambar' => fake()->image(null, 120, 80, 'animals', true, true, 'cats', true, 'jpg'),
             'deskripsi' => fake()->unique()->text(100),
             'status' => fake()->randomElement(['Selesai','Belum Selesai']),

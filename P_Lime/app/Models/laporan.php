@@ -16,6 +16,11 @@ class laporan extends Model
         'gambar', 
         'status',
     ];
+
+    public function warga()
+    {
+        return $this->belongsTo(Warga::class, 'pengirim', 'nik');
+    }
     
     
 
