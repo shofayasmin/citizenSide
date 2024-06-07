@@ -22,6 +22,17 @@
         <!-- Theme Styles -->
         <link href="{{ asset('lime/theme/assets/css/lime.min.css')}}" rel="stylesheet">
         <link href="{{ asset('lime/theme/assets/css/custom.css')}}" rel="stylesheet">
+        <style>
+            .popular-product-list {
+                margin-top: 20px;
+            }
+            .badge {
+                float: right;
+            }
+            .card-title {
+                text-align: center;
+            }
+        </style>
 
         
 
@@ -43,7 +54,8 @@
             <div class="lime-body">
                 <div class="container">
                     <div class="row">
-                        <div class="col-md-8">
+
+                        <div class="col-md">
                             <div class="card bg-info text-white">
                                 <div class="card-body">
                                     <div class="dashboard-info row">
@@ -62,19 +74,6 @@
                                 </div>
                             </div>
                         </div>
-
-                        <div class="col-md-4">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="">
-                                        <div class="">
-                                            <h5 class="card-title">Perbandingan Jumlah Perempuan <br>Laki-Laki</h5>
-                                            <canvas id="visitorsChart" width="400" height="400"></canvas>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>  
 
                     </div>
                     <div class="row">
@@ -113,7 +112,7 @@
                                 <div class="card-body">
                                     <h5 class="card-title">Umkm</h5>
                                     <h2 class="float-right">{{ $totalUmkm }}</h2>
-                                    <p>Total UMKM</p>
+                                    <a class="btn btn-link" href="{{ route('umkm.view') }}">Total UMKM</a >
                                     
                                 </div>
                             </div>
@@ -210,7 +209,44 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-12">
+
+                        <div class="row">
+                            
+                            <div class="col-md-12">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Usia yang Kerja dan Non Kerja</h5>
+                                        <div class="popular-products">
+                                            <canvas id="statusUsiaChart">Your browser does not support the canvas element.</canvas>
+                                            <div class="popular-product-list">
+                                                <ul class="list-unstyled">
+                                                    <li>
+                                                        <span>Usia Produktif Bekerja</span>
+                                                        <span class="badge badge-success">{{ number_format(($pie['kerja_produktif']/10)*100, 2) }}%</span>
+                                                    </li>
+                                                    <li>
+                                                        <span>Usia Non Produktif Bekerja</span>
+                                                        <span class="badge badge-warning">{{ number_format(($pie['kerja_non_produktif']/10)*100, 2) }}%</span>
+                                                    </li>
+                                                    <li>
+                                                        <span>Usia Produktif Tidak Bekerja</span>
+                                                        <span class="badge badge-secondary">{{ number_format(($pie['non_kerja_produktif']/10)*100, 2) }}%</span>
+                                                    </li>
+                                                    <li>
+                                                        <span>Usia Non Produktif Tidak Bekerja</span>
+                                                        <span class="badge badge-primary">{{ number_format(($pie['non_kerja_non_produktif']/10)*100, 2) }}%</span>
+                                                    </li>
+                                                </ul>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+
+                        <div class="col-md-8">
                             <div class="card">
                                 <div class="card-body">
                                     <h5 class="card-title">Bansos</h5>
@@ -455,6 +491,41 @@
             chart70.render();
         </script>
         
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                var ctx = document.getElementById('statusUsiaChart').getContext('2d');
+                new Chart(ctx, {
+                    type: 'pie',
+                    data: {
+                        labels: [
+                            'Kerja Usia Produktif', 
+                            'Kerja Usia Non Produktif', 
+                            'Non Kerja Usia Produktif', 
+                            'Non Kerja Usia Non Produktif'
+                        ],
+                        datasets: [{
+                            data: [
+                                {{ $pie['kerja_produktif'] }},
+                                {{ $pie['kerja_non_produktif'] }},
+                                {{ $pie['non_kerja_produktif'] }},
+                                {{ $pie['non_kerja_non_produktif'] }}
+                            ],
+                            backgroundColor: [
+                                '#06BA54', 
+                                '#FFCD36', 
+                                '#E6E6E6', 
+                                '#0000FF'
+                            ]
+                        }]
+                    },
+                    options: {
+                        legend: {
+                            display: false
+                        }
+                    }
+                });
+            });
+        </script>
         
         
 

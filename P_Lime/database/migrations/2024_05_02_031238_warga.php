@@ -25,6 +25,7 @@ return new class extends Migration
             $table->enum('status', ['Belum Kawin', 'Kawin', 'Cerai Hidup', 'Cerai Mati']);
             $table->string('pekerjaan',30);
             $table->string('kewarganegaraan',20);
+            $table->integer('usia');
             $table->string('domisili');
             $table->timestamps();
         });

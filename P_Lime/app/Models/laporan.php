@@ -17,4 +17,6 @@ class laporan extends Model
         'status',
     ];
     
+    
+
 }

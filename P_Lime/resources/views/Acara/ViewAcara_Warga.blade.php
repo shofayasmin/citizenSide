@@ -59,7 +59,7 @@
                 </div>
 
 
-                    {{--<div class="row">
+                    <div class="row">
                         <div class="col-xl">
                             <div class="container">
                                 @php $i = 0; @endphp
@@ -87,41 +87,8 @@
                                     @php $i++; @endphp
                                     @include('Acara.modal',['acara' => $d])
                                 @endforeach
-                            </div>--}}
-
-                <div class="row">
-                    <div class="col-xl">
-                        <div class="container">
-                            @php $i = 0; @endphp
-                            @foreach ($data as $key => $d)
-                                @if ($i % 3 == 0)
-                                    <div class="row row-cols-3">
-                                @endif
-                                <div class="col">
-                                    <div class="card">
-                                        <img src="{{ asset('storage/'.$d->image) }}" class="card-img-top"
-                                            alt="Placeholder" style="width: 100%; height: 200px; object-fit: cover;">
-                                        <div class="card-body">
-                                            <h5 class="card-title">{{ $d->judul }}</h5>
-                                            <p class="card-text">{{ $d->deskripsi }}</p>
-                                            <a href="#" class="badge badge-primary" data-toggle="modal"
-                                                data-target="#Read_More_{{ $key }}">Read More</a>
-                                            <div class="text-right">
-                                                <span class="badge badge-pill badge-info">{{ $d->tipe_acara }}</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                @if ($i % 3 == 2 || $loop->last)
-
-                        </div>
-                        @endif
-                        @php $i++; @endphp
-                        @include('Acara.modal')
-                        @endforeach
+                            </div>
                     </div>
-                </div>
-            </div>
 
 
             <div class="lime-footer">

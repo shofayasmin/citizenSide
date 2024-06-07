@@ -37,10 +37,12 @@ class WargaFactory extends Factory
             'Dokter',
             'Perawat',
             'Supir',
-            'Buruh',]),
+            'Buruh',
+            'Tidak Bekerja']),
 
             'kewarganegaraan' => 'Indonesia',
-            'domisili'  => fake()->address()
+            'domisili'  => fake()->address(),
+            'usia' => fake()->numberBetween(1,80)
         ];
     }
 }

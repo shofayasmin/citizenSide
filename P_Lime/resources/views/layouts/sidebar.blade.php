@@ -21,23 +21,12 @@
             <li class="sidebar-title">
                 Dashboard
             </li>
-<<<<<<< HEAD
-            @canany(['rw', 'sekretaris', 'rt'])
-=======
             
->>>>>>> 93fb73d1fd064aac7e0aed0eeb0d1368ba3fc5f5
             <li>
                 <a href="{{ route('dashboard.rw') }}" class="{{ Request::routeIs('dashboard.rw') ? 'active' : '' }}">
                     <i class="material-icons">dashboard</i>Dashboard
                 </a>
-<<<<<<< HEAD
-            </li>
-            @endcanany
-            
-
-=======
             </li> 
->>>>>>> 93fb73d1fd064aac7e0aed0eeb0d1368ba3fc5f5
 
             <li class="page {{ Request::is('laporan*') ? 'active-page' : '' }}">
                 <a href="#"><i class="material-icons">report</i>Laporan<i
@@ -75,34 +64,8 @@
                 <a href="#"><i class="material-icons">store</i>UMKM<i
                         class="material-icons has-sub-menu">keyboard_arrow_left</i></a>
                 <ul class="sub-menu">
-                    @canany(['sekretaris','rw'])
-                    <li>
-                        <a href="{{ route('umkm.register') }}">UMKM Register</a>
-                    </li>
-                    @endcanany
                     <li>
                         <a href="{{ route('umkm.view') }}">UMKM List</a>
-                    </li>
-                </ul>
-            </li>
-            
-
-            <li class="page {{ Request::is('acara*') || Request::is('umkm*') ? 'active-page' : '' }}">
-                <a href="#"><i class="material-icons">inbox</i>Acara<i class="material-icons has-sub-menu">keyboard_arrow_left</i></a>
-                <ul class="sub-menu">
-                    {{-- @can('rw')
-                    <li>
-                        <a href="{{ route('umkm.register') }}" >UMKM Register</a>
-                    </li>     
-                    @endcan --}}
-                    <li>
-                        <a href="{{ route('umkm.view') }}" >UMKM list</a>
-                    </li>     
-                    <li>
-                        <a href="{{ route('acara.manage') }}" >Manage Acara</a>
-                    </li>
-                    <li>
-                        <a href="{{ route('acara.view') }}" >View Acara</a>
                     </li>
                 </ul>
             </li>

@@ -25,10 +25,12 @@ class Warga extends Model
         'pekerjaan', 
         'kewarganegaraan', 
         'domisili', 
+        'usia'
     ];
     public function kk()
     {
         return $this->belongsTo(Kk::class, 'no_kk', 'no_kk');
     }
+    
 }
 

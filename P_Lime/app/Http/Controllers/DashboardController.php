@@ -61,6 +61,31 @@ class DashboardController extends Controller
         // Ambil data penyaluran bansos dari model
         $penyaluranBansos = Bansos::all();
 
+        //pie chart
+        $table_warga = Warga::all();
+        $pie= [
+            'kerja_produktif' => 0,
+            'kerja_non_produktif' => 0,
+            'non_kerja_produktif' => 0,
+            'non_kerja_non_produktif' => 0,
+        ];
+    
+        foreach ($table_warga as $w) {
+            if ($w->pekerjaan !== 'Tidak Bekerja') {
+                if ($w->usia >= 15 && $w->usia <= 64) {
+                    $pie['kerja_produktif']++;
+                } else {
+                    $pie['kerja_non_produktif']++;
+                }
+            } else {
+                if ($w->usia >= 15 && $w->usia <= 64) {
+                    $pie['non_kerja_produktif']++;
+                } else {
+                    $pie['non_kerja_non_produktif']++;
+                }
+            }
+        }
+
         return view('dashboard.rw',compact(
         'laporan',
         'dates',
@@ -73,7 +98,8 @@ class DashboardController extends Controller
         'pelapor',
         'lastUpdated',
         'warga',
-        'penyaluranBansos'));
+        'penyaluranBansos',
+        'pie'));
     }
     
 }
