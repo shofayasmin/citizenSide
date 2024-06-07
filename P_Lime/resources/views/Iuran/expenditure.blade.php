@@ -42,7 +42,7 @@
                             <div class="page-title">
                                 <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb breadcrumb-separator-1">
-                                    <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+                                    <li class="breadcrumb-item"><a href="{{ route('dashboard.rw') }}">Dashboard</a></li>
                                     <li class="breadcrumb-item">Keuangan</li>
                                     <li class="breadcrumb-item active" aria-current="page">Pengeluaran</li>
                                 </ol>

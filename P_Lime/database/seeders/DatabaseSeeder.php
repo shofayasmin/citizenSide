@@ -41,6 +41,9 @@ class DatabaseSeeder extends Seeder
         Rumah::factory(5)->create();
         laporan::factory(4)->create();
         Organisasi::factory(5)->create();
+        Income::factory(10)->create();
+        Expenditure::factory(10)->create();
+
 
         $this->call(CriteriaSeeder::class);
 
