@@ -31,6 +31,24 @@ class Warga extends Model
     {
         return $this->belongsTo(Kk::class, 'no_kk', 'no_kk');
     }
+    public static function boot()
+    {
+        parent::boot();
+
+        static::saved(function ($warga) {
+            if ($warga->kk) {
+                $warga->kk->updateCalculatedFields();
+                $warga->kk->save();
+            }
+        });
+
+        static::deleted(function ($warga) {
+            if ($warga->kk) {
+                $warga->kk->updateCalculatedFields();
+                $warga->kk->save();
+            }
+        });
+    }
     
 }
 

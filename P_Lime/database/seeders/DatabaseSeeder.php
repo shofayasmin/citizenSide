@@ -29,11 +29,19 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        Warga::factory(10)->create();
+        Warga::factory(100)->create();
+        // Get unique no_kk values from Warga
+        $uniqueNoKks = Warga::pluck('no_kk')->unique();
+
+        // Create KK records based on unique no_kk values
+        foreach ($uniqueNoKks as $noKk) {
+            KK::factory()->create([
+                'no_kk' => $noKk,
+            ]);
+        }
         User::factory(10)->create();
         umkm::factory(4)->create();
         Acara::factory(6)->create();
-        Kk::factory(6)->create();
         Iuran::factory(30)->create();
         Alternatives::factory(50)->create();
         Bansos::factory(10)->create();

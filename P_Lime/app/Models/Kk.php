@@ -21,4 +21,24 @@ class Kk extends Model
     {
         return $this->hasMany(Warga::class, 'no_kk', 'no_kk');
     }
+    public static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($kk) {
+            $kk->updateCalculatedFields();
+        });
+
+        static::updating(function ($kk) {
+            $kk->updateCalculatedFields();
+        });
+    }
+    public function updateCalculatedFields()
+    {
+        $wargas = $this->wargas;
+        
+        $this->jumlah_anggota_kk = $wargas->count();
+        $this->jumlah_usia_produktif = $wargas->whereBetween('usia', [15, 64])->count();
+        $this->jumlah_usia_lanjut = $wargas->where('usia', '>', 64)->count();
+    }
 }
