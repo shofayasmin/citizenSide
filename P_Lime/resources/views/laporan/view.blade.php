@@ -58,7 +58,7 @@
                                     @endphp
                                     <div class="card-header d-flex justify-content-between align-items-center">
                                         <h3 class="mt-3">{{ $d->judul }}</h3>
-                                        @if(auth()->check() && auth()->user()->role == 'citizen')
+                                        @if(auth()->check() && auth()->user()->role == 'secretary')
                                             <img src="{{ asset('storage/photo-acara/comment1.png') }}" width="25" data-toggle="modal" data-target="#comment_{{ $d->laporan_id }}">
                                         @endif
                                         @if(auth()->check() && in_array(auth()->user()->role, $allowedRoles))

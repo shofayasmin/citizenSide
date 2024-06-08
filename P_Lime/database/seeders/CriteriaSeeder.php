@@ -15,7 +15,7 @@ class CriteriaSeeder extends Seeder
     {
         $data = [
             [
-                'name' => 'Jumlah Usia Produktifv',
+                'name' => 'Jumlah Usia Produktif',
                 'weight' => 0.25,
                 
             ],
