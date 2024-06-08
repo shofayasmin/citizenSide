@@ -18,7 +18,7 @@ class ExpenditureFactory extends Factory
     {
         return [
             'expenditure_name' => fake()->text(),
-            'amount' => fake()->numberBetween(0, 1000000000),
+            'amount' => fake()->numberBetween(0, 100000000),
             'description' => fake()->text(),
             'date' => fake()->date('Y-m-d'),
         ];

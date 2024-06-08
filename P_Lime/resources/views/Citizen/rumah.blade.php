@@ -70,7 +70,7 @@
                                                     <p>Berikut adalah Data Data Rumah dari RW 003</code>.</p>
                                                     <div class="text-right mb-3">
                                                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#rumah_tambah">
-                                                            Tambah Acara
+                                                            Tambah Rumah
                                                         </button>
                                                     </div>
                                                     <div class="table-responsive">
@@ -92,7 +92,7 @@
                                                                     
                                                                 <tr>
                                                                     <th scope="row">{{ $d->rumah_id }}</th>
-                                                                    <td>{{ $d->nama_pemilik }}</td>
+                                                                    <td>{{ $d->warga->nama_lengkap }}</td>
                                                                     <td>{{ $d->alamat }}</td>
                                                                     <td>{{ $d->luas_bangunan }} m²</td>
                                                                     <td>{{ $d->luas_tanah }} m²</td>
