@@ -45,7 +45,6 @@ class IuranController extends Controller
         
         if($validator->fails()) return redirect()->back()->withInput()->withErrors($validator);
 
-        // $data['nama_field_di_database'] = $request->nama_di_inputan;
         $income['income_name'] = $request->income_name; 
         $income['income_type'] = $request->income_type; 
         $income['description'] = $request->description;
@@ -80,7 +79,6 @@ class IuranController extends Controller
 
         if($validator->fails()) return redirect()->back()->withInput()->withErrors($validator);
 
-        // $data['nama_field_di_database'] = $request->nama_di_inputan;
         $income['income_name'] = $request->income_name; 
         $income['income_type'] = $request->income_type; 
         $income['description'] = $request->description;
@@ -104,6 +102,17 @@ class IuranController extends Controller
         return redirect()->route('iuran.income');
     }
 
+    public function filter()
+    {
+        $income = Income::all();
+
+    $incomeType = Income::select('income_type')->distinct()->pluck('income_type');
+
+    return view('iuran.income',compact('income', 'incomeTypes'));
+    // return view('income.edit',compact('data'));
+
+    }
+    
 
     //Expenditure (Pengeluaran)
     
@@ -118,7 +127,6 @@ class IuranController extends Controller
         
         if($validator->fails()) return redirect()->back()->withInput()->withErrors($validator);
 
-        // $data['nama_field_di_database'] = $request->nama_di_inputan;
         $expenditure['date'] = $request->date; 
         $expenditure['expenditure_name'] = $request->expenditure_name; 
         $expenditure['amount'] = $request->amount; 
@@ -151,7 +159,6 @@ class IuranController extends Controller
 
         if($validator->fails()) return redirect()->back()->withInput()->withErrors($validator);
 
-        // $data['nama_field_di_database'] = $request->nama_di_inputan;
         $expenditure['date'] = $request->date; 
         $expenditure['expenditure_name'] = $request->expenditure_name; 
         $expenditure['amount'] = $request->amount; 
