@@ -40,7 +40,8 @@ class WargaFactory extends Factory
             'pekerjaan' => $pekerjaan,
             'kewarganegaraan' => 'Indonesia',
             'domisili' => $this->faker->address(),
-            'usia' => $usia
+            'usia' => $usia,
+            'pendapatan' => fake()->numberBetween(1000000,10000000),
         ];
     }
 }

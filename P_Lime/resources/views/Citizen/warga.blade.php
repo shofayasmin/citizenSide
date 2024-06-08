@@ -111,7 +111,7 @@
                                                                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalEdit{{ $d->nik }}">
                                                                             Edit
                                                                         </button>
-                                                                        <a data-toggle="modal" data-target="#exampleModalHapus{{ $d->nik }}" class="btn btn-danger"><i class="fas fa-trash-alt">Hapus</i></a>
+                                                                        <span data-toggle="modal" data-target="#exampleModalHapus{{ $d->nik }}" class="btn btn-danger"><i class="fas fa-trash-alt"></i></span>
                                                                     </td>
                                                                 </tr>
 
@@ -121,17 +121,9 @@
                                                                 @endforeach
                                                                
                                                             </tbody>
-                                                            <!-- Form untuk input NIK -->
-                                                            <form method="post" action="/cek-nik">
-                                                                @csrf
-                                                                <div class="form-group">
-                                                                    <label for="nik">NIK:</label>
-                                                                    <input type="text" class="form-control" id="nik" name="nik" placeholder="Masukkan NIK">
-                                                                </div>
-                                                                <!-- Tombol untuk memeriksa NIK -->
-                                                                <button type="submit" class="btn btn-primary">Cek NIK</button>
-                                                            </form>
                                                         </table>
+                                                       
+                                                        
                                                         <a href="{{ route('citizen.index') }}"> <- Kembali</a>
                                                     </div>      
                                                 </div>

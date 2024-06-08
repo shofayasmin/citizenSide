@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('nomor_telepon');
             $table->enum('status', ['Belum Kawin', 'Kawin', 'Cerai Hidup', 'Cerai Mati']);
             $table->string('pekerjaan',30);
+            $table->integer('pendapatan')->nullable();
             $table->string('kewarganegaraan',20);
             $table->integer('usia');
             $table->string('domisili');

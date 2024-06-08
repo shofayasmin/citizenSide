@@ -20,8 +20,8 @@ class RumahFactory extends Factory
         return [
             'nik_pemilik'=> Warga::inRandomOrder()->first()?->nik,
             'alamat'=>fake()->text(7),
-            'luas_bangunan'=>fake()->numberBetween(1,50),
-            'luas_tanah'=>fake()->numberBetween(1,50),
+            'luas_bangunan'=>fake()->numberBetween(50,700),
+            'luas_tanah'=>fake()->numberBetween(50,700),
             'jumlah_anggota_kk'=>fake()->numberBetween(1,4),
         ];
     }

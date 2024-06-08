@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Comment;
-use App\Models\Comment;
 use App\Models\laporan;
 use App\Models\Warga;
 use Illuminate\Http\Request;
@@ -30,18 +29,7 @@ class LaporanController extends Controller
 
         return view('laporan.view',compact('data','data_tambahan','comment'));
         
-        
 
-
-        $data_tambahan = Laporan::with('comments.user')
-        ->orderByRaw("FIELD(status, 'Belum Selesai', 'Selesai')")
-        ->get();
-
-        $comment = Comment::all();
-
-
-        return view('laporan.view',compact('data','data_tambahan','comment'));
-        
         
 
     }
@@ -165,21 +153,6 @@ class LaporanController extends Controller
         Comment::create([
             'laporan_id' => $request->laporan_id,
             'user_id' => auth()->id(),
-            'content' => $request->content,
-        ]);
-
-        return redirect()->back()->with('success', 'Comment added successfully.');
-    }
-    public function store_comment(Request $request)
-    {
-        $request->validate([
-            'laporan_id' => 'required|exists:laporans,laporan_id',
-            'content' => 'required|string|max:255',
-        ]);
-
-        Comment::create([
-            'laporan_id' => $request->laporan_id,
-            'user_id' => auth()->user()->id,
             'content' => $request->content,
         ]);
 
