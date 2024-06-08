@@ -52,7 +52,7 @@ class CitizenController extends Controller
 
         Rt::create($data);
 
-        return redirect()->route('citizen.rt');
+        return redirect()->back()->with('success', 'Anda Berhasil menambahkan Data Rt');
     }
     public function edit_rt(Request $request,$id)
     {   
@@ -79,7 +79,7 @@ class CitizenController extends Controller
 
         Rt::where('rt_id',$id)->update($data);
 
-        return redirect()->route('citizen.rt');
+        return redirect()->back()->with('edit', 'Anda Berhasil Mengedit');
     }
 
     public function delete_rt(Request $request,$id)
@@ -90,7 +90,7 @@ class CitizenController extends Controller
             $data->delete();
         }
 
-        return redirect()->route('citizen.rt');
+        return redirect()->back()->with('delete', 'Anda Berhasil Menghapus');
     }
 
 
@@ -136,7 +136,7 @@ class CitizenController extends Controller
 
         Kk::create($data);
 
-        return redirect()->route('citizen.kk');
+        return redirect()->back()->with('success', 'Anda Berhasil menambahkan Data KK');
     }
     public function edit_kk(Request $request,$id)
     {
@@ -165,7 +165,7 @@ class CitizenController extends Controller
         $data['jumlah_anggota_kk'] =  $request->jumlah_anggota_kk;
         $data['jumlah_usia_lanjut'] =  $request->jumlah_usia_lanjut;
         Kk::where('id_kk',$id)->update($data);
-        return redirect()->route('citizen.kk');
+        return redirect()->back()->with('edit', 'Anda Berhasil Mengedit');
     }
 
     public function delete_kk(Request $request,$id)
@@ -176,7 +176,7 @@ class CitizenController extends Controller
             $data->delete();
         }
 
-        return redirect()->route('citizen.kk');
+        return redirect()->back()->with('delete', 'Anda Berhasil Menghapus');
     }
 
     public function getHouseholdMembers($no_kk)
@@ -219,7 +219,7 @@ class CitizenController extends Controller
 
         Organisasi::create($data);
 
-        return redirect()->route('citizen.organisasi');
+        return redirect()->back()->with('success', 'Anda Berhasil menambahkan Data Organisasi');
     }
     public function edit_organisasi(Request $request,$id)
     {
@@ -245,7 +245,7 @@ class CitizenController extends Controller
         $data['jumlah_anggota']     =  $request->jumlah_anggota;
 
         Organisasi::where('id_organisasi',$id)->update($data);
-        return redirect()->route('citizen.organisasi');
+        return redirect()->back()->with('edit', 'Anda Berhasil Mengedit');
     }
     public function delete_organisasi(Request $request,$id)
     {
@@ -255,7 +255,7 @@ class CitizenController extends Controller
             $data->delete();
         }
 
-        return redirect()->route('citizen.organisasi');
+        return redirect()->back()->with('delete', 'Anda Berhasil Menghapus');
     }
     
 
@@ -293,7 +293,7 @@ class CitizenController extends Controller
 
         Rumah::create($data);
 
-        return redirect()->route('citizen.rumah');
+        return redirect()->back()->with('success', 'Anda Berhasil menambahkan Data Rumah');
     }
     public function edit_rumah(Request $request,$id)
     {
@@ -321,7 +321,7 @@ class CitizenController extends Controller
         $data['jumlah_anggota_kk'] =  $request->jumlah_anggota_kk;
 
         Rumah::where('rumah_id',$id)->update($data);
-        return redirect()->route('citizen.rumah');
+        return redirect()->back()->with('edit', 'Anda Berhasil Mengedit');
     }
 
     public function delete_rumah(Request $request,$id)
@@ -332,7 +332,7 @@ class CitizenController extends Controller
             $data->delete();
         }
 
-        return redirect()->route('citizen.rumah');
+        return redirect()->back()->with('delete', 'Anda Berhasil Menghapus');
     }
 
 
@@ -388,7 +388,7 @@ class CitizenController extends Controller
 
         Warga::create($data);
 
-        return redirect()->route('citizen.warga');
+        return redirect()->back()->with('success', 'Anda Berhasil menambahkan Data Rumah');
     }
     public function edit_warga(Request $request,$id)
     {
@@ -432,7 +432,7 @@ class CitizenController extends Controller
         $data['domisili']           =  $request->domisili;
 
         Warga::where('nik',$id)->update($data);
-        return redirect()->route('citizen.warga');
+        return redirect()->back()->with('edit', 'Anda Berhasil Mengedit');
     }
 
     public function delete_warga(Request $request,$id)
@@ -443,7 +443,7 @@ class CitizenController extends Controller
             $data->delete();
         }
 
-        return redirect()->route('citizen.warga');
+        return redirect()->back()->with('delete', 'Anda Berhasil Menghapus');
     }
 
     

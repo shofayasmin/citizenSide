@@ -17,12 +17,16 @@ class RumahFactory extends Factory
      */
     public function definition(): array
     {
+
+        $warga = Warga::inRandomOrder()->first();
+
         return [
-            'nik_pemilik'=> Warga::inRandomOrder()->first()?->nik,
-            'alamat'=>fake()->text(7),
-            'luas_bangunan'=>fake()->numberBetween(50,700),
-            'luas_tanah'=>fake()->numberBetween(50,700),
-            'jumlah_anggota_kk'=>fake()->numberBetween(1,4),
+            'nik_pemilik' => $warga ? $warga->nik : null,
+            'alamat' => $this->faker->address,
+            'luas_bangunan' => $this->faker->numberBetween(50, 700),
+            'luas_tanah' => $this->faker->numberBetween(50, 700),
+            'jumlah_anggota_kk' => $this->faker->numberBetween(1,2)
+           
         ];
     }
 }

@@ -85,6 +85,7 @@ class DashboardController extends Controller
                 }
             }
         }
+        $total_warga = Warga::count();
 
         return view('dashboard.rw',compact(
         'laporan',
@@ -99,7 +100,8 @@ class DashboardController extends Controller
         'lastUpdated',
         'warga',
         'penyaluranBansos',
-        'pie'));
+        'pie',
+        'total_warga'));
     }
     
 }

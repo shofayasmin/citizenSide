@@ -25,10 +25,12 @@ class WargaFactory extends Factory
             'Karyawan Swasta', 'Pegawai Negeri Sipil', 'Wiraswasta', 'Petani', 'Pedagang', 'Guru',
             'Dokter', 'Perawat', 'Supir', 'Buruh', 'Tidak Bekerja'
         ]);
+        // Menentukan pendapatan berdasarkan usia dan pekerjaan
+        $pendapatan = $usia < 15 ? 0 : $this->faker->numberBetween(1000000, 10000000);
 
         return [
             'nik' => $this->faker->unique()->nik(),
-            'no_kk' => $this->faker->nik(),
+            'no_kk' => $this->faker->randomElement(['7203126706184655','6109335410064542','3577601406137820','1604246709198618','7110681801248754','6309375107034210','1225291903047679','6210625205196101','3504795101016110','3504795101016110']),
             'nama_lengkap' => $this->faker->name(),
             'tempat_lahir' => $this->faker->city(),
             'tanggal_lahir' => $this->faker->dateTimeBetween('-80 years', '-15 years'),
@@ -41,7 +43,7 @@ class WargaFactory extends Factory
             'kewarganegaraan' => 'Indonesia',
             'domisili' => $this->faker->address(),
             'usia' => $usia,
-            'pendapatan' => fake()->numberBetween(1000000,10000000),
+            'pendapatan' => $pendapatan,
         ];
     }
 }

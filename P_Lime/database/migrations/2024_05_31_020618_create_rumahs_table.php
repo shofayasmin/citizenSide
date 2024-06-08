@@ -18,7 +18,7 @@ return new class extends Migration
             $table->text('alamat');
             $table->integer('luas_bangunan');
             $table->integer('luas_tanah');
-            $table->integer('jumlah_anggota_kk');
+            $table->integer('jumlah_anggota_kk')->nullable();
             $table->timestamps();
         });
     }

@@ -21,8 +21,9 @@ class AcaraController extends Controller
     public function view()
     {
         $data = Acara::get();
+        $user = Auth::user();
 
-        return view('Acara.ViewAcara_Warga',compact('data'));
+        return view('Acara.ViewAcara_Warga',compact('data','user'));
     }
 
     public function create()

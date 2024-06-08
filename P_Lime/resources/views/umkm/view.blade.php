@@ -63,7 +63,11 @@
                     <div class="row">
                         <div class="col-xl">
                             <div class="container">
-
+                                @if(session()->has('success'))
+                                    <div class="alert alert-success outline-alert" role="alert">
+                                        {{ session('success') }}
+                                    </div>
+                                @endif
                                 @php
                                     $allowedRoles = ['secretary', 'rw', 'rt']; // Daftar peran yang diizinkan
                                 @endphp

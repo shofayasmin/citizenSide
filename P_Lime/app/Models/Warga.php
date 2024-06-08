@@ -49,6 +49,10 @@ class Warga extends Model
             }
         });
     }
+    public function rumah()
+    {
+        return $this->belongsTo(Rumah::class, 'no_kk', 'no_kk');
+    }
     
 }
 

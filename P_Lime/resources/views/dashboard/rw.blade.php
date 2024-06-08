@@ -102,7 +102,7 @@
                                 <div class="card-body">
                                     <h5 class="card-title">Warga</h5>
                                     <h2 class="float-right">{{ $totalWarga }}</h2>
-                                    <p>Total Rumah</p>
+                                    <p>Total Warga</p>
                                     
                                 </div>
                             </div>
@@ -119,12 +119,13 @@
                         </div>
                     </div>
                     <div class="row">
+                        
                         <div class="col-md-8">
                             <div class="card">
                                 <div class="card-body">
                                     <h5 class="card-title">List Report</h5>
-                                    <div class="table-responsive">
-                                        <table class="table">
+                                    <div class="table-responsive" style="max-height: 300px; overflow-y: auto;">
+                                        <table class="table table-bordered table-striped mb-0">
                                             <thead>
                                                 <tr>
                                                     <th scope="col">No</th>
@@ -133,37 +134,34 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @php
-                                                    $counter = 1
-                                                @endphp
+                                                @php $counter = 1; @endphp
                                                 @foreach ($laporan as $l)
-                                                    
                                                 <tr>
                                                     <td>{{ $counter++ }}</td>
                                                     <td>{{ $l->judul }}</td>
                                                     <td>
                                                         @if($l->status == 'Selesai')
-                                                            <span class="badge badge-success">{{ $l->status }}</span>
+                                                        <span class="badge badge-success">{{ $l->status }}</span>
                                                         @elseif($l->status == 'Belum Selesai')
-                                                            <a href="{{ route('laporan.view') }}" class="badge badge-danger">{{ $l->status }}</a>
+                                                        <a href="{{ route('laporan.view') }}" class="badge badge-danger">{{ $l->status }}</a>
                                                         @endif
                                                     </td>
                                                 </tr>
                                                 @endforeach
-                                                
                                             </tbody>
                                         </table>
                                     </div>      
                                 </div>
                             </div>
                         </div>
+                        
+
                         <div class="col-md-4">
                             <div class="card">
                                 <div class="card-body">
                                     <h5 class="card-title">List Pengirim Laporan</h5>
-                                    <div class="social-media-list">
+                                    <div class="social-media-list" style="max-height: 300px; overflow-y: auto;">
                                         @foreach ($pelapor as $p)
-                                            
                                         <div class="social-media-item">
                                             <img src="\storage\photo-acara\orang.png" alt="" width="10%">
                                             <div class="social-text">
@@ -172,11 +170,13 @@
                                             </div>
                                         </div>
                                         @endforeach
-
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        
+                        
+                        
                     </div>
                     <div class="row">
                         <div class="col-md-12">
@@ -222,19 +222,19 @@
                                                 <ul class="list-unstyled">
                                                     <li>
                                                         <span>Usia Produktif Bekerja</span>
-                                                        <span class="badge badge-success">{{ number_format(($pie['kerja_produktif']/10)*100, 2) }}%</span>
+                                                        <span class="badge badge-success">{{ number_format(($pie['kerja_produktif']/$total_warga)*100, 2) }}%</span>
                                                     </li>
                                                     <li>
                                                         <span>Usia Non Produktif Bekerja</span>
-                                                        <span class="badge badge-warning">{{ number_format(($pie['kerja_non_produktif']/10)*100, 2) }}%</span>
+                                                        <span class="badge badge-warning">{{ number_format(($pie['kerja_non_produktif']/$total_warga)*100, 2) }}%</span>
                                                     </li>
                                                     <li>
                                                         <span>Usia Produktif Tidak Bekerja</span>
-                                                        <span class="badge badge-secondary">{{ number_format(($pie['non_kerja_produktif']/10)*100, 2) }}%</span>
+                                                        <span class="badge badge-secondary">{{ number_format(($pie['non_kerja_produktif']/$total_warga)*100, 2) }}%</span>
                                                     </li>
                                                     <li>
                                                         <span>Usia Non Produktif Tidak Bekerja</span>
-                                                        <span class="badge badge-primary">{{ number_format(($pie['non_kerja_non_produktif']/10)*100, 2) }}%</span>
+                                                        <span class="badge badge-primary">{{ number_format(($pie['non_kerja_non_produktif']/$total_warga)*100, 2) }}%</span>
                                                     </li>
                                                 </ul>
                                                 

@@ -21,6 +21,10 @@ class Kk extends Model
     {
         return $this->hasMany(Warga::class, 'no_kk', 'no_kk');
     }
+    public function rumah()
+    {
+        return $this->belongsTo(Rumah::class, 'nik_kepala_keluarga', 'nik_pemilik');
+    }
     public static function boot()
     {
         parent::boot();

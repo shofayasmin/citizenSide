@@ -107,7 +107,7 @@ class UmkmController extends Controller
         // Create the new participation record
         UmkmParticipation::create($validatedData);
 
-        return redirect()->route('umkm.view');
+        return redirect()->back()->with('success','Selamat anda telah bergabung di UMKM');
 
 
 
