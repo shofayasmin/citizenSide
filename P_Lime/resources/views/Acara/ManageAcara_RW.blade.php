@@ -96,12 +96,12 @@
                         <div class="col-md-12">
                             <div class="page-title">
                                 <nav aria-label="breadcrumb">
-                                  <ol class="breadcrumb breadcrumb-separator-1">
-                                    <li class="breadcrumb-item"><a href="#">UI Elements</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">Forms</li>
-                                  </ol>
+                                <ol class="breadcrumb breadcrumb-separator-1">
+                                    <li class="breadcrumb-item"><a href="#">Acara</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Manage</li>
+                                </ol>
                                 </nav>
-                                <h3>Forms</h3>
+                                <h3>Acara</h3>
                                 
                             </div>
                         </div>
@@ -158,7 +158,6 @@
 
                                                                 @endforeach
                                                                 
-                                                               
                                                             </tbody>
                                                         </table>
                                                     </div>      

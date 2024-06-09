@@ -43,13 +43,13 @@
                         <div class="col-md-12">
                             <div class="page-title">
                                 <nav aria-label="breadcrumb">
-                                  <ol class="breadcrumb breadcrumb-separator-1">
-                                    <li class="breadcrumb-item"><a href="#">Citizen</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">Kartu Keluarga</li>
-                                  </ol>
-                                  
+                                <ol class="breadcrumb breadcrumb-separator-1">
+                                <li class="breadcrumb-item"><a href="#">Kependudukan</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Kartu Keluarga</li>
+                                </ol>
+                                
                                 </nav>
-                                <h3>Kartu Keluarga</h3>
+                                <h3>Data Kartu Keluarga</h3>
                                 
                             </div>
                         </div>
@@ -61,13 +61,12 @@
                                     <div class="row">
                                         <div class="col-xl">
                                             <div class="card">
-                                                <div class="card-body">
-                                                    
-                                                    <h4 class="mb-0">Data Kartu Keluarga</h4>
-                                                    <p>Berikut adalah Data Data Kartu Keluarga dari RW 003</code>.</p>
+                                                <div class="card-body"> 
+                                                    <h5 class="card-title">Data Kartu Keluarga</h5>
+                                                    <p>Berikut adalah Data Kartu Keluarga dari RW 003</code>.</p>
                                                     <div class="text-right mb-3">
                                                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#kk_tambah">
-                                                            Tambah Kartu Keluarga
+                                                            Tambah Data
                                                         </button>
                                                     </div>
 
@@ -78,11 +77,11 @@
                                                                     <th scope="col">No</th>
                                                                     <th scope="col">No. Kartu Keluarga</th>
                                                                     <th scope="col">Alamat</th>
-                                                                    <th scope="col">Nik Kepala Keluarga</th>
+                                                                    <th scope="col">NIK Kepala Keluarga</th>
                                                                     <th scope="col">Jumlah Usia Produktif</th>
                                                                     <th scope="col">Jumlah Anggota KK</th>
                                                                     <th scope="col">Jumlah Usia Lanjut</th>
-                                                                   
+
                                                                 </tr>
                                                             </thead>
                                                             <tbody>

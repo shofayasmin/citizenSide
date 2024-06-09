@@ -44,12 +44,12 @@
                             <div class="page-title">
                                 <nav aria-label="breadcrumb">
                                   <ol class="breadcrumb breadcrumb-separator-1">
-                                    <li class="breadcrumb-item"><a href="#">UI Elements</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">Forms</li>
+                                    <li class="breadcrumb-item"><a href="#">Kependudukan</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Warga</li>
                                     
                                   </ol>
                                 </nav>
-                                <h3>Forms</h3>
+                                <h3>Data Warga</h3>
                                 
                             </div>
                         </div>
@@ -63,10 +63,10 @@
                                             <div class="card">
                                                 <div class="card-body">
                                                     <h5 class="card-title">Data Warga</h5>
-                                                    <p>Berikut adalah Data Data Warga dari RW 003</code>.</p>
+                                                    <p>Berikut adalah Data Warga dari RW 003</code>.</p>
                                                     <div class="text-right mb-3">
                                                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#warga_tambah">
-                                                            Tambah Data Warga
+                                                            Tambah Data
                                                         </button>
                                                     </div>
                                                     <div class="table-responsive">
@@ -87,7 +87,7 @@
                                                                     <th scope="col">Kewarganegaraan</th>
                                                                     <th scope="col">Alamat Domisili</th>
                                                                     
-                                                                   
+                                                                
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
@@ -119,9 +119,9 @@
                                                                 @include('Citizen.modal_warga')
 
                                                                 @endforeach
-                                                               
+                                                            
                                                             </tbody>
-                                                            <!-- Form untuk input NIK -->
+                                                            {{-- <!-- Form untuk input NIK -->
                                                             <form method="post" action="/cek-nik">
                                                                 @csrf
                                                                 <div class="form-group">
@@ -130,7 +130,7 @@
                                                                 </div>
                                                                 <!-- Tombol untuk memeriksa NIK -->
                                                                 <button type="submit" class="btn btn-primary">Cek NIK</button>
-                                                            </form>
+                                                            </form> --}}
                                                         </table>
                                                         <a href="{{ route('citizen.index') }}"> <- Kembali</a>
                                                     </div>      

@@ -46,13 +46,13 @@
                                 
                                 <nav aria-label="breadcrumb">
                                   <ol class="breadcrumb breadcrumb-separator-1">
-                                    <li class="breadcrumb-item"><a href="#">UI Elements</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">Forms</li>
+                                    <li class="breadcrumb-item"><a href="#">Kependudukan</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Rumah</li>
                                     
                                   </ol>
                                   
                                 </nav>
-                                <h3>Forms</h3>
+                                <h3>Data Rumah</h3>
                                 
                             </div>
                         </div>
@@ -70,7 +70,7 @@
                                                     <p>Berikut adalah Data Data Rumah dari RW 003</code>.</p>
                                                     <div class="text-right mb-3">
                                                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#rumah_tambah">
-                                                            Tambah Acara
+                                                            Tambah Data
                                                         </button>
                                                     </div>
                                                     <div class="table-responsive">

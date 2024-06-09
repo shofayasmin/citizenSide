@@ -111,7 +111,6 @@ class IuranController extends Controller
         return redirect()->route('iuran.income');
     }
 
-    
     public function delete_income(Request $request,$id)
     {
         $data = Income::find($id);
@@ -122,17 +121,6 @@ class IuranController extends Controller
 
         return redirect()->route('iuran.income');
     }
-
-    // public function filter_income(Request $request)
-    // {
-    //     $income = Income::query();
-        
-    //     $income->when ($request->income_type, function ($query) use ($request){
-    //         return $query->where('income_type', $request->income_type);
-    //     });
-    //     return view('Iuran.index',['income' => $income ->paginate(10)]);
-    // }
-    
 
     //Expenditure (Pengeluaran)
     
