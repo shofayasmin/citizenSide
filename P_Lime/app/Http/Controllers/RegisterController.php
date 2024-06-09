@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Warga;
 use Illuminate\Http\Request;
 
 class RegisterController extends Controller
@@ -14,8 +15,13 @@ class RegisterController extends Controller
     public function store(Request $request){
         $citizenExists = User::where('user_nik', $request['user_nik'])->exists();
         if($citizenExists){
-            return back()->with('error', 'There is already an account with that nik.')->withInput();
+            return back()->with('error', 'NIK telah digunakan pada akun lainnya.')->withInput();
         }
+
+        if (!Warga::where('nik', $request['user_nik'])->exists()) {
+            return back()->with('error', 'NIK tidak terdaftar pada database.')->withInput();
+        }
+        
 
         $validatedData = $request->validate([
             'username' => 'required',

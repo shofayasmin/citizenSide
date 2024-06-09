@@ -1,11 +1,11 @@
 <?php
 
-use App\Http\Controllers\IuranController;
-use App\Http\Controllers\PrometheeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SpkController;
 use App\Http\Controllers\UmkmController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\AcaraController;
+use App\Http\Controllers\IuranController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MasukController;
 use App\Http\Controllers\BansosController;
@@ -14,6 +14,7 @@ use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\TemplateController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PrometheeController;
 use App\Http\Controllers\DashboardWargaController;
 
 
@@ -183,7 +184,13 @@ route::get('/Iuran/edit_expenditure/{id}', [IuranController::class, 'edit_expend
 route::put('/Iuran/update_expenditure/{id}', [IuranController::class, 'update_expenditure'])->name('expenditure.update')->middleware('sekretaris');
 route::delete('/Iuran/delete_expenditure/{id}', [IuranController::class, 'delete_expenditure'])->name('expenditure.delete')->middleware('sekretaris');
 
-
+//user accounts
+route::get('/user/index', [UserController::class, 'index'])->name('user.index')->middleware('sekretaris');
+route::get('/user/create', [UserController::class, 'create'])->name('user.create')->middleware('sekretaris');
+route::post('/user/store', [UserController::class, 'store'])->name('user.store')->middleware('sekretaris');
+route::get('/user/edit/{id}', [UserController::class, 'edit'])->name('user.edit')->middleware('sekretaris');
+route::put('/user/update/{id}', [UserController::class, 'update'])->name('user.update')->middleware('sekretaris');
+route::delete('/user/delete/{id}', [UserController::class, 'delete'])->name('user.delete')->middleware('sekretaris');
 
 // SPK
 route::get('/SPK/promethee', [PrometheeController::class, 'calculate'])->name('spk.promethee');

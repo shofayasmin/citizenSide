@@ -29,7 +29,7 @@ class UserFactory extends Factory
         return [
             'username' => fake()->userName(),
             'user_nik' => Warga::inRandomOrder()->first()?->nik,
-            'role' => fake()->randomElement(['admin', 'rt', 'rw', 'secretary', 'citizen']),
+            'role' => fake()->randomElement(['rt', 'rw', 'secretary', 'citizen']),
             'password' => static::$password ??= Hash::make('password'),
           ];
     }
