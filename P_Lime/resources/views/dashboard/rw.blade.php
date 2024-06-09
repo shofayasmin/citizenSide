@@ -205,7 +205,7 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-body">
-                                    <h5 class="card-title">Earnings</h5>
+                                    <h5 class="card-title">Grafik Keuangan</h5>
                                     <div id="apex10"></div>
                                 </div>
                             </div>
@@ -234,16 +234,6 @@
         </div>
         
         
-                    
-                   
-                    
-                    
-                    
-
-                    
-            
-        
-        
         <!-- Javascripts -->
         <script src="{{ asset('lime/theme/assets/plugins/jquery/jquery-3.1.0.min.js')}}"></script>
         <script src="{{ asset('lime/theme/assets/plugins/bootstrap/popper.min.js')}}"></script>
@@ -253,22 +243,39 @@
         <script src="{{ asset('lime/theme/assets/plugins/apexcharts/dist/apexcharts.min.js') }}"></script>
         <script src="{{ asset('lime/theme/assets/plugins/chartjs/chart.min.js') }}"></script>
         <script src="{{ asset('lime/theme/assets/js/pages/charts.js')}}"></script>
+        <script src="{{ asset('lime/theme/assets/js/pages/charts.js')}}"></script>
 
+        {{-- Riil --}}
         <script>
+            var incomeData = {!! json_encode($incomeData) !!};
+            var expenditureData = {!! json_encode($expenditureData) !!};
             var dates = {!! json_encode($dates) !!};
-            var earnings = {!! json_encode($totals) !!};
-    
+
             var options = {
                 chart: {
                     height: 350,
                     type: 'line',
+                    stacked: false,
                     zoom: {
-                        enabled: false
+                        enabled: true // Aktifkan zoom
+                    },
+                    toolbar: {
+                        show: true,
+                        tools: {
+                            zoomIn: true,
+                            zoomOut: true,
+                            selectionZoom: true,
+                            pan: true,
+                            reset: true
+                        }
                     }
                 },
                 series: [{
-                    name: "Earnings",
-                    data: earnings
+                    name: "Pemasukan",
+                    data: incomeData
+                }, {
+                    name: "Pengeluaran",
+                    data: expenditureData
                 }],
                 dataLabels: {
                     enabled: false
@@ -277,25 +284,35 @@
                     curve: 'straight'
                 },
                 title: {
-                    text: 'Trend Keuangan RW 003',
+                    text: 'Grafik Pemasukan dan Pengeluaran',
                     align: 'left'
                 },
                 grid: {
                     row: {
-                        colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
+                        colors: ['#f3f3f3', 'transparent'],
                         opacity: 0.5
                     },
                 },
                 xaxis: {
                     categories: dates
+                },
+                yaxis: {
+                    title: {
+                        text: 'Total' 
+                    }
+                },
+                legend: {
+                    position: 'bottom',
+                    offsetY: -10
                 }
             };
+
     
             var chart = new ApexCharts(
                 document.querySelector("#apex10"),
                 options
             );
-    
+
             chart.render();
         </script>
 
@@ -447,17 +464,13 @@
         
             // Inisialisasi grafik
             var chart70 = new ApexCharts(
-              document.querySelector("#apex70"),
-              options70
+            document.querySelector("#apex70"),
+            options70
             );
         
             // Render grafik
             chart70.render();
         </script>
-        
-        
-        
-
         
         
     </body>

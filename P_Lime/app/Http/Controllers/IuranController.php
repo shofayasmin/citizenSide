@@ -14,22 +14,43 @@ use Illuminate\Support\Facades\Validator;
 class IuranController extends Controller
 {
     
-    public function index()
-    {
-        $iuran = Iuran::get();
-        return view('Iuran.index',compact('iuran'));
-    }
+    // public function index()
+    // {
+    //     $iuran = Iuran::get();
+    //     return view('Iuran.index',compact('iuran'));
+    // }
 
-    public function income()
+    public function income(Request $request)
     {
-        $income = Income::get();
-        return view('Iuran.income',compact('income'));
+        $income = Income::query();
+
+        if ($request->income_type) {
+            $income->where('income_type', $request->income_type);
+        }
+
+        if ($request->start_date && $request->end_date) {
+            $income->whereBetween('date', [$request->start_date, $request->end_date]);
+        } elseif ($request->start_date) {
+            $income->where('date', '>=', $request->start_date);
+        } elseif ($request->end_date) {
+            $income->where('date', '<=', $request->end_date);
+        }
+
+        return view('Iuran.income', ['income' => $income->paginate(10)]);
     }
     
-    public function expenditure()
+    public function expenditure(Request $request)
     {
-        $expenditure = Expenditure::get();
-        return view('Iuran.expenditure',compact('expenditure'));
+        $start_date = $request->input('start_date');
+        $end_date = $request->input('end_date');
+
+        $expenditure = Expenditure::query();
+        
+        if ($start_date && $end_date) {
+            $expenditure->whereBetween('date', [$start_date, $end_date]);
+        }
+
+        return view('Iuran.expenditure', ['expenditure' => $expenditure->paginate(10)]);
     }
 
     //Income (Pemasukan)
@@ -102,16 +123,15 @@ class IuranController extends Controller
         return redirect()->route('iuran.income');
     }
 
-    public function filter()
-    {
-        $income = Income::all();
-
-    $incomeType = Income::select('income_type')->distinct()->pluck('income_type');
-
-    return view('iuran.income',compact('income', 'incomeTypes'));
-    // return view('income.edit',compact('data'));
-
-    }
+    // public function filter_income(Request $request)
+    // {
+    //     $income = Income::query();
+        
+    //     $income->when ($request->income_type, function ($query) use ($request){
+    //         return $query->where('income_type', $request->income_type);
+    //     });
+    //     return view('Iuran.index',['income' => $income ->paginate(10)]);
+    // }
     
 
     //Expenditure (Pengeluaran)
