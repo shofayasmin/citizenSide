@@ -69,8 +69,6 @@
                                     <form id="commentForm_{{ $d->laporan_id }}" method="POST" action="{{ route('comments.store') }}">
                                         @csrf
                                         <input type="hidden" name="laporan_id" value="{{ $d->laporan_id }}">
-                                        <input name="user_id" type="hidden" value="{{ auth()->user()->id }}" >
-
                                         <div class="form-group">
                                             <textarea class="form-control" name="content" rows="3" placeholder="Your Comment" required></textarea>
                                         </div>

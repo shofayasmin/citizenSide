@@ -68,6 +68,11 @@
                                     <div class="col-xl">
                                         <div class="card">
                                             <div class="card-body">
+                                                @if(session()->has('success'))
+                                                    <div class="alert alert-success outline-alert" role="alert">
+                                                        {{ session('success') }}
+                                                    </div>
+                                                @endif
 
                                                 <form action="{{ route('laporan.store') }}" method="POST"
                                                     enctype="multipart/form-data">

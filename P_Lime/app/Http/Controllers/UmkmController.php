@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\UmkmParticipation;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use App\Models\umkm;
@@ -14,7 +16,8 @@ class UmkmController extends Controller
 {
     public function register()
     {
-        return view('umkm.register');
+        $user = Auth::user();
+        return view('umkm.register',compact('user'));
     }
     public function view(){
         $data = umkm::all();
@@ -23,6 +26,7 @@ class UmkmController extends Controller
 
     public function store_umkm(Request $request)
     {
+        
         $validator = Validator::make($request->all(),[
             'Nama' => 'required',
             'umkm' => 'required',
@@ -30,19 +34,20 @@ class UmkmController extends Controller
             'tipe_umkm' => 'required',
             'deskripsi' => 'required',
             
+            
         ]);
-        
-        
+
         if($validator->fails()) return redirect()->back()->withInput()->withErrors($validator);
+        
         $photo = $request->file('gambar');
         $filename = date('Y-m-d') . $photo->getClientOriginalName();
         $path = 'photo-acara/' . $filename;
-
+        
         Storage::disk('public')->put($path,file_get_contents($photo));
         
-
+        
         // $data['nama_field_di_database'] = $request->nama_di_inputan;
-        $data['Nama'] = $request->Nama; 
+        $data['Nama'] = $request->Nama;  
         $data['umkm'] = $request->umkm; 
         $data['gambar'] = $filename; 
         $data['tipe_umkm'] = $request->tipe_umkm;
@@ -102,7 +107,7 @@ class UmkmController extends Controller
         // Create the new participation record
         UmkmParticipation::create($validatedData);
 
-        return redirect()->route('umkm.view');
+        return redirect()->back()->with('success','Selamat anda telah bergabung di UMKM');
 
 
 

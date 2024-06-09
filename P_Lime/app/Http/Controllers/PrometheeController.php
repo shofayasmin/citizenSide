@@ -17,7 +17,7 @@ class PrometheeController extends Controller
             'jumlah_usia_produktif'     => Criteria::where('name', 'Jumlah Usia Produktif')->first()->weight,
             'jumlah_anggota_keluarga'   => Criteria::where('name', 'Jumlah Anggota Keluarga')->first()->weight,
             'kondisi_rumah'             => Criteria::where('name', 'Kondisi Rumah')->first()->weight,
-            'jumlah_kk'                 => Criteria::where('name', 'Jumlah KK')->first()->weight,
+            'jumlah_usia_lanjut'        => Criteria::where('name', 'Jumlah Usia Lanjut')->first()->weight,
             'pendapatan_total'          => Criteria::where('name', 'Pendapatan')->first()->weight,
         ];
 

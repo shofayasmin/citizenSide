@@ -47,7 +47,7 @@
                             <div class="page-title">
                                 <nav aria-label="breadcrumb">
                                   <ol class="breadcrumb breadcrumb-separator-1">
-                                    <li class="breadcrumb-item"><a href="#">Register UMKM</a></li>
+                                    <li class="breadcrumb-item"><a href="#">Add UMKM</a></li>
                                     {{-- <li class="breadcrumb-item active" aria-current="page">Tambah Acara</li> --}}
                                   </ol>
                                 </nav>
@@ -60,36 +60,48 @@
                         <div class="col-xl">
                             <div class="card">
                                 <div class="card-body">
-                                    <h5 class="card-title">Daftar Ulang UMKM</h5>
+                                    <h5 class="card-title">Menambah Data UMKM</h5>
                                     <p> </p>
 
                                     
-                                    <form action="{{ route('umkm.store') }}" method="POST">
+                                    <form action="{{ route('umkm.store') }}" method="POST" enctype="multipart/form-data">
                                         @csrf
-
                                         <div class="form-group">
-                                            <label for="exampleInputEmail1">Nama Lengkap</label>
-                                            <input type="form" name="Nama" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Masukan Nama">
-                                            
+                                            <label for="username">Username</label>
+                                            <input type="text" name="Nama" class="form-control" id="Nama" placeholder="Masukan Nama" value="{{ $user->username }}">
                                             @error('Nama')
                                                 <small>{{ $message }}</small>
                                             @enderror
                                         </div>
                                         <div class="form-group">
-                                            <label for="exampleFormControlTextarea1">Nama UMKM</label>
-                                            <textarea class="form-control" name="umkm" id="exampleFormControlTextarea1" rows="3" placeholder="Masukkan umkm"></textarea>
+                                            <label for="exampleInputEmail1">Nama UMKM</label>
+                                            <input type="form" name="umkm" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Masukan umkm">
+                                            
                                             @error('umkm')
                                                 <small>{{ $message }}</small>
                                             @enderror
                                         </div>
+                                        <div class="form-group">
+                                            <label for="exampleFormControlTextarea1">Deskripsi</label>
+                                            <textarea class="form-control" name="deskripsi" id="exampleFormControlTextarea1" rows="3" placeholder="Masukkan deskripsi"></textarea>
+                                            @error('deskripsi')
+                                                <small>{{ $message }}</small>
+                                            @enderror
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="exampleFormControlTextarea1">Tipe UMKM</label>
+                                            <textarea class="form-control" name="tipe_umkm" id="exampleFormControlTextarea1" rows="3" placeholder="Masukkan tipe_umkm"></textarea>
+                                            @error('tipe_umkm')
+                                                <small>{{ $message }}</small>
+                                            @enderror
+                                        </div>
+                                        <div class="custom-file mb-4">
+                                            <input type="file" class="custom-file-input" id="customFile" name="gambar">
+                                            <label class="custom-file-label" for="customFile">Upload Image</label>
+                                        </div>
                                         
                                         
 
-                                        {{-- <div class="custom-file">
-                                            <label for=""></label>
-                                            <input type="file" class="custom-file-input" id="customFile">
-                                            <label class="custom-file-label" for="customFile">Upload Image</label>
-                                        </div> --}}
                                                             
                                         <button type="submit" class="btn btn-primary">Submit</button>
                                     </form>

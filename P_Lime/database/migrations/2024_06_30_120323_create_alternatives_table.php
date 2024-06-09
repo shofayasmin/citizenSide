@@ -13,16 +13,18 @@ return new class extends Migration
     {
         Schema::create('alternatives', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('rumah_id');
+            $table->foreign('rumah_id')->references('rumah_id')->on('rumahs');
             $table->string('name');
-            $table->float('jumlah_usia_produktif');     // Jumlah orang yang produktif dalam kk, atau belum lansia
-            $table->double('jumlah_anggota_keluarga');  // total jumlah anggota keluarga yg tinggal 1 rumah
-            $table->integer('kondisi_rumah');           // semakin besar angkanya berarti semakin bagus rating rumah tersebut
-            $table->integer('jumlah_kk');               // Jumlah kk dalam 1 rumah
-            $table->float('pendapatan_total',15,2);     // jumlah total pendapatan 1 rumah
+            $table->integer('jumlah_usia_produktif');
+            $table->double('jumlah_anggota_keluarga');
+            $table->integer('jumlah_usia_lanjut');
+            $table->integer('kondisi_rumah');
+            $table->float('pendapatan_total', 15, 2);
             $table->timestamps();
         });
-        
     }
+
 
     /**
      * Reverse the migrations.
