@@ -113,7 +113,7 @@
 
             @canany(['sekretaris', 'rw'])
             <li class="page {{ Request::is('citizen*') ? 'active-page' : '' }}">
-                <a href="#"><i class="material-icons">person</i>Kependudukan<i
+                <a href="#"><i class="material-icons">groups</i>Kependudukan<i
                         class="material-icons has-sub-menu">keyboard_arrow_left</i></a>
                 <ul class="sub-menu">
                     <li>
@@ -132,6 +132,12 @@
                         <a href="{{ route('citizen.organisasi') }}">Organisasi</a>
                     </li>
                 </ul>
+            </li>
+
+            <li>
+                <a href="{{ route('user.index') }}" class="{{ Request::routeIs('user.index') ? 'active' : '' }}">
+                    <i class="material-icons">manage_accounts</i>Akun User
+                </a>
             </li>
             @endcanany
             

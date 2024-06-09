@@ -45,12 +45,12 @@
                                 @csrf
                                 <div class="form-group">
                                     <label for="username">Username</label>
-                                    <input id="email" type="text" name="username" class="form-control" autofocus
+                                    <input id="username" type="text" name="username" class="form-control" autofocus
                                         required value="{{ old('username') }}">
                                 </div>
                                 <div class="form-group @error('user_nik') is-invalid @enderror">
                                     <label for="user_nik">NIK</label>
-                                    <input type="text" name="user_nik" class="form-control" autofocus required
+                                    <input type="number" name="user_nik" class="form-control" autofocus required
                                         value="{{ old('user_nik') }}">
                                 </div>
                                 @if (session('error'))
@@ -59,8 +59,8 @@
                                     </div>
                                 @endif
                                 <div class="form-group">
-                                    <select name="role" id="role">
-                                        <option value="admin">Admin</option>
+                                    <label for="username">Role</label>
+                                    <select name="role" id="role" class="form-control">
                                         <option value="rt">RT</option>
                                         <option value="rw">RW</option>
                                         <option value="secretary">Secretary</option>
