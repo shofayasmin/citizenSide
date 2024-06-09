@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Rumah;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,6 +18,7 @@ class AlternativesFactory extends Factory
     public function definition(): array
     {
         return [
+            'rumah_id'                 => Rumah::inRandomOrder()->first()->rumah_id,
             'name'                      =>fake()->name(),
             'jumlah_usia_produktif'     =>fake()->numberBetween(1,10),
             'jumlah_anggota_keluarga'   =>fake()->numberBetween(1.10),

@@ -17,7 +17,7 @@ class LaporanController extends Controller
      */
     public function view()
     {
-        $data = Laporan::with('warga','comments')
+        $data = Laporan::with('warga','comments','comments')
         ->orderByRaw("FIELD(status,'Belum Selesai', 'Selesai')")->get();
 
         $data_tambahan = Laporan::with('comments.user')
@@ -29,6 +29,7 @@ class LaporanController extends Controller
 
         return view('laporan.view',compact('data','data_tambahan','comment'));
         
+
         
 
     }
@@ -151,7 +152,7 @@ class LaporanController extends Controller
 
         Comment::create([
             'laporan_id' => $request->laporan_id,
-            'user_id' => auth()->user()->id,
+            'user_id' => auth()->id(),
             'content' => $request->content,
         ]);
 

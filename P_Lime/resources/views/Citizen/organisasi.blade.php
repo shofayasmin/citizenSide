@@ -62,6 +62,21 @@
                                         <div class="col-xl">
                                             <div class="card">
                                                 <div class="card-body">
+                                                    @if(session()->has('success'))
+                                                        <div class="alert alert-success outline-alert" role="alert">
+                                                            {{ session('success') }}
+                                                        </div>
+                                                    @endif
+                                                    @if(session()->has('edit'))
+                                                        <div class="alert alert-info outline-alert" role="alert">
+                                                            {{ session('edit') }}
+                                                        </div>
+                                                    @endif
+                                                    @if(session()->has('delete'))
+                                                        <div class="alert alert-danger outline-alert" role="alert">
+                                                            {{ session('delete') }}
+                                                        </div>
+                                                    @endif
                                                     <h5 class="card-title">Data Organisasi</h5>
                                                     <p>Berikut adalah Data Data Organisasi dari RW 003</code>.</p>
                                                     <div class="text-right mb-3">
@@ -96,7 +111,7 @@
                                                                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalEdit{{ $d->id_organisasi }}">
                                                                             Edit
                                                                         </button>
-                                                                        <a data-toggle="modal" data-target="#exampleModalHapus{{ $d->id_organisasi }}" class="btn btn-danger"><i class="fas fa-trash-alt">Hapus</i></a>
+                                                                        <span data-toggle="modal" data-target="#exampleModalHapus{{ $d->id_organisasi }}" class="btn btn-danger"><i class="fas fa-trash-alt"></i></span>
                                                                     </td>
                                                                 </tr>
 

@@ -30,7 +30,7 @@ class CriteriaSeeder extends Seeder
                 
             ],
             [
-                'name' => 'Jumlah KK',
+                'name' => 'Jumlah Usia Lanjut',
                 'weight' => 0.20,
                 
             ],

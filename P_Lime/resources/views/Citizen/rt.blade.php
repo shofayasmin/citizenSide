@@ -64,7 +64,21 @@
                                     <div class="col-xl">
                                         <div class="card">
                                             <div class="card-body">
-
+                                                @if(session()->has('success'))
+                                                    <div class="alert alert-success outline-alert" role="alert">
+                                                        {{ session('success') }}
+                                                    </div>
+                                                @endif
+                                                @if(session()->has('edit'))
+                                                    <div class="alert alert-info outline-alert" role="alert">
+                                                        {{ session('edit') }}
+                                                    </div>
+                                                @endif
+                                                @if(session()->has('delete'))
+                                                    <div class="alert alert-danger outline-alert" role="alert">
+                                                        {{ session('delete') }}
+                                                    </div>
+                                                @endif
 
                                                 <h5 class="card-title">Data RT</h5>
                                                 <p>Berikut adalah Data Data RT dari RW 003</code>.</p>
