@@ -47,4 +47,9 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Acara::class, 'acara_participants', 'user_id', 'acara_id');
     }
+
+    public function warga()
+    {
+        return $this->belongsTo(Warga::class, 'user_nik', 'nik');
+    }
 }

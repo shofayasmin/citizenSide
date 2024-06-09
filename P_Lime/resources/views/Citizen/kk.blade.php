@@ -36,56 +36,85 @@
         
         @include('layouts.header')
 
-        <div class="lime-container">
-            <div class="lime-body">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="page-title">
-                                <nav aria-label="breadcrumb">
+    <div class="lime-container">
+        <div class="lime-body">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="page-title">
+                            <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb breadcrumb-separator-1">
-                                <li class="breadcrumb-item"><a href="#">Kependudukan</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Kartu Keluarga</li>
+                                    <li class="breadcrumb-item"><a href="#">Citizen</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Kartu Keluarga</li>
                                 </ol>
-                                
-                                </nav>
-                                <h3>Data Kartu Keluarga</h3>
-                                
-                            </div>
+
+                            </nav>
+                            <h3>Kartu Keluarga</h3>
+
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-xl">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-xl">
-                                            <div class="card">
-                                                <div class="card-body"> 
-                                                    <h5 class="card-title">Data Kartu Keluarga</h5>
-                                                    <p>Berikut adalah Data Kartu Keluarga dari RW 003</code>.</p>
-                                                    <div class="text-right mb-3">
-                                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#kk_tambah">
-                                                            Tambah Data
-                                                        </button>
+                </div>
+                <div class="row">
+                    <div class="col-xl">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-xl">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                @if ($errors->has('no_kk'))
+                                                    <div class="alert alert-danger">
+                                                        {{ $errors->first('no_kk') }}
                                                     </div>
+                                                @endif
 
-                                                    <div class="table-responsive">
-                                                        <table class="table">
-                                                            <thead>
-                                                                <tr>
-                                                                    <th scope="col">No</th>
-                                                                    <th scope="col">No. Kartu Keluarga</th>
-                                                                    <th scope="col">Alamat</th>
-                                                                    <th scope="col">NIK Kepala Keluarga</th>
-                                                                    <th scope="col">Jumlah Usia Produktif</th>
-                                                                    <th scope="col">Jumlah Anggota KK</th>
-                                                                    <th scope="col">Jumlah Usia Lanjut</th>
+                                                @if(session()->has('success'))
+                                                    <div class="alert alert-success outline-alert" role="alert">
+                                                        {{ session('success') }}
+                                                    </div>
+                                                @endif
+                                                @if(session()->has('edit'))
+                                                    <div class="alert alert-info outline-alert" role="alert">
+                                                        {{ session('edit') }}
+                                                    </div>
+                                                @endif
+                                                @if(session()->has('delete'))
+                                                    <div class="alert alert-danger outline-alert" role="alert">
+                                                        {{ session('delete') }}
+                                                    </div>
+                                                @endif
+                                                
+                                                <h4 class="mb-0">Data Kartu Keluarga</h4>
+                                                <p>Berikut adalah Data Data Kartu Keluarga dari RW 003</code>.</p>
+                                                @error('no_kk')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $errors->first('no_kk') }}</strong>
+                                                    </span>
+                                                @enderror
 
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                                @foreach ($data as $d)
+                                                <div class="text-right mb-3">
+                                                    <button type="button" class="btn btn-primary" data-toggle="modal"
+                                                        data-target="#kk_tambah">
+                                                        Tambah Kartu Keluarga
+                                                    </button>
+                                                </div>
+
+                                                <div class="table-responsive">
+                                                    <table class="table">
+                                                        <thead>
+                                                            <tr>
+                                                                <th scope="col">No</th>
+                                                                <th scope="col">No. Kartu Keluarga</th>
+                                                                <th scope="col">Alamat</th>
+                                                                <th scope="col">Nik Kepala Keluarga</th>
+                                                                <th scope="col">Jumlah Usia Produktif</th>
+                                                                <th scope="col">Jumlah Anggota KK</th>
+                                                                <th scope="col">Jumlah Usia Lanjut</th>
+
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @foreach ($data as $d)
                                                                 <tr>
                                                                     <th scope="row">{{ $d->id_kk }}</th>
                                                                     <td><button type="button" class="btn btn-link" data-toggle="modal" data-target="#householdModal_{{ $d->id_kk }}">{{ $d->no_kk }}</button></td>

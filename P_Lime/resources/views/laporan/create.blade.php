@@ -68,14 +68,24 @@
                                     <div class="col-xl">
                                         <div class="card">
                                             <div class="card-body">
+                                                @if(session()->has('success'))
+                                                    <div class="alert alert-success outline-alert" role="alert">
+                                                        {{ session('success') }}
+                                                    </div>
+                                                @endif
 
                                                 <form action="{{ route('laporan.store') }}" method="POST"
                                                     enctype="multipart/form-data">
                                                     @csrf
                                                     <div class="form-group">
                                                         <label for="exampleFormControlInput1">Pengirim</label>
-                                                        <input type="text" name="pengirim" class="form-control"
-                                                            id="exampleFormControlInput1">
+        
+                                                        <select name="pengirim" id="exampleFormControlInput1" class="form-control">
+                                                            @foreach ($warga as $w)
+                                                            <option value="{{ $w->nik }}">{{ $w->nama_lengkap }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                            
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="exampleFormControlInput1">Judul Laporan</label>

@@ -21,14 +21,12 @@
             <li class="sidebar-title">
                 MENU
             </li>
+            
             <li>
                 <a href="{{ route('dashboard.rw') }}" class="{{ Request::routeIs('dashboard.rw') ? 'active' : '' }}">
                     <i class="material-icons">dashboard</i>Dashboard
                 </a>
-            </li>
-
-
-
+            </li> 
 
             <li class="page {{ Request::is('laporan*') ? 'active-page' : '' }}">
                 <a href="#"><i class="material-icons">report</i>Laporan<i
@@ -66,11 +64,6 @@
                 <a href="#"><i class="material-icons">store</i>UMKM<i
                         class="material-icons has-sub-menu">keyboard_arrow_left</i></a>
                 <ul class="sub-menu">
-                    @canany(['sekretaris', 'rw'])
-                        <li>
-                            <a href="{{ route('umkm.register') }}">UMKM Register</a>
-                        </li>
-                    @endcanany
                     <li>
                         <a href="{{ route('umkm.view') }}">UMKM List</a>
                     </li>
@@ -113,7 +106,7 @@
 
             @canany(['sekretaris', 'rw'])
             <li class="page {{ Request::is('citizen*') ? 'active-page' : '' }}">
-                <a href="#"><i class="material-icons">person</i>Kependudukan<i
+                <a href="#"><i class="material-icons">groups</i>Kependudukan<i
                         class="material-icons has-sub-menu">keyboard_arrow_left</i></a>
                 <ul class="sub-menu">
                     <li>
@@ -132,6 +125,12 @@
                         <a href="{{ route('citizen.organisasi') }}">Organisasi</a>
                     </li>
                 </ul>
+            </li>
+
+            <li>
+                <a href="{{ route('user.index') }}" class="{{ Request::routeIs('user.index') ? 'active' : '' }}">
+                    <i class="material-icons">manage_accounts</i>Akun User
+                </a>
             </li>
             @endcanany
             

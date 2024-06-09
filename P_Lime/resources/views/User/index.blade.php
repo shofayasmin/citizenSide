@@ -41,21 +41,25 @@
     <div class="lime-container">
         <div class="lime-body">
             <div class="container">
+
                 <div class="row">
                     <div class="col-md-12">
                         <div class="page-title">
+
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb breadcrumb-separator-1">
-                                    <li class="breadcrumb-item"><a href="#">UI Elements</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">Forms</li>
+                                    <li class="breadcrumb-item"><a href="{{ route('dashboard.rw') }}">Dashboard</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Users</li>
 
                                 </ol>
+
                             </nav>
-                            <h3>Forms</h3>
+                            <h3>Akun User</h3>
 
                         </div>
                     </div>
                 </div>
+
                 <div class="row">
                     <div class="col-xl">
                         <div class="card">
@@ -64,84 +68,83 @@
                                     <div class="col-xl">
                                         <div class="card">
                                             <div class="card-body">
-                                                @if(session()->has('success'))
-                                                    <div class="alert alert-success outline-alert" role="alert">
+                                                <h5 class="card-title">Data User</h5>
+                                                <p>Berikut adalah Data Data User dari RW 003</code>.</p>
+                                                @if (session('success'))
+                                                    <div class="alert alert-success alert-dismissible fade show"
+                                                        role="alert">
+                                                        <button type="button" class="close" data-dismiss="alert"
+                                                            aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
                                                         {{ session('success') }}
                                                     </div>
                                                 @endif
-                                                @if(session()->has('edit'))
-                                                    <div class="alert alert-info outline-alert" role="alert">
-                                                        {{ session('edit') }}
+                                                @if ($errors->any())
+                                                    <div class="alert alert-danger alert-dismissible fade show"
+                                                        role="alert">
+                                                        <button type="button" class="close" data-dismiss="alert"
+                                                            aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                        <ul>
+                                                            @foreach ($errors->all() as $error)
+                                                                <li>{{ $error }}</li>
+                                                            @endforeach
+                                                        </ul>
                                                     </div>
                                                 @endif
-                                                @if(session()->has('delete'))
-                                                    <div class="alert alert-danger outline-alert" role="alert">
-                                                        {{ session('delete') }}
-                                                    </div>
-                                                @endif
-
-                                                <h5 class="card-title">Data RT</h5>
-                                                <p>Berikut adalah Data Data RT dari RW 003</code>.</p>
-                                                @if ($errors->has('no_kk'))
-                                                    <div class="alert alert-danger">
-                                                        {{ $errors->first('no_kk') }}
-                                                    </div>
-                                                @endif
-
                                                 <div class="text-right mb-3">
                                                     <button type="button" class="btn btn-primary" data-toggle="modal"
-                                                        data-target="#RT_tambah">
-                                                        Tambah Data Rt
+                                                        data-target="#user_tambah">
+                                                        Tambah User
                                                     </button>
                                                 </div>
                                                 <div class="table-responsive">
-
                                                     <table class="table">
                                                         <thead>
+
                                                             <tr>
                                                                 <th scope="col">No</th>
-                                                                <th scope="col">Nama Ketua</th>
-                                                                <th scope="col">No RT</th>
-                                                                <th scope="col">Masa Jabatan</th>
-
-
+                                                                <th scope="col">Username</th>
+                                                                <th scope="col">Nama Lengkap</th>
+                                                                <th scope="col">NIK</th>
+                                                                <th scope="col">Role</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
-                                                            @foreach ($data as $d)
+                                                            @foreach ($users as $u)
                                                                 <tr>
-
-                                                                    <th scope="row">{{ $d->rt_id }}</th>
-                                                                    <td>{{ $d->warga->nama_lengkap }}</td>
-                                                                    <td>{{ $d->no_rt }}</td>
-                                                                    <td>{{ \Carbon\Carbon::parse($d->mulai_masa_jabatan)->format('Y') }}
-                                                                        -
-                                                                        {{ \Carbon\Carbon::parse($d->berakhir_masa_jabatan)->format('Y') }}
-                                                                    </td>
+                                                                    <th scope="row">{{ $u->id }}</th>
+                                                                    <td>{{ $u->username }}</td>
+                                                                    <td>{{ $u->warga->nama_lengkap }}</td>
+                                                                    <td>{{ $u->user_nik }}</td>
+                                                                    <td>{{ $u->role }}</td>
                                                                     <td>
                                                                         <button type="button" class="btn btn-primary"
                                                                             data-toggle="modal"
-                                                                            data-target="#exampleModalEdit{{ $d->rt_id }}">
+                                                                            data-target="#exampleModalEdit{{ $u->id }}">
                                                                             Edit
                                                                         </button>
                                                                         <a data-toggle="modal"
-                                                                            data-target="#exampleModalHapus{{ $d->rt_id }}"
+                                                                            data-target="#exampleModalHapus{{ $u->id }}"
                                                                             class="btn btn-danger"><i
                                                                                 class="fas fa-trash-alt">Hapus</i></a>
                                                                     </td>
-
                                                                 </tr>
 
+
                                                                 <!-- Modal -->
-                                                                @include('Citizen.modal_rt')
+                                                                @include('User.modal')
                                                             @endforeach
                                                         </tbody>
                                                     </table>
-                                                    <a href="{{ route('citizen.index') }}"> <- Kembali</a>
+                                                </div>
+
+                                                <div class="d-flex justify-content-center mt-4">
+                                                    {{ $users->links() }}
                                                 </div>
                                             </div>
-
-
                                         </div>
                                     </div>
                                 </div>

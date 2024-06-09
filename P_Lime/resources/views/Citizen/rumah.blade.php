@@ -46,13 +46,13 @@
                                 
                                 <nav aria-label="breadcrumb">
                                   <ol class="breadcrumb breadcrumb-separator-1">
-                                    <li class="breadcrumb-item"><a href="#">Kependudukan</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">Rumah</li>
+                                    <li class="breadcrumb-item"><a href="#">UI Elements</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Forms</li>
                                     
                                   </ol>
                                   
                                 </nav>
-                                <h3>Data Rumah</h3>
+                                <h3>Forms</h3>
                                 
                             </div>
                         </div>
@@ -66,11 +66,26 @@
                                         <div class="col-xl">
                                             <div class="card">
                                                 <div class="card-body">
+                                                    @if(session()->has('success'))
+                                                        <div class="alert alert-success outline-alert" role="alert">
+                                                            {{ session('success') }}
+                                                        </div>
+                                                    @endif
+                                                    @if(session()->has('edit'))
+                                                        <div class="alert alert-info outline-alert" role="alert">
+                                                            {{ session('edit') }}
+                                                        </div>
+                                                    @endif
+                                                    @if(session()->has('delete'))
+                                                        <div class="alert alert-danger outline-alert" role="alert">
+                                                            {{ session('delete') }}
+                                                        </div>
+                                                    @endif
                                                     <h5 class="card-title">Data Rumah</h5>
                                                     <p>Berikut adalah Data Data Rumah dari RW 003</code>.</p>
                                                     <div class="text-right mb-3">
                                                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#rumah_tambah">
-                                                            Tambah Data
+                                                            Tambah Rumah
                                                         </button>
                                                     </div>
                                                     <div class="table-responsive">
@@ -92,7 +107,7 @@
                                                                     
                                                                 <tr>
                                                                     <th scope="row">{{ $d->rumah_id }}</th>
-                                                                    <td>{{ $d->nama_pemilik }}</td>
+                                                                    <td>{{ $d->warga->nama_lengkap }}</td>
                                                                     <td>{{ $d->alamat }}</td>
                                                                     <td>{{ $d->luas_bangunan }} m²</td>
                                                                     <td>{{ $d->luas_tanah }} m²</td>

@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('username');
             $table->string('user_nik');
             $table->foreign('user_nik')->references('nik')->on('wargas');
-            $table->enum('role', ['admin', 'rt', 'rw', 'secretary', 'citizen'])->default('citizen');
+            $table->enum('role', ['rt', 'rw', 'secretary', 'citizen'])->default('citizen');
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
