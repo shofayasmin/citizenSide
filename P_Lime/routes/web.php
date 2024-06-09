@@ -167,12 +167,13 @@ route::get('/Bansos/lurah', [BansosController::class, 'lurah'])->name('bansos.lu
 
 //iuran/financial
 //income = pemasukan
-route::get('/Iuran/income', [IuranController::class, 'income'])->name('iuran.income')->middleware('sekretaris');;
+route::get('/Iuran/income', [IuranController::class, 'income'])->name('iuran.income')->middleware('sekretaris');
 route::get('/Iuran/create_income', [IuranController::class, 'create_income'])->name('income.create')->middleware('sekretaris');
 route::post('/Iuran/store_income', [IuranController::class, 'store_income'])->name('income.store')->middleware('sekretaris');
 route::get('/Iuran/edit_income/{id}', [IuranController::class, 'edit_income'])->name('income.edit')->middleware('sekretaris');
 route::put('/Iuran/update_income/{id}', [IuranController::class, 'update_income'])->name('income.update')->middleware('sekretaris');
 route::delete('/Iuran/delete_income/{id}', [IuranController::class, 'delete_income'])->name('income.delete')->middleware('sekretaris');
+
 
 //expenditure = pengeluaran
 route::get('/iuran/expenditure', [IuranController::class, 'expenditure'])->name('iuran.expenditure')->middleware('sekretaris');

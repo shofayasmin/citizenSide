@@ -62,6 +62,22 @@
                                                     <h5 class="card-title">Pengeluaran</h5>
                                                     <p>Berikut adalah Data Pengeluaran dari RW 003</code>.</p>
                                                     <div class="text-right mb-3">
+                                                        <form action="{{ route('iuran.expenditure') }}" method="get" class="d-inline">
+                                                            @csrf
+                                                            <div class="row mb-3 justify-content-end">
+                                                                <div class="col-sm-3">
+                                                                    <label for="start_date" class="form-label">Rentang Tanggal Mulai: </label>
+                                                                    <input type="date" name="start_date" class="form-control" value="{{ request('start_date') }}">
+                                                                </div>
+                                                                <div class="col-sm-3">
+                                                                    <label for="end_date" class="form-label">Rentang Tanggal Akhir: </label>
+                                                                    <input type="date" name="end_date" class="form-control" value="{{ request('end_date') }}">
+                                                                </div>
+                                                                <div class="col-sm-2 d-flex align-items-end">
+                                                                    <button type="submit" class="btn btn-primary">Filter</button>
+                                                                </div>
+                                                            </div>
+                                                        </form>
                                                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalTambahExpenditure">
                                                             Tambah Data 
                                                         </button>
@@ -104,7 +120,15 @@
                                                                 @endforeach
                                                             </tbody>
                                                         </table>
-                                                        <a href="{{ route('iuran.expenditure') }}"> <- Kembali</a>
+                                                        <div class="d-flex justify-content-between align-items-center">
+                                                            {{-- <a href="{{ route('iuran.expenditure') }}" class="btn btn-secondary">Kembali</a> --}}
+                                                            <a href="{{ route('iuran.expenditure') }}"> <- Kembali</a>
+                                                            <nav aria-label="Page navigation example">
+                                                                <ul class="pagination mb-0">
+                                                                    {{ $expenditure->links() }}
+                                                                </ul>
+                                                            </nav>
+                                                        </div>
                                                     </div>  
                                                 </div>
                                             </div>
