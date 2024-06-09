@@ -52,7 +52,9 @@
                                     <li class="breadcrumb-item active" aria-current="page">View</li>
                                   </ol>
                                 </nav>
+                                <div></div>
                                 <h3>View Umkm List</h3>
+                                
                                 
                             </div>
                         </div>
@@ -61,6 +63,23 @@
                     <div class="row">
                         <div class="col-xl">
                             <div class="container">
+                                @if(session()->has('success'))
+                                    <div class="alert alert-success outline-alert" role="alert">
+                                        {{ session('success') }}
+                                    </div>
+                                @endif
+                                @php
+                                    $allowedRoles = ['secretary', 'rw', 'rt']; // Daftar peran yang diizinkan
+                                @endphp
+
+                                @if(Auth::check() && in_array(Auth::user()->role, $allowedRoles))
+                                    <div class="d-flex justify-content-end">
+                                        <a href="{{ route('umkm.register') }}" class="register-class mb-5">
+                                            Tambah Data
+                                        </a>
+                                    </div>
+                                @endif
+
                                 <div class="row">
                                     @php $i = 0; @endphp
                                     @foreach($data as $d)

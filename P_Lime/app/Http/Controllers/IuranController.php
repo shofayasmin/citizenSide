@@ -53,7 +53,7 @@ class IuranController extends Controller
         
         Income::create($income);
 
-        return redirect()->route('iuran.income');
+        return redirect()->back()->with('success', 'Anda Berhasil menambahkan Data Income');
     }
 
     public function edit_income(Request $request,$id)
@@ -87,7 +87,7 @@ class IuranController extends Controller
 
         Income::where('income_id',$id)->update($income);
 
-        return redirect()->route('iuran.income');
+        return redirect()->back()->with('edit', 'Anda Berhasil Mengedit');
     }
 
     
@@ -99,7 +99,7 @@ class IuranController extends Controller
             $data->delete();
         }
 
-        return redirect()->route('iuran.income');
+        return redirect()->back()->with('delete', 'Anda Berhasil Menghapus');
     }
 
     public function filter()
@@ -134,7 +134,7 @@ class IuranController extends Controller
 
         Expenditure::create($expenditure);
 
-        return redirect()->route('iuran.expenditure');
+        return redirect()->back()->with('success', 'Anda Berhasil menambahkan Data Pengeluaran');
     }
 
     public function edit_expenditure(Request $request,$id)
@@ -167,7 +167,7 @@ class IuranController extends Controller
 
         Expenditure::where('expenditure_id',$id)->update($expenditure);
 
-        return redirect()->route('iuran.expenditure');
+        return redirect()->back()->with('edit', 'Anda Berhasil Mengedit');
     }
 
     
@@ -179,6 +179,6 @@ class IuranController extends Controller
             $data->delete();
         }
 
-        return redirect()->route('iuran.expenditure');
+        return redirect()->back()->with('delete', 'Anda Berhasil Menghapus');
     }
 }

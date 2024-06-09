@@ -61,6 +61,21 @@
                                         <div class="col-xl">
                                             <div class="card">
                                                 <div class="card-body">
+                                                    @if(session()->has('success'))
+                                                        <div class="alert alert-success outline-alert" role="alert">
+                                                            {{ session('success') }}
+                                                        </div>
+                                                    @endif
+                                                    @if(session()->has('edit'))
+                                                        <div class="alert alert-info outline-alert" role="alert">
+                                                            {{ session('edit') }}
+                                                        </div>
+                                                    @endif
+                                                    @if(session()->has('delete'))
+                                                        <div class="alert alert-danger outline-alert" role="alert">
+                                                            {{ session('delete') }}
+                                                        </div>
+                                                    @endif
                                                     <h5 class="card-title">Pemasukan</h5>
                                                     <p>Berikut adalah Data Pemasukan dari RW 003</code>.</p>
                                                     <div class="text-right mb-3">
@@ -94,10 +109,10 @@
                                                                     <td>Rp. {{ $d->inflow }}</td>
                                                                     <td>
                                                                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalEditIncome{{ $d->income_id }}">
-                                                                            <i class="fas fa-pen"></i>Edit
+                                                                            <i class="fas fa-pen"></i>
                                                                         </button>
                                                                         <button type="button" data-toggle="modal" data-target="#exampleModalHapusIncome{{ $d->income_id }}" class="btn btn-danger">
-                                                                            <i class="fas fa-trash-alt"></i> Hapus
+                                                                            <i class="fas fa-trash-alt"></i> 
                                                                         </button></td>
                                                                 </tr>
 

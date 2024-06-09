@@ -13,13 +13,13 @@ return new class extends Migration
     {
         Schema::create('kks', function (Blueprint $table) {
             $table->id('id_kk');
-            $table->string('no_kk',30)->unique();
+            $table->string('no_kk',30);
             $table->text('alamat');
             $table->string('nik_kepala_keluarga');
             $table->foreign('nik_kepala_keluarga')->references('nik')->on('wargas');
-            $table->integer('jumlah_usia_produktif');
-            $table->integer('jumlah_anggota_kk');
-            $table->integer('jumlah_usia_lanjut');
+            $table->integer('jumlah_usia_produktif')->default(0);
+            $table->integer('jumlah_anggota_kk')->default(0);
+            $table->integer('jumlah_usia_lanjut')->default(0);
             $table->timestamps();
         });
     }

@@ -23,6 +23,7 @@
     <!-- Theme Styles -->
     <link href="{{ asset('lime/theme/assets/css/lime.min.css') }}" rel="stylesheet">
     <link href="{{ asset('lime/theme/assets/css/custom.css') }}" rel="stylesheet">
+    <link href="{{ asset('lime/theme/assets/js/pages/toastr.js') }}" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -69,6 +70,23 @@
                                                         {{ $errors->first('no_kk') }}
                                                     </div>
                                                 @endif
+
+                                                @if(session()->has('success'))
+                                                    <div class="alert alert-success outline-alert" role="alert">
+                                                        {{ session('success') }}
+                                                    </div>
+                                                @endif
+                                                @if(session()->has('edit'))
+                                                    <div class="alert alert-info outline-alert" role="alert">
+                                                        {{ session('edit') }}
+                                                    </div>
+                                                @endif
+                                                @if(session()->has('delete'))
+                                                    <div class="alert alert-danger outline-alert" role="alert">
+                                                        {{ session('delete') }}
+                                                    </div>
+                                                @endif
+                                                
                                                 <h4 class="mb-0">Data Kartu Keluarga</h4>
                                                 <p>Berikut adalah Data Data Kartu Keluarga dari RW 003</code>.</p>
                                                 @error('no_kk')
@@ -160,6 +178,10 @@
                 <!-- Include jQuery and Bootstrap JS files -->
                 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
                 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+                <script>
+                    
+                </script>
 
 </body>
 
