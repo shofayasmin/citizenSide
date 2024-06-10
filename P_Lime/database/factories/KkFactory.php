@@ -17,11 +17,11 @@ class KkFactory extends Factory
      */
     public function definition(): array
     {
+        $kepala = Warga::inRandomOrder()->first();
         return [
-            'no_kk' => Warga::inRandomOrder()->first()->no_kk,
+            'no_kk' => $kepala->no_kk,
             'alamat' => fake()->text(75),
-            'nik_kepala_keluarga' => Warga::inRandomOrder()->first()?->nik,
-            
+            'nik_kepala_keluarga' => $kepala->nik,
         ];
     }
 }
