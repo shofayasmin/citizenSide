@@ -77,7 +77,7 @@
 
                     </div>
                     <div class="row">
-                        @canany(['rw', 'rt', 'secretary'])
+                        @canany(['rw', 'rt', 'sekretaris'])
                         <div class="col-md-3">
                             <div class="card stat-card">
                                 <div class="card-body">
@@ -151,7 +151,7 @@
                         </div>
                     </div>
 
-                    @canany(['rw', 'rt', 'secretary'])
+                    @canany(['rw', 'rt', 'sekretaris'])
                     <div class="row">
                         
                         <div class="col-md-8">
@@ -222,7 +222,7 @@
                         </div>
                     </div>
 
-                    @canany(['rw', 'rt', 'secretary'])
+                    @canany(['rw', 'rt', 'sekretaris'])
                     <div class="row">
                         {{-- <div class="col-md-4">
                             <div class="card">
