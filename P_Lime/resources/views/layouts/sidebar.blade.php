@@ -138,7 +138,7 @@
             @endcanany
 
 
-            @canany(['rw', 'rt', 'secretary'])
+            @canany(['rw', 'rt', 'sekretaris'])
             <li class="sidebar-title">
                 SPK
             </li>
