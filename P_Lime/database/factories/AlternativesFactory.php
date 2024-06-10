@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Rumah;
+use App\Models\Kk;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -18,12 +19,12 @@ class AlternativesFactory extends Factory
     public function definition(): array
     {
         return [
-            'rumah_id'                 => Rumah::inRandomOrder()->first()->rumah_id,
-            'name'                      =>fake()->name(),
+            'rumah_id'                  =>Rumah::inRandomOrder()->first()->rumah_id,
+            'name'                      =>Kk::inRandomOrder()->first()->nik_kepala_keluarga,
             'jumlah_usia_produktif'     =>fake()->numberBetween(1,10),
             'jumlah_anggota_keluarga'   =>fake()->numberBetween(1.10),
             'kondisi_rumah'             =>fake()->numberBetween(1,10),
-            'jumlah_kk'                 =>fake()->numberBetween(1,2),
+            'jumlah_usia_lanjut'        =>fake()->numberBetween(1,2),
             'pendapatan_total'          =>fake()->numberBetween(1,30) * 100000,
         ];
     }

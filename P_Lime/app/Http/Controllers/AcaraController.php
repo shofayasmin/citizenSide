@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Acara;
+use App\Models\acara_participant;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -14,16 +15,30 @@ class AcaraController extends Controller
     public function manage()
     {
         $data = Acara::get();
+        $userParticipations = acara_participant::where('user_id', auth()->id())->pluck('acara_id')->toArray(); // Get all acara_id where the authenticated user has participated
 
-        return view('Acara.ManageAcara_RW',compact('data'));
+
+        return view('Acara.ManageAcara_RW',compact('data','userParticipations'));
     }
 
     public function view()
     {
-        $data = Acara::get();
+        $data = Acara::paginate(6);
         $user = Auth::user();
 
-        return view('Acara.ViewAcara_Warga',compact('data','user'));
+        
+        $userParticipations = acara_participant::where('user_id', auth()->id())->pluck('acara_id')->toArray(); // Get all acara_id where the authenticated user has participated
+        
+
+        return view('Acara.ViewAcara_Warga',compact('data','user','userParticipations'));
+    }
+
+    public function batal_ikut($id)
+    {
+        $user_id = Auth::id();
+        acara_participant::where('umkm_id', $id)->where('user_id', $user_id)->delete();
+
+        return redirect()->back()->with('success', 'Kamu telah membatalkan keikutsertaan dalam kegiatan ini.');
     }
 
     public function create()

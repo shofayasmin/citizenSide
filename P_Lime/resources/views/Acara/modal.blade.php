@@ -131,27 +131,24 @@
                     </button>
                 </div>
                 <div class="modal-body mb-4">
-                    @php
-                        $allowedRoles = ['secretary', 'rw', 'rt']; // Daftar peran yang diizinkan
-                    @endphp
                     <p>{{ $d->deskripsi }}</p>
                     @if($d->tipe_acara != 'Informasi')
-                        <form action="{{ route('acara.ikuti', $d->id_acara) }}" method="POST">
-                            @csrf
-                            <button type="submit" class="btn btn-link">Ikut Kegiatan</button>
-                            @if(auth()->check() && in_array(auth()->user()->role, $allowedRoles))
-                                <button type="button" class="btn btn-link show-participants-btn" data-toggle="modal" data-target="#participantsModal_{{ $d->id_acara }}">Show Participants</button>
-                            @endif
-                        </form>
+                        @if(in_array($d->id_acara, $userParticipations))
+                            <form action="{{ route('acara.batal', $d->id_acara) }}" method="POST">
+                                @csrf
+                                <button type="submit" class="btn btn-danger">Batalkan Kegiatan</button>
+                            </form>
+                        @else
+                            <form action="{{ route('acara.ikuti', $d->id_acara) }}" method="POST">
+                                @csrf
+                                <button type="submit" class="btn btn-link">Ikut Kegiatan</button>
+                            </form>
+                        @endif
                     @endif
-                    
                 </div>
             </div>
         </div>
     </div>
-    
-    {{-- <!-- Include participants modal -->
-    @include('partials.participants_modal', ['acara' => $d]) --}}
 @endforeach
 
 

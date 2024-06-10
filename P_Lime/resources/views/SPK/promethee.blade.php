@@ -50,27 +50,39 @@
                         <div class="card-body">
                             <h5 class="card-title">Promethee</h5>
                             <p>Ini adalah List Orang Orang yang berhak mendapatkan Bantuan Sosial</p>
-                            <table class="table table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">No</th>
-                                        <th scope="col">Nama Kandidat</th>
-                                        <th scope="col">Net Flow</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @php
-                                        $counter = 1;
-                                    @endphp
-                                    @foreach ($netFlow as $altId => $flow)
+                            <form action="{{ route('store.alternatives.results') }}" method="POST">
+                                @csrf
+                                <table class="table table-bordered">
+                                    <thead>
                                         <tr>
-                                            <td>{{ $counter++ }}</td>
-                                            <td>{{ $alternatives->find($altId)->name }}</td>
-                                            <td>{{ $flow }}</td>
+                                            <th scope="col">No</th>
+                                            <th scope="col">Nama Kandidat</th>
+                                            <th scope="col">Net Flow</th>
                                         </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>       
+                                    </thead>
+                                    <tbody>
+                                        @php
+                                            $counter = 1;
+                                        @endphp
+                                        @foreach ($netFlow as $altId => $flow)
+                                            <tr>
+                                                <td>{{ $counter }}</td>
+                                                <td>{{ $alternatives->find($altId)->name }}</td>
+                                                <td>{{ $flow }}</td>
+                                            </tr>
+                                            <input type="hidden" name="data[{{ $counter }}][alternative_id]" value="{{ $altId }}">
+                                            <input type="hidden" name="data[{{ $counter }}][net_flow]" value="{{ $flow }}">
+                                            @php
+                                                $counter++;
+                                            @endphp
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                                <button type="submit" class="btn btn-primary">Store Table</button>
+                            </form>
+                            
+                            
+                              
                         </div>
                     </div>
     

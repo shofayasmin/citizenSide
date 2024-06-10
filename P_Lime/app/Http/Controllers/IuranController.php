@@ -22,13 +22,13 @@ class IuranController extends Controller
 
     public function income()
     {
-        $income = Income::get();
+        $income = Income::paginate(10);
         return view('Iuran.income',compact('income'));
     }
     
     public function expenditure()
     {
-        $expenditure = Expenditure::get();
+        $expenditure = Expenditure::paginate(10);
         return view('Iuran.expenditure',compact('expenditure'));
     }
 

@@ -29,7 +29,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        Warga::factory(40)->create();
+        Warga::factory(200)->create();
         // Get unique no_kk values from Warga
         $uniqueNoKks = Warga::pluck('no_kk')->unique();
 
@@ -44,9 +44,9 @@ class DatabaseSeeder extends Seeder
         umkm::factory(4)->create();
         Acara::factory(6)->create();
         Iuran::factory(30)->create();
-        Bansos::factory(10)->create();
+        Bansos::factory(2500)->create();
         Rt::factory(5)->create();
-
+        Alternatives::factory(30)->create();
         laporan::factory(10)->create();
         Organisasi::factory(5)->create();
         Income::factory(10)->create();

@@ -99,9 +99,9 @@
                                                                 @php
                                                                     $counter = 1   
                                                                 @endphp
-                                                                @foreach ($income as $d)
+                                                                @foreach ($income as $key => $d)
                                                                 <tr>
-                                                                    <th scope="row">{{ $counter++ }}</th>
+                                                                    <th scope="row">{{ $income->firstItem() + $key }}</th>
                                                                     <td>{{ $d->date }}</td>
                                                                     <td>{{ $d->income_name }}</td>
                                                                     <td>{{ $d->income_type }}</td>
@@ -123,7 +123,49 @@
 
                                                             </tbody>
                                                         </table>
-                                                        <a href="{{ route('iuran.income') }}"> <- Kembali</a>
+                                                        <nav aria-label="Page navigation example">
+                                                            <ul class="pagination justify-content-center">
+                                                                {{-- Previous Page Link --}}
+                                                                @if ($income->onFirstPage())
+                                                                    <li class="page-item disabled">
+                                                                        <span class="page-link">&laquo;</span>
+                                                                    </li>
+                                                                @else
+                                                                    <li class="page-item">
+                                                                        <a class="page-link" href="{{ $income->previousPageUrl() }}" aria-label="Previous">
+                                                                            <span aria-hidden="true">&laquo;</span>
+                                                                            <span class="sr-only">Previous</span>
+                                                                        </a>
+                                                                    </li>
+                                                                @endif
+                                                        
+                                                                {{-- Pagination Elements --}}
+                                                                @php
+                                                                    $start = max(1, $income->currentPage() - 2);
+                                                                    $end = min($start + 4, $income->lastPage());
+                                                                @endphp
+                                                        
+                                                                @for ($i = $start; $i <= $end; $i++)
+                                                                    <li class="page-item {{ ($i == $income->currentPage()) ? 'active' : '' }}">
+                                                                        <a class="page-link" href="{{ $income->url($i) }}">{{ $i }}</a>
+                                                                    </li>
+                                                                @endfor
+                                                        
+                                                                {{-- Next Page Link --}}
+                                                                @if ($income->hasMorePages())
+                                                                    <li class="page-item">
+                                                                        <a class="page-link" href="{{ $income->nextPageUrl() }}" aria-label="Next">
+                                                                            <span aria-hidden="true">&raquo;</span>
+                                                                            <span class="sr-only">Next</span>
+                                                                        </a>
+                                                                    </li>
+                                                                @else
+                                                                    <li class="page-item disabled">
+                                                                        <span class="page-link">&raquo;</span>
+                                                                    </li>
+                                                                @endif
+                                                            </ul>
+                                                        </nav>
                                                     </div>      
                                                 </div>
                                             </div>

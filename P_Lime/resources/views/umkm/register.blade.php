@@ -47,8 +47,8 @@
                             <div class="page-title">
                                 <nav aria-label="breadcrumb">
                                   <ol class="breadcrumb breadcrumb-separator-1">
-                                    <li class="breadcrumb-item"><a href="#">Add UMKM</a></li>
-                                    {{-- <li class="breadcrumb-item active" aria-current="page">Tambah Acara</li> --}}
+                                    <li class="breadcrumb-item"><a href="#">UMKM</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Tambah UMKM</li>
                                   </ol>
                                 </nav>
                                 <h3>Forms</h3>
