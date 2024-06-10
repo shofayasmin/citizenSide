@@ -57,6 +57,7 @@
                                         <tr>
                                             <th scope="col">No</th>
                                             <th scope="col">Nama Kandidat</th>
+                                            <th scope="col">NIK</th>
                                             <th scope="col">Net Flow</th>
                                         </tr>
                                     </thead>
@@ -66,8 +67,13 @@
                                         @endphp
                                         @foreach ($netFlow as $altId => $flow)
                                             <tr>
+                                                @php
+                                                    $nik = $alternatives->find($altId)->name;
+                                                    $w = $warga->where('nik', $nik)->first();
+                                                @endphp
                                                 <td>{{ $counter }}</td>
-                                                <td>{{ $alternatives->find($altId)->name }}</td>
+                                                <td>{{ $w->nama_lengkap }}</td>
+                                                <td>{{ $nik }}</td>
                                                 <td>{{ $flow }}</td>
                                             </tr>
                                             <input type="hidden" name="data[{{ $counter }}][alternative_id]" value="{{ $altId }}">

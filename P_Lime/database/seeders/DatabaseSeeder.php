@@ -39,7 +39,7 @@ class DatabaseSeeder extends Seeder
                 'no_kk' => $noKk,
             ]);
         }
-        Rumah::factory(5)->create();
+        Rumah::factory(40)->create();
         User::factory(10)->create();
         umkm::factory(4)->create();
         Acara::factory(6)->create();
