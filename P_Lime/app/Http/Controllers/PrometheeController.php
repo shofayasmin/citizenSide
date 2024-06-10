@@ -6,6 +6,7 @@ use App\Models\Alternatives;
 use App\Models\AlternativesResult;
 use Illuminate\Http\Request;
 use App\Models\Criteria;
+use App\Models\Warga;
 
 class PrometheeController extends Controller
 {
@@ -77,7 +78,8 @@ class PrometheeController extends Controller
         // Step 5: Rank the alternatives
         arsort($netFlow);
 
-        return view('spk.promethee', compact('netFlow', 'alternatives'));
+        $warga = Warga::get();
+        return view('spk.promethee', compact('netFlow', 'alternatives', 'warga'));
     }
 
     public function storeAlternativesResults(Request $request)
@@ -94,7 +96,6 @@ class PrometheeController extends Controller
                 return redirect()->back()->with('error', 'Data tidak valid.');
             }
         }
-
         return redirect()->back()->with('success', 'Data berhasil disimpan');
     }
 }
