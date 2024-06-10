@@ -21,7 +21,9 @@ class UmkmController extends Controller
     }
     public function view(){
         $data = umkm::all();
-        return view('umkm.view',compact('data'));
+        $userParticipations = UmkmParticipation::where('user_id', auth()->id())->pluck('umkm_id')->toArray(); // Get all acara_id where the authenticated user has participated
+
+        return view('umkm.view',compact('data','userParticipations'));
     }
 
     public function store_umkm(Request $request)
@@ -109,10 +111,12 @@ class UmkmController extends Controller
 
         return redirect()->back()->with('success','Selamat anda telah bergabung di UMKM');
 
+    }
+    public function batal_ikut($id)
+    {
+        $user_id = Auth::id();
+        UmkmParticipation::where('umkm_id', $id)->where('user_id', $user_id)->delete();
 
-
-
-        // Return a success response
-        // return response()->json(['success' => true]);
+        return redirect()->back()->with('success', 'Kamu telah membatalkan keikutsertaan dalam kegiatan ini.');
     }
 }
