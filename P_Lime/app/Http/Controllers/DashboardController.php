@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Acara;
 use App\Models\Bansos;
 use App\Models\Iuran;
 use App\Models\Kk;
@@ -17,7 +18,7 @@ use Illuminate\Support\Facades\Auth;
 class DashboardController extends Controller
 {
     public function index(){
-        return view('dashboard.index');
+        return view('dashboard.rw');
     }
     public function rw()
     {
@@ -39,6 +40,10 @@ class DashboardController extends Controller
         $totalKk = Kk::count();
         $totalRumah = Rumah::count();
         $totalUmkm = umkm::count();
+        $totalBansos = Bansos::count();
+        $totalLaporan = laporan::count();
+        $totalAcara = Acara::count();
+
         // Ambil daftar pengirim beserta jumlah laporan mereka
         $pelapor = Laporan::selectRaw('pengirim, COUNT(*) as total_laporan')
         ->groupBy('pengirim')
@@ -96,6 +101,9 @@ class DashboardController extends Controller
         'totalKk',
         'totalRumah',
         'totalUmkm',
+        'totalBansos',
+        'totalLaporan',
+        'totalAcara',
         'pelapor',
         'lastUpdated',
         'warga',
