@@ -339,7 +339,7 @@
                 },
                 legend: {
                     position: 'bottom',
-                    offsetY: -10
+                    offsetY: 30
                 }
             };
 
