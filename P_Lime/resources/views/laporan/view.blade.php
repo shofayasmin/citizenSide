@@ -53,18 +53,20 @@
                         @foreach ($data as $key => $d)
                             <div class="col-10">
                                 <div class="card">
-                                    {{-- @php
-                                        $allowedRoles = ['secretary', 'rw', 'rt']; // Daftar peran yang diizinkan
-                                    @endphp --}}
+                                    @php
+                                        $allowedRoles = ['secretary', 'citizen', 'rt']; // Daftar peran yang diizinkan
+                                    @endphp
                                     <div class="card-header d-flex justify-content-between align-items-center">
                                         <h3 class="mt-3">{{ $d->judul }}</h3>
-                                        {{-- @if(auth()->check() && auth()->user()->role == 'secretary') --}}
-                                            <img src="{{ asset('storage/photo-acara/comment1.png') }}" width="25" data-toggle="modal" data-target="#comment_{{ $d->laporan_id }}">
-                                        {{-- @endif --}}
-                                        {{-- @if(auth()->check() && in_array(auth()->user()->role, $allowedRoles)) --}}
-                                            <img src="{{ asset('storage/photo-acara/comment1.png') }}" width="25" data-toggle="modal" data-target="#datacomment_{{ $d->laporan_id }}">
-                                        {{-- @endif --}}
+                                        @if(auth()->check() && in_array(auth()->user()->role, $allowedRoles))
+                                            <img src="{{ asset('storage/photo-acara/comment1.png') }}" width="25" data-toggle="modal" data-target="#comment_{{ $d->laporan_id }}" class="ml-auto">
+                                        @endif
+                                        
+                                        @if(auth()->check() && auth()->user()->role == 'rw')
+                                            <img src="{{ asset('storage/photo-acara/mata.png') }}" width="25" data-toggle="modal" data-target="#datacomment_{{ $d->laporan_id }}" class="ml-auto">
+                                        @endif
                                     </div>
+                                    
                                     <div class="card-body">
                                         <h5 class="card-title"></h5>
                                         <p class="card-text"></p>

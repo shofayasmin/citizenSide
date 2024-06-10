@@ -89,6 +89,7 @@ Route::post('/umkm/batal/{id}', [UmkmController::class, 'batal_ikut'])->name('um
 
 
 
+
 // Read Citizen
 route::get('/citizen', [CitizenController::class, 'index'])->name('citizen.index')->middleware('sekretaris');
 
