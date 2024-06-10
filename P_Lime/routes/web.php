@@ -187,3 +187,5 @@ route::delete('/Iuran/delete_expenditure/{id}', [IuranController::class, 'delete
 
 // SPK
 route::get('/SPK/promethee', [PrometheeController::class, 'calculate'])->name('spk.promethee');
+Route::post('/store-alternatives-results', [PrometheeController::class, 'storeAlternativesResults'])
+    ->name('store.alternatives.results');

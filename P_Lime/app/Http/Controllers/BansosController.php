@@ -24,14 +24,14 @@ class BansosController extends Controller
     public function manage()
     {
         $alternatives = Alternatives::all();
-        $bansos = Bansos::get();
+        $bansos = Bansos::paginate(10);
 
         // Mengambil bobot kriteria dari tabel criteria
         $criteriaWeights = [
             'jumlah_usia_produktif'     => Criteria::where('name', 'Jumlah Usia Produktif')->first()->weight,
             'jumlah_anggota_keluarga'   => Criteria::where('name', 'Jumlah Anggota Keluarga')->first()->weight,
             'kondisi_rumah'             => Criteria::where('name', 'Kondisi Rumah')->first()->weight,
-            'jumlah_kk'                 => Criteria::where('name', 'Jumlah KK')->first()->weight,
+            'jumlah_usia_lanjut'        => Criteria::where('name', 'Jumlah Usia Lanjut')->first()->weight,
             'pendapatan_total'          => Criteria::where('name', 'Pendapatan')->first()->weight,
         ];
 
@@ -90,8 +90,18 @@ class BansosController extends Controller
         // Step 5: Rank the alternatives
         arsort($netFlow);
 
+        // Step 6: Get the top candidates based on jumlah_bansos
+        $jumlahBansos = $bansos->first()->jumlah_bansos;
+        $topCandidates = array_slice(array_keys($netFlow), 0, $jumlahBansos, true);
         
-        return view('Bansos.manage', compact('netFlow', 'alternatives','bansos'));
+        // Ambil ID penerima bansos berdasarkan top candidates
+        $penerimaBansosIds = array_keys($topCandidates);
+
+        // Ambil data lengkap penerima bansos berdasarkan ID yang didapat
+        $penerimaBansos = Alternatives::whereIn('id', $penerimaBansosIds)->get();
+
+        
+        return view('Bansos.manage', compact('netFlow', 'alternatives','bansos','topCandidates','penerimaBansos'));
 
     }
     public function lurah()

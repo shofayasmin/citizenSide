@@ -17,11 +17,22 @@ class BansosFactory extends Factory
     public function definition(): array
     {
         return [
-            'judul'                 => fake()->word(),
+            'judul'                 => fake()->randomElement([
+                                    'Bantuan Sembako Masyarakat',
+                                    'Program Bantuan Tunai',
+                                    'Bantuan Sosial Anak Yatim',
+                                    'Bantuan Lansia',
+                                    'Bantuan Pendidikan',
+                                    'Program Keluarga Harapan',
+                                    'Bantuan Covid-19',
+                                    'Subsidi Listrik',
+                                    'Bantuan Rumah Tangga',
+                                    'Bantuan Bencana Alam'
+                                ]),
             'gambar'                => ('infobansos.png'),
-            'jenis_bansos'          => fake()->randomElement(['Sembako', 'Tunai', 'Lain-lain']),
+            'jenis_bansos'          => fake()->randomElement(['Sembako', 'Tunai', 'Lain-lain', 'Beras', 'Bantuan Kesehatan', 'Pendidikan', 'Kartu Sakti', 'Bantuan Bencana']),
             'periode_bansos'        => fake()->numberBetween(1,3),
-            'tanggal_penyaluran'    => fake()->dateTimeThisYear('2 months'),
+            'tanggal_penyaluran'    => fake()->dateTimeBetween('-5 years', 'now'),
             'jumlah_bansos'         => fake()->numberBetween(10,30),
         ];
     }
