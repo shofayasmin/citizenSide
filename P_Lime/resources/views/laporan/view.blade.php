@@ -76,7 +76,7 @@
                                         @endif
                                         <a href="#" class="badge badge-primary" data-toggle="modal" data-target="#Read_More_{{ $d->laporan_id }}">Read More</a>
                                         <div class="text-right">
-                                            @canany(['rw', 'rt', 'secretary'])
+                                            @canany(['rw', 'rt', 'sekretaris'])
                                                 <a href="#" class="badge {{ $d->status == 'Belum Selesai' ? 'badge-danger' : 'badge-success' }} status-toggle" data-id="{{ $d->laporan_id }}">{{ $d->status }}</a>
                                             @endcanany
                                             @can('citizen')
