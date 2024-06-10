@@ -86,6 +86,7 @@ route::delete('/umkm/delete_umkm/{id}', [UmkmController::class, 'delete_umkm'])-
 route::get('/umkm/list', [UmkmController::class, 'show_list'])->name('umkm.list')->middleware('not.warga');
 Route::post('/participate', [UmkmController::class, 'store_kandidat'])->name('participate');
 Route::post('/umkm/batal/{id}', [UmkmController::class, 'batal_ikut'])->name('umkm.batal');
+route::get('/umkm/manage', [UmkmController::class, 'manage'])->name('umkm.manage');
 
 
 

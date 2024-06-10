@@ -115,13 +115,13 @@
                             <nav aria-label="Page navigation example">
                                 <ul class="pagination justify-content-center">
                                     {{-- Previous Page Link --}}
-                                    @if ($dataa->onFirstPage())
+                                    @if ($data->onFirstPage())
                                         <li class="page-item disabled">
                                             <span class="page-link">&laquo;</span>
                                         </li>
                                     @else
                                         <li class="page-item">
-                                            <a class="page-link" href="{{ $dataa->previousPageUrl() }}" aria-label="Previous">
+                                            <a class="page-link" href="{{ $data->previousPageUrl() }}" aria-label="Previous">
                                                 <span aria-hidden="true">&laquo;</span>
                                                 <span class="sr-only">Previous</span>
                                             </a>
@@ -130,20 +130,20 @@
                             
                                     {{-- Pagination Elements --}}
                                     @php
-                                        $start = max(1, $dataa->currentPage() - 2);
-                                        $end = min($start + 4, $dataa->lastPage());
+                                        $start = max(1, $data->currentPage() - 2);
+                                        $end = min($start + 4, $data->lastPage());
                                     @endphp
                             
                                     @for ($i = $start; $i <= $end; $i++)
-                                        <li class="page-item {{ ($i == $dataa->currentPage()) ? 'active' : '' }}">
-                                            <a class="page-link" href="{{ $dataa->url($i) }}">{{ $i }}</a>
+                                        <li class="page-item {{ ($i == $data->currentPage()) ? 'active' : '' }}">
+                                            <a class="page-link" href="{{ $data->url($i) }}">{{ $i }}</a>
                                         </li>
                                     @endfor
                             
                                     {{-- Next Page Link --}}
-                                    @if ($dataa->hasMorePages())
+                                    @if ($data->hasMorePages())
                                         <li class="page-item">
-                                            <a class="page-link" href="{{ $dataa->nextPageUrl() }}" aria-label="Next">
+                                            <a class="page-link" href="{{ $data->nextPageUrl() }}" aria-label="Next">
                                                 <span aria-hidden="true">&raquo;</span>
                                                 <span class="sr-only">Next</span>
                                             </a>
