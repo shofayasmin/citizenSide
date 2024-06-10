@@ -117,9 +117,9 @@
                                                             </tr>
                                                         </thead>
                                                         <tbody>
-                                                            @foreach ($data as $d)
+                                                            @foreach ($data as $key => $d)
                                                                 <tr>
-                                                                    <th scope="row">{{ $d->id_kk }}</th>
+                                                                    <th scope="row">{{ $data->firstItem() + $key }}</th>
                                                                     <td><button type="button" class="btn btn-link"
                                                                             data-toggle="modal"
                                                                             data-target="#householdModal_{{ $d->id_kk }}">{{ $d->no_kk }}</button>
@@ -152,7 +152,49 @@
                                                         </tbody>
 
                                                     </table>
-                                                    <a href="{{ route('citizen.index') }}"> <- Kembali</a>
+                                                    <nav aria-label="Page navigation example">
+                                                        <ul class="pagination justify-content-center">
+                                                            {{-- Previous Page Link --}}
+                                                            @if ($data->onFirstPage())
+                                                                <li class="page-item disabled">
+                                                                    <span class="page-link">&laquo;</span>
+                                                                </li>
+                                                            @else
+                                                                <li class="page-item">
+                                                                    <a class="page-link" href="{{ $data->previousPageUrl() }}" aria-label="Previous">
+                                                                        <span aria-hidden="true">&laquo;</span>
+                                                                        <span class="sr-only">Previous</span>
+                                                                    </a>
+                                                                </li>
+                                                            @endif
+                                                    
+                                                            {{-- Pagination Elements --}}
+                                                            @php
+                                                                $start = max(1, $data->currentPage() - 2);
+                                                                $end = min($start + 4, $data->lastPage());
+                                                            @endphp
+                                                    
+                                                            @for ($i = $start; $i <= $end; $i++)
+                                                                <li class="page-item {{ ($i == $data->currentPage()) ? 'active' : '' }}">
+                                                                    <a class="page-link" href="{{ $data->url($i) }}">{{ $i }}</a>
+                                                                </li>
+                                                            @endfor
+                                                    
+                                                            {{-- Next Page Link --}}
+                                                            @if ($data->hasMorePages())
+                                                                <li class="page-item">
+                                                                    <a class="page-link" href="{{ $data->nextPageUrl() }}" aria-label="Next">
+                                                                        <span aria-hidden="true">&raquo;</span>
+                                                                        <span class="sr-only">Next</span>
+                                                                    </a>
+                                                                </li>
+                                                            @else
+                                                                <li class="page-item disabled">
+                                                                    <span class="page-link">&raquo;</span>
+                                                                </li>
+                                                            @endif
+                                                        </ul>
+                                                    </nav>
                                                 </div>
 
                                             </div>

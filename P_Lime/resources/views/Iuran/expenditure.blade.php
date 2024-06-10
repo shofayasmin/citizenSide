@@ -96,9 +96,9 @@
                                                                 @php
                                                                     $counter = 1   
                                                                 @endphp
-                                                                @foreach ($expenditure as $d)
+                                                                @foreach ($expenditure as $key => $d)
                                                                 <tr>
-                                                                    <th scope="row">{{ $counter++ }}</th>
+                                                                    <th scope="row">{{ $expenditure->firstItem() + $key }}</th>
                                                                     <td>{{ $d->date }}</td>
                                                                     <td>{{ $d->expenditure_name }}</td>
                                                                     <td>Rp. {{ $d->amount }}</td>
@@ -119,7 +119,49 @@
                                                                 @endforeach
                                                             </tbody>
                                                         </table>
-                                                        <a href="{{ route('iuran.expenditure') }}"> <- Kembali</a>
+                                                        <nav aria-label="Page navigation example">
+                                                            <ul class="pagination justify-content-center">
+                                                                {{-- Previous Page Link --}}
+                                                                @if ($expenditure->onFirstPage())
+                                                                    <li class="page-item disabled">
+                                                                        <span class="page-link">&laquo;</span>
+                                                                    </li>
+                                                                @else
+                                                                    <li class="page-item">
+                                                                        <a class="page-link" href="{{ $expenditure->previousPageUrl() }}" aria-label="Previous">
+                                                                            <span aria-hidden="true">&laquo;</span>
+                                                                            <span class="sr-only">Previous</span>
+                                                                        </a>
+                                                                    </li>
+                                                                @endif
+                                                        
+                                                                {{-- Pagination Elements --}}
+                                                                @php
+                                                                    $start = max(1, $expenditure->currentPage() - 2);
+                                                                    $end = min($start + 4, $expenditure->lastPage());
+                                                                @endphp
+                                                        
+                                                                @for ($i = $start; $i <= $end; $i++)
+                                                                    <li class="page-item {{ ($i == $expenditure->currentPage()) ? 'active' : '' }}">
+                                                                        <a class="page-link" href="{{ $expenditure->url($i) }}">{{ $i }}</a>
+                                                                    </li>
+                                                                @endfor
+                                                        
+                                                                {{-- Next Page Link --}}
+                                                                @if ($expenditure->hasMorePages())
+                                                                    <li class="page-item">
+                                                                        <a class="page-link" href="{{ $expenditure->nextPageUrl() }}" aria-label="Next">
+                                                                            <span aria-hidden="true">&raquo;</span>
+                                                                            <span class="sr-only">Next</span>
+                                                                        </a>
+                                                                    </li>
+                                                                @else
+                                                                    <li class="page-item disabled">
+                                                                        <span class="page-link">&raquo;</span>
+                                                                    </li>
+                                                                @endif
+                                                            </ul>
+                                                        </nav>
                                                     </div>  
                                                 </div>
                                             </div>

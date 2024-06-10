@@ -25,7 +25,7 @@ class CitizenController extends Controller
     //RT
     public function rt()
     {
-        $data = Rt::with('warga')->get();
+        $data = Rt::with('warga')->paginate(10);
         $warga = Warga::all();
         return view('Citizen.rt',compact('data', 'warga'));
     }
@@ -97,7 +97,7 @@ class CitizenController extends Controller
     // KK
     public function kk()
     {
-        $data = Kk::get();
+        $data = Kk::paginate(10);
         $warga = Warga::all();
         return view('Citizen.kk',compact('data', 'warga'));
     }
@@ -188,7 +188,7 @@ class CitizenController extends Controller
     // ORGANISASI
     public function organisasi()
     {
-        $data = Organisasi::get();
+        $data = Organisasi::paginate(10);
         $warga = Warga::all();
         return view('Citizen.organisasi',compact('data', 'warga'));
          
@@ -263,7 +263,7 @@ class CitizenController extends Controller
     // RUMAH
     public function rumah()
     {
-        $data = Rumah::with('warga')->get();
+        $data = Rumah::with('warga')->paginate(10);
         $warga = Warga::all();
         return view('Citizen.rumah',compact('data', 'warga'));
     }
@@ -339,7 +339,7 @@ class CitizenController extends Controller
     // WARGA
     public function warga()
     {
-        $data = Warga::get();
+        $data = Warga::paginate(10);
 
         return view('Citizen.warga',compact('data'));
     }

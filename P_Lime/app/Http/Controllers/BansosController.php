@@ -14,7 +14,7 @@ class BansosController extends Controller
 
     public function informasi()
     {
-        $data = Bansos::get();
+        $data = Bansos::paginate(10);
         return view('Bansos.informasi',compact('data'));
     }
     public function pengajuan()

@@ -18,7 +18,7 @@ class LaporanController extends Controller
     public function view()
     {
         $data = Laporan::with('warga','comments','comments')
-        ->orderByRaw("FIELD(status,'Belum Selesai', 'Selesai')")->get();
+        ->orderByRaw("FIELD(status,'Belum Selesai', 'Selesai')")->paginate(5);
 
         $data_tambahan = Laporan::with('comments.user')
         ->orderByRaw("FIELD(status, 'Belum Selesai', 'Selesai')")

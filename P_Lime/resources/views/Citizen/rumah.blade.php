@@ -103,11 +103,11 @@
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
-                                                                @foreach ($data as $d)
+                                                                @foreach ($data as $key => $d)
                                                                     
                                                                 <tr>
-                                                                    <th scope="row">{{ $d->rumah_id }}</th>
-                                                                    <td>{{ $d->warga->nama_lengkap }}</td>
+                                                                    <th scope="row">{{ $data->firstItem() + $key }}</th>
+                                                                    <td>{{ $d->nik_pemilik }}</td>
                                                                     <td>{{ $d->alamat }}</td>
                                                                     <td>{{ $d->luas_bangunan }} m²</td>
                                                                     <td>{{ $d->luas_tanah }} m²</td>
@@ -116,7 +116,7 @@
                                                                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalEdit{{ $d->rumah_id }}">
                                                                             Edit
                                                                         </button>
-                                                                        <a data-toggle="modal" data-target="#exampleModalHapus{{ $d->rumah_id }}" class="btn btn-danger"><i class="fas fa-trash-alt">Hapus</i></a>
+                                                                        <span data-toggle="modal" data-target="#exampleModalHapus{{ $d->rumah_id }}" class="btn btn-danger"><i class="fas fa-trash-alt"> Hapus</i></span>
                                                                     </td>
                                                                 </tr>
                                                                 
@@ -131,7 +131,49 @@
                                                             </tbody>
                                                             
                                                         </table>
-                                                        <a href="{{ route('citizen.index') }}"> <- Kembali</a>
+                                                        <nav aria-label="Page navigation example">
+                                                            <ul class="pagination justify-content-center">
+                                                                {{-- Previous Page Link --}}
+                                                                @if ($data->onFirstPage())
+                                                                    <li class="page-item disabled">
+                                                                        <span class="page-link">&laquo;</span>
+                                                                    </li>
+                                                                @else
+                                                                    <li class="page-item">
+                                                                        <a class="page-link" href="{{ $data->previousPageUrl() }}" aria-label="Previous">
+                                                                            <span aria-hidden="true">&laquo;</span>
+                                                                            <span class="sr-only">Previous</span>
+                                                                        </a>
+                                                                    </li>
+                                                                @endif
+                                                        
+                                                                {{-- Pagination Elements --}}
+                                                                @php
+                                                                    $start = max(1, $data->currentPage() - 2);
+                                                                    $end = min($start + 4, $data->lastPage());
+                                                                @endphp
+                                                        
+                                                                @for ($i = $start; $i <= $end; $i++)
+                                                                    <li class="page-item {{ ($i == $data->currentPage()) ? 'active' : '' }}">
+                                                                        <a class="page-link" href="{{ $data->url($i) }}">{{ $i }}</a>
+                                                                    </li>
+                                                                @endfor
+                                                        
+                                                                {{-- Next Page Link --}}
+                                                                @if ($data->hasMorePages())
+                                                                    <li class="page-item">
+                                                                        <a class="page-link" href="{{ $data->nextPageUrl() }}" aria-label="Next">
+                                                                            <span aria-hidden="true">&raquo;</span>
+                                                                            <span class="sr-only">Next</span>
+                                                                        </a>
+                                                                    </li>
+                                                                @else
+                                                                    <li class="page-item disabled">
+                                                                        <span class="page-link">&raquo;</span>
+                                                                    </li>
+                                                                @endif
+                                                            </ul>
+                                                        </nav>
                                                     </div>      
                                                 </div>
                                             </div>

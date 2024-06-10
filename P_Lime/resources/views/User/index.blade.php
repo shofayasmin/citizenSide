@@ -126,10 +126,10 @@
                                                                             data-target="#exampleModalEdit{{ $u->id }}">
                                                                             Edit
                                                                         </button>
-                                                                        <a data-toggle="modal"
+                                                                        <span data-toggle="modal"
                                                                             data-target="#exampleModalHapus{{ $u->id }}"
                                                                             class="btn btn-danger"><i
-                                                                                class="fas fa-trash-alt">Hapus</i></a>
+                                                                                class="fas fa-trash-alt"> Hapus</i></span>
                                                                     </td>
                                                                 </tr>
 

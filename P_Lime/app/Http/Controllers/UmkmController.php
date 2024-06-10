@@ -20,7 +20,7 @@ class UmkmController extends Controller
         return view('umkm.register',compact('user'));
     }
     public function view(){
-        $data = umkm::all();
+        $data = umkm::paginate(10);
         $userParticipations = UmkmParticipation::where('user_id', auth()->id())->pluck('umkm_id')->toArray(); // Get all acara_id where the authenticated user has participated
 
         return view('umkm.view',compact('data','userParticipations'));

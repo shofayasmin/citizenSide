@@ -23,7 +23,7 @@ class AcaraController extends Controller
 
     public function view()
     {
-        $data = Acara::all();
+        $data = Acara::paginate(6);
         $user = Auth::user();
 
         
