@@ -58,15 +58,7 @@
                                         {{ session('error') }}
                                     </div>
                                 @endif
-                                <div class="form-group">
-                                    <label for="username">Role</label>
-                                    <select name="role" id="role" class="form-control">
-                                        <option value="rt">RT</option>
-                                        <option value="rw">RW</option>
-                                        <option value="secretary">Secretary</option>
-                                        <option value="citizen" selected>Citizen</option>
-                                    </select>
-                                </div>
+                                <input type="hidden" name="role" value="citizen">
                                 <div class="form-group">
                                     <label for="password">Password</label>
                                     <input id="password" type="password"
