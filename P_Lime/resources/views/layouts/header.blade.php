@@ -8,13 +8,13 @@
             </a>
         </section>
         <a class="navbar-brand" href="
-            @if(Auth::user()->role == 'rw')
-                {{ route('dashboard.rw') }}
-            @elseif(Auth::user()->role == 'citizen')
+            {{-- @if(Auth::user()->role == 'rw') --}}
+                {{ route('dashboard.index') }}
+            {{-- @elseif(Auth::user()->role == 'citizen')
                 {{ route('DashboardWarga.index') }}
             @else
                 {{ route('home') }}
-            @endif
+            @endif --}}
         ">C-Hub</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <i class="material-icons">keyboard_arrow_down</i>
@@ -35,8 +35,7 @@
                         <i class="material-icons">more_vert</i>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-right">
-                        <li><a class="dropdown-item" href="#">Account</a></li>
-                        <li><a class="dropdown-item" href="#">Settings</a></li>
+                        <li><a href="{{ route('account') }}" class="dropdown-item">Account</a></li>
                         <li class="divider"></li>
                         <li><a class="dropdown-item" href="{{ route('logout') }}">Log Out</a></li>
 

@@ -21,12 +21,13 @@
             <li class="sidebar-title">
                 MENU
             </li>
-            
+
             <li>
-                <a href="{{ route('dashboard.rw') }}" class="{{ Request::routeIs('dashboard.rw') ? 'active' : '' }}">
+                <a href="{{ route('dashboard.index') }}"
+                    class="{{ Request::routeIs('dashboard.index') ? 'active' : '' }}">
                     <i class="material-icons">dashboard</i>Dashboard
                 </a>
-            </li> 
+            </li>
 
             <li class="page {{ Request::is('laporan*') ? 'active-page' : '' }}">
                 <a href="#"><i class="material-icons">report</i>Laporan<i
@@ -89,53 +90,55 @@
             </li>
 
 
-            <li class="page {{ Request::is('iuran*') ? 'active-page' : '' }}">
-                <a href="#"><i class="material-icons">attach_money</i>Keuangan<i
-                        class="material-icons has-sub-menu">keyboard_arrow_left</i></a>
-                <ul class="sub-menu">
-                    <li>
-                        <a href="{{ route('iuran.income') }}">Pemasukan</a>
-                    </li>
-                    @canany(['sekretaris', 'rw'])
+            @canany(['sekretaris', 'rw', 'rt'])
+                <li class="page {{ Request::is('iuran*') ? 'active-page' : '' }}">
+                    <a href="#"><i class="material-icons">attach_money</i>Keuangan<i
+                            class="material-icons has-sub-menu">keyboard_arrow_left</i></a>
+                    <ul class="sub-menu">
                         <li>
-                            <a href="{{ route('iuran.expenditure') }}">Pengeluaran</a>
+                            <a href="{{ route('iuran.income') }}">Pemasukan</a>
                         </li>
-                    @endcanany
-                </ul>
-            </li>
+                        @canany(['sekretaris', 'rw'])
+                            <li>
+                                <a href="{{ route('iuran.expenditure') }}">Pengeluaran</a>
+                            </li>
+                        @endcanany
+                    </ul>
+                </li>
+            @endcanany
 
             @canany(['sekretaris', 'rw'])
-            <li class="page {{ Request::is('citizen*') ? 'active-page' : '' }}">
-                <a href="#"><i class="material-icons">groups</i>Kependudukan<i
-                        class="material-icons has-sub-menu">keyboard_arrow_left</i></a>
-                <ul class="sub-menu">
-                    <li>
-                        <a href="{{ route('citizen.kk') }}">Keluarga</a>
-                    </li>
-                    <li>
-                        <a href="{{ route('citizen.warga') }}">Warga</a>
-                    </li>
-                    <li>
-                        <a href="{{ route('citizen.rumah') }}">Rumah</a>
-                    </li>
-                    <li>
-                        <a href="{{ route('citizen.rt') }}">RT</a>
-                    </li>
-                    <li>
-                        <a href="{{ route('citizen.organisasi') }}">Organisasi</a>
-                    </li>
-                </ul>
-            </li>
+                <li class="page {{ Request::is('citizen*') ? 'active-page' : '' }}">
+                    <a href="#"><i class="material-icons">groups</i>Kependudukan<i
+                            class="material-icons has-sub-menu">keyboard_arrow_left</i></a>
+                    <ul class="sub-menu">
+                        <li>
+                            <a href="{{ route('citizen.kk') }}">Keluarga</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('citizen.warga') }}">Warga</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('citizen.rumah') }}">Rumah</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('citizen.rt') }}">RT</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('citizen.organisasi') }}">Organisasi</a>
+                        </li>
+                    </ul>
+                </li>
 
-            <li>
-                <a href="{{ route('user.index') }}" class="{{ Request::routeIs('user.index') ? 'active' : '' }}">
-                    <i class="material-icons">manage_accounts</i>Akun User
-                </a>
-            </li>
+                <li>
+                    <a href="{{ route('user.index') }}" class="{{ Request::routeIs('user.index') ? 'active' : '' }}">
+                        <i class="material-icons">manage_accounts</i>Akun User
+                    </a>
+                </li>
             @endcanany
-            
 
 
+            @canany(['rw', 'rt', 'secretary'])
             <li class="sidebar-title">
                 SPK
             </li>
@@ -145,8 +148,7 @@
                     <i class="material-icons">calculate</i>promethee
                 </a>
             </li>
-
-
+            @endcanany
 
         </ul>
     </div>

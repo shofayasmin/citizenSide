@@ -77,6 +77,7 @@
 
                     </div>
                     <div class="row">
+                        @canany(['rw', 'rt', 'secretary'])
                         <div class="col-md-3">
                             <div class="card stat-card">
                                 <div class="card-body">
@@ -107,17 +108,50 @@
                                 </div>
                             </div>
                         </div>
+                        @endcanany
+
+                        @can('citizen')
+                        <div class="col-md-3">
+                            <div class="card stat-card">
+                                <div class="card-body">
+                                    <h5 class="card-title">Acara</h5>
+                                    <h2 class="float-right">{{ $totalAcara }}</h2>
+                                    <a class="btn btn-link" href="{{ route('acara.view') }}">Total Acara</a >
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card stat-card">
+                                <div class="card-body">
+                                    <h5 class="card-title">Bansos</h5>
+                                    <h2 class="float-right">{{ $totalBansos }}</h2>
+                                    <a class="btn btn-link" href="{{ route('bansos.informasi') }}">Total Bansos</a >
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card stat-card">
+                                <div class="card-body">
+                                    <h5 class="card-title">Laporan</h5>
+                                    <h2 class="float-right">{{ $totalLaporan }}</h2>
+                                    <a class="btn btn-link" href="{{ route('laporan.view') }}">Total Laporan</a >
+                                </div>
+                            </div>
+                        </div>
+                        @endcan
+
                         <div class="col-md-3">
                             <div class="card stat-card">
                                 <div class="card-body">
                                     <h5 class="card-title">Umkm</h5>
                                     <h2 class="float-right">{{ $totalUmkm }}</h2>
                                     <a class="btn btn-link" href="{{ route('umkm.view') }}">Total UMKM</a >
-                                    
                                 </div>
                             </div>
                         </div>
                     </div>
+
+                    @canany(['rw', 'rt', 'secretary'])
                     <div class="row">
                         
                         <div class="col-md-8">
@@ -178,6 +212,8 @@
                         
                         
                     </div>
+                    @endcanany
+
                     <div class="row">
                         <div class="col-md-12">
                             <div id="update-alert" class="alert alert-warning m-b-lg" role="alert">
@@ -185,6 +221,8 @@
                             </div>
                         </div>
                     </div>
+
+                    @canany(['rw', 'rt', 'secretary'])
                     <div class="row">
                         {{-- <div class="col-md-4">
                             <div class="card">
@@ -254,8 +292,8 @@
                                 </div>
                             </div>
                         </div>
-                        
                     </div>
+                    @endcanany
                 </div>
             </div>
             <div class="lime-footer">

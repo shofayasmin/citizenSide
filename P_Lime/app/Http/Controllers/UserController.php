@@ -100,4 +100,41 @@ class UserController extends Controller
 
         return redirect()->route('user.index')->with('success', 'User telah berhasil dihapus!');
     }
+
+
+    public function manageAccount()
+    {
+        return view('user.manageAccount');
+    }
+
+    public function editAccount(Request $request)
+    {
+        $user = User::find(auth()->user()->id);
+
+        if (!$user) {
+          return redirect()->route('user.index')->with('error', 'User not found!');
+        }
+      
+        $validator = Validator::make($request->all(), [
+          'username' => 'required|string|max:255|unique:users,username,' . $user->id,
+          'password' => 'nullable', 
+        ]);
+      
+        if ($validator->fails()) {
+          return redirect()->back()->withInput()->withErrors($validator);
+        }
+      
+        $data = $request->only('username'); 
+
+        if ($request->filled('password')) { 
+        $data['password'] = Hash::make($request->get('password'));
+        }
+      
+        $data['username'] = $request->username; 
+
+      
+        User::where('id',auth()->user()->id)->update($data);
+      
+        return redirect()->route('account')->with('success', 'Akun telah berhasil diupdate!');
+    }
 }

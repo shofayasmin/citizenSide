@@ -53,17 +53,17 @@
                         @foreach ($data as $key => $d)
                             <div class="col-10">
                                 <div class="card">
-                                    @php
+                                    {{-- @php
                                         $allowedRoles = ['secretary', 'rw', 'rt']; // Daftar peran yang diizinkan
-                                    @endphp
+                                    @endphp --}}
                                     <div class="card-header d-flex justify-content-between align-items-center">
                                         <h3 class="mt-3">{{ $d->judul }}</h3>
-                                        @if(auth()->check() && auth()->user()->role == 'secretary')
+                                        {{-- @if(auth()->check() && auth()->user()->role == 'secretary') --}}
                                             <img src="{{ asset('storage/photo-acara/comment1.png') }}" width="25" data-toggle="modal" data-target="#comment_{{ $d->laporan_id }}">
-                                        @endif
-                                        @if(auth()->check() && in_array(auth()->user()->role, $allowedRoles))
+                                        {{-- @endif --}}
+                                        {{-- @if(auth()->check() && in_array(auth()->user()->role, $allowedRoles)) --}}
                                             <img src="{{ asset('storage/photo-acara/comment1.png') }}" width="25" data-toggle="modal" data-target="#datacomment_{{ $d->laporan_id }}">
-                                        @endif
+                                        {{-- @endif --}}
                                     </div>
                                     <div class="card-body">
                                         <h5 class="card-title"></h5>
@@ -76,7 +76,12 @@
                                         @endif
                                         <a href="#" class="badge badge-primary" data-toggle="modal" data-target="#Read_More_{{ $d->laporan_id }}">Read More</a>
                                         <div class="text-right">
-                                            <a href="#" class="badge {{ $d->status == 'Belum Selesai' ? 'badge-danger' : 'badge-success' }} status-toggle" data-id="{{ $d->laporan_id }}">{{ $d->status }}</a>
+                                            @canany(['rw', 'rt', 'secretary'])
+                                                <a href="#" class="badge {{ $d->status == 'Belum Selesai' ? 'badge-danger' : 'badge-success' }} status-toggle" data-id="{{ $d->laporan_id }}">{{ $d->status }}</a>
+                                            @endcanany
+                                            @can('citizen')
+                                                <span class="badge {{ $d->status == 'Belum Selesai' ? 'badge-danger' : 'badge-success' }}">{{ $d->status }}</span>
+                                            @endcan
                                         </div>
                                     </div>
                                 </div>
