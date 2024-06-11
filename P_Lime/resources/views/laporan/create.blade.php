@@ -77,6 +77,8 @@
                                                 <form action="{{ route('laporan.store') }}" method="POST"
                                                     enctype="multipart/form-data">
                                                     @csrf
+
+                                                    @canany(['rw', 'rt', 'sekretaris'])
                                                     <div class="form-group">
                                                         <label for="exampleFormControlInput1">Pengirim</label>
         
@@ -87,6 +89,11 @@
                                                         </select>
                                                             
                                                     </div>
+                                                    @endcanany
+
+                                                    @can('citizen')
+                                                    <input type="hidden" name="pengirim" value="{{ auth()->user()->user_nik }}">
+                                                    @endcan
                                                     <div class="form-group">
                                                         <label for="exampleFormControlInput1">Judul Laporan</label>
                                                         <input type="text" name="judul" class="form-control"
