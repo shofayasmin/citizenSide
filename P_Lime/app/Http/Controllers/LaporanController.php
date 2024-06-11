@@ -91,9 +91,6 @@ class LaporanController extends Controller
 
         session()->flash('success', 'Laporan telah berhasil ditambahkan!');
 
-        if (auth()->user()->role === 'citizen'){
-            return redirect()->route('DashboardWarga.pelaporan');
-        }
         return redirect()->route('laporan.view');
     }
 
