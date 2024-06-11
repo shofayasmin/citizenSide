@@ -54,6 +54,7 @@
                             </div>
                         </div>
                     </div>
+                    
                     <div class="row">
                         <div class="col-xl">
                             <div class="card">
@@ -79,66 +80,145 @@
                                                                     <th scope="col">Jenis Bansos</th>
                                                                     <th scope="col">Periode Bansos</th>
                                                                     <th scope="col">Tanggal Penyaluran</th>
-                                                                    <th scope="col">Penerima Bansos</th>
-                                                                    
-
+                                                                    <th scope="col">Penerima</th>
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
                                                                 @php
-                                                                    $counter = 1;
+                                                                    $counter = ($bansos->currentPage() - 1) * $bansos->perPage() + 1;
                                                                 @endphp
                                                                 @foreach ($bansos as $key => $b)
                                                                 <tr>
-                                                                    <th scope="row">{{ $counter++ }}</th>
+                                                                    <td>{{ $counter++ }}</td>
                                                                     <td>{{ $b->jenis_bansos }}</td>
                                                                     <td>{{ $b->periode_bansos }} Hari</td>
                                                                     <td>{{ $b->tanggal_penyaluran }}</td>
-                                                                    <td>
-                                                                        <a href="{{ route('spk.promethee') }}" class="btn btn-link">Lihat Detail</a> 
-                                                                    </td>
                                                                     
+                                                                    <td>
+                                                                        <button type="button" class="btn btn-link" data-toggle="modal" data-target="#detailModal{{ $key }}">Lihat Detail</button>
+                                                                    </td>
                                                                 </tr>
-                                                                @include('Bansos.modal')
                                                                 @endforeach
-                                                                
-                                                                {{-- <td>
-                                                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalEdit">
-                                                                        Edit
-                                                                    </button>
-                                                                    <a data-toggle="modal" data-target="#exampleModalHapus" class="btn btn-danger"><i class="fas fa-trash-alt">Hapus</i></a>
-                                                                </td> --}}
-                                                                <!-- Modal Buat Show Kandidat-->
-                                                                @foreach($bansos as $key => $d)
-                                                                <div class="modal fade" id="modal_kandidat_{{ $key }}" tabindex="-1" role="dialog" aria-labelledby="modal_kandidatTitle_{{ $key }}" aria-hidden="true">
-                                                                    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-                                                                        <div class="modal-content">
-                                                                            <div class="modal-header">
-                                                                                <h5 class="modal-title" id="modal_kandidatTitle_{{ $key }}">{{ $d->jenis_bansos }}</h5>
-                                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                                    <span aria-hidden="true">&times;</span>
-                                                                                </button>
-                                                                            </div>
-                                                                            <div class="modal-body mb-4">
-                                                                                <p>Periode: {{ $d->periode_bansos }} Hari</p>
-                                                                                <p>Tanggal Penyaluran: {{ $d->tanggal_penyaluran }}</p>
-                                                                                <p>Deskripsi: {{ $d->deskripsi }}</p>
-                                                                                <img src="{{ asset('storage/photo-acara/' . $d->gambar) }}" alt="" width="100">
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                @endforeach
-
-                                                                
-                                                                
-
-                                                                
-                                                                
                                                             </tbody>
                                                         </table>
+                                                        <nav aria-label="Page navigation example">
+                                                            <ul class="pagination justify-content-center">
+                                                                {{-- Previous Page Link --}}
+                                                                @if ($bansos->onFirstPage())
+                                                                    <li class="page-item disabled">
+                                                                        <span class="page-link">&laquo;</span>
+                                                                    </li>
+                                                                @else
+                                                                    <li class="page-item">
+                                                                        <a class="page-link" href="{{ $bansos->previousPageUrl() }}" aria-label="Previous">
+                                                                            <span aria-hidden="true">&laquo;</span>
+                                                                            <span class="sr-only">Previous</span>
+                                                                        </a>
+                                                                    </li>
+                                                                @endif
+                                                    
+                                                                {{-- Pagination Elements --}}
+                                                                @php
+                                                                    $start = max(1, $bansos->currentPage() - 2);
+                                                                    $end = min($start + 4, $bansos->lastPage());
+                                                                @endphp
+                                                    
+                                                                @for ($i = $start; $i <= $end; $i++)
+                                                                    <li class="page-item {{ ($i == $bansos->currentPage()) ? 'active' : '' }}">
+                                                                        <a class="page-link" href="{{ $bansos->url($i) }}">{{ $i }}</a>
+                                                                    </li>
+                                                                @endfor
+                                                    
+                                                                {{-- Next Page Link --}}
+                                                                @if ($bansos->hasMorePages())
+                                                                    <li class="page-item">
+                                                                        <a class="page-link" href="{{ $bansos->nextPageUrl() }}" aria-label="Next">
+                                                                            <span aria-hidden="true">&raquo;</span>
+                                                                            <span class="sr-only">Next</span>
+                                                                        </a>
+                                                                    </li>
+                                                                @else
+                                                                    <li class="page-item disabled">
+                                                                        <span class="page-link">&raquo;</span>
+                                                                    </li>
+                                                                @endif
+                                                            </ul>
+                                                        </nav>
                                                     </div>
+                                                    
+                                                    
+                                                    @foreach ($bansos as $key => $b)
+                                                    <!-- Modal for Each Row -->
+                                                    <div class="modal fade" id="detailModal{{ $key }}" tabindex="-1" role="dialog" aria-labelledby="detailModalLabel{{ $key }}" aria-hidden="true">
+                                                        <div class="modal-dialog modal-xl" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="detailModalLabel{{ $key }}">Detail Bansos</h5>
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <p>Jenis Bansos: {{ $b->jenis_bansos }}</p>
+                                                                    <p>Periode Bansos: {{ $b->periode_bansos }} Hari</p>
+                                                                    <p>Tanggal Penyaluran: {{ $b->tanggal_penyaluran }}</p>
+                                                                    <p>Penerima Bansos:</p>
+                                                                    <ul>
+                                                                        @php
+                                                                            $rankCounter = 1;
+                                                                        @endphp
+                                                                        @foreach ($topCandidates as $candidateId)
+                                                                            <li>{{ $alternatives->find($candidateId)->name }}</li>
+                                                                        @endforeach
+                                                                    </ul>
+                                                                    <!-- Isi modal lainnya sesuai kebutuhan -->
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    @endforeach
 
+                                                    <!-- Modal Buat Tambah Data -->
+                                                    <div class="modal fade" id="bansos_tambah">
+                                                        <div class="modal-dialog modal-xl">
+                                                            <div class="modal-content">
+                                                                <form action="" method="POST">
+                                                                    @csrf
+                                                                    <div class="form-group mt-3" style="margin-left: 10px; margin-right: 10px;">
+                                                                        <label for="exampleInputEmail1">Jenis Bansos</label>
+                                                                        <input type="form" name="no_kk" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Jenis Bansos">
+                                                                        @error( 'no_kk' )
+                                                                            <small>{{ $message }}</small>
+                                                                        @enderror
+                                                                    </div>
+                                                                    <div class="form-group" style="margin-left: 10px; margin-right: 10px;">
+                                                                        <label for="exampleInputEmail1">Periode Bansos</label>
+                                                                        <input type="form" name="no_kk" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Periode Bansos">
+                                                                        @error( 'no_kk' )
+                                                                            <small>{{ $message }}</small>
+                                                                        @enderror
+                                                        
+                                                                    
+                                                                    <div class="form-group" style="margin-left: 10px; margin-right: 10px;">
+                                                                        <label for="exampleInputEmail1">Tanggal Penyaluran</label>
+                                                                        <input type="form" name="no_kk" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Dalam bentuk tahun">
+                                                                        @error( 'no_kk' )
+                                                                            <small>{{ $message }}</small>
+                                                                        @enderror
+                                                                    </div>
+                                                                                                
+                                                                                        
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                                                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -147,7 +227,6 @@
                             </div>
                         </div>
                     </div>
-                    <a href="{{ route('bansos.informasi') }}"> <- Kembali</a>
 
                     
             

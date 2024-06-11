@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -10,14 +11,14 @@
         <!-- The above 6 meta tags *must* come first in the head; any other head content must come *after* these tags -->
         
         <!-- Title -->
-        <title>Manage Data Pengeluaran</title>
+        <title>Manage Citizen Data</title>
 
         <!-- Styles -->
         <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link href="{{ asset('lime/theme/assets/plugins/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
         <link href="{{ asset('lime/theme/assets/plugins/font-awesome/css/all.min.css')}}" rel="stylesheet">
-
+      
         <!-- Theme Styles -->
         <link href="{{ asset('lime/theme/assets/css/lime.min.css')}}" rel="stylesheet">
         <link href="{{ asset('lime/theme/assets/css/custom.css')}}" rel="stylesheet">
@@ -30,7 +31,9 @@
         <![endif]-->
     </head>
     <body>
+        
         @include('layouts.sidebar')
+        
         
         @include('layouts.header')
 
@@ -41,16 +44,17 @@
                         <div class="col-md-12">
                             <div class="page-title">
                                 <nav aria-label="breadcrumb">
-                                <ol class="breadcrumb breadcrumb-separator-1">
-                                    <li class="breadcrumb-item"><a href="{{ route('dashboard.index') }}">Dashboard</a></li>
-                                    <li class="breadcrumb-item">Keuangan</li>
-                                    <li class="breadcrumb-item active" aria-current="page">Pengeluaran</li>
-                                </ol>
+                                  <ol class="breadcrumb breadcrumb-separator-1">
+                                    <li class="breadcrumb-item"><a href="#">UMKM</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Manage UMKM</li>
+                                  </ol>
                                 </nav>
-                                <h3>Pengeluaran</h3>
+                                <h3>Manage UMKM</h3>
+                                
                             </div>
                         </div>
                     </div>
+                    
                     <div class="row">
                         <div class="col-xl">
                             <div class="card">
@@ -59,115 +63,82 @@
                                         <div class="col-xl">
                                             <div class="card">
                                                 <div class="card-body">
-                                                    @if(session()->has('success'))
-                                                        <div class="alert alert-success outline-alert" role="alert">
-                                                            {{ session('success') }}
-                                                        </div>
-                                                    @endif
-                                                    @if(session()->has('edit'))
-                                                        <div class="alert alert-info outline-alert" role="alert">
-                                                            {{ session('edit') }}
-                                                        </div>
-                                                    @endif
-                                                    @if(session()->has('delete'))
-                                                        <div class="alert alert-danger outline-alert" role="alert">
-                                                            {{ session('delete') }}
-                                                        </div>
-                                                    @endif
-                                                    <h5 class="card-title">Pengeluaran</h5>
-                                                    <p>Berikut adalah Data Pengeluaran dari RW 003</code>.</p>
-                                                    <div class="text-right mb-3">
-                                                        <form action="{{ route('iuran.expenditure') }}" method="get" class="d-inline">
-                                                            @csrf
-                                                            <div class="row mb-3 justify-content-end">
-                                                                <div class="col-sm-3">
-                                                                    <label for="start_date" class="form-label">Rentang Tanggal Mulai: </label>
-                                                                    <input type="date" name="start_date" class="form-control" value="{{ request('start_date') }}">
-                                                                </div>
-                                                                <div class="col-sm-3">
-                                                                    <label for="end_date" class="form-label">Rentang Tanggal Akhir: </label>
-                                                                    <input type="date" name="end_date" class="form-control" value="{{ request('end_date') }}">
-                                                                </div>
-                                                                <div class="col-sm-2 d-flex align-items-end">
-                                                                    <button type="submit" class="btn btn-primary">Filter</button>
-                                                                </div>
-                                                            </div>
-                                                        </form>
-                                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalTambahExpenditure">
-                                                            Tambah Data 
-                                                        </button>
-                                                    </div>
+                                                    
+                                                    <h4 class="mb-0">Data UMKM</h4>
+                                                    <p>Berikut adalah Data Data UMKM dari RW 003</code>.</p>
+
                                                     <div class="table-responsive">
-                                                    <table class="table"> 
+                                                        <table class="table">
                                                             <thead>
                                                                 <tr>
                                                                     <th scope="col">No</th>
-                                                                    <th scope="col">Tanggal</th>
-                                                                    <th scope="col">Nama Pengeluaran</th>
-                                                                    <th scope="col">Jumlah</th>
+                                                                    <th scope="col">Nama</th>
+                                                                    <th scope="col">Nama UMKM</th>
+                                                                    <th scope="col">Tipe UMKM</th>
                                                                     <th scope="col">Deskripsi</th>
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
                                                                 @php
-                                                                    $counter = 1   
+                                                                    $counter = ($data->currentPage() - 1) * $data->perPage() + 1;
                                                                 @endphp
-                                                                @foreach ($expenditure as $key => $d)
+                                                                @foreach ($data as $key => $b)
                                                                 <tr>
-                                                                    <th scope="row">{{ $expenditure->firstItem() + $key }}</th>
-                                                                    <td>{{ $d->date }}</td>
-                                                                    <td>{{ $d->expenditure_name }}</td>
-                                                                    <td>Rp. {{ $d->amount }}</td>
-                                                                    <td>{{ $d->description }}</td>
-                                                                    </td>
+                                                                    <td>{{ $counter++ }}</td>
+                                                                    <td>{{ $b->Nama }}</td>
+                                                                    <td>{{ $b->umkm }} Hari</td>
+                                                                    <td>{{ $b->tipe_umkm }}</td>
+                                                                    <td>{{ $b->deskripsi }}</td>
+                                                                    
                                                                     <td>
-                                                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalEdit{{ $d->expenditure_id }}">
-                                                                            <i class="fas fa-pen"></i> Edit
+                                                                        <button type="button" class="btn btn-primary"
+                                                                            data-toggle="modal"
+                                                                            data-target="#exampleModalEdit{{ $b->umkm_id }}"><i
+                                                                                class="fas fa-pencil-alt"></i>
+
                                                                         </button>
-                                                                        <button type="button" data-toggle="modal" data-target="#exampleModalHapus{{ $d->expenditure_id }}" class="btn btn-danger">
-                                                                            <i class="fas fa-trash-alt"></i> Hapus
-                                                                        </button>
+                                                                        <button type="button" data-toggle="modal"
+                                                                            data-target="#exampleModalHapus{{ $b->umkm_id }}"
+                                                                            class="btn btn-danger"><i
+                                                                                class="fas fa-trash-alt"></i></button>
                                                                     </td>
                                                                 </tr>
-
-                                                                @include('Iuran.modal_expenditure', ['expenditure' => $d])
-
+                                                                @include('umkm.modal')
                                                                 @endforeach
                                                             </tbody>
                                                         </table>
-
                                                         <nav aria-label="Page navigation example">
                                                             <ul class="pagination justify-content-center">
                                                                 {{-- Previous Page Link --}}
-                                                                @if ($expenditure->onFirstPage())
+                                                                @if ($data->onFirstPage())
                                                                     <li class="page-item disabled">
                                                                         <span class="page-link">&laquo;</span>
                                                                     </li>
                                                                 @else
                                                                     <li class="page-item">
-                                                                        <a class="page-link" href="{{ $expenditure->previousPageUrl() }}" aria-label="Previous">
+                                                                        <a class="page-link" href="{{ $data->previousPageUrl() }}" aria-label="Previous">
                                                                             <span aria-hidden="true">&laquo;</span>
                                                                             <span class="sr-only">Previous</span>
                                                                         </a>
                                                                     </li>
                                                                 @endif
-                                                        
+                                                    
                                                                 {{-- Pagination Elements --}}
                                                                 @php
-                                                                    $start = max(1, $expenditure->currentPage() - 2);
-                                                                    $end = min($start + 4, $expenditure->lastPage());
+                                                                    $start = max(1, $data->currentPage() - 2);
+                                                                    $end = min($start + 4, $data->lastPage());
                                                                 @endphp
-                                                        
+                                                    
                                                                 @for ($i = $start; $i <= $end; $i++)
-                                                                    <li class="page-item {{ ($i == $expenditure->currentPage()) ? 'active' : '' }}">
-                                                                        <a class="page-link" href="{{ $expenditure->url($i) }}">{{ $i }}</a>
+                                                                    <li class="page-item {{ ($i == $data->currentPage()) ? 'active' : '' }}">
+                                                                        <a class="page-link" href="{{ $data->url($i) }}">{{ $i }}</a>
                                                                     </li>
                                                                 @endfor
-                                                        
+                                                    
                                                                 {{-- Next Page Link --}}
-                                                                @if ($expenditure->hasMorePages())
+                                                                @if ($data->hasMorePages())
                                                                     <li class="page-item">
-                                                                        <a class="page-link" href="{{ $expenditure->nextPageUrl() }}" aria-label="Next">
+                                                                        <a class="page-link" href="{{ $data->nextPageUrl() }}" aria-label="Next">
                                                                             <span aria-hidden="true">&raquo;</span>
                                                                             <span class="sr-only">Next</span>
                                                                         </a>
@@ -178,8 +149,9 @@
                                                                     </li>
                                                                 @endif
                                                             </ul>
-                                                        </nav>
-                                                    </div>  
+                                                        </nav>
+                                                    </div>
+                                                    
                                                 </div>
                                             </div>
                                         </div>
@@ -188,6 +160,7 @@
                             </div>
                         </div>
                     </div>
+
                     
             
         

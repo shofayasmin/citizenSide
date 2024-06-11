@@ -73,6 +73,8 @@ route::put('/Acara/update_acara/{id}', [AcaraController::class, 'update_acara'])
 route::delete('/Acara/delete_acara/{id}', [AcaraController::class, 'delete_acara'])->name('acara.delete')->middleware('not.warga');
 Route::post('/acara/{id}/ikuti', [AcaraController::class, 'storeIkutiAcara'])->name('acara.ikuti')->middleware('auth');
 Route::get('/acara/{id}/participants', [AcaraController::class, 'showParticipants'])->name('acara.participants')->middleware('not.warga');
+Route::post('/acara/batal/{id}', [AcaraController::class, 'batal_ikut'])->name('acara.batal');
+
 
 // UMKM
 route::get('/umkm/register', [UmkmController::class, 'register'])->name('umkm.register')->middleware('auth');
@@ -83,6 +85,9 @@ route::put('/umkm/update_umkm/{id}', [UmkmController::class, 'update_umkm'])->na
 route::delete('/umkm/delete_umkm/{id}', [UmkmController::class, 'delete_umkm'])->name('umkm.delete')->middleware('not.warga');
 route::get('/umkm/list', [UmkmController::class, 'show_list'])->name('umkm.list')->middleware('not.warga');
 Route::post('/participate', [UmkmController::class, 'store_kandidat'])->name('participate');
+Route::post('/umkm/batal/{id}', [UmkmController::class, 'batal_ikut'])->name('umkm.batal');
+route::get('/umkm/manage', [UmkmController::class, 'manage'])->name('umkm.manage');
+
 
 
 
@@ -196,4 +201,6 @@ route::get('/account', [UserController::class, 'manageAccount'])->name('account'
 route::put('/account', [UserController::class, 'editAccount'])->name('editAccount')->middleware('auth');
 
 // SPK
-route::get('/SPK/promethee', [PrometheeController::class, 'calculate'])->name('spk.promethee')->middleware('not.warga');
+route::get('/SPK/promethee', [PrometheeController::class, 'calculate'])->name('spk.promethee');
+Route::post('/store-alternatives-results', [PrometheeController::class, 'storeAlternativesResults'])
+    ->name('store.alternatives.results');

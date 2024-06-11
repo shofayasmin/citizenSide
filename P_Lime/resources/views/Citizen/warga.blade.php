@@ -44,8 +44,8 @@
                             <div class="page-title">
                                 <nav aria-label="breadcrumb">
                                   <ol class="breadcrumb breadcrumb-separator-1">
-                                    <li class="breadcrumb-item"><a href="#">UI Elements</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">Forms</li>
+                                    <li class="breadcrumb-item"><a href="#">Kependudukan</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Warga</li>
                                     
                                   </ol>
                                 </nav>
@@ -106,10 +106,10 @@
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
-                                                                @foreach ($data as $d)
+                                                                @foreach ($data as $key => $d)
                                                                 <tr>
                                                                         
-                                                                    <th scope="row">{{ $d->id }}</th>
+                                                                    <th scope="row">{{ $data->firstItem() + $key }}</th>
                                                                     <td>{{ $d->nik }}</td>
                                                                     <td>{{ $d->no_kk }}</td>
                                                                     <td>{{ $d->nama_lengkap }}</td>
@@ -137,9 +137,49 @@
                                                                
                                                             </tbody>
                                                         </table>
-                                                       
+                                                        <nav aria-label="Page navigation example">
+                                                            <ul class="pagination justify-content-center">
+                                                                {{-- Previous Page Link --}}
+                                                                @if ($data->onFirstPage())
+                                                                    <li class="page-item disabled">
+                                                                        <span class="page-link">&laquo;</span>
+                                                                    </li>
+                                                                @else
+                                                                    <li class="page-item">
+                                                                        <a class="page-link" href="{{ $data->previousPageUrl() }}" aria-label="Previous">
+                                                                            <span aria-hidden="true">&laquo;</span>
+                                                                            <span class="sr-only">Previous</span>
+                                                                        </a>
+                                                                    </li>
+                                                                @endif
                                                         
-                                                        <a href="{{ route('citizen.index') }}"> <- Kembali</a>
+                                                                {{-- Pagination Elements --}}
+                                                                @php
+                                                                    $start = max(1, $data->currentPage() - 2);
+                                                                    $end = min($start + 4, $data->lastPage());
+                                                                @endphp
+                                                        
+                                                                @for ($i = $start; $i <= $end; $i++)
+                                                                    <li class="page-item {{ ($i == $data->currentPage()) ? 'active' : '' }}">
+                                                                        <a class="page-link" href="{{ $data->url($i) }}">{{ $i }}</a>
+                                                                    </li>
+                                                                @endfor
+                                                        
+                                                                {{-- Next Page Link --}}
+                                                                @if ($data->hasMorePages())
+                                                                    <li class="page-item">
+                                                                        <a class="page-link" href="{{ $data->nextPageUrl() }}" aria-label="Next">
+                                                                            <span aria-hidden="true">&raquo;</span>
+                                                                            <span class="sr-only">Next</span>
+                                                                        </a>
+                                                                    </li>
+                                                                @else
+                                                                    <li class="page-item disabled">
+                                                                        <span class="page-link">&raquo;</span>
+                                                                    </li>
+                                                                @endif
+                                                            </ul>
+                                                        </nav>
                                                     </div>      
                                                 </div>
                                             </div>

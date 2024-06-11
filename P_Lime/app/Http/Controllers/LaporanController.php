@@ -18,7 +18,7 @@ class LaporanController extends Controller
     public function view()
     {
         $data = Laporan::with('warga','comments','comments')
-        ->orderByRaw("FIELD(status,'Belum Selesai', 'Selesai')")->get();
+        ->orderByRaw("FIELD(status,'Belum Selesai', 'Selesai')")->paginate(5);
 
         $data_tambahan = Laporan::with('comments.user')
         ->orderByRaw("FIELD(status, 'Belum Selesai', 'Selesai')")
@@ -91,9 +91,6 @@ class LaporanController extends Controller
 
         session()->flash('success', 'Laporan telah berhasil ditambahkan!');
 
-        if (auth()->user()->role === 'citizen'){
-            return redirect()->route('DashboardWarga.pelaporan');
-        }
         return redirect()->route('laporan.view');
     }
 

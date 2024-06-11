@@ -96,10 +96,10 @@
                         <div class="col-md-12">
                             <div class="page-title">
                                 <nav aria-label="breadcrumb">
-                                <ol class="breadcrumb breadcrumb-separator-1">
+                                  <ol class="breadcrumb breadcrumb-separator-1">
                                     <li class="breadcrumb-item"><a href="#">Acara</a></li>
                                     <li class="breadcrumb-item active" aria-current="page">Manage</li>
-                                </ol>
+                                  </ol>
                                 </nav>
                                 <h3>Acara</h3>
                                 

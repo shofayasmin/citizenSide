@@ -91,20 +91,70 @@
                                                 <img src="{{ asset('storage/photo-acara/2024-05-13Tempat pelatihan umkm daerah padamara 083114610391.jpeg') }}" class="card-img-top" alt="Placeholder" style="width: 100%; height: 200px; object-fit: cover;">
                                                 <div class="card-body">
                                                     <h5 class="card-title">{{ $d->umkm }}</h5>
-                                                    <p class="card-text">Penjelasan Detail Tentang UMKM Tersebut</p> <!-- $d->deskripsi -->
-                                                    <span class="btn btn-success ikut-kegiatan" data-id="{{ $d->umkm_id }}" data-toggle="modal" data-target="#confirmationModal{{ $d->umkm_id }}">Ikut Kegiatan</span>
+                                                    <p class="card-text">Penjelasan Detail Tentang UMKM Tersebut</p>
+                                                    @if(in_array($d->umkm_id, $userParticipations))
+                                                        <form id="form-batal-{{ $d->umkm_id }}" action="{{ route('umkm.batal', $d->umkm_id) }}" method="POST">
+                                                            @csrf
+                                                            
+                                                            <button type="button" class="btn btn-danger" onclick="confirmBatal({{ $d->umkm_id }})">Batalkan Kegiatan</button>
+                                                        </form>
+                                                    @else
+                                                        <span class="btn btn-success ikut-kegiatan" data-id="{{ $d->umkm_id }}" data-toggle="modal" data-target="#confirmationModal{{ $d->umkm_id }}">Ikut Kegiatan</span>
+                                                    @endif
                                                     <div class="text-right">
                                                         <span class="badge badge-pill badge-info">{{ $d->tipe_umkm }}</span>
                                                     </div>
                                                 </div>
-
                                             </div>
                                         </div>
                                         @php $i++; @endphp
-                                    @include('umkm.modal')
+                                        @include('umkm.modal', ['umkm' => $d])
                                     @endforeach
                                 </div>
-                            </div>                            
+                            </div>   
+                            <nav aria-label="Page navigation example">
+                                <ul class="pagination justify-content-center">
+                                    {{-- Previous Page Link --}}
+                                    @if ($data->onFirstPage())
+                                        <li class="page-item disabled">
+                                            <span class="page-link">&laquo;</span>
+                                        </li>
+                                    @else
+                                        <li class="page-item">
+                                            <a class="page-link" href="{{ $data->previousPageUrl() }}" aria-label="Previous">
+                                                <span aria-hidden="true">&laquo;</span>
+                                                <span class="sr-only">Previous</span>
+                                            </a>
+                                        </li>
+                                    @endif
+                            
+                                    {{-- Pagination Elements --}}
+                                    @php
+                                        $start = max(1, $data->currentPage() - 2);
+                                        $end = min($start + 4, $data->lastPage());
+                                    @endphp
+                            
+                                    @for ($i = $start; $i <= $end; $i++)
+                                        <li class="page-item {{ ($i == $data->currentPage()) ? 'active' : '' }}">
+                                            <a class="page-link" href="{{ $data->url($i) }}">{{ $i }}</a>
+                                        </li>
+                                    @endfor
+                            
+                                    {{-- Next Page Link --}}
+                                    @if ($data->hasMorePages())
+                                        <li class="page-item">
+                                            <a class="page-link" href="{{ $data->nextPageUrl() }}" aria-label="Next">
+                                                <span aria-hidden="true">&raquo;</span>
+                                                <span class="sr-only">Next</span>
+                                            </a>
+                                        </li>
+                                    @else
+                                        <li class="page-item disabled">
+                                            <span class="page-link">&raquo;</span>
+                                        </li>
+                                    @endif
+                                </ul>
+                            </nav>                         
                         </div>
                     </div>
                 </div>

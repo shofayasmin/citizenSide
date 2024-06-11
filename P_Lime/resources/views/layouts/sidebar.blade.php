@@ -33,10 +33,12 @@
                 <a href="#"><i class="material-icons">report</i>Laporan<i
                         class="material-icons has-sub-menu">keyboard_arrow_left</i></a>
                 <ul class="sub-menu">
+                    @canany(['sekretaris', 'citizen', 'rt'])
                     <li>
                         <a href="{{ route('laporan.create') }}"
                             class="{{ Request::routeIs('laporan.create') ? 'active' : '' }}">Membuat Laporan</a>
                     </li>
+                    @endcanany
                     <li>
                         <a href="{{ route('laporan.view') }}">View Laporan</a>
                     </li>
@@ -65,6 +67,13 @@
                 <a href="#"><i class="material-icons">store</i>UMKM<i
                         class="material-icons has-sub-menu">keyboard_arrow_left</i></a>
                 <ul class="sub-menu">
+                    @can('rw')
+                        
+                    <li>
+                        <a href="{{ route('umkm.manage') }}">UMKM Manage</a>
+                    </li>
+                    @endcan
+
                     <li>
                         <a href="{{ route('umkm.view') }}">UMKM List</a>
                     </li>

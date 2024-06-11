@@ -19,9 +19,18 @@ class UmkmController extends Controller
         $user = Auth::user();
         return view('umkm.register',compact('user'));
     }
+
+    public function manage()
+    {
+        $data = umkm::paginate(10);
+        return view('umkm.manage',compact('data'));
+    }
+
     public function view(){
-        $data = umkm::all();
-        return view('umkm.view',compact('data'));
+        $data = umkm::paginate(10);
+        $userParticipations = UmkmParticipation::where('user_id', auth()->id())->pluck('umkm_id')->toArray(); // Get all acara_id where the authenticated user has participated
+
+        return view('umkm.view',compact('data','userParticipations'));
     }
 
     public function store_umkm(Request $request)
@@ -56,33 +65,45 @@ class UmkmController extends Controller
 
         return redirect()->route('umkm.view');
     }
-    public function edit_umkm(Request $request,$id)
+    public function edit_umkm(Request $request, $id)
     {
         $data = umkm::find($id);
-        
-        return view('umkm.edit',compact('data'));
+
+        return view('umkm.edit', compact('data'));
     }
-    public function update_umkm(Request $request,$id)
+
+    public function update_umkm(Request $request, $id)
     {
-        $validator = Validator::make($request->all(),[
+        $validator = Validator::make($request->all(), [
             'Nama' => 'required',
             'umkm' => 'required',
-            'gambar' => 'required|mimes:png,jpg,jpeg|max:2048',
+            'gambar' => 'sometimes|nullable|mimes:png,jpg,jpeg|max:2048',
             'tipe_umkm' => 'required',
             'deskripsi' => 'required',
         ]);
 
-        if($validator->fails()) return redirect()->back()->withInput()->withErrors($validator);
+        if ($validator->fails()) {
+            return redirect()->back()->withInput()->withErrors($validator);
+        }
 
-        // $data['nama_field_di_database'] = $request->nama_di_inputan;
-        $data['Nama'] = $request->Nama; 
-        $data['umkm'] = $request->umkm; 
-        $data['gambar'] = $request->gambar;
-        $data['tipe_umkm'] = $request->tipe_umkm;
-        $data['deskripsi'] = $request->deskripsi;
+        $data = umkm::find($id);
 
-        umkm::where('umkm_id',$id)->update($data);
-        return redirect()->route('umkm.view');
+        if ($request->hasFile('gambar')) {
+            // Handle the file upload
+            $file = $request->file('gambar');
+            $filename = time() . '.' . $file->getClientOriginalExtension();
+            $file->move(public_path('uploads'), $filename);
+            $data->gambar = $filename;
+        }
+
+        $data->Nama = $request->Nama;
+        $data->umkm = $request->umkm;
+        $data->tipe_umkm = $request->tipe_umkm;
+        $data->deskripsi = $request->deskripsi;
+
+        $data->save();
+
+        return redirect()->route('umkm.view')->with('success', 'Data berhasil diperbarui');
     }
 
     public function delete_umkm(Request $request,$id)
@@ -109,10 +130,12 @@ class UmkmController extends Controller
 
         return redirect()->back()->with('success','Selamat anda telah bergabung di UMKM');
 
+    }
+    public function batal_ikut($id)
+    {
+        $user_id = Auth::id();
+        UmkmParticipation::where('umkm_id', $id)->where('user_id', $user_id)->delete();
 
-
-
-        // Return a success response
-        // return response()->json(['success' => true]);
+        return redirect()->back()->with('success', 'Kamu telah membatalkan keikutsertaan dalam kegiatan ini.');
     }
 }
