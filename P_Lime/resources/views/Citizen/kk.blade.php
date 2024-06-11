@@ -1,43 +1,40 @@
+
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="Responsive Admin Dashboard Template">
+        <meta name="keywords" content="admin,dashboard">
+        <meta name="author" content="stacks">
+        <!-- The above 6 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+        
+        <!-- Title -->
+        <title>Manage Citizen Data</title>
 
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Responsive Admin Dashboard Template">
-    <meta name="keywords" content="admin,dashboard">
-    <meta name="author" content="stacks">
-    <!-- The above 6 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+        <!-- Styles -->
+        <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link href="{{ asset('lime/theme/assets/plugins/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
+        <link href="{{ asset('lime/theme/assets/plugins/font-awesome/css/all.min.css')}}" rel="stylesheet">
+      
+        <!-- Theme Styles -->
+        <link href="{{ asset('lime/theme/assets/css/lime.min.css')}}" rel="stylesheet">
+        <link href="{{ asset('lime/theme/assets/css/custom.css')}}" rel="stylesheet">
 
-    <!-- Title -->
-    <title>Manage Citizen Data</title>
-
-    <!-- Styles -->
-    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900&display=swap"
-        rel="stylesheet">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link href="{{ asset('lime/theme/assets/plugins/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('lime/theme/assets/plugins/font-awesome/css/all.min.css') }}" rel="stylesheet">
-
-    <!-- Theme Styles -->
-    <link href="{{ asset('lime/theme/assets/css/lime.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('lime/theme/assets/css/custom.css') }}" rel="stylesheet">
-    <link href="{{ asset('lime/theme/assets/js/pages/toastr.js') }}" rel="stylesheet">
-
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
+        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
         <![endif]-->
-</head>
-
-<body>
-
-    @include('layouts.sidebar')
-
-    @include('layouts.header')
+    </head>
+    <body>
+        
+        @include('layouts.sidebar')
+        
+        @include('layouts.header')
 
     <div class="lime-container">
         <div class="lime-body">
@@ -119,6 +116,7 @@
                                                         <tbody>
                                                             @foreach ($data as $key => $d)
                                                                 <tr>
+
                                                                     <th scope="row">{{ $data->firstItem() + $key }}</th>
                                                                     <td><button type="button" class="btn btn-link"
                                                                             data-toggle="modal"
@@ -130,26 +128,19 @@
                                                                     <td>{{ $d->jumlah_anggota_kk }}</td>
                                                                     <td>{{ $d->jumlah_usia_lanjut }}</td>
                                                                     <td>
-                                                                        <button type="button" class="btn btn-primary"
-                                                                            data-toggle="modal"
-                                                                            data-target="#exampleModalEdit{{ $d->id_kk }}"><i
-                                                                                class="fas fa-pencil-alt"></i>
-
+                                                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalEdit{{ $d->id_kk }}"><i class="fas fa-pencil-alt"></i>
+                                                                            
                                                                         </button>
-                                                                        <button type="button" data-toggle="modal"
-                                                                            data-target="#exampleModalHapus{{ $d->id_kk }}"
-                                                                            class="btn btn-danger"><i
-                                                                                class="fas fa-trash-alt"></i></button>
+                                                                        <button type="button" data-toggle="modal" data-target="#exampleModalHapus{{ $d->id_kk }}" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
                                                                     </td>
                                                                 </tr>
 
                                                                 <!-- Modal -->
-                                                                @include('Citizen.modal_kk', [
-                                                                    'id_kk' => $d->id_kk,
-                                                                ])
-                                                            @endforeach
+                                                                @include('Citizen.modal_kk',['id_kk' => $d->id_kk])
 
-                                                        </tbody>
+                                                                @endforeach
+                                                                
+                                                            </tbody>
 
                                                     </table>
                                                     <nav aria-label="Page navigation example">
@@ -197,6 +188,7 @@
                                                     </nav>
                                                 </div>
 
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -204,27 +196,21 @@
                             </div>
                         </div>
                     </div>
-                </div>
-
-
-
-
-
-
-                <!-- Javascripts -->
-                <script src="{{ asset('lime/theme/assets/plugins/jquery/jquery-3.1.0.min.js') }}"></script>
-                <script src="{{ asset('lime/theme/assets/plugins/bootstrap/popper.min.js') }}"></script>
-                <script src="{{ asset('lime/theme/assets/plugins/bootstrap/js/bootstrap.min.js') }}"></script>
-                <script src="{{ asset('lime/theme/assets/plugins/jquery-slimscroll/jquery.slimscroll.min.js') }}"></script>
-                <script src="{{ asset('lime/theme/assets/js/lime.min.js') }}"></script>
-                <!-- Include jQuery and Bootstrap JS files -->
-                <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-                <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-                <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-                <script>
                     
-                </script>
 
-</body>
+                    
+            
+        
+        
+        <!-- Javascripts -->
+        <script src="{{ asset('lime/theme/assets/plugins/jquery/jquery-3.1.0.min.js')}}"></script>
+        <script src="{{ asset('lime/theme/assets/plugins/bootstrap/popper.min.js')}}"></script>
+        <script src="{{ asset('lime/theme/assets/plugins/bootstrap/js/bootstrap.min.js')}}"></script>
+        <script src="{{ asset('lime/theme/assets/plugins/jquery-slimscroll/jquery.slimscroll.min.js')}}"></script>
+        <script src="{{ asset('lime/theme/assets/js/lime.min.js')}}"></script>
+        <!-- Include jQuery and Bootstrap JS files -->
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
+    </body>
 </html>

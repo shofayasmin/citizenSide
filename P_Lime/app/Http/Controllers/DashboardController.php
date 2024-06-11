@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Acara;
 use App\Models\Bansos;
+use App\Models\Expenditure;
+use App\Models\Income;
 use App\Models\Iuran;
 use App\Models\Kk;
 use App\Models\laporan;
@@ -25,16 +27,25 @@ class DashboardController extends Controller
         $laporan = Laporan::orderByRaw("FIELD(status,'Belum Selesai', 'Selesai')")->get();
         $user = Auth::user();
 
+        $incomes = Income::orderBy('date')->get();
+        $expenditures = Expenditure::orderBy('date')->get();
 
-        $iurans = Iuran::selectRaw('MONTH(tanggal) as month, SUM(total) as total')
-            ->groupBy('month')
-            ->orderBy('month')
-            ->get();
+        $dates = [];
+        $expenditureData = [];
+        $incomeData = [];
 
-        $dates = $iurans->pluck('month')->map(function ($month) {
-            return Carbon::create()->month($month)->format('F'); // Mengubah angka bulan menjadi nama bulan
-        });
-        $totals = $iurans->pluck('total');
+        foreach ($expenditures as $expenditure) {
+            $date = Carbon::parse($expenditure->date); // Konversi string menjadi objek tanggal
+            $dates[] = $date->format('Y-m-d'); // Format tanggal menjadi 'YYYY-MM'
+            $expenditureData[] = $expenditure->amount; // Gunakan atribut amount sebagai data expenditure
+        }
+        foreach ($incomes as $income) {
+            $date = Carbon::parse($expenditure->date); // Konversi string menjadi objek tanggal
+            $dates[] = $date->format('Y-m-d'); // Format tanggal menjadi 'YYYY-MM'
+            $incomeData[] = $income->inflow; // Gunakan atribut amount inflow data expenditure
+        }
+        $dates = array_unique($dates);
+        sort($dates);
 
         $totalWarga = Warga::count();
         $totalKk = Kk::count();
@@ -51,7 +62,8 @@ class DashboardController extends Controller
         ->get();
 
         $lastUpdated = max(
-            Iuran::latest('updated_at')->value('updated_at'),
+            Income::latest('updated_at')->value('updated_at'),
+            Expenditure::latest('updated_at')->value('updated_at'),
             Laporan::latest('updated_at')->value('updated_at'),
             Warga::latest('updated_at')->value('updated_at'),
             Kk::latest('updated_at')->value('updated_at'),
@@ -95,7 +107,6 @@ class DashboardController extends Controller
         return view('dashboard.rw',compact(
         'laporan',
         'dates',
-        'totals',
         'user',
         'totalWarga',
         'totalKk',
@@ -108,8 +119,9 @@ class DashboardController extends Controller
         'lastUpdated',
         'warga',
         'penyaluranBansos',
+        'incomeData',
+        'expenditureData',
         'pie',
         'total_warga'));
     }
-    
 }

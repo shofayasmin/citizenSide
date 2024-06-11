@@ -77,10 +77,36 @@
                                                         </div>
                                                     @endif
                                                     <h5 class="card-title">Pemasukan</h5>
-                                                    <p>Berikut adalah Data Pemasukan dari RW 003</code>.</p>
+                                                    <p>Berikut adalah Data Pemasukan dari RW 003</code>.</p> 
                                                     <div class="text-right mb-3">
-                                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalTambahIncome">
-                                                            Tambah Data 
+                                                        <form action="{{ route('iuran.income') }}" method="get" class="d-inline">
+                                                            @csrf
+                                                            <div class="row mb-3 justify-content-end">
+                                                                <div class="col-sm-3">
+                                                                    <label for="income_type" class="form-label">Tipe Pemasukan: </label>
+                                                                    <select name="income_type" class="form-select form-select-sm" >
+                                                                        <option value="">Semua</option>
+                                                                        <option value="Iuran Warga" {{ isset($_GET['income_type']) && $_GET['income_type'] == 'Iuran Warga' ? 'selected' : '' }}>Iuran Warga</option>
+                                                                        <option value="Sumbangan" {{ isset($_GET['income_type']) && $_GET['income_type'] == 'Sumbangan' ? 'selected' : '' }}>Sumbangan</option>
+                                                                        <option value="Usaha RW" {{ isset($_GET['income_type']) && $_GET['income_type'] == 'Usaha RW' ? 'selected' : '' }}>Usaha RW</option>
+                                                                        <option value="Bantuan Pemerintah" {{ isset($_GET['income_type']) && $_GET['income_type'] == 'Bantuan Pemerintah' ? 'selected' : '' }}>Bantuan Pemerintah</option>
+                                                                    </select>
+                                                                </div>
+                                                                <div class="col-sm-3">
+                                                                    <label for="start_date" class="form-label">Rentang Tanggal Mulai: </label>
+                                                                    <input type="date" name="start_date" class="form-control" value="{{ request('start_date') }}">
+                                                                </div>
+                                                                <div class="col-sm-3">
+                                                                    <label for="end_date" class="form-label">Rentang Tanggal Akhir: </label>
+                                                                    <input type="date" name="end_date" class="form-control" value="{{ request('end_date') }}">
+                                                                </div>
+                                                                <div class="col-sm-2 d-flex align-items-end">
+                                                                    <button type="submit" class="btn btn-primary">Filter</button>
+                                                                </div>
+                                                            </div>
+                                                        </form>
+                                                        <button type="button" class="btn btn-primary d-inline" data-toggle="modal" data-target="#exampleModalTambahIncome">
+                                                            Tambah Data
                                                         </button>
                                                     </div>
                                                     <div class="table-responsive">
@@ -115,12 +141,9 @@
                                                                             <i class="fas fa-trash-alt"></i> 
                                                                         </button></td>
                                                                 </tr>
-
                                                                 <!-- Modal -->
                                                                 @include('Iuran.modal_income', ['income' => $d])
-
                                                                 @endforeach
-
                                                             </tbody>
                                                         </table>
                                                         <nav aria-label="Page navigation example">

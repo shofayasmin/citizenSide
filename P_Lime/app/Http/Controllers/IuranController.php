@@ -14,22 +14,43 @@ use Illuminate\Support\Facades\Validator;
 class IuranController extends Controller
 {
     
-    public function index()
-    {
-        $iuran = Iuran::get();
-        return view('Iuran.index',compact('iuran'));
-    }
+    // public function index()
+    // {
+    //     $iuran = Iuran::get();
+    //     return view('Iuran.index',compact('iuran'));
+    // }
 
-    public function income()
+    public function income(Request $request)
     {
-        $income = Income::paginate(10);
-        return view('Iuran.income',compact('income'));
+        $income = Income::query();
+
+        if ($request->income_type) {
+            $income->where('income_type', $request->income_type);
+        }
+
+        if ($request->start_date && $request->end_date) {
+            $income->whereBetween('date', [$request->start_date, $request->end_date]);
+        } elseif ($request->start_date) {
+            $income->where('date', '>=', $request->start_date);
+        } elseif ($request->end_date) {
+            $income->where('date', '<=', $request->end_date);
+        }
+
+        return view('Iuran.income', ['income' => $income->paginate(10)]);
     }
     
-    public function expenditure()
+    public function expenditure(Request $request)
     {
-        $expenditure = Expenditure::paginate(10);
-        return view('Iuran.expenditure',compact('expenditure'));
+        $start_date = $request->input('start_date');
+        $end_date = $request->input('end_date');
+
+        $expenditure = Expenditure::query();
+        
+        if ($start_date && $end_date) {
+            $expenditure->whereBetween('date', [$start_date, $end_date]);
+        }
+
+        return view('Iuran.expenditure', ['expenditure' => $expenditure->paginate(10)]);
     }
 
     //Income (Pemasukan)
@@ -90,7 +111,6 @@ class IuranController extends Controller
         return redirect()->back()->with('edit', 'Anda Berhasil Mengedit');
     }
 
-    
     public function delete_income(Request $request,$id)
     {
         $data = Income::find($id);
@@ -101,18 +121,6 @@ class IuranController extends Controller
 
         return redirect()->back()->with('delete', 'Anda Berhasil Menghapus');
     }
-
-    public function filter()
-    {
-        $income = Income::all();
-
-    $incomeType = Income::select('income_type')->distinct()->pluck('income_type');
-
-    return view('iuran.income',compact('income', 'incomeTypes'));
-    // return view('income.edit',compact('data'));
-
-    }
-    
 
     //Expenditure (Pengeluaran)
     

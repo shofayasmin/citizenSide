@@ -101,7 +101,7 @@
                                     <li class="breadcrumb-item active" aria-current="page">Manage</li>
                                   </ol>
                                 </nav>
-                                <h3>Forms</h3>
+                                <h3>Acara</h3>
                                 
                             </div>
                         </div>
@@ -158,7 +158,6 @@
 
                                                                 @endforeach
                                                                 
-                                                               
                                                             </tbody>
                                                         </table>
                                                     </div>      

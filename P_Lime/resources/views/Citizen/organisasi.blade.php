@@ -46,10 +46,9 @@
                                   <ol class="breadcrumb breadcrumb-separator-1">
                                     <li class="breadcrumb-item"><a href="#">Kependudukan</a></li>
                                     <li class="breadcrumb-item active" aria-current="page">Organisasi</li>
-                                    
                                   </ol>
                                 </nav>
-                                <h3>Forms</h3>
+                                <h3>Data Organisasi</h3>
                                 
                             </div>
                         </div>
@@ -78,10 +77,10 @@
                                                         </div>
                                                     @endif
                                                     <h5 class="card-title">Data Organisasi</h5>
-                                                    <p>Berikut adalah Data Data Organisasi dari RW 003</code>.</p>
+                                                    <p>Berikut adalah Data Organisasi dari RW 003</code>.</p>
                                                     <div class="text-right mb-3">
                                                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#organisasi_tambah">
-                                                            Tambah Acara
+                                                            Tambah Data
                                                         </button>
                                                     </div>
                                                     <div class="table-responsive">
@@ -95,7 +94,7 @@
                                                                     <th scope="col">Jumlah Anggota</th>
                                                                     
                                                                     
-                                                                   
+
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
