@@ -44,12 +44,12 @@
                         <div class="page-title">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb breadcrumb-separator-1">
-                                    <li class="breadcrumb-item"><a href="#">kependudukan</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">Kartu Keluarga</li>
+                                    <li class="breadcrumb-item"><a href="#">citizenship</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Family Card</li>
                                 </ol>
 
                             </nav>
-                            <h3>Kartu Keluarga</h3>
+                            <h3>Family Card</h3>
 
                         </div>
                     </div>
@@ -84,8 +84,8 @@
                                                     </div>
                                                 @endif
                                                 
-                                                <h4 class="mb-0">Data Kartu Keluarga</h4>
-                                                <p>Berikut adalah Data Data Kartu Keluarga dari RW 003</code>.</p>
+                                                <h4 class="mb-0">Family Card Data</h4>
+                                                <p>belows are data of neighborhood 003</code>.</p>
                                                 @error('no_kk')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $errors->first('no_kk') }}</strong>
@@ -95,7 +95,7 @@
                                                 <div class="text-right mb-3">
                                                     <button type="button" class="btn btn-primary" data-toggle="modal"
                                                         data-target="#kk_tambah">
-                                                        Tambah Kartu Keluarga
+                                                        Add Family Card
                                                     </button>
                                                 </div>
 
@@ -103,13 +103,13 @@
                                                     <table class="table">
                                                         <thead>
                                                             <tr>
-                                                                <th scope="col">No</th>
-                                                                <th scope="col">No. Kartu Keluarga</th>
-                                                                <th scope="col">Alamat</th>
-                                                                <th scope="col">Nik Kepala Keluarga</th>
-                                                                <th scope="col">Jumlah Usia Produktif</th>
-                                                                <th scope="col">Jumlah Anggota KK</th>
-                                                                <th scope="col">Jumlah Usia Lanjut</th>
+                                                                <th scope="col">Number</th>
+                                                                <th scope="col">Family Card Number</th>
+                                                                <th scope="col">Address</th>
+                                                                <th scope="col">Family Head ID</th>
+                                                                <th scope="col">Number of Productivity Age</th>
+                                                                <th scope="col">Family card Member</th>
+                                                                <th scope="col">Number of Elderly</th>
 
                                                             </tr>
                                                         </thead>

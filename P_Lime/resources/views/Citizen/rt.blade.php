@@ -100,9 +100,9 @@
                                                         <thead>
                                                             <tr>
                                                                 <th scope="col">No</th>
-                                                                <th scope="col">Nama Ketua</th>
-                                                                <th scope="col">No RT</th>
-                                                                <th scope="col">Masa Jabatan</th>
+                                                                <th scope="col">Neighborhood Name</th>
+                                                                <th scope="col">Neighborhood ID</th>
+                                                                <th scope="col">Term of Service</th>
 
 
                                                             </tr>

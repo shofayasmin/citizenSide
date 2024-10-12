@@ -44,8 +44,8 @@
                             <div class="page-title">
                                 <nav aria-label="breadcrumb">
                                   <ol class="breadcrumb breadcrumb-separator-1">
-                                    <li class="breadcrumb-item"><a href="#">Kependudukan</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">Warga</li>
+                                    <li class="breadcrumb-item"><a href="#">citizenship</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Citizen</li>
                                     
                                   </ol>
                                 </nav>
@@ -77,30 +77,30 @@
                                                             {{ session('delete') }}
                                                         </div>
                                                     @endif
-                                                    <h5 class="card-title">Data Warga</h5>
-                                                    <p>Berikut adalah Data Data Warga dari RW 003</code>.</p>
+                                                    <h5 class="card-title">Citizen data</h5>
+                                                    <p>These are the data of neighborhood 003</code>.</p>
                                                     <div class="text-right mb-3">
                                                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#warga_tambah">
-                                                            Tambah Data Warga
+                                                            add citizen data
                                                         </button>
                                                     </div>
                                                     <div class="table-responsive">
                                                         <table class="table">
                                                             <thead>
                                                                 <tr>
-                                                                    <th scope="col">No</th>
-                                                                    <th scope="col">NIK</th>
-                                                                    <th scope="col">NO KK</th>
-                                                                    <th scope="col">Nama Lengkap</th>
-                                                                    <th scope="col">Tempat Tanggal Lahir</th>
-                                                                    <th scope="col">Jenis Kelamin</th>
-                                                                    <th scope="col">Alamat KTP</th>
-                                                                    <th scope="col">Agama</th>
-                                                                    <th scope="col">No. Telepon</th>
+                                                                    <th scope="col">Number</th>
+                                                                    <th scope="col">ID</th>
+                                                                    <th scope="col">Family Card Number</th>
+                                                                    <th scope="col">Full Number</th>
+                                                                    <th scope="col">Place and Date of birth</th>
+                                                                    <th scope="col">Gender</th>
+                                                                    <th scope="col">ID Address</th>
+                                                                    <th scope="col">Religion</th>
+                                                                    <th scope="col">Phone Number</th>
                                                                     <th scope="col">Status</th>
-                                                                    <th scope="col">Pekerjaan</th>
-                                                                    <th scope="col">Kewarganegaraan</th>
-                                                                    <th scope="col">Alamat Domisili</th>
+                                                                    <th scope="col">Occupance/th>
+                                                                    <th scope="col">Nationality</th>
+                                                                    <th scope="col">Current Address</th>
                                                                     
                                                                    
                                                                 </tr>

@@ -81,11 +81,11 @@
                                                             {{ session('delete') }}
                                                         </div>
                                                     @endif
-                                                    <h5 class="card-title">Data Rumah</h5>
-                                                    <p>Berikut adalah Data Data Rumah dari RW 003</code>.</p>
+                                                    <h5 class="card-title">House Data</h5>
+                                                    <p>Here are the house data of RW 003</code>.</p>
                                                     <div class="text-right mb-3">
                                                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#rumah_tambah">
-                                                            Tambah Rumah
+                                                            Add House
                                                         </button>
                                                     </div>
                                                     <div class="table-responsive">
@@ -94,9 +94,9 @@
                                                                 
                                                                 <tr>
                                                                     <th scope="col">No</th>
-                                                                    <th scope="col">Nama Kepala Keluarga</th>
-                                                                    <th scope="col">Alamat</th>
-                                                                    <th scope="col">Luas Bangunan</th>
+                                                                    <th scope="col">Family Head Name</th>
+                                                                    <th scope="col">Address</th>
+                                                                    <th scope="col">Building Size</th>
                                                                     <th scope="col">Luas Tanah</th>
                                                                     <th scope="col">Jumlah Anggota KK</th>
                                                                     

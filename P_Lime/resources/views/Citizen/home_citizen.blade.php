@@ -61,7 +61,7 @@
                                     <h5 class="card-title">Filter Citizen Data</h5>
                                     <p> </p>
                                     <form>
-                                        <p>Silahkan pilih sesuai dengan kebutuhan dan tujuan anda</p>
+                                        <p>Please choose based on your purpose</p>
                                             <div class="dropdown">
                                                 <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                     Data Menu.....
